@@ -37,6 +37,7 @@ body {
   line-height: 1.65;
 }
 img, svg { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
 
 h1, h2 { font-family: var(--font-display); font-weight: 600; line-height: 1.13; margin: 0; }
 h1 { font-size: var(--fs-h1); }
