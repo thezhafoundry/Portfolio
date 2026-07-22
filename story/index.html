@@ -33,83 +33,77 @@
   <main>
     <section class="container">
       <div class="card story-head">
-        <span class="label label--pill">The Story</span>
-        <h1>From machine shop to <em class="sweep">hello.</em></h1>
-        <p class="story-intro">Engineer-turned-sales leader. This is how a mechanical-engineering student from Coimbatore ended up opening doors in twelve markets.</p>
+        <div class="story-head-copy">
+          <span class="label label--pill">The Story</span>
+          <h1>From machine shop to <em class="sweep">hello.</em></h1>
+          <p class="story-intro">Engineer-turned-sales leader. This is how a mechanical-engineering student from Coimbatore ended up opening doors in twelve markets.</p>
+        </div>
+        <div class="story-head-figs" aria-label="At a glance">
+          <div class="fig"><span class="fig-num">2013</span><span class="fig-lab">Where it starts</span></div>
+          <div class="fig"><span class="fig-num">12</span><span class="fig-lab">Markets wide</span></div>
+          <div class="fig"><span class="fig-num">7+</span><span class="fig-lab">Years of hellos</span></div>
+        </div>
       </div>
     </section>
 
-    <section class="container section-gap" aria-label="Career timeline">
-      <ol class="story-thread card thread-panel">
-        <li class="thread-row thread-row--left reveal">
-          <div class="bubble bubble--cream bubble--reply thread-bubble">
-            <span class="label label--pill">2013 – 2016</span>
-            <p>Diploma in Mechanical Engineering, Sree Narayana Guru Polytechnic. Learning how machines fit together.</p>
-          </div>
-        </li>
-        <li class="thread-row thread-row--right reveal">
-          <div class="bubble bubble--honey bubble--me thread-bubble">
-            <span class="label label--pill">2017 – 2020</span>
-            <p>B.E. at Sri Krishna College of Technology. The engineering mindset sticks: systems, inputs, outputs.</p>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <!-- grid-breaking pivot interruption (spec §6.2) -->
-    <section class="pivot" aria-label="The pivot">
-      <div class="container">
-        <!-- TODO(spec §8.6): replace with Sampath's own words about the engineer→sales pivot.
-             Neutral placeholder below; approved copy required before launch. -->
-        <p class="pivot-quote">2020: the pivot from engineering to sales.<br><span class="pivot-todo">[ Pull-quote in Sampath's own words — to be supplied ]</span></p>
-      </div>
-    </section>
-
-    <section class="container section-gap" aria-label="Career timeline continued">
-      <ol class="story-thread card thread-panel">
-        <li class="thread-row thread-row--left reveal">
-          <div class="bubble bubble--cream bubble--reply thread-bubble">
-            <span class="label label--pill">2020 – 2021 · Zinnov / Draup</span>
-            <p>Pre-sales lead: solution consulting, demos, proposals — learning to translate products into conversations.</p>
-          </div>
-        </li>
-        <li class="thread-row thread-row--right reveal">
-          <div class="bubble bubble--honey bubble--me thread-bubble">
-            <span class="label label--pill">2021 – 2022 · Alore</span>
-            <p>Lead generation specialist: outbound campaigns across the US, UK and Australia; research, QA and reporting discipline.</p>
-          </div>
-        </li>
-        <li class="thread-row thread-row--left reveal">
-          <div class="bubble bubble--cream bubble--reply thread-bubble">
-            <span class="label label--pill">2022 – 2023 · Ecosmob</span>
-            <p>Lead generation manager: leading a team, territory allocation across US, UK, MENA and APAC, campaign analytics.</p>
-          </div>
-        </li>
-        <li class="thread-row thread-row--right reveal">
-          <div class="bubble bubble--honey bubble--me thread-bubble">
-            <span class="label label--pill">2023 · Uplers / Mavlers</span>
-            <p>Business development manager: global campaigns, Salesforce hygiene, investor and partner research.</p>
-          </div>
-        </li>
-        <li class="thread-row thread-row--left reveal">
-          <div class="bubble bubble--cream bubble--reply thread-bubble">
-            <span class="label label--pill">2024 · The Sales Group, Toronto (remote)</span>
-            <p>Lead generation manager for North American clients — custom outbound strategies, fractional sales support.</p>
-          </div>
-        </li>
-        <li class="thread-row thread-row--right reveal">
-          <div class="bubble bubble--ink bubble--me thread-bubble">
-            <span class="label">2024 – 2025 · Finquest, Bengaluru</span>
+    <!-- ================= CHAPTERS — scroll-driven split; the node travels the career path ================= -->
+    <section class="container section-gap" aria-label="Career chapters">
+      <div class="chapters">
+        <div class="chapter-list">
+          <article class="chapter" data-years="2013 – 2016" data-org="Sree Narayana Guru Polytechnic · Coimbatore">
+            <h3>The machine shop</h3>
+            <p>Diploma in Mechanical Engineering. Learning how machines fit together.</p>
+          </article>
+          <article class="chapter" data-years="2017 – 2020" data-org="Sri Krishna College of Technology">
+            <h3>Systems thinking</h3>
+            <p>B.E. The engineering mindset sticks: systems, inputs, outputs.</p>
+          </article>
+          <article class="chapter" data-years="2020 – 2021" data-org="Zinnov / Draup">
+            <h3>The pivot</h3>
+            <!-- TODO(spec §8.6): fold in Sampath's own words about the engineer→sales pivot when supplied -->
+            <p>Engineering to sales. Pre-sales lead: solution consulting, demos, proposals — learning to translate products into conversations.</p>
+          </article>
+          <article class="chapter" data-years="2021 – 2022" data-org="Alore · Bengaluru">
+            <h3>Outbound discipline</h3>
+            <p>Lead generation specialist: campaigns across the US, UK and Australia; research, QA and reporting rigor.</p>
+          </article>
+          <article class="chapter" data-years="2022 – 2023" data-org="Ecosmob · Ahmedabad">
+            <h3>Leading the team</h3>
+            <p>Lead generation manager: territory allocation across US, UK, MENA and APAC, campaign analytics.</p>
+          </article>
+          <article class="chapter" data-years="2023" data-org="Uplers / Mavlers · Ahmedabad">
+            <h3>Global campaigns</h3>
+            <p>Business development manager: global outreach, Salesforce hygiene, investor and partner research.</p>
+          </article>
+          <article class="chapter" data-years="2024" data-org="The Sales Group · Toronto (remote)">
+            <h3>North America</h3>
+            <p>Custom outbound strategies and fractional sales support for clients across the US and Canada.</p>
+          </article>
+          <article class="chapter" data-years="2024 – 2025" data-org="Finquest · Bengaluru">
+            <h3>The anchor</h3>
             <p>Senior Lead Generation Manager: proprietary mid-market M&amp;A sourcing across North America, Europe and APAC. The numbers on the Results page happened here.</p>
+          </article>
+          <article class="chapter" data-years="2024 – 2026" data-org="Amrita Vishwa Vidyapeetham">
+            <h3>Sharpening the theory</h3>
+            <p>MBA in marketing management, in progress — under seven years of practice.</p>
+          </article>
+        </div>
+        <aside class="chapter-panel" aria-hidden="true">
+          <div class="chapter-panel-inner">
+            <span class="cp-idx label">01 / 09</span>
+            <svg class="cp-svg" viewBox="0 0 300 200" aria-hidden="true">
+              <path d="M 20 170 C 90 150 120 120 160 110 C 220 96 240 60 280 30" fill="none" stroke="rgba(30,27,18,.4)" stroke-width="2" stroke-dasharray="3 7"/>
+              <circle cx="280" cy="30" r="14" fill="none" stroke="rgba(30,27,18,.35)" stroke-width="1.5" stroke-dasharray="3 5"/>
+              <circle class="cp-halo" cx="20" cy="170" r="15" fill="rgba(30,27,18,.14)"/>
+              <circle class="cp-node" cx="20" cy="170" r="8" fill="#1E1B12"/>
+            </svg>
+            <div class="cp-meta">
+              <span class="cp-years">2013 – 2016</span>
+              <span class="cp-org label">Sree Narayana Guru Polytechnic · Coimbatore</span>
+            </div>
           </div>
-        </li>
-        <li class="thread-row thread-row--left reveal">
-          <div class="bubble bubble--cream bubble--reply thread-bubble">
-            <span class="label label--pill">2024 – 2026 · MBA, Amrita</span>
-            <p>Marketing management, in progress — sharpening the theory under seven years of practice.</p>
-          </div>
-        </li>
-      </ol>
+        </aside>
+      </div>
     </section>
 
     <section class="container section-gap">
