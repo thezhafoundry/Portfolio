@@ -16,8 +16,8 @@
   /* type */
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
-  --fs-h1: clamp(2.1rem, 5.5vw, 4.5rem);
-  --fs-h2: clamp(1.5rem, 3.5vw, 2.2rem);
+  --fs-h1: clamp(2.1rem, 5.5vw, 5rem);
+  --fs-h2: clamp(1.5rem, 3.5vw, 2.6rem);
   --fs-body: 1rem;
   --fs-small: 0.8125rem;
   --fs-label: 0.6875rem;
@@ -28,7 +28,9 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+/* fluid root (v6): identical up to 1200px, then everything — type and
+   rem-based spacing alike — grows smoothly to ~119% by 1920px */
+html { -webkit-text-size-adjust: 100%; font-size: clamp(16px, 0.55vw + 9.4px, 19px); }
 body {
   margin: 0;
   background-color: var(--paper);    /* identity v5: light world on warm paper */
@@ -76,7 +78,7 @@ a { color: var(--ink); }
 }
 /* width rhythm (v5): contained column → wide panel → full-bleed close */
 .container { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 3vw, 56px); }
-.container--wide { max-width: 1400px; }
+.container--wide { max-width: 1500px; }
 
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; border-radius: var(--r-tail); }
 

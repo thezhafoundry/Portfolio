@@ -16,7 +16,7 @@
 <body>
   <header class="site-nav">
     <a class="brand" href="/">
-      <svg class="brand-node" aria-hidden="true" viewBox="0 0 76 76" width="18" height="18"><circle cx="38" cy="38" r="26" fill="none" stroke="rgba(30,27,18,.35)" stroke-width="4" stroke-dasharray="5 9"/><circle cx="38" cy="38" r="10" fill="#FFC21A"/><circle cx="60" cy="22" r="5" fill="#FFC21A"/></svg>
+      <svg class="brand-node" aria-hidden="true" viewBox="0 0 76 76" width="28" height="28"><circle cx="38" cy="38" r="26" fill="none" stroke="rgba(30,27,18,.35)" stroke-width="4" stroke-dasharray="5 9"/><circle cx="38" cy="38" r="10" fill="#FFC21A"/><circle cx="60" cy="22" r="5" fill="#FFC21A"/></svg>
       Sampath Kumar
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="site-links">Menu
@@ -30,8 +30,10 @@
     </nav>
   </header>
 
+  <div class="margin-rail" aria-hidden="true"><span>The Story</span></div>
+
   <main>
-    <section class="container">
+    <section class="container container--wide">
       <div class="card story-head">
         <div class="story-head-copy">
           <span class="label label--pill">The Story</span>
@@ -43,11 +45,23 @@
           <div class="fig"><span class="fig-num">12</span><span class="fig-lab">Markets wide</span></div>
           <div class="fig"><span class="fig-num">7+</span><span class="fig-lab">Years of hellos</span></div>
         </div>
+        <!-- the journey, previewed (v6): one node per chapter, click to jump -->
+        <nav class="story-strip" aria-label="Jump to a chapter">
+          <button type="button" data-ch="0" aria-label="The machine shop"><i></i><span>2013</span></button>
+          <button type="button" data-ch="1" aria-label="Systems thinking"><i></i></button>
+          <button type="button" data-ch="2" aria-label="The pivot"><i></i><span>2020</span></button>
+          <button type="button" data-ch="3" aria-label="Outbound discipline"><i></i></button>
+          <button type="button" data-ch="4" aria-label="Leading the team"><i></i><span>2022</span></button>
+          <button type="button" data-ch="5" aria-label="Global campaigns"><i></i></button>
+          <button type="button" data-ch="6" aria-label="North America"><i></i><span>2024</span></button>
+          <button type="button" data-ch="7" aria-label="The anchor"><i></i></button>
+          <button type="button" data-ch="8" aria-label="Sharpening the theory"><i></i><span>2026</span></button>
+        </nav>
       </div>
     </section>
 
     <!-- ================= CHAPTERS — scroll-driven split; the node travels the career path ================= -->
-    <section class="container section-gap" aria-label="Career chapters">
+    <section class="container section-gap chapters-wrap" aria-label="Career chapters">
       <div class="chapters">
         <div class="chapter-list">
           <article class="chapter" data-years="2013 – 2016" data-org="Sree Narayana Guru Polytechnic · Coimbatore">
@@ -90,6 +104,7 @@
         </div>
         <aside class="chapter-panel" aria-hidden="true">
           <div class="chapter-panel-inner">
+            <span class="cp-ghost">01</span>
             <span class="cp-idx label">01 / 09</span>
             <svg class="cp-svg" viewBox="0 0 300 200" aria-hidden="true">
               <path d="M 20 170 C 90 150 120 120 160 110 C 220 96 240 60 280 30" fill="none" stroke="rgba(30,27,18,.4)" stroke-width="2" stroke-dasharray="3 7"/>
@@ -106,7 +121,7 @@
       </div>
     </section>
 
-    <section class="container section-gap">
+    <section class="container container--wide section-gap">
       <div class="card story-close">
         <div class="story-photo" aria-hidden="true">
           <!-- TODO(spec §8.1): casual photo of Sampath goes here -->

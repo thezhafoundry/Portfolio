@@ -1,10 +1,40 @@
-/* ================= story head — copy left, figures right ================= */
-.story-head { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-5); padding: var(--space-6) var(--space-5); margin-top: var(--space-3); align-items: center; }
+/* ================= story head — copy left, figures right, journey strip below (v6) ================= */
+.story-head { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-5); padding: var(--space-6) var(--space-5) 0; margin-top: var(--space-3); align-items: center; }
 .story-head h1 { margin-top: var(--space-4); max-width: 16ch; }
 .story-intro { margin-top: var(--space-3); max-width: 48ch; opacity: 0.72; }
 .story-head-figs { display: grid; gap: var(--space-4); justify-items: end; text-align: right; border-left: 1px solid var(--hairline); padding-left: var(--space-5); }
-.fig-num { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; display: block; }
+.fig-num { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 1; display: block; }
 .fig-lab { font: 600 var(--fs-label) var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; }
+
+/* the journey strip — the card's former dead space, now a preview of the chapters */
+.story-strip {
+  grid-column: 1 / -1;
+  margin: var(--space-4) calc(-1 * var(--space-5)) 0;
+  padding: var(--space-3) var(--space-5) var(--space-4);
+  border-top: 1px dashed rgba(30, 27, 18, 0.2);
+  display: flex; justify-content: space-between; align-items: flex-start;
+  position: relative;
+}
+.story-strip::before {
+  content: ""; position: absolute;
+  left: var(--space-5); right: var(--space-5); top: calc(var(--space-3) + 9px);
+  border-top: 2px dashed rgba(255, 194, 26, 0.7);
+}
+.story-strip button {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: none; border: 0; padding: 0; cursor: pointer;
+}
+.story-strip i {
+  width: 11px; height: 11px; border-radius: var(--r-pill);
+  background: var(--honey); border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px rgba(255, 194, 26, 0.8);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.story-strip button:hover i { transform: scale(1.35); }
+.story-strip span {
+  font: 600 var(--fs-label) var(--font-body);
+  letter-spacing: 0.14em; opacity: 0.55;
+}
 
 .section-gap { margin-top: var(--space-6); }
 
@@ -18,7 +48,7 @@
 .chapter.on { opacity: 1; }
 .chapter h3 {
   font-family: var(--font-display); font-weight: 600; line-height: 1.12;
-  font-size: clamp(1.6rem, 2.8vw, 2.5rem); margin: 0 0 var(--space-2);
+  font-size: clamp(1.6rem, 2.8vw, 3rem); margin: 0 0 var(--space-2);
 }
 .chapter p { max-width: 44ch; margin: 0; opacity: 0.8; }
 
@@ -26,24 +56,50 @@
 .chapter-panel-inner {
   height: 100%; background: var(--honey); border-radius: var(--r-card) var(--r-card) var(--r-card) var(--r-tail);
   padding: var(--space-5); display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
 }
 .cp-idx { opacity: 0.6; }
 .cp-svg { width: min(420px, 90%); margin: auto; display: block; }
 .cp-node, .cp-halo { transition: cx 0.5s ease, cy 0.5s ease; }
 .cp-meta { display: flex; flex-direction: column; gap: var(--space-1); }
-.cp-years { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.1; }
+.cp-years { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1.1; }
 .cp-org { opacity: 0.7; }
+/* the ghost numeral (v6): chapter progress you can read from across the room */
+.cp-ghost {
+  position: absolute; right: -0.05em; bottom: -0.16em;
+  font-family: var(--font-display); font-style: italic; font-weight: 600;
+  font-size: clamp(8rem, 15vw, 15rem); line-height: 1;
+  color: rgba(30, 27, 18, 0.10);
+  pointer-events: none; user-select: none;
+}
+
+/* ================= wide world (v6): true split-screen — panel bleeds to the screen edge ================= */
+@media (min-width: 1440px) {
+  .chapters-wrap {
+    max-width: none;
+    padding-right: 0;
+    padding-left: max(clamp(20px, 3vw, 56px), calc((100vw - 1200px) / 2));
+  }
+  .chapters { grid-template-columns: minmax(0, 1fr) 44vw; }
+  .chapter-panel { top: 9vh; height: 84vh; }
+  .chapter-panel-inner { border-radius: var(--r-card) 0 0 var(--r-tail); padding: var(--space-6); }
+  .cp-svg { width: min(560px, 86%); }
+}
 
 /* ================= closing card ================= */
-.story-close { display: grid; grid-template-columns: 280px 1fr; gap: var(--space-5); padding: var(--space-5); align-items: center; }
+.story-close { display: grid; grid-template-columns: 320px 1fr; gap: var(--space-5); padding: var(--space-5); align-items: center; }
+.story-close h2 { font-size: var(--fs-h2); }
 .story-photo-slot {
-  aspect-ratio: 4 / 5; background: var(--cream);
+  aspect-ratio: 4 / 5; background: var(--honey); /* honey until the real photo: designed, not missing */
   border-radius: var(--r-card) var(--r-card) var(--r-card) var(--r-tail);
   display: grid; place-items: center;
 }
+.story-photo-slot .label { opacity: 0.55; }
 
 @media (max-width: 860px) {
   .story-head { grid-template-columns: 1fr; }
+  .story-strip span { display: none; }
+  .story-strip button:first-child span, .story-strip button:last-child span { display: block; }
   .story-head-figs { border-left: none; padding-left: 0; justify-items: start; text-align: left; grid-template-columns: repeat(3, auto); justify-content: space-between; width: 100%; }
   .chapters { grid-template-columns: 1fr; }
   .chapter-panel { display: none; }
