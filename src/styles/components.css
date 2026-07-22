@@ -39,6 +39,7 @@
 }
 .btn--primary { background: var(--ink); color: var(--honey); }
 .btn--ghost   { border: 1.5px solid var(--ink); color: var(--ink); }
+.btn--honey   { background: var(--honey); color: var(--ink); }  /* for dark grounds */
 .btn:hover  { transform: translateY(-2px); border-bottom-right-radius: var(--r-tail); }
 .btn:active { transform: translateY(0) scale(0.97, 0.94); }
 
@@ -66,19 +67,42 @@
 .thread-bubble p { margin: 0; }
 .bubble--ink .label { color: var(--honey); }
 
-/* --- shared CTA band (used by home + results) --- */
-.cta-band { background: var(--honey); margin-top: var(--space-7); }
-.cta-inner {
-  padding-block: var(--space-6);
-  display: flex; align-items: center; gap: var(--space-4);
-  flex-wrap: wrap; justify-content: space-between;
+/* --- the close: CTA band + footer fused into one dark ending (v5, home + results) --- */
+.site-close {
+  background: var(--ink);
+  background-image: radial-gradient(rgba(255, 243, 204, 0.10) 1px, transparent 1px);
+  background-size: 8px 8px;
+  color: var(--white);
+  margin-top: var(--space-6);
+  padding: var(--space-7) clamp(20px, 3vw, 56px) var(--space-5);
 }
+.close-inner { max-width: 1200px; margin-inline: auto; }
+.close-inner h2 {
+  color: var(--cream);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  max-width: 16ch;
+  line-height: 1.1;
+}
+.close-inner h2 em { font-style: italic; color: var(--honey); }
+.close-actions { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-4); }
+.btn--ghost-cream { border: 1.5px solid rgba(255, 243, 204, 0.5); color: var(--cream); }
+.close-fine {
+  display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center;
+  margin-top: var(--space-6); padding-top: var(--space-4);
+  border-top: 1px solid rgba(255, 243, 204, 0.18);
+  color: rgba(255, 243, 204, 0.7); font-size: var(--fs-small);
+}
+.close-fine a { color: var(--honey); font-weight: 600; font-size: var(--fs-small); }
+.close-fine .fine { margin-left: auto; opacity: 0.7; }
 
-/* --- nav --- */
+/* --- nav: sticky, floating on blurred paper (v5) --- */
 .site-nav {
   display: flex; align-items: center; gap: var(--space-3);
   padding: var(--space-3) clamp(16px, 4vw, 40px);
-  position: relative;
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(251, 246, 232, 0.82);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 .site-nav .brand {
   display: inline-flex; align-items: center; gap: 10px;

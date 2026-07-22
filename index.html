@@ -35,7 +35,7 @@
   <main>
     <!-- ================= HERO (spec §6.1.1, locked composition) ================= -->
     <section class="container">
-      <div class="sechead sechead--first"><span class="num">01</span><span class="lab">Hello</span><i></i><span class="of">01 / 05</span></div>
+      <div class="sechead sechead--first"><span class="num">01</span><span class="lab">Hello</span><i></i><span class="of">01 / 06</span></div>
       <div class="card hero">
         <div class="hero-copy">
           <span class="label label--pill">Lead Generation · Pre-Sales</span>
@@ -56,17 +56,44 @@
               </g>
             </svg>
           </div>
+          <span class="hero-badge bubble bubble--white bubble--reply">9.2/10 client satisfaction</span>
+        </div>
+        <!-- the 12 markets on the hero's bottom edge (v5 move 2) -->
+        <div class="hero-ticker" aria-hidden="true">
+          <span class="tickline">New York · Toronto · London · Frankfurt · Paris · Dubai · Mumbai · Bengaluru · Singapore · Hong Kong · Tokyo · Sydney ·&nbsp;New York · Toronto · London · Frankfurt · Paris · Dubai · Mumbai · Bengaluru · Singapore · Hong Kong · Tokyo · Sydney ·&nbsp;</span>
         </div>
       </div>
     </section>
 
-    <!-- ================= PROOF BAND (v3 spec §3.3) — real numbers, overlapping the hero edge ================= -->
+    <!-- ================= STAT ROW (v5 move 6) — the numbers said out loud, straddling the hero edge ================= -->
     <section class="container" aria-label="Key results">
-      <div class="proof-band">
-        <span class="bubble bubble--ink bubble--reply">7+ years</span>
-        <span class="bubble bubble--white bubble--reply">+35% lead → meeting</span>
-        <span class="bubble bubble--me">9.2/10 client satisfaction</span>
-        <span class="bubble bubble--white bubble--reply">200M+ companies mapped</span>
+      <div class="card stats">
+        <div class="stat">
+          <div class="stat-n"><span data-count-to="35" data-prefix="+">+35</span><small>%</small></div>
+          <div class="stat-l">Lead → meeting lift</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><span data-count-to="9.2" data-decimals="1">9.2</span><small>/10</small></div>
+          <div class="stat-l">Client satisfaction</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><span data-count-to="200">200</span><small>M+</small></div>
+          <div class="stat-l">Companies mapped</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><span data-count-to="12">12</span></div>
+          <div class="stat-l">Markets covered</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CREDIBILITY BAND (v5 move 5) — seven real teams, as wordmarks ================= -->
+    <section class="container" aria-label="Teams worked with">
+      <div class="clients reveal">
+        <span class="label">Teams I've filled calendars for</span>
+        <div class="clients-row">
+          <span>Finquest</span><span>Zinnov</span><span>Draup</span><span>Uplers</span><span>Ecosmob</span><span>Alore</span><span>The Sales Group</span>
+        </div>
       </div>
     </section>
 
@@ -76,8 +103,8 @@
     </section>
 
     <!-- ================= THE NIGHT WINDOW (v3 spec §3.4) — the one dark panel on the site ================= -->
-    <section class="container section-gap" aria-labelledby="signal-h">
-      <div class="sechead"><span class="num">02</span><span class="lab">The Signal Path</span><i></i><span class="of">02 / 05</span></div>
+    <section class="container container--wide section-gap" aria-labelledby="signal-h">
+      <div class="sechead"><span class="num">02</span><span class="lab">The Signal Path</span><i></i><span class="of">02 / 06</span></div>
       <div class="night reveal">
         <h2 id="signal-h">How a cold name becomes a <em>meeting</em></h2>
         <div class="signal-stage" role="img" aria-label="Pipeline: research, outreach, qualified, meeting — one signal rising out of the noise">
@@ -161,9 +188,21 @@
       </div>
     </section>
 
+    <!-- ================= HOW IT SOUNDS (v5 move 7) — a real exchange, anonymized ================= -->
+    <section class="container section-gap" aria-label="How a real exchange sounds">
+      <div class="sechead"><span class="num">04</span><span class="lab">How it sounds</span><i></i><span class="of">04 / 06</span></div>
+      <div class="card thread-panel convo">
+        <div class="thread-row reveal"><p class="thread-bubble bubble bubble--white bubble--reply">"We need pipeline in APAC — but our list is three years stale."</p></div>
+        <div class="thread-row thread-row--right reveal"><p class="thread-bubble bubble bubble--me">Give me two weeks. I'll map the segment first — then we talk outreach.</p></div>
+        <div class="thread-row reveal"><p class="thread-bubble bubble bubble--white bubble--reply">"…meeting booked for Thursday. How?"</p></div>
+        <div class="thread-row reveal"><span class="bubble bubble--white bubble--reply convo-typing"><span class="typing-dots typing-dots--live" aria-hidden="true"><i></i><i></i><i></i></span></span></div>
+      </div>
+      <p class="convo-note">A real exchange, anonymized. The typing never stops.</p>
+    </section>
+
     <!-- ================= FOLLOWER COUNT (spec §6.1.2, honest fallback §8.3) ================= -->
     <section class="container section-gap">
-      <div class="sechead"><span class="num">04</span><span class="lab">From zero</span><i></i><span class="of">04 / 05</span></div>
+      <div class="sechead"><span class="num">05</span><span class="lab">From zero</span><i></i><span class="of">05 / 06</span></div>
       <div class="card followers reveal" id="follower-card" data-target="8331">
         <!-- TODO(spec §8.3): when real history arrives, add
              data-points='[{"t":2019,"v":0}, …, {"t":2026,"v":8331}]'
@@ -187,24 +226,26 @@
     </section>
     ================= -->
 
-    <!-- ================= CTA BAND (spec §6.1.5) ================= -->
+    <!-- ================= SAY HELLO (spec §6.1.5, v5 move 9: CTA + footer fused into one dark ending) ================= -->
     <section class="container">
-      <div class="sechead"><span class="num">05</span><span class="lab">Say hello</span><i></i><span class="of">05 / 05</span></div>
-    </section>
-    <section class="cta-band">
-      <div class="container cta-inner">
-        <h2>Your pipeline is one <em class="sweep">hello</em> away.</h2>
-        <a class="btn btn--primary" href="/schedule/">Start a conversation</a>
-      </div>
+      <div class="sechead"><span class="num">06</span><span class="lab">Say hello</span><i></i><span class="of">06 / 06</span></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <svg class="brand-node brand-node--footer" aria-hidden="true" viewBox="0 0 76 76" width="18" height="18"><circle cx="38" cy="38" r="26" fill="none" stroke="rgba(255,243,204,.4)" stroke-width="4" stroke-dasharray="5 9"/><circle cx="38" cy="38" r="10" fill="#FFC21A"/><circle cx="60" cy="22" r="5" fill="#FFC21A"/></svg>
-    <span>Every deal begins with hello.</span>
-    <a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699/" rel="noopener" target="_blank">LinkedIn</a>
-    <a href="/schedule/">Schedule</a>
-    <span class="fine">© 2026 Sampath Kumar</span>
+  <footer class="site-close">
+    <div class="close-inner">
+      <h2>Your pipeline is one <em>hello</em> away.</h2>
+      <div class="close-actions">
+        <a class="btn btn--honey" href="/schedule/">Start a conversation</a>
+        <a class="btn btn--ghost-cream" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699/" rel="noopener" target="_blank">LinkedIn ↗</a>
+      </div>
+      <div class="close-fine">
+        <svg class="brand-node brand-node--footer" aria-hidden="true" viewBox="0 0 76 76" width="18" height="18"><circle cx="38" cy="38" r="26" fill="none" stroke="rgba(255,243,204,.4)" stroke-width="4" stroke-dasharray="5 9"/><circle cx="38" cy="38" r="10" fill="#FFC21A"/><circle cx="60" cy="22" r="5" fill="#FFC21A"/></svg>
+        <span>Every deal begins with hello.</span>
+        <a href="/schedule/">Schedule</a>
+        <span class="fine">© 2026 Sampath Kumar</span>
+      </div>
+    </div>
   </footer>
 
   <script type="module" src="/src/js/home.js"></script>

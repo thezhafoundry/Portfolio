@@ -23,12 +23,62 @@
   position: absolute; left: 12%; right: 10%; bottom: 0;
   height: 108%;   /* head breaks the shape's top line (reference anatomy) */
 }
-/* ================= proof band — bubbles straddling the hero's bottom edge ================= */
-.proof-band {
-  display: flex; flex-wrap: wrap; gap: var(--space-2);
-  justify-content: center;
+.hero-badge {
+  position: absolute; top: 20px; right: 20px; z-index: 2;
+  box-shadow: 0 4px 14px rgba(30, 27, 18, 0.18);
+}
+
+/* the 12 markets, travelling the hero's bottom edge (v5 spec move 2) */
+.hero-ticker {
+  grid-column: 1 / -1;
+  overflow: hidden; white-space: nowrap;
+  border-top: 1px dashed rgba(30, 27, 18, 0.22);
+  padding: 0.9em clamp(20px, 3vw, 48px) 2em; /* deep bottom pad: the stat card overlaps this edge */
+  font: 600 var(--fs-label) var(--font-body);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(30, 27, 18, 0.5);
+}
+.hero-ticker .tickline { display: inline-block; animation: ticker-scroll 45s linear infinite; }
+@keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ================= stat row — the numbers, said out loud (v5 spec move 6) ================= */
+.stats {
   margin-top: calc(-1 * var(--space-3));
   position: relative; z-index: 3;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3);
+  padding: var(--space-4);
+  text-align: center;
+}
+.stat-n {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.stat-n small { font-size: 0.55em; }
+.stat-l {
+  margin-top: var(--space-2);
+  font: 600 var(--fs-label) var(--font-body);
+  letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.55;
+}
+
+/* ================= credibility band — the teams, as wordmarks (v5 spec move 5) ================= */
+.clients {
+  margin-top: var(--space-5);
+  background: var(--cream); border-radius: var(--r-card);
+  padding: var(--space-4); text-align: center;
+}
+.clients .label { display: block; margin-bottom: var(--space-3); opacity: 0.6; }
+.clients-row {
+  display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3);
+  justify-content: center; align-items: baseline;
+}
+.clients-row span {
+  font-family: var(--font-display); font-style: italic; font-weight: 600;
+  font-size: 1.15rem; opacity: 0.62;
+}
+.clients-row span:not(:last-child)::after {
+  content: "·"; color: var(--honey); opacity: 1;
+  margin-left: var(--space-3); font-style: normal;
 }
 
 /* ================= sections ================= */
@@ -73,23 +123,45 @@
 }
 
 /* ================= editorial apparatus (v4 spec §9) ================= */
-.sechead { display: flex; align-items: center; gap: 14px; margin: var(--space-6) 0 var(--space-4); }
+.sechead { display: flex; align-items: center; gap: 14px; margin: var(--space-6) 0 var(--space-4); position: relative; }
 .sechead--first { margin-top: var(--space-3); }
 .sechead .num { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; opacity: 0.5; }
+/* the thread (v5 spec move 4): each section number is a node on the signal path;
+   a dashed honey line rises through the gap to the section before it */
+.sechead .num::before {
+  content: ""; display: inline-block; width: 9px; height: 9px;
+  border-radius: var(--r-pill); background: var(--honey);
+  margin-right: 10px; vertical-align: middle;
+}
+.sechead:not(.sechead--first)::before {
+  content: ""; position: absolute; left: 3px; bottom: calc(100% + 8px);
+  height: calc(var(--space-6) - 28px);
+  border-left: 2px dashed rgba(255, 194, 26, 0.65);
+}
 .sechead .lab { font: 600 var(--fs-label) var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; }
 .sechead i { flex: 1; border-top: 1px solid rgba(30, 27, 18, 0.15); }
 .sechead .of { font-family: var(--font-display); font-style: italic; font-size: 0.85rem; opacity: 0.4; }
 .sechead .arrow { font: 600 var(--fs-small) var(--font-body); color: var(--ink); }
 .pull { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3.2vw, 2.1rem); text-align: center; max-width: 24ch; margin: var(--space-6) auto 0; line-height: 1.3; }
-/* the 05 sechead already provides the pause before the CTA band (home only) */
-.cta-band { margin-top: 0; }
+/* the 06 sechead already provides the pause before the dark close (home only) */
+.site-close { margin-top: 0; }
 
 /* ================= win routes — outcomes as flight legs ================= */
 .routes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
 .route {
   display: flex; flex-direction: column; gap: var(--space-1);
   padding: var(--space-4); text-decoration: none;
+  overflow: hidden;
 }
+/* honey wash sweeps in from the left (v5 spec move 8) */
+.route::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--honey); border-radius: inherit;
+  transform: translateX(-101%);
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.route:hover::before { transform: translateX(0); }
+.route > * { position: relative; }
 .route-code {
   display: flex; align-items: center; gap: 8px;
   font: 600 var(--fs-label) var(--font-body);
@@ -100,7 +172,12 @@
 .route-sub { font-size: var(--fs-small); opacity: 0.65; }
 .route:hover { border-color: rgba(30, 27, 18, 0.3); }
 
-/* the sweep sits on a WHITE band in the CTA, so Honey still reads (identity: emphasis = Ink italic on Honey) */
+/* ================= how it sounds — a real exchange, in the brand's own bubbles (v5 spec move 7) ================= */
+.convo { display: flex; flex-direction: column; gap: var(--space-3); }
+.convo p { margin: 0; }
+.convo .thread-bubble { font-size: var(--fs-body); }
+.convo-typing { padding: 0.85em 1.1em; }
+.convo-note { text-align: center; font-size: var(--fs-small); opacity: 0.6; margin: var(--space-3) auto 0; }
 
 /* ================= mobile recomposition (spec §3.5) ================= */
 @media (max-width: 860px) {
@@ -125,4 +202,5 @@
   .signal-svg { display: none; }
   .signal-chip { position: static; transform: none; background: var(--ink); }
   .routes { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr; gap: var(--space-4) var(--space-3); }
 }

@@ -5,6 +5,7 @@
   --honey: #FFC21A;
   --ink: #1E1B12;
   --cream: #FFF3CC;
+  --paper: #FBF6E8; /* v5: the ground — a desaturated cousin of Cream, so White cards read as objects */
   --hairline: rgba(30, 27, 18, 0.12); /* 12% Ink, inside cards only */
 
   /* radii — the only three */
@@ -15,7 +16,7 @@
   /* type */
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
-  --fs-h1: clamp(2.1rem, 5.5vw, 3.6rem);
+  --fs-h1: clamp(2.1rem, 5.5vw, 4.5rem);
   --fs-h2: clamp(1.5rem, 3.5vw, 2.2rem);
   --fs-body: 1rem;
   --fs-small: 0.8125rem;
@@ -30,7 +31,9 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--white);          /* identity v3: light world */
+  background-color: var(--paper);    /* identity v5: light world on warm paper */
+  background-image: radial-gradient(rgba(30, 27, 18, 0.045) 1px, transparent 1px);
+  background-size: 9px 9px;          /* the Night panel's dot-grid, whispered site-wide */
   color: var(--ink);
   font-family: var(--font-body);
   font-size: var(--fs-body);
@@ -69,8 +72,11 @@ a { color: var(--ink); }
   border: 1px solid rgba(30, 27, 18, 0.08);
   border-radius: var(--r-card);
   position: relative;
+  box-shadow: 0 2px 12px rgba(30, 27, 18, 0.05); /* warm lift off the paper — never grey-black */
 }
-.container { max-width: none; margin-inline: 0; padding-inline: clamp(20px, 3vw, 56px); }
+/* width rhythm (v5): contained column → wide panel → full-bleed close */
+.container { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 3vw, 56px); }
+.container--wide { max-width: 1400px; }
 
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; border-radius: var(--r-tail); }
 
