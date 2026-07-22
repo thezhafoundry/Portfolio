@@ -154,7 +154,9 @@ Ecosmob (2022–23) → Uplers/Mavlers (2023) → The Sales Group, Toronto remot
 (2024) → Finquest (2024–25) → MBA, Amrita (2024–26, in progress).
 
 Grid-breaking move: the engineer→sales pivot is a full-bleed Honey interruption
-carrying the site's one big pull-quote. Ends with casual photo + short human
+carrying the site's one big pull-quote — its text must be Sampath's own words
+(supplied by him, or adapted from his real About copy and approved), never
+ghost-written by the build (see §8.6). Ends with casual photo + short human
 paragraph + link: "Here's what that journey produced →" (Results).
 
 ### 6.3 Results (most designed surface)
@@ -205,6 +207,8 @@ Never invented; clearly-labeled neutral TODO placeholders until supplied:
    (8,331) — no invented curve.**
 4. **Cal.com booking link** — Sampath creates the free account + availability.
 5. **CV PDF** and the public contact email address.
+6. **Pivot pull-quote** (Story page) — Sampath's own words about the
+   engineer→sales pivot, or his approval of a line adapted from his About copy.
 
 ## 9. Verification gates (per surface, before "done")
 
@@ -221,7 +225,7 @@ Never invented; clearly-labeled neutral TODO placeholders until supplied:
 |---|---|---|
 | Purpose priority | Brand > clients > job | — |
 | Site shape | Multi-page (4 pages) | One-pager; one-pager+blog |
-| Direction | M — The Conversation | 11 others across rounds 1–3 (Signal Ink, Editorial Ledger, Momentum Bloc, Quiet Compass, Highlight, Morning Signal, Spark Grid, Greenlight, You're the Lead, Cold Email, One in 200M, Always Morning Somewhere, Open Door, First Light) |
+| Direction | M — The Conversation | 14 others across rounds 1–4 (Signal Ink, Editorial Ledger, Momentum Bloc, Quiet Compass, Highlight, Morning Signal, Spark Grid, Greenlight, You're the Lead, Cold Email, One in 200M, Always Morning Somewhere, Open Door, First Light) |
 | Palette v2 | 4 colors, Amber removed | v1 five-color palette |
 | Scheduler | Cal.com embed (auto-emails both parties) | Custom form→email; hybrid |
 | Stack | Vite static, Netlify/Vercel | Next.js/React |
