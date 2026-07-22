@@ -1,0 +1,33 @@
+.story-head { padding: var(--space-6) var(--space-5); margin-top: var(--space-3); }
+.story-head h1 { margin-top: var(--space-4); max-width: 16ch; }
+.story-intro { margin-top: var(--space-3); max-width: 48ch; opacity: 0.72; }
+
+.section-gap { margin-top: var(--space-6); }
+
+/* thread-row / thread-bubble / thread-panel come from components.css (shared with home).
+   .story-thread IS the white panel here (card thread-panel in the markup). */
+.story-thread {
+  list-style: none;
+  display: flex; flex-direction: column; gap: var(--space-4);
+}
+.story-thread .label--pill { display: inline-block; margin-bottom: var(--space-2); }
+
+/* full-bleed white interruption carrying the ONE big pull-quote — grid-breaking move */
+.pivot { background: var(--white); margin-block: var(--space-7); }
+.pivot .container { padding-block: var(--space-6); }
+.pivot-quote {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: var(--fs-h2); line-height: 1.25; max-width: 26ch; margin: 0;
+}
+.pivot-todo { font-size: var(--fs-small); font-family: var(--font-body); font-weight: 600; opacity: 0.5; }
+
+.story-close { display: grid; grid-template-columns: 280px 1fr; gap: var(--space-5); padding: var(--space-5); align-items: center; }
+.story-photo-slot {
+  aspect-ratio: 4 / 5; background: var(--cream);
+  border-radius: var(--r-card) var(--r-card) var(--r-card) var(--r-tail);
+  display: grid; place-items: center;
+}
+
+@media (max-width: 720px) {
+  .story-close { grid-template-columns: 1fr; }
+}

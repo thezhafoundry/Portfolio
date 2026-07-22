@@ -58,6 +58,7 @@
 .type-unit.on { opacity: 1; transform: none; transition: opacity 0.22s ease, transform 0.3s ease; }
 
 /* --- shared conversation thread (used by home + story) --- */
+.thread-panel { max-width: 860px; margin-inline: auto; padding: var(--space-5); }
 .thread-row { display: flex; }
 .thread-row--right { justify-content: flex-end; }
 .thread-bubble { max-width: 30rem; padding: var(--space-4); font-weight: 400; }
