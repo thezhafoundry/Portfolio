@@ -69,22 +69,6 @@
       </div>
     </section>
 
-    <!-- ================= FOLLOWER COUNT (spec §6.1.2, honest fallback §8.3) ================= -->
-    <section class="container section-gap">
-      <div class="card followers reveal" id="follower-card" data-target="8331">
-        <!-- TODO(spec §8.3): when real history arrives, add
-             data-points='[{"t":2019,"v":0}, …, {"t":2026,"v":8331}]'
-             and unhide the svg below. No invented curves. -->
-        <svg viewBox="0 0 640 180" hidden aria-hidden="true">
-          <path data-line fill="none" stroke="#1E1B12" stroke-width="3"/>
-          <g data-tip><circle r="7" fill="#FFC21A" stroke="#1E1B12" stroke-width="2.5"/></g>
-        </svg>
-        <p class="label">LinkedIn, from zero</p>
-        <p class="followers-number"><span data-count>0</span> followers</p>
-        <p class="followers-note">Built one conversation at a time.</p>
-      </div>
-    </section>
-
     <!-- ================= THE NIGHT WINDOW (v3 spec §3.4) — the one dark panel on the site ================= -->
     <section class="container section-gap" aria-labelledby="signal-h">
       <div class="night reveal">
@@ -130,6 +114,22 @@
           <span class="route-title">Clients keep replying</span>
           <span class="route-sub">satisfaction, measured</span>
         </a>
+      </div>
+    </section>
+
+    <!-- ================= FOLLOWER COUNT (spec §6.1.2, honest fallback §8.3) ================= -->
+    <section class="container section-gap">
+      <div class="card followers reveal" id="follower-card" data-target="8331">
+        <!-- TODO(spec §8.3): when real history arrives, add
+             data-points='[{"t":2019,"v":0}, …, {"t":2026,"v":8331}]'
+             and unhide the svg below. No invented curves. -->
+        <svg viewBox="0 0 640 180" hidden aria-hidden="true">
+          <path data-line fill="none" stroke="#1E1B12" stroke-width="3"/>
+          <g data-tip><circle r="7" fill="#FFC21A" stroke="#1E1B12" stroke-width="2.5"/></g>
+        </svg>
+        <p class="label">LinkedIn, from zero</p>
+        <p class="followers-number"><span data-count>0</span> followers</p>
+        <p class="followers-note">Built one conversation at a time.</p>
       </div>
     </section>
 
