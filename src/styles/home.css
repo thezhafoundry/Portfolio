@@ -3,10 +3,9 @@
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   min-height: 520px;
-  margin-top: var(--space-3);
   overflow: visible;
 }
-.hero-copy { padding: var(--space-6) var(--space-3) var(--space-6) var(--space-5); }
+.hero-copy { padding: var(--space-5) var(--space-3) var(--space-5) 0; }
 .hero-copy h1 { margin: var(--space-4) 0 0; max-width: 13ch; }
 .hero-sub { margin-top: var(--space-3); max-width: 42ch; color: var(--ink); opacity: 0.72; }
 .hero-actions { margin-top: var(--space-4); display: flex; gap: var(--space-2); flex-wrap: wrap; }
@@ -33,7 +32,7 @@
   grid-column: 1 / -1;
   overflow: hidden; white-space: nowrap;
   border-top: 1px dashed rgba(30, 27, 18, 0.22);
-  padding: 0.9em clamp(20px, 3vw, 48px) 2em; /* deep bottom pad: the stat card overlaps this edge */
+  padding: 0.9em 0 0;
   font: 600 var(--fs-label) var(--font-body);
   letter-spacing: 0.22em; text-transform: uppercase;
   color: rgba(30, 27, 18, 0.5);
@@ -41,12 +40,9 @@
 .hero-ticker .tickline { display: inline-block; animation: ticker-scroll 45s linear infinite; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ================= stat row — the numbers, said out loud (v5 spec move 6) ================= */
+/* ================= stat row — the numbers, said out loud on a honey band (v7) ================= */
 .stats {
-  margin-top: calc(-1 * var(--space-3));
-  position: relative; z-index: 3;
   display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3);
-  padding: var(--space-4);
   text-align: center;
 }
 .stat-n {
@@ -62,11 +58,7 @@
 }
 
 /* ================= credibility band — the teams, as wordmarks (v5 spec move 5) ================= */
-.clients {
-  margin-top: var(--space-5);
-  background: var(--cream); border-radius: var(--r-card);
-  padding: var(--space-4); text-align: center;
-}
+.clients { text-align: center; }
 .clients .label { display: block; margin-bottom: var(--space-3); opacity: 0.6; }
 .clients-row {
   display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3);
@@ -84,22 +76,13 @@
 /* ================= sections ================= */
 .section-gap { margin-top: var(--space-6); }
 
-.followers { padding: var(--space-5); text-align: center; background: var(--cream); border: none; }
+.followers { text-align: center; }
 .followers-number { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); margin: var(--space-2) 0 0; }
 .followers-note { opacity: 0.65; font-size: var(--fs-small); }
 .followers svg { width: min(640px, 100%); margin-inline: auto; }
 
-/* ================= the Night Window — the site's single dark panel ================= */
-.night {
-  background: var(--ink);
-  background-image: radial-gradient(rgba(255, 243, 204, 0.13) 1px, transparent 1px);
-  background-size: 8px 8px;
-  border: none;
-  border-radius: var(--r-card);
-  color: var(--white);
-  padding: var(--space-5) var(--space-4) var(--space-5);
-  overflow: hidden;
-}
+/* ================= the Night Window — now a full-bleed dark band (v7) ================= */
+.night { color: var(--white); }
 .night h2 { text-align: center; color: var(--white); }
 .night h2 em { font-style: italic; color: var(--honey); }
 
@@ -122,32 +105,22 @@
   margin: var(--space-4) auto 0;
 }
 
-/* ================= editorial apparatus (v4 spec §9) ================= */
-.sechead { display: flex; align-items: center; gap: 14px; margin: var(--space-6) 0 var(--space-4); position: relative; }
-.sechead--first { margin-top: var(--space-3); }
+/* ================= editorial apparatus (v4 spec §9; v7 — secheads live inside their bands) ================= */
+.sechead { display: flex; align-items: center; gap: 14px; margin: 0 0 var(--space-4); }
+.sechead--solo { margin-bottom: 0; }
 .sechead .num { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; opacity: 0.5; }
-/* the thread (v5 spec move 4): each section number is a node on the signal path;
-   a dashed honey line rises through the gap to the section before it */
 .sechead .num::before {
   content: ""; display: inline-block; width: 9px; height: 9px;
   border-radius: var(--r-pill); background: var(--honey);
   margin-right: 10px; vertical-align: middle;
 }
-.sechead:not(.sechead--first)::before {
-  content: ""; position: absolute; left: 3px; bottom: calc(100% + 8px);
-  height: calc(var(--space-6) - 28px);
-  border-left: 2px dashed rgba(255, 194, 26, 0.65);
-}
-/* ≥1440px the fixed margin rail becomes the spine; per-section connectors hand off
-   (wide + normal containers no longer share a left edge there) */
-@media (min-width: 1440px) {
-  .sechead:not(.sechead--first)::before { display: none; }
-}
+.band--ink .sechead { color: var(--cream); }
+.band--ink .sechead i { border-top-color: rgba(255, 243, 204, 0.25); }
 .sechead .lab { font: 600 var(--fs-label) var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; }
 .sechead i { flex: 1; border-top: 1px solid rgba(30, 27, 18, 0.15); }
 .sechead .of { font-family: var(--font-display); font-style: italic; font-size: 0.85rem; opacity: 0.4; }
 .sechead .arrow { font: 600 var(--fs-small) var(--font-body); color: var(--ink); }
-.pull { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3.2vw, 2.1rem); text-align: center; max-width: 24ch; margin: var(--space-6) auto 0; line-height: 1.3; }
+.pull { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3.2vw, 2.1rem); text-align: center; max-width: 24ch; margin: 0 auto; line-height: 1.3; }
 /* the 06 sechead already provides the pause before the dark close (home only) */
 .site-close { margin-top: 0; }
 
@@ -187,7 +160,7 @@
 /* ================= mobile recomposition (spec §3.5) ================= */
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; min-height: 0; }
-  .hero-copy { padding: var(--space-5) var(--space-4) var(--space-3); }
+  .hero-copy { padding: var(--space-4) 0 var(--space-3); }
   .hero-photo { min-height: 340px; margin-top: var(--space-3); overflow: hidden; border-radius: 120px var(--r-card) var(--r-tail) var(--r-card); }
   .hero-shape { inset: 0; border-radius: inherit; }
   .hero-silhouette { left: 14%; right: 14%; height: 100%; }

@@ -16,8 +16,8 @@
   /* type */
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
-  --fs-h1: clamp(2.1rem, 5.5vw, 5rem);
-  --fs-h2: clamp(1.5rem, 3.5vw, 2.6rem);
+  --fs-h1: clamp(2.1rem, 5.5vw, 4.5rem);
+  --fs-h2: clamp(1.5rem, 3.5vw, 2.2rem);
   --fs-body: 1rem;
   --fs-small: 0.8125rem;
   --fs-label: 0.6875rem;
@@ -28,9 +28,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-/* fluid root (v6): identical up to 1200px, then everything — type and
-   rem-based spacing alike — grows smoothly to ~119% by 1920px */
-html { -webkit-text-size-adjust: 100%; font-size: clamp(16px, 0.55vw + 9.4px, 19px); }
+html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   background-color: var(--paper);    /* identity v5: light world on warm paper */
@@ -79,6 +77,20 @@ a { color: var(--ink); }
 /* width rhythm (v5): contained column → wide panel → full-bleed close */
 .container { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 3vw, 56px); }
 .container--wide { max-width: 1500px; }
+
+/* band world (v7): sections run edge-to-edge in color; content keeps a readable column */
+.band { width: 100%; }
+.band--white { background: var(--white); }
+.band--cream { background: var(--cream); }
+.band--honey { background: var(--honey); }
+.band--ink {
+  background: var(--ink);
+  background-image: radial-gradient(rgba(255, 243, 204, 0.13) 1px, transparent 1px);
+  background-size: 8px 8px;
+  color: var(--white);
+}
+.band-inner { max-width: 1200px; margin-inline: auto; padding: var(--space-5) clamp(20px, 3vw, 56px); }
+.band-inner--wide { max-width: 1500px; }
 
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; border-radius: var(--r-tail); }
 

@@ -1,4 +1,4 @@
-.sched { padding: var(--space-6) var(--space-5); margin-top: var(--space-3); }
+/* v7 band world: the card chrome is gone — the white band carries the section */
 .sched h1 { margin-top: var(--space-4); max-width: 16ch; }
 .sched-sub { margin-top: var(--space-3); max-width: 46ch; opacity: 0.72; }
 
