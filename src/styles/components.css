@@ -107,14 +107,15 @@
 .site-nav .brand {
   display: inline-flex; align-items: center; gap: 12px;
   font-family: var(--font-display);
-  font-weight: 600; text-decoration: none; font-size: 1.05rem;
+  font-weight: 600; text-decoration: none; font-size: 1.3rem;
 }
 .brand-node { display: inline-block; flex: none; }
 .site-nav .links { margin-left: auto; display: flex; align-items: center; gap: var(--space-4); }
 .site-nav .links a:not(.btn) {
-  text-decoration: none; font-weight: 600; font-size: var(--fs-small);
+  text-decoration: none; font-weight: 600; font-size: 0.95rem;
   border-bottom: 2px solid transparent;
 }
+.site-nav .btn { font-size: 0.95rem; padding: 0.8em 1.5em; }
 .site-nav .links a:not(.btn):hover,
 .site-nav .links a[aria-current="page"] { border-bottom-color: var(--ink); }
 .nav-toggle { display: none; }
