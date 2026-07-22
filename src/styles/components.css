@@ -84,11 +84,7 @@
   display: inline-flex; align-items: center; gap: 10px;
   font-weight: 600; text-decoration: none; font-size: var(--fs-small);
 }
-.brand-mark {
-  width: 34px; height: 27px; background: var(--white); color: var(--ink);
-  border-radius: 9px 9px var(--r-tail) 9px;
-  display: inline-flex; align-items: center; justify-content: center;
-}
+.brand-node { display: inline-block; flex: none; }
 .site-nav .links { margin-left: auto; display: flex; align-items: center; gap: var(--space-4); }
 .site-nav .links a:not(.btn) {
   text-decoration: none; font-weight: 600; font-size: var(--fs-small);
