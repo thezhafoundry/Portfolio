@@ -533,3 +533,62 @@ Check every cell; fix-and-recommit anything broken:
 ```bash
 git add -A && git commit -m "fix: night-window redesign verification fixes"
 ```
+
+---
+
+### Task 8: v4 editorial apparatus (full-width + numbered sections + pull-quote)
+
+**Files:**
+- Modify: `src/styles/identity.css` (`.container` full-width)
+- Modify: `src/styles/home.css` (add `.sechead`, `.pull` rules)
+- Modify: `index.html` (insert five section headers + pull-quote divider)
+
+**Interfaces:**
+- Consumes: sections built in Tasks 3-6.
+- Produces: `.sechead` (num + lab + rule + right slot), `.pull`.
+
+- [ ] **Step 1: Full-width container** in `src/styles/identity.css`:
+
+```css
+.container { max-width: none; margin-inline: 0; padding-inline: clamp(20px, 3vw, 56px); }
+```
+
+- [ ] **Step 2: Add to `src/styles/home.css`:**
+
+```css
+/* ================= editorial apparatus (v4 spec §9) ================= */
+.sechead { display: flex; align-items: center; gap: 14px; margin: var(--space-6) 0 var(--space-4); }
+.sechead--first { margin-top: var(--space-3); }
+.sechead .num { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; opacity: 0.5; }
+.sechead .lab { font: 600 var(--fs-label) var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; }
+.sechead i { flex: 1; border-top: 1px solid rgba(30, 27, 18, 0.15); }
+.sechead .of { font-family: var(--font-display); font-style: italic; font-size: 0.85rem; opacity: 0.4; }
+.sechead .arrow { font: 600 var(--fs-small) var(--font-body); color: var(--ink); }
+.pull { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3.2vw, 2.1rem); text-align: center; max-width: 24ch; margin: var(--space-6) auto 0; line-height: 1.3; }
+```
+
+- [ ] **Step 3: Insert headers/divider in `index.html`** — inside each section's `.container`, before its card/content (hero header uses `sechead--first`; routes section replaces its old `<h2 class="routes-heading">`):
+
+```html
+<div class="sechead sechead--first"><span class="num">01</span><span class="lab">Hello</span><i></i><span class="of">01 / 05</span></div>
+```
+```html
+<p class="pull">"A pipeline is just a <em class="sweep">conversation</em>, kept alive at scale."</p>
+```
+(placed in its own `<section class="container">` after the proof band)
+```html
+<div class="sechead"><span class="num">02</span><span class="lab">The Signal Path</span><i></i><span class="of">02 / 05</span></div>
+<h2 id="routes-h" class="sechead"><span class="num">03</span><span class="lab">Where hellos have led</span><i></i><a class="arrow" href="/results/">See all results →</a></h2>
+<div class="sechead"><span class="num">04</span><span class="lab">From zero</span><i></i><span class="of">04 / 05</span></div>
+<div class="sechead"><span class="num">05</span><span class="lab">Say hello</span><i></i><span class="of">05 / 05</span></div>
+```
+Delete the `.routes-heading` CSS rule from home.css (superseded).
+
+- [ ] **Step 4: Verify** — `npm test` passes; home shows 01-05 headers, full-width layout on all pages, pull-quote after proof band.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add src/styles/identity.css src/styles/home.css index.html
+git commit -m "feat: v4 editorial apparatus — full-width, numbered sections, pull-quote"
+```

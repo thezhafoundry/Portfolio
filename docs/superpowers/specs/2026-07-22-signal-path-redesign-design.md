@@ -129,3 +129,20 @@ static; animating the constellation is a candidate for a later phase.
   or deferred during mockup rounds).
 - Real portrait cutout and testimonials (still awaiting assets, v2 §8).
 - Any fifth color or new typeface.
+
+## 9. v4 amendments — editorial apparatus (user-approved after bloommatrix.in review)
+
+Reference reviewed: https://www.bloommatrix.in/ — its dark-section placement
+(mid-page process section + footer) matches §3 unchanged. Adopted devices:
+
+- **Full-width layout:** `.container` loses its 1120px cap site-wide —
+  `max-width: none; padding-inline: clamp(20px, 3vw, 56px)`.
+- **Numbered section headers** on home, above each section: italic Fraunces
+  number + uppercase label + hairline rule + right-slot ("0N / 05" or an arrow
+  link). Order: 01 Hello · 02 The Signal Path · 03 Where hellos have led ·
+  04 From zero · 05 Say hello.
+- **Pull-quote divider** after the proof band: "A pipeline is just a
+  *conversation*, kept alive at scale." (conversation = Honey sweep).
+- **Arrow link** in section 03's header rule: "See all results →" → /results/.
+- Sub-pages get the full-width container automatically; numbered headers are
+  home-only in this phase.
