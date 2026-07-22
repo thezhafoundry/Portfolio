@@ -35,6 +35,7 @@
   <main>
     <!-- ================= HERO (spec §6.1.1, locked composition) ================= -->
     <section class="container">
+      <div class="sechead sechead--first"><span class="num">01</span><span class="lab">Hello</span><i></i><span class="of">01 / 05</span></div>
       <div class="card hero">
         <div class="hero-copy">
           <span class="label label--pill">Lead Generation · Pre-Sales</span>
@@ -69,8 +70,14 @@
       </div>
     </section>
 
+    <!-- ================= PULL-QUOTE DIVIDER (v4 spec §9) ================= -->
+    <section class="container">
+      <p class="pull">"A pipeline is just a <em class="sweep">conversation</em>, kept alive at scale."</p>
+    </section>
+
     <!-- ================= THE NIGHT WINDOW (v3 spec §3.4) — the one dark panel on the site ================= -->
     <section class="container section-gap" aria-labelledby="signal-h">
+      <div class="sechead"><span class="num">02</span><span class="lab">The Signal Path</span><i></i><span class="of">02 / 05</span></div>
       <div class="night reveal">
         <h2 id="signal-h">How a cold name becomes a <em>meeting</em></h2>
         <div class="signal-zone" role="img" aria-label="Pipeline: research, outreach, qualified, meeting">
@@ -92,7 +99,7 @@
 
     <!-- ================= WIN ROUTES (v3 spec §3.5) — real Finquest outcomes ================= -->
     <section class="container section-gap" aria-labelledby="routes-h">
-      <h2 id="routes-h" class="routes-heading">Where hellos have led</h2>
+      <h2 id="routes-h" class="sechead"><span class="num">03</span><span class="lab">Where hellos have led</span><i></i><a class="arrow" href="/results/">See all results →</a></h2>
       <div class="routes">
         <a class="card route reveal" href="/results/">
           <span class="route-code">Cold <i aria-hidden="true"></i> Meeting</span>
@@ -119,6 +126,7 @@
 
     <!-- ================= FOLLOWER COUNT (spec §6.1.2, honest fallback §8.3) ================= -->
     <section class="container section-gap">
+      <div class="sechead"><span class="num">04</span><span class="lab">From zero</span><i></i><span class="of">04 / 05</span></div>
       <div class="card followers reveal" id="follower-card" data-target="8331">
         <!-- TODO(spec §8.3): when real history arrives, add
              data-points='[{"t":2019,"v":0}, …, {"t":2026,"v":8331}]'
@@ -143,6 +151,9 @@
     ================= -->
 
     <!-- ================= CTA BAND (spec §6.1.5) ================= -->
+    <section class="container">
+      <div class="sechead"><span class="num">05</span><span class="lab">Say hello</span><i></i><span class="of">05 / 05</span></div>
+    </section>
     <section class="cta-band">
       <div class="container cta-inner">
         <h2>Your pipeline is one <em class="sweep">hello</em> away.</h2>
