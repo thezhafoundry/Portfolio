@@ -1,0 +1,14 @@
+.sched { padding: var(--space-6) var(--space-5); margin-top: var(--space-3); }
+.sched h1 { margin-top: var(--space-4); max-width: 16ch; }
+.sched-sub { margin-top: var(--space-3); max-width: 46ch; opacity: 0.72; }
+
+.cal-embed { margin-top: var(--space-5); min-height: 480px; }
+.cal-loading { display: flex; gap: 10px; align-items: center; opacity: 0.6; font-size: var(--fs-small); font-weight: 600; }
+
+.cal-fallback { margin-top: var(--space-5); max-width: 34rem; font-weight: 400; padding: var(--space-4); }
+.cal-fallback p { margin: 0; }
+.cal-fallback-list { margin: var(--space-2) 0 0; padding-left: 1.1em; }
+
+.section-gap { margin-top: var(--space-5); }
+.sched-links { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.sched-link { text-decoration: none; }
