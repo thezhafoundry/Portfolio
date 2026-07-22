@@ -80,18 +80,55 @@
       <div class="sechead"><span class="num">02</span><span class="lab">The Signal Path</span><i></i><span class="of">02 / 05</span></div>
       <div class="night reveal">
         <h2 id="signal-h">How a cold name becomes a <em>meeting</em></h2>
-        <div class="signal-zone" role="img" aria-label="Pipeline: research, outreach, qualified, meeting">
-          <i class="signal-line signal-line--1" aria-hidden="true"></i>
-          <i class="signal-line signal-line--2" aria-hidden="true"></i>
-          <i class="signal-line signal-line--3" aria-hidden="true"></i>
-          <i class="signal-node signal-node--1" aria-hidden="true"></i>
-          <i class="signal-node signal-node--2" aria-hidden="true"></i>
-          <i class="signal-node signal-node--3" aria-hidden="true"></i>
-          <i class="signal-node signal-node--4" aria-hidden="true"></i>
-          <span class="signal-chip signal-chip--1">Research</span>
-          <span class="signal-chip signal-chip--2">Outreach</span>
-          <span class="signal-chip signal-chip--3">Qualified</span>
-          <span class="signal-chip signal-chip--4">Meeting ✓</span>
+        <div class="signal-stage" role="img" aria-label="Pipeline: research, outreach, qualified, meeting — one signal rising out of the noise">
+          <svg class="signal-svg" viewBox="0 0 1200 320" aria-hidden="true">
+            <!-- the noise: companies that didn't survive the filter -->
+            <g fill="#FFF3CC">
+              <circle cx="60"  cy="180" r="2"   opacity=".10"/>
+              <circle cx="90"  cy="80"  r="1.5" opacity=".14"/>
+              <circle cx="160" cy="150" r="2.5" opacity=".10"/>
+              <circle cx="200" cy="60"  r="1.5" opacity=".12"/>
+              <circle cx="280" cy="120" r="2"   opacity=".14"/>
+              <circle cx="320" cy="250" r="2"   opacity=".10"/>
+              <circle cx="390" cy="60"  r="2.5" opacity=".12"/>
+              <circle cx="540" cy="260" r="2"   opacity=".12"/>
+              <circle cx="620" cy="80"  r="1.5" opacity=".14"/>
+              <circle cx="700" cy="250" r="2.5" opacity=".10"/>
+              <circle cx="850" cy="220" r="2"   opacity=".12"/>
+              <circle cx="930" cy="180" r="1.5" opacity=".14"/>
+              <circle cx="990" cy="240" r="2"   opacity=".10"/>
+              <circle cx="1010" cy="140" r="2"  opacity=".12"/>
+              <circle cx="1130" cy="180" r="2.5" opacity=".10"/>
+              <circle cx="880" cy="60"  r="1.5" opacity=".12"/>
+            </g>
+            <!-- the signal: one line, gaining strength; dip after outreach = the ghosted replies -->
+            <path d="M 30 285 Q 80 265 140 240" fill="none" stroke="#FFC21A" stroke-width="1.5" stroke-dasharray="2 12" opacity=".35"/>
+            <path d="M 140 240 C 250 215 350 175 460 140" fill="none" stroke="#FFC21A" stroke-width="1.5" stroke-dasharray="2 10" opacity=".5"/>
+            <path d="M 460 140 C 540 118 580 200 660 196 C 710 193 730 170 760 150" fill="none" stroke="#FFC21A" stroke-width="2" stroke-dasharray="3 8" opacity=".7"/>
+            <path d="M 760 150 C 860 115 960 95 1060 70" fill="none" stroke="#FFC21A" stroke-width="2" stroke-dasharray="5 6" opacity=".95"/>
+            <!-- ticks: each label anchored to its node -->
+            <g stroke="#FFC21A" stroke-width="1" stroke-dasharray="2 3" opacity=".4">
+              <line x1="140"  y1="248" x2="140"  y2="272"/>
+              <line x1="460"  y1="132" x2="460"  y2="112"/>
+              <line x1="760"  y1="158" x2="760"  y2="190"/>
+              <line x1="1060" y1="42"  x2="1060" y2="32"/>
+            </g>
+            <!-- nodes ON the path -->
+            <g class="signal-nodes" fill="#FFC21A">
+              <circle cx="140" cy="240" r="9"  opacity=".12"/><circle cx="140" cy="240" r="5" opacity=".7"/>
+              <circle cx="460" cy="140" r="12" opacity=".14"/><circle cx="460" cy="140" r="7"/>
+              <circle cx="760" cy="150" r="11" opacity=".14"/><circle cx="760" cy="150" r="6"/>
+              <!-- the meeting node IS the North Node: orbit + satellite, same as the logo -->
+              <circle cx="1060" cy="70" r="26" fill="none" stroke="rgba(255,243,204,.35)" stroke-width="1.5" stroke-dasharray="4 7"/>
+              <circle cx="1060" cy="70" r="18" opacity=".16"/>
+              <circle cx="1060" cy="70" r="10"/>
+              <circle cx="1078" cy="52" r="4"/>
+            </g>
+          </svg>
+          <span class="signal-chip" style="left:11.67%; top:91.25%">Research</span>
+          <span class="signal-chip" style="left:38.33%; top:28.75%">Outreach</span>
+          <span class="signal-chip" style="left:63.33%; top:65.6%">Qualified</span>
+          <span class="signal-chip" style="left:88.33%; top:5.6%">Meeting ✓</span>
         </div>
         <p class="night-caption">200M+ companies filtered, outreach tuned per market, calendars filled — scored 9.2/10.</p>
       </div>

@@ -53,24 +53,11 @@
 .night h2 { text-align: center; color: var(--white); }
 .night h2 em { font-style: italic; color: var(--honey); }
 
-.signal-zone { position: relative; height: 220px; margin-top: var(--space-4); }
-.signal-node {
-  position: absolute; border-radius: var(--r-pill); background: var(--honey);
-  box-shadow: 0 0 14px rgba(255, 194, 26, 0.85);
-}
-.signal-node--1 { width: 8px;  height: 8px;  left: 12%; top: 58%; opacity: 0.7; }
-.signal-node--2 { width: 12px; height: 12px; left: 37%; top: 34%; }
-.signal-node--3 { width: 10px; height: 10px; left: 63%; top: 60%; }
-.signal-node--4 { width: 16px; height: 16px; left: 87%; top: 42%; box-shadow: 0 0 22px rgba(255, 194, 26, 0.95); }
-.signal-line {
-  position: absolute; border-top: 1px dashed rgba(255, 194, 26, 0.45);
-  transform-origin: left center;
-}
-.signal-line--1 { left: 13%; top: 60%; width: 25%; transform: rotate(-12deg); }
-.signal-line--2 { left: 38%; top: 37%; width: 26%; transform: rotate(12deg); }
-.signal-line--3 { left: 64%; top: 62%; width: 24%; transform: rotate(-10deg); }
+.signal-stage { position: relative; margin-top: var(--space-4); max-width: 1400px; margin-inline: auto; }
+.signal-svg { display: block; width: 100%; height: auto; }
+.signal-nodes { filter: drop-shadow(0 0 6px rgba(255, 194, 26, 0.55)); }
 .signal-chip {
-  position: absolute;
+  position: absolute; transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 243, 204, 0.3);
   color: var(--cream);
@@ -79,10 +66,6 @@
   border-radius: 12px 12px 12px var(--r-tail);
   padding: 0.55em 0.95em; white-space: nowrap;
 }
-.signal-chip--1 { left: 4%;  top: 74%; }
-.signal-chip--2 { left: 28%; top: 10%; }
-.signal-chip--3 { left: 55%; top: 76%; }
-.signal-chip--4 { left: 78%; top: 14%; }
 .night-caption {
   text-align: center; color: rgba(255, 243, 204, 0.75);
   font-size: var(--fs-small); max-width: 52ch;
@@ -133,13 +116,13 @@
 
 /* mobile: constellation restacks to a vertical path (spec §7) */
 @media (max-width: 640px) {
-  .signal-zone {
-    height: auto; display: flex; flex-direction: column; align-items: center;
+  .signal-stage {
+    display: flex; flex-direction: column; align-items: center;
     gap: var(--space-3); padding-block: var(--space-2);
     background-image: linear-gradient(rgba(255, 194, 26, 0.45) 50%, transparent 50%);
     background-size: 1px 8px; background-repeat: repeat-y; background-position: center top;
   }
-  .signal-node, .signal-line { display: none; }
-  .signal-chip { position: static; background: var(--ink); }
+  .signal-svg { display: none; }
+  .signal-chip { position: static; transform: none; background: var(--ink); }
   .routes { grid-template-columns: 1fr; }
 }
