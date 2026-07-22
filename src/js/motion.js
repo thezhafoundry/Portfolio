@@ -35,3 +35,34 @@ export function animateSpring({ from, to, params, onFrame, onDone }) {
   raf = requestAnimationFrame(tick);
   return () => cancelAnimationFrame(raf);
 }
+
+/* Typing headline (spec §4): heading keeps its real DOM text; we wrap
+   words/inline elements in .type-unit spans and reveal them in sequence.
+   Screen readers get the full text via aria-label on the heading. */
+export function typeHeading(el, { unitDelay = 90 } = {}) {
+  const fullText = el.textContent.replace(/\s+/g, ' ').trim();
+  el.setAttribute('aria-label', fullText);
+  if (prefersReducedMotion()) return;
+
+  const units = [];
+  [...el.childNodes].forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        const s = document.createElement('span');
+        s.className = 'type-unit';
+        s.textContent = part;
+        frag.appendChild(s);
+        units.push(s);
+      });
+      node.replaceWith(frag);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      node.classList.add('type-unit');
+      units.push(node);
+    }
+  });
+
+  units.forEach((u, i) => setTimeout(() => u.classList.add('on'), 350 + i * unitDelay));
+}
