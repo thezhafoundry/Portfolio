@@ -89,6 +89,23 @@
   margin: var(--space-4) auto 0;
 }
 
+/* ================= win routes — outcomes as flight legs ================= */
+.routes-heading { text-align: center; margin-bottom: var(--space-4); }
+.routes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.route {
+  display: flex; flex-direction: column; gap: var(--space-1);
+  padding: var(--space-4); text-decoration: none;
+}
+.route-code {
+  display: flex; align-items: center; gap: 8px;
+  font: 600 var(--fs-label) var(--font-body);
+  letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.55;
+}
+.route-code i { flex: 1; border-top: 1px dashed rgba(30, 27, 18, 0.35); }
+.route-title { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; }
+.route-sub { font-size: var(--fs-small); opacity: 0.65; }
+.route:hover { border-color: rgba(30, 27, 18, 0.3); }
+
 /* the sweep sits on a WHITE band in the CTA, so Honey still reads (identity: emphasis = Ink italic on Honey) */
 
 /* ================= mobile recomposition (spec §3.5) ================= */
@@ -113,4 +130,5 @@
   }
   .signal-node, .signal-line { display: none; }
   .signal-chip { position: static; background: var(--ink); }
+  .routes { grid-template-columns: 1fr; }
 }
