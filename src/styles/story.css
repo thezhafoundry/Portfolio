@@ -12,8 +12,8 @@
 }
 .story-thread .label--pill { display: inline-block; margin-bottom: var(--space-2); }
 
-/* full-bleed white interruption carrying the ONE big pull-quote — grid-breaking move */
-.pivot { background: var(--white); margin-block: var(--space-7); }
+/* full-bleed cream interruption carrying the ONE big pull-quote — grid-breaking move */
+.pivot { background: var(--cream); margin-block: var(--space-7); }
 .pivot .container { padding-block: var(--space-6); }
 .pivot-quote {
   font-family: var(--font-display); font-weight: 600;

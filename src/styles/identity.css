@@ -30,7 +30,7 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--honey);          /* the Honey world */
+  background: var(--white);          /* identity v3: light world */
   color: var(--ink);
   font-family: var(--font-body);
   font-size: var(--fs-body);
@@ -63,9 +63,10 @@ a { color: var(--ink); }
 }
 .label--pill { background: var(--cream); padding: 0.35em 0.8em; border-radius: var(--r-pill); }
 
-/* white card on the Honey world */
+/* white card on the light world — hairline keeps the edge readable */
 .card {
   background: var(--white);
+  border: 1px solid rgba(30, 27, 18, 0.08);
   border-radius: var(--r-card);
   position: relative;
 }
