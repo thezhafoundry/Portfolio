@@ -10,13 +10,14 @@
   --bg-card: #FFFFFF;
   --bg-dark: #111117;
   --bg-dark-card: #191924;
-  --bg-purple-card: #6C5CE7;
-  
-  --primary: #6C5CE7;
-  --primary-hover: #5949D6;
-  --primary-light: #EEECFE;
-  --primary-glow: rgba(108, 92, 231, 0.35);
-  
+  --bg-purple-card: #5b21b6;
+
+  --primary: #5b21b6;
+  --primary-hover: #4c1d95;
+  --primary-dark: #2e1065;
+  --primary-light: #EDE4FB;
+  --primary-glow: rgba(91, 33, 182, 0.35);
+
   --text-dark: #111827;
   --text-muted: #6B7280;
   --text-subtle: #9CA3AF;
@@ -25,7 +26,7 @@
 
   --border-light: rgba(0, 0, 0, 0.07);
   --border-dark: rgba(255, 255, 255, 0.12);
-  --border-purple: rgba(108, 92, 231, 0.3);
+  --border-purple: rgba(91, 33, 182, 0.3);
 
   /* Typography */
   --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -40,12 +41,12 @@
   /* Transitions */
   --tr-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --tr-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  
+
   /* Shadows */
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 10px 30px rgba(108, 92, 231, 0.08);
+  --shadow-md: 0 10px 30px rgba(91, 33, 182, 0.08);
   --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
-  --shadow-purple: 0 14px 30px rgba(108, 92, 231, 0.28);
+  --shadow-purple: 0 14px 30px rgba(91, 33, 182, 0.28);
 }
 
 /* Reset & Base */
@@ -169,7 +170,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-purple:hover {
   background-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 18px 36px rgba(108, 92, 231, 0.4);
+  box-shadow: 0 18px 36px rgba(91, 33, 182, 0.4);
 }
 
 .btn-dark {
