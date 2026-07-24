@@ -1,6 +1,50 @@
 .home-hero {
-  padding-block: clamp(3rem, 7vw, 6.5rem) clamp(3.5rem, 8vw, 7rem);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-content: center;
+  /* One screen, no more: the hero fills the viewport and centres its content. */
+  min-height: 100dvh;
+  --par-x: 0px;
+  --par-y: 0px;
+  /* Top padding clears the transparent overlay header. */
+  padding-block: clamp(5.5rem, 6vw + 2.5rem, 8rem) clamp(2rem, 3vw, 3rem);
+  /* Static editorial column grid — the no-JS/reduced-motion baseline. When the bionic
+     flaps are built, they replace these lines (each flap carries its own hinge line). */
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-orchid) 15%, transparent) 0 1px, transparent 1px 42px),
+    var(--color-section);
+}
+
+.home-hero.has-flaps {
   background: var(--color-section);
+}
+
+/* Bionic flap field (AVTR-style): one vertical flap per grid column, each hinged on its
+   left line. A ripple of open flaps follows the pointer. */
+.hero-flaps {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: flex;
+  perspective: 900px;
+  pointer-events: none;
+}
+
+.hero-flaps i {
+  flex: 1 1 0;
+  border-left: 1px solid color-mix(in srgb, var(--color-orchid) 30%, transparent);
+  background: color-mix(in srgb, var(--color-orchid) 13%, transparent);
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform 110ms ease-out;
+  will-change: transform;
+}
+
+/* Hero content sits above the flap field. */
+.home-hero > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .home-hero__grid {
@@ -48,26 +92,90 @@
   gap: 0.9rem;
 }
 
-.home-hero__figure { position: relative; margin: 0; }
+.home-hero__figure {
+  position: relative;
+  isolation: isolate; /* keep the decorative block's z-index scoped to the figure */
+  margin: 0;
+  justify-self: end;
+  /* Capped against viewport height too, so the hero never spills past one screen. */
+  width: min(100%, 27rem, 56dvh);
+}
+
+/* Soft orchid block, strictly BEHIND the photo (z-index 0 < frame's 1), never in the
+   photo's 3D space — so it can't intersect the tilt. It drifts further than the grid
+   for a clear parallax depth cue. */
+.home-hero__figure::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: auto -2rem -2rem auto;
+  width: 70%;
+  aspect-ratio: 1;
+  background: color-mix(in srgb, var(--color-orchid) 26%, transparent);
+  transform: translate(calc(var(--par-x, 0px) * 1.7), calc(var(--par-y, 0px) * 1.7));
+  transition: transform 200ms ease;
+}
 
 .home-hero__photo-frame {
-  overflow: hidden;
-  border: 0.7rem solid var(--color-white);
-  border-radius: clamp(0.9rem, 1.5vw, 1.25rem);
-  background: var(--color-white);
+  position: relative;
+  z-index: 1;
+  /* Neumorphic frame: photo extruded from the section surface, sharp corners. */
+  padding: 0.85rem;
+  border-radius: 0;
+  background: var(--color-section);
+  box-shadow:
+    -9px -9px 20px color-mix(in srgb, var(--color-white) 82%, transparent),
+    11px 11px 26px color-mix(in srgb, var(--color-deep-violet) 15%, transparent);
+  transform: perspective(1100px);
+  transition: transform 140ms ease;
+  will-change: transform;
 }
 
 .home-hero__photo-frame img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  object-position: 53% 45%;
-  border-radius: 0.45rem;
+  object-position: 55% 30%;
+  border-radius: 0;
+}
+
+/* "▶ A personal introduction…" cue (lives in the Introduction section). */
+.home-hero__intro-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white));
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-hero__play {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-highlight);
+  color: var(--color-violet);
+  font-size: 0.7rem;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.home-hero__intro-cue:hover .home-hero__play,
+.home-hero__intro-cue:focus-visible .home-hero__play {
+  transform: scale(1.08);
+  background: var(--color-orchid);
+  color: var(--color-white);
 }
 
 .home-hero__badge {
   position: absolute;
+  z-index: 2;
   right: -1rem;
   bottom: 1.4rem;
   display: grid;
@@ -97,6 +205,35 @@
   min-height: 8.5rem;
   align-content: center;
   padding: 1.4rem clamp(1rem, 2.3vw, 2rem);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+}
+
+/* Hover: tile lifts and an orchid underline sweeps beneath the metric. */
+.proof-rail__grid > div:hover {
+  transform: translateY(-4px);
+  background: color-mix(in srgb, var(--color-highlight) 35%, transparent);
+}
+
+.proof-rail strong {
+  position: relative;
+  width: fit-content;
+}
+
+.proof-rail strong::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: -0.2em;
+  bottom: -0.12em;
+  height: 3px;
+  background: var(--color-orchid);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.proof-rail__grid > div:hover strong::after {
+  transform: scaleX(1);
 }
 
 .proof-rail__grid > div + div { border-left: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); }
@@ -118,6 +255,17 @@
 
 .partners__list li + li::before { margin-right: 1.3rem; color: var(--color-orchid); content: "•"; }
 
+/* Hover: each partner name takes the same orchid highlight sweep as "hello." */
+.partners__list li {
+  transition: color 0.25s ease, background 0.25s ease;
+  padding-inline: 0.15em;
+}
+
+.partners__list li:hover {
+  color: var(--color-deep-violet);
+  background: var(--color-highlight);
+}
+
 .introduction { background: var(--color-section); }
 .introduction__media { margin: 0; overflow: hidden; border-radius: var(--radius-media); }
 .introduction__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 48% 50%; }
@@ -129,7 +277,15 @@
 .section-heading > p { margin-bottom: 0; color: color-mix(in srgb, var(--color-deep-violet) 75%, var(--color-white)); }
 
 .services__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
-.services__grid article { min-height: 17rem; display: flex; flex-direction: column; border: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); border-radius: var(--radius-media); padding: clamp(1.25rem, 2.5vw, 2rem); background: var(--color-white); }
+.services__grid article { min-height: 17rem; display: flex; flex-direction: column; border: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); border-radius: var(--radius-media); padding: clamp(1.25rem, 2.5vw, 2rem); background: var(--color-white); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease; }
+
+/* Hover: card lifts, its number slides up, and an orchid rule draws along the top. */
+.services__grid article::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--color-orchid); border-radius: var(--radius-media) var(--radius-media) 0 0; transform: scaleX(0); transform-origin: left center; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.services__grid article { position: relative; overflow: hidden; }
+.services__grid article:hover { transform: translateY(-6px); box-shadow: 0 1.1rem 2.2rem color-mix(in srgb, var(--color-deep-violet) 13%, transparent); }
+.services__grid article:hover::before { transform: scaleX(1); }
+.services__grid article span { display: inline-block; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.services__grid article:hover span { transform: translateY(-3px); }
 .services__grid article:first-child { background: var(--color-deep-violet); }
 .services__grid span, .process__list > li > span, .results-preview__cards span { color: var(--color-violet); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em; }
 .services__grid article:first-child span, .services__grid article:first-child h3, .services__grid article:first-child p { color: var(--color-white); }
@@ -138,13 +294,35 @@
 
 .process { background: var(--color-section); }
 .process__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2.5rem 0 0; padding: 0; list-style: none; counter-reset: process; }
-.process__list > li { border-top: 2px solid var(--color-orchid); padding: 1.25rem 0.5rem 0 0; }
+.process__list > li { position: relative; padding: 1.25rem 0.5rem 0 0; }
+
+/* The orchid rules draw themselves left→right, one step after another, on scroll. */
+.process__list > li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-orchid);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js .process__list:not(.on) > li::before { transform: scaleX(0); }
+.process__list.on > li:nth-child(2)::before { transition-delay: 0.2s; }
+.process__list.on > li:nth-child(3)::before { transition-delay: 0.4s; }
 .process__list h3 { margin: 1.1rem 0 0.7rem; }
 .process__list p { margin: 0; color: color-mix(in srgb, var(--color-deep-violet) 75%, var(--color-white)); font-size: 0.95rem; }
 
 .results-preview__grid { align-items: start; }
 .results-preview__cards { display: grid; gap: 0.75rem; }
-.results-preview__cards article { display: grid; grid-template-columns: minmax(6.5rem, 0.7fr) minmax(0, 1.15fr) minmax(0, 1fr); gap: 1rem; align-items: center; border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 14%, transparent); padding-block: 1.2rem; }
+.results-preview__cards article { display: grid; grid-template-columns: minmax(6.5rem, 0.7fr) minmax(0, 1.15fr) minmax(0, 1fr); gap: 1rem; align-items: center; border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 14%, transparent); padding-block: 1.2rem; padding-inline: 0.4rem; transition: background 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Hover: row tints and nudges right; the bold value takes the highlight sweep. */
+.results-preview__cards article:hover { background: color-mix(in srgb, var(--color-highlight) 30%, transparent); transform: translateX(4px); }
+.results-preview__cards strong { transition: background 0.3s ease; padding-inline: 0.1em; }
+.results-preview__cards article:hover strong { background: var(--color-highlight); }
 .results-preview__cards strong { color: var(--color-deep-violet); font-family: var(--font-display); font-size: 1.4rem; line-height: 1; }
 .results-preview__cards p { margin: 0; color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white)); font-size: 0.86rem; }
 
@@ -157,15 +335,27 @@
 .contact-card .btn--primary { background: var(--color-orchid); color: var(--color-deep-violet); }
 .contact-card .btn--primary:hover { background: var(--color-white); }
 
+/* Hero-specific entrance (shared .reveal system lives in components.css). */
+.js .home-hero__figure.reveal { transform: translateY(1.5rem) scale(0.985); }
+.home-hero__figure.reveal.on { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .home-hero__figure.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @media (max-width: 62rem) {
   .home-hero__grid, .introduction__grid, .results-preview__grid, .section-heading, .contact-card { grid-template-columns: minmax(0, 1fr); }
-  .home-hero__figure { width: min(100%, 33rem); }
+  .home-hero__figure { justify-self: start; width: min(100%, 30rem); }
   .services__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .contact-actions { justify-content: flex-start; }
 }
 
 @media (max-width: 44rem) {
-  .home-hero { padding-top: 2.5rem; }
+  .home-hero { padding-top: 6rem; }
   .home-hero__grid { gap: 2.2rem; }
   .home-hero h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
   .home-hero__badge { right: 0.7rem; bottom: 0.7rem; }

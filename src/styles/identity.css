@@ -8,6 +8,7 @@
   --color-white: #fff;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
+  --font-signature: "Great Vibes", "Cormorant Garamond", cursive;
   --content-max: 76rem;
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --section-space: clamp(3.5rem, 8vw, 8rem);

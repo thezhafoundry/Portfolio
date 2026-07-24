@@ -1,7 +1,11 @@
 import { initNav } from './nav.js';
 import { initScheduler } from './scheduler.js';
+import { initReveals } from './bubbles.js';
+import { initMagnetic } from './magnetic.js';
 
 initNav();
+initReveals();
+initMagnetic();
 
 const container = document.getElementById('cal-embed');
 const fallback = document.getElementById('cal-fallback');

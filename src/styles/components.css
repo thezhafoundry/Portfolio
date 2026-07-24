@@ -796,6 +796,21 @@
   border: 1px solid color-mix(in srgb, var(--color-white) 12%, transparent);
 }
 
+/* The card sits on deep violet, so its text must override the global dark
+   heading/eyebrow colors regardless of the inner wrapper (results/schedule
+   use a plain <div>, not .contact-info). */
+.contact-card h2 {
+  color: var(--color-white);
+}
+
+.contact-card p:not(.eyebrow) {
+  color: color-mix(in srgb, var(--color-white) 78%, transparent);
+}
+
+.contact-card .eyebrow {
+  color: var(--color-orchid);
+}
+
 .contact-info h2 {
   color: var(--color-white);
   font-size: 2.75rem;
@@ -914,10 +929,17 @@
    Shared site shell
    -------------------------------------------------------------------------- */
 .site-header {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 20;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent);
-  background: var(--color-canvas);
+  background: transparent;
+}
+
+/* Header floats over the hero, so the first section clears its height. */
+main > section:first-child > .band-inner {
+  padding-top: calc(var(--section-space) + 3rem);
 }
 
 .site-header__inner {
@@ -933,18 +955,36 @@
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
+  gap: 0.6rem;
   min-height: 2.75rem;
+  text-decoration: none;
+  color: var(--color-deep-violet);
 }
 
-.site-brand img,
-.site-footer__brand img {
-  width: auto;
-  max-height: 2.25rem;
+/* Editorial Orchid lockup: a round deep-violet "S" badge + serif wordmark. */
+.site-brand__badge {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--color-deep-violet);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.35rem;
+  line-height: 1;
 }
 
-.site-brand__mark {
-  display: none;
-  width: 2rem !important;
+.site-brand__word {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  color: var(--color-deep-violet);
+  white-space: nowrap;
 }
 
 .site-nav {
@@ -1056,8 +1096,31 @@ body.nav-is-open {
   padding-block: clamp(3rem, 7vw, 5rem);
 }
 
-.site-footer__brand img {
-  max-height: 2.5rem;
+.site-footer__brand {
+  color: var(--color-white);
+}
+
+.site-footer__signature {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.5rem 0.35rem 0.1rem;
+  font-family: var(--font-signature);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  line-height: 1;
+  color: var(--color-white);
+}
+
+.site-footer__signature::after {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  right: -0.15rem;
+  bottom: 0;
+  height: 0.7rem;
+  border-bottom: 3px solid var(--color-orchid);
+  border-radius: 50%;
+  transform: rotate(-2deg);
 }
 
 .site-footer__line {
@@ -1180,14 +1243,6 @@ body.nav-is-open {
 @media (max-width: 48rem) {
   .site-header__inner {
     min-height: 4.5rem;
-  }
-
-  .site-brand__signature {
-    display: none;
-  }
-
-  .site-brand__mark {
-    display: block;
   }
 
   .nav-toggle {
@@ -1318,3 +1373,132 @@ body.nav-is-open {
   }
 }
 
+
+/* ================= Shared motion system (Editorial Orchid) =================
+   Scroll reveals, staggered groups, self-drawing lines, duotone photo blooms,
+   dark-card shimmer. Everything is gated on `.js` so content stays fully
+   visible without JavaScript, and silenced under prefers-reduced-motion. */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+
+.reveal {
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.on {
+  opacity: 1;
+  transform: none;
+}
+
+/* Group reveal: children rise one-by-one. */
+.js .reveal-group > * {
+  opacity: 0;
+  transform: translateY(1.25rem);
+}
+
+.reveal-group > * {
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-group.on > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Slide-in-from-left variant for ledger/list rows. */
+.js .reveal-group--left > * {
+  transform: translateX(-1.5rem);
+}
+
+.reveal-group.on > *:nth-child(2) { transition-delay: 0.08s; }
+.reveal-group.on > *:nth-child(3) { transition-delay: 0.16s; }
+.reveal-group.on > *:nth-child(4) { transition-delay: 0.24s; }
+.reveal-group.on > *:nth-child(5) { transition-delay: 0.32s; }
+.reveal-group.on > *:nth-child(6) { transition-delay: 0.4s; }
+.reveal-group.on > *:nth-child(7) { transition-delay: 0.48s; }
+.reveal-group.on > *:nth-child(8) { transition-delay: 0.56s; }
+
+/* Footer Classic Flourish underline draws itself when the footer enters view. */
+.site-footer__signature::after {
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+
+.js .site-footer:not(.on) .site-footer__signature::after {
+  transform: rotate(-2deg) scaleX(0);
+}
+
+/* Duotone photo bloom: portraits rest in a violet duotone and bloom to full
+   colour on hover/focus. */
+.introduction__media img,
+.story-photo img {
+  filter: grayscale(1) sepia(0.35) hue-rotate(215deg) saturate(1.35);
+  transition: filter 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.introduction__media:hover img,
+.story-photo:hover img,
+a:focus-visible .introduction__media img {
+  filter: none;
+  transform: scale(1.02);
+}
+
+/* Dark-card shimmer: a faint travelling echo of the hero flap lines on the
+   deep-violet surfaces. */
+.contact-card,
+.services__grid article:first-child {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::after,
+.services__grid article:first-child::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -56px;
+  width: calc(100% + 112px);
+  background: repeating-linear-gradient(115deg, color-mix(in srgb, var(--color-white) 7%, transparent) 0 1px, transparent 1px 56px);
+  animation: shimmer-drift 9s linear infinite;
+  pointer-events: none;
+}
+
+.contact-card > *,
+.services__grid article:first-child > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes shimmer-drift {
+  to { transform: translateX(56px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .reveal-group > *,
+  .js .reveal-group--left > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .js .site-footer:not(.on) .site-footer__signature::after {
+    transform: rotate(-2deg);
+    transition: none;
+  }
+
+  .introduction__media img,
+  .story-photo img {
+    filter: none;
+    transition: none;
+  }
+
+  .contact-card::after,
+  .services__grid article:first-child::after {
+    animation: none;
+  }
+}

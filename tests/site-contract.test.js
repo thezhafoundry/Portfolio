@@ -58,11 +58,14 @@ describe('Editorial Orchid Home contracts', () => {
     expect(portrait).toContain('fetchpriority="high"');
   });
 
-  it('keeps the primary hero action on the honest Schedule path', async () => {
+  it('points the primary hero action at the story and keeps an honest schedule path available', async () => {
     const html = await readPage('index.html');
     const hero = html.match(/<section\b[^>]*class="[^"]*hero[^"]*"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
 
-    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="\/schedule\/"/);
+    // Editorial Orchid direction: the hero CTA is "Read the story" → /story/.
+    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="\/story\/"/);
+    // The honest scheduling path still exists elsewhere on the page.
+    expect(html).toMatch(/href="\/schedule\/"/);
   });
 
   it('states the verified proof values literally without counter animation hooks', async () => {
@@ -95,6 +98,14 @@ describe('Editorial Orchid Story contracts', () => {
     const html = await readPage('story/index.html');
 
     expect(html).toMatch(/<button\b[^>]*data-chapter="chapter-\d+"[^>]*>/);
+  });
+
+  it('keeps a gap-free heading hierarchy by titling chapters with h2, not h3', async () => {
+    const html = await readPage('story/index.html');
+
+    // Nine chapters + the closing "short version" section = ten h2 headings, no h3 skip after the single h1.
+    expect((html.match(/<h2\b/g) ?? []).length).toBe(10);
+    expect(html).not.toMatch(/<h3\b/);
   });
 });
 
@@ -141,12 +152,12 @@ describe('Editorial Orchid shared-shell contracts', () => {
 
     expect(html).toMatch(/<a class="skip-link" href="#main-content">Skip to content<\/a>/);
     expect(html).toMatch(/<header class="site-header">[\s\S]*?<div class="site-header__inner container">/);
-    expect(html).toMatch(/<a class="site-brand" href="\/" aria-label="Sampath Kumar, home">[\s\S]*?sampath-signature\.svg/);
+    expect(html).toMatch(/<a class="site-brand" href="\/"[^>]*aria-label="Sampath Kumar, home">[\s\S]*?class="site-brand__word">Sampath Kumar<\/span>/);
     expect(html).toMatch(/<button class="nav-toggle" type="button"[\s\S]*?aria-expanded="false"[\s\S]*?aria-controls="site-navigation"[\s\S]*?aria-label="Open navigation">/);
     expect(html).toMatch(/<nav id="site-navigation" class="site-nav" aria-label="Primary">/);
     expect(html).toMatch(/<button class="nav-scrim" type="button" tabindex="-1"[\s\S]*?aria-label="Close navigation" hidden><\/button>/);
     expect(html).toMatch(/<main id="main-content">/);
-    expect(html).toMatch(/<footer class="site-footer">[\s\S]*?sampath-signature-reversed\.svg[\s\S]*?Every deal begins with hello\.[\s\S]*?© 2026 Sampath Kumar · Greater Coimbatore, India/);
+    expect(html).toMatch(/<footer class="site-footer">[\s\S]*?class="site-footer__signature">Sampath Kumar<\/span>[\s\S]*?Every deal begins with hello\.[\s\S]*?© 2026 Sampath Kumar · Greater Coimbatore, India/);
     expect(html).toMatch(/href="\/story\/"[^>]*>Story<\/a>[\s\S]*?href="\/results\/"[^>]*>Results<\/a>[\s\S]*?href="\/schedule\/"[^>]*>Schedule<\/a>[\s\S]*?linkedin\.com\/in\/sampath-kumar-tn66sk9699/);
     expect(html).toMatch(/href="\/schedule\/"[^>]*>Start a conversation<\/a>/);
   });

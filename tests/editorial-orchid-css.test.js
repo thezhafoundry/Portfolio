@@ -24,7 +24,8 @@ describe('Editorial Orchid live style contracts', () => {
     const css = await readProjectFile(path);
 
     expect(css).not.toMatch(/var\(--(?:space|r-|honey|cream|ink|white|hairline|fs-)/);
-    expect(css).not.toMatch(/(?:linear|radial)-gradient/);
+    // Blob gradients stay banned; the Editorial Orchid column grid uses repeating-linear-gradient, which is allowed.
+    expect(css).not.toMatch(/(?<!repeating-)(?:linear|radial)-gradient/);
     expect(css).not.toMatch(/rgba?\(/);
 
     for (const hex of css.match(/#[0-9a-f]{3,8}\b/gi) ?? []) {
@@ -46,6 +47,16 @@ describe('Home contact contract', () => {
     expect(script).not.toMatch(/contactForm|Consultation Requested|Scheduling\.\.\./);
   });
 
+  it('keeps deep-violet contact-card text legible regardless of inner wrapper', async () => {
+    // Regression: results/schedule use .contact-card without a .contact-info wrapper,
+    // so the card must force light heading/eyebrow colors or the global dark heading
+    // color renders deep-violet-on-deep-violet (invisible) and a 1.75:1 eyebrow.
+    const css = await readProjectFile('src/styles/components.css');
+
+    expect(ruleBody(css, '.contact-card h2')).toContain('var(--color-white)');
+    expect(ruleBody(css, '.contact-card .eyebrow')).toContain('var(--color-orchid)');
+  });
+
   it('contains no dead Font Awesome toggle branch or obsolete form selectors', async () => {
     const [css, script] = await Promise.all([
       readProjectFile('src/styles/components.css'),
@@ -58,7 +69,7 @@ describe('Home contact contract', () => {
 
   it('uses the reversed light button for LinkedIn inside the deep contact panel', async () => {
     const home = await readProjectFile('index.html');
-    const contactPanel = home.match(/<div class="contact-card">([\s\S]*?)<\/section>/)?.[1] ?? '';
+    const contactPanel = home.match(/<div class="contact-card[^"]*">([\s\S]*?)<\/section>/)?.[1] ?? '';
     const linkedInAction = contactPanel.match(/<a[^>]+linkedin\.com[^>]*>/)?.[0] ?? '';
 
     expect(linkedInAction).toContain('class="btn btn--ghost-cream"');

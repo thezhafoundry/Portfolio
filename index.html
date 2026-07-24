@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js')</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sampath Kumar — B2B Growth &amp; Deal Origination</title>
@@ -9,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap&amp;text=SampathKumr%20" rel="stylesheet">
   <link rel="stylesheet" href="/src/styles/identity.css">
   <link rel="stylesheet" href="/src/styles/components.css">
   <link rel="stylesheet" href="/src/styles/home.css">
@@ -17,9 +19,9 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="site-header__inner container">
-      <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><img class="site-brand__signature" src="/brand/sampath-signature.svg" alt="Sampath Kumar"><img class="site-brand__mark" src="/brand/sampath-s-mark.svg" alt="" aria-hidden="true"></a>
+      <a class="site-brand" href="/" aria-current="page" aria-label="Sampath Kumar, home"><span class="site-brand__badge" aria-hidden="true">S</span><span class="site-brand__word">Sampath Kumar</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button>
-      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/" aria-current="page">Home</a><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a class="btn btn--primary" href="/schedule/">Start a conversation</a></nav>
+      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/story/">Story</a><a href="/results/">Work</a><a href="/schedule/">Hello</a></nav>
     </div>
     <button class="nav-scrim" type="button" tabindex="-1" aria-label="Close navigation" hidden></button>
   </header>
@@ -27,26 +29,26 @@
   <main id="main-content">
     <section class="home-hero hero">
       <div class="container home-hero__grid">
-        <div class="home-hero__copy">
-          <p class="eyebrow">B2B growth &amp; deal origination</p>
+        <div class="home-hero__copy reveal">
+          <p class="eyebrow">Sales leader · Storyteller</p>
           <h1>Every deal begins with <em class="home-hero__highlight">hello.</em></h1>
-          <p class="home-hero__intro">I help B2B and private-market teams find the right accounts, frame a relevant reason to talk, and move from research to qualified conversations.</p>
+          <p class="home-hero__intro">An editorial portfolio built around Sampath's journey, working philosophy, and strongest outcomes.</p>
           <div class="home-hero__actions">
-            <a class="btn btn--primary" href="/schedule/">Schedule a conversation <span aria-hidden="true">→</span></a>
+            <a class="btn btn--primary" href="/story/">Read the story <span aria-hidden="true">→</span></a>
             <a class="btn btn--text" href="/results/">See selected results</a>
           </div>
         </div>
-        <figure class="home-hero__figure" data-media data-poster-src="/assets/hero_portrait.jpg">
+        <figure class="home-hero__figure reveal">
           <div class="home-hero__photo-frame">
             <img src="/assets/hero_portrait.jpg" alt="Sampath Kumar seated at a desk, ready for a strategy conversation" width="1200" height="896" fetchpriority="high">
           </div>
-          <figcaption class="home-hero__badge"><strong>9.2/10</strong><span>average client satisfaction</span></figcaption>
+          <figcaption class="home-hero__badge"><strong>9.2/10</strong><span>client satisfaction</span></figcaption>
         </figure>
       </div>
     </section>
 
     <section class="proof-rail" aria-label="Selected proof points">
-      <div class="container proof-rail__grid">
+      <div class="container proof-rail__grid reveal-group">
         <div><strong>+35%</strong><span>lead-to-meeting conversion lift</span></div>
         <div><strong>9.2/10</strong><span>average client satisfaction</span></div>
         <div><strong>200M+</strong><span>private-company records mapped</span></div>
@@ -58,14 +60,14 @@
       <div class="container">
         <p class="eyebrow">Selected partners</p>
         <h2 id="partners-heading">Work shaped across ambitious teams.</h2>
-        <ul class="partners__list" aria-label="Selected organizations">
+        <ul class="partners__list reveal-group" aria-label="Selected organizations">
           <li>Finquest</li><li>The Sales Group</li><li>Uplers</li><li>Mavlers</li><li>Ecosmob</li><li>Alore</li><li>Zinnov</li><li>Draup</li>
         </ul>
       </div>
     </section>
 
     <section class="introduction section">
-      <div class="container introduction__grid">
+      <div class="container introduction__grid reveal">
         <figure class="introduction__media">
           <img src="/assets/strategy_session.jpg" alt="Sampath Kumar in a working strategy session" width="1376" height="768" loading="lazy">
         </figure>
@@ -74,6 +76,8 @@
           <h2>Research first. A human conversation next.</h2>
           <p>I’m an engineer-turned-sales leader based in Coimbatore, with seven-plus years of experience in B2B SaaS, pre-sales, and private-market intelligence. I bring the structure behind a good pipeline into the room without losing the human reason someone should care.</p>
           <a class="btn btn--ghost" href="/story/">Read my story <span aria-hidden="true">→</span></a>
+          <br>
+          <a class="home-hero__intro-cue" href="/story/"><span class="home-hero__play" aria-hidden="true">▶</span> A personal introduction, presented like a story chapter</a>
         </div>
       </div>
     </section>
@@ -84,7 +88,7 @@
           <div><p class="eyebrow">What I help unlock</p><h2 id="services-heading">From a sharper target list to a better next meeting.</h2></div>
           <p>Hands-on growth work for teams that need a clear market view, relevant outreach, and a confident commercial handoff.</p>
         </div>
-        <div class="services__grid">
+        <div class="services__grid reveal-group">
           <article><span>01</span><h3>Deal origination</h3><p>Map investment theses to credible mid-market targets and surface opportunities worth pursuing.</p></article>
           <article><span>02</span><h3>Outbound systems</h3><p>Build a focused account, message, and cadence plan that earns a response across markets.</p></article>
           <article><span>03</span><h3>Pre-sales clarity</h3><p>Turn complex products into useful demos, proposals, and commercial next steps.</p></article>
@@ -97,7 +101,7 @@
       <div class="container">
         <p class="eyebrow">A simple way of working</p>
         <h2 id="process-heading">Enough process to make the work repeatable.</h2>
-        <ol class="process__list">
+        <ol class="process__list reveal-group">
           <li><span>01</span><h3>Listen for the real brief</h3><p>Clarify the market, moment, and commercial outcome before opening a list.</p></li>
           <li><span>02</span><h3>Build the case to connect</h3><p>Prioritize the right accounts and write outreach around a concrete reason to talk.</p></li>
           <li><span>03</span><h3>Learn and hand off cleanly</h3><p>Track what lands, qualify the signal, and give the next conversation useful context.</p></li>
@@ -106,7 +110,7 @@
     </section>
 
     <section class="results-preview section" aria-labelledby="results-heading">
-      <div class="container results-preview__grid">
+      <div class="container results-preview__grid reveal">
         <div><p class="eyebrow">Selected outcomes</p><h2 id="results-heading">Useful work leaves a trail.</h2><p>Explore a short record of conversion gains, global research, and commercial work across the last seven years.</p><a class="btn btn--ghost" href="/results/">View selected results <span aria-hidden="true">→</span></a></div>
         <div class="results-preview__cards">
           <article><span>Private markets</span><strong>From months to weeks</strong><p>Market-thesis sourcing accelerated for PE clients.</p></article>
@@ -118,7 +122,7 @@
 
     <section class="conversation section" aria-labelledby="conversation-heading">
       <div class="container">
-        <div class="contact-card">
+        <div class="contact-card reveal">
           <div><p class="eyebrow">Start with a hello</p><h2 id="conversation-heading">Have a market or pipeline question worth unpacking?</h2><p>Choose a time that works, or send me a note on LinkedIn. I’ll come prepared to make the first conversation useful.</p></div>
           <div class="contact-actions" aria-label="Ways to start a conversation"><a class="btn btn--primary" href="/schedule/">View scheduling options <span aria-hidden="true">→</span></a><a class="btn btn--ghost-cream" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">Message on LinkedIn</a></div>
         </div>
@@ -126,7 +130,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="site-footer__inner container"><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><img src="/brand/sampath-signature-reversed.svg" alt="Sampath Kumar"></a><p class="site-footer__line">Every deal begins with hello.</p><nav class="site-footer__links" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a></nav><a class="btn btn--honey" href="/schedule/">Start a conversation</a><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p></div></footer>
+  <footer class="site-footer"><div class="site-footer__inner container"><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><span class="site-footer__signature">Sampath Kumar</span></a><p class="site-footer__line">Every deal begins with hello.</p><nav class="site-footer__links" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a></nav><a class="btn btn--primary" href="/schedule/">Start a conversation</a><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p></div></footer>
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>

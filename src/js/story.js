@@ -1,7 +1,11 @@
 import { initNav } from './nav.js';
 import { prefersReducedMotion } from './motion.js';
+import { initReveals } from './bubbles.js';
+import { initMagnetic } from './magnetic.js';
 
 initNav();
+initReveals();
+initMagnetic();
 
 const chapters = [...document.querySelectorAll('.story-chapter')];
 const panel = document.querySelector('.chapter-panel');

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js')</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Schedule — Sampath Kumar</title>
@@ -9,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap&amp;text=SampathKumr%20" rel="stylesheet">
   <link rel="stylesheet" href="/src/styles/identity.css">
   <link rel="stylesheet" href="/src/styles/components.css">
   <link rel="stylesheet" href="/src/styles/schedule.css">
@@ -17,9 +19,9 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="site-header__inner container">
-      <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><img class="site-brand__signature" src="/brand/sampath-signature.svg" alt="Sampath Kumar"><img class="site-brand__mark" src="/brand/sampath-s-mark.svg" alt="" aria-hidden="true"></a>
+      <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><span class="site-brand__badge" aria-hidden="true">S</span><span class="site-brand__word">Sampath Kumar</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button>
-      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/" aria-current="page">Schedule</a><a class="btn btn--primary" href="/schedule/">Start a conversation</a></nav>
+      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/story/">Story</a><a href="/results/">Work</a><a href="/schedule/" aria-current="page">Hello</a></nav>
     </div>
     <button class="nav-scrim" type="button" tabindex="-1" aria-label="Close navigation" hidden></button>
   </header>
@@ -38,7 +40,7 @@
         </div>
 
         <div id="cal-fallback" class="cal-fallback">
-          <div class="contact-card">
+          <div class="contact-card reveal">
             <div>
               <p class="eyebrow">Direct Contact</p>
               <h2>Start a conversation</h2>
@@ -54,14 +56,14 @@
     </section>
 
     <section class="band">
-      <div class="band-inner sched-links">
+      <div class="band-inner sched-links reveal-group">
         <a class="btn btn--ghost" href="/story/">Explore career story</a>
         <a class="btn btn--ghost" href="/results/">Review case studies</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="site-footer__inner container"><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><img src="/brand/sampath-signature-reversed.svg" alt="Sampath Kumar"></a><p class="site-footer__line">Every deal begins with hello.</p><nav class="site-footer__links" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a></nav><a class="btn btn--honey" href="/schedule/">Start a conversation</a><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p></div></footer>
+  <footer class="site-footer"><div class="site-footer__inner container"><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><span class="site-footer__signature">Sampath Kumar</span></a><p class="site-footer__line">Every deal begins with hello.</p><nav class="site-footer__links" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a></nav><a class="btn btn--primary" href="/schedule/">Start a conversation</a><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p></div></footer>
 
   <script type="module" src="/src/js/schedule-page.js"></script>
 </body>

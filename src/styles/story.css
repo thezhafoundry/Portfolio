@@ -63,7 +63,7 @@
   font-family: var(--font-body); font-weight: 700; font-size: 0.8rem;
   color: var(--color-violet); letter-spacing: 0.1em; margin-bottom: 0.25rem;
 }
-.story-chapter h3 {
+.story-chapter h2 {
   font-family: var(--font-display); font-weight: 600; line-height: 1.12;
   font-size: clamp(1.6rem, 2.5vw, 2.25rem); margin: 0 0 0.25rem;
 }
@@ -84,6 +84,21 @@
 .cp-idx { font-weight: 700; color: var(--color-violet); }
 .cp-svg { width: min(420px, 90%); margin: auto; display: block; }
 .cp-node, .cp-halo { transition: cx 0.5s ease, cy 0.5s ease; }
+
+/* The active node's halo breathes gently. */
+.cp-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: halo-pulse 3s ease-in-out infinite;
+}
+
+@keyframes halo-pulse {
+  50% { transform: scale(1.35); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-halo { animation: none; }
+}
 .cp-meta { display: flex; flex-direction: column; gap: 0.25rem; }
 .cp-years { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1.1; color: var(--color-deep-violet); }
 .cp-org { color: var(--color-violet); font-size: 0.85rem; font-weight: 600; }
@@ -96,9 +111,11 @@
 
 @media (max-width: 860px) {
   .story-head { grid-template-columns: 1fr; }
-  .story-strip span { display: none; }
-  .story-strip button:first-child span, .story-strip button:last-child span { display: block; }
-  .story-head-figs { border-left: none; padding-left: 0; justify-items: start; text-align: left; grid-template-columns: repeat(3, auto); justify-content: space-between; width: 100%; }
+  /* The strip is a scrubber for the sticky visual panel, which is hidden on mobile.
+     Its 9 fixed 44px targets can't shrink below the viewport, so retire it here and
+     let the chapter cards carry navigation in normal document flow. */
+  .story-strip { display: none; }
+  .story-head-figs { border-left: none; padding-left: 0; justify-items: start; text-align: left; grid-template-columns: repeat(3, minmax(0, 1fr)); justify-content: space-between; width: 100%; }
   .chapters { grid-template-columns: 1fr; gap: 1.5rem; }
   .chapter-panel { display: none; }
   .chapter-list { padding-block: 0; gap: 1rem; }

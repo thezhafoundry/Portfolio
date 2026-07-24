@@ -72,7 +72,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
+
+/* Hover: block lifts and the metric takes the orchid highlight sweep. */
+.outcome-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.9rem 1.8rem color-mix(in srgb, var(--color-deep-violet) 10%, transparent);
+}
+
+.outcome-block strong { width: fit-content; padding-inline: 0.08em; transition: background 0.3s ease; }
+.outcome-block:hover strong { background: var(--color-highlight); }
 
 .outcome-block strong {
   font-family: var(--font-display);
@@ -110,8 +120,15 @@
 }
 
 .ledger-entry {
-  padding-bottom: 1.5rem;
+  padding: 0.6rem 0.6rem 1.5rem;
   border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent);
+  transition: background 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover: entry tints and nudges right, echoing the Home ledger rows. */
+.ledger-entry:hover {
+  background: color-mix(in srgb, var(--color-highlight) 28%, transparent);
+  transform: translateX(4px);
 }
 
 .ledger-head {

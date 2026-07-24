@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js')</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Story — Sampath Kumar</title>
@@ -9,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap&amp;text=SampathKumr%20" rel="stylesheet">
   <link rel="stylesheet" href="/src/styles/identity.css">
   <link rel="stylesheet" href="/src/styles/components.css">
   <link rel="stylesheet" href="/src/styles/story.css">
@@ -17,9 +19,9 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="site-header__inner container">
-      <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><img class="site-brand__signature" src="/brand/sampath-signature.svg" alt="Sampath Kumar"><img class="site-brand__mark" src="/brand/sampath-s-mark.svg" alt="" aria-hidden="true"></a>
+      <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><span class="site-brand__badge" aria-hidden="true">S</span><span class="site-brand__word">Sampath Kumar</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button>
-      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/story/" aria-current="page">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a class="btn btn--primary" href="/schedule/">Start a conversation</a></nav>
+      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/story/" aria-current="page">Story</a><a href="/results/">Work</a><a href="/schedule/">Hello</a></nav>
     </div>
     <button class="nav-scrim" type="button" tabindex="-1" aria-label="Close navigation" hidden></button>
   </header>
@@ -32,12 +34,12 @@
           <h1>From machine shop to <em class="sweep">hello.</em></h1>
           <p class="story-intro">Engineer-turned-sales leader. This is how a mechanical-engineering student from Coimbatore ended up opening doors in twelve markets.</p>
         </div>
-        <div class="story-head-figs" aria-label="At a glance">
+        <div class="story-head-figs reveal-group" aria-label="At a glance">
           <div class="fig"><span class="fig-num">2013</span><span class="fig-lab">Where it starts</span></div>
           <div class="fig"><span class="fig-num">12</span><span class="fig-lab">Markets wide</span></div>
           <div class="fig"><span class="fig-num">7+</span><span class="fig-lab">Years of hellos</span></div>
         </div>
-        <nav class="story-strip" aria-label="Jump to a chapter">
+        <nav class="story-strip reveal" aria-label="Jump to a chapter">
           <button type="button" data-chapter="chapter-1" aria-label="Chapter 1: The machine shop"><i></i><span>2013</span></button>
           <button type="button" data-chapter="chapter-2" aria-label="Chapter 2: Systems thinking"><i></i></button>
           <button type="button" data-chapter="chapter-3" aria-label="Chapter 3: The pivot"><i></i><span>2020</span></button>
@@ -56,55 +58,55 @@
         <div class="chapter-list">
           <article id="chapter-1" class="story-chapter" data-years="2013 – 2016" data-org="Sree Narayana Guru Polytechnic · Coimbatore">
             <span class="story-chapter__years">2013 – 2016</span>
-            <h3>The machine shop</h3>
+            <h2>The machine shop</h2>
             <p class="story-chapter__org">Sree Narayana Guru Polytechnic · Coimbatore</p>
             <p>Diploma in Mechanical Engineering. Learning how machines fit together.</p>
           </article>
           <article id="chapter-2" class="story-chapter" data-years="2017 – 2020" data-org="Sri Krishna College of Technology">
             <span class="story-chapter__years">2017 – 2020</span>
-            <h3>Systems thinking</h3>
+            <h2>Systems thinking</h2>
             <p class="story-chapter__org">Sri Krishna College of Technology</p>
             <p>B.E. The engineering mindset sticks: systems, inputs, outputs.</p>
           </article>
           <article id="chapter-3" class="story-chapter" data-years="2020 – 2021" data-org="Zinnov / Draup">
             <span class="story-chapter__years">2020 – 2021</span>
-            <h3>The pivot</h3>
+            <h2>The pivot</h2>
             <p class="story-chapter__org">Zinnov / Draup</p>
             <p>Engineering to sales. Pre-sales lead: solution consulting, demos, proposals — learning to translate products into conversations.</p>
           </article>
           <article id="chapter-4" class="story-chapter" data-years="2021 – 2022" data-org="Alore · Bengaluru">
             <span class="story-chapter__years">2021 – 2022</span>
-            <h3>Outbound discipline</h3>
+            <h2>Outbound discipline</h2>
             <p class="story-chapter__org">Alore · Bengaluru</p>
             <p>Lead generation specialist: campaigns across the US, UK and Australia; research, QA and reporting rigor.</p>
           </article>
           <article id="chapter-5" class="story-chapter" data-years="2022 – 2023" data-org="Ecosmob · Ahmedabad">
             <span class="story-chapter__years">2022 – 2023</span>
-            <h3>Leading the team</h3>
+            <h2>Leading the team</h2>
             <p class="story-chapter__org">Ecosmob · Ahmedabad</p>
             <p>Lead generation manager: territory allocation across US, UK, MENA and APAC, campaign analytics.</p>
           </article>
           <article id="chapter-6" class="story-chapter" data-years="2023" data-org="Uplers / Mavlers · Ahmedabad">
             <span class="story-chapter__years">2023</span>
-            <h3>Global campaigns</h3>
+            <h2>Global campaigns</h2>
             <p class="story-chapter__org">Uplers / Mavlers · Ahmedabad</p>
             <p>Business development manager: global outreach, Salesforce hygiene, investor and partner research.</p>
           </article>
           <article id="chapter-7" class="story-chapter" data-years="2024" data-org="The Sales Group · Toronto (remote)">
             <span class="story-chapter__years">2024</span>
-            <h3>North America</h3>
+            <h2>North America</h2>
             <p class="story-chapter__org">The Sales Group · Toronto (remote)</p>
             <p>Custom outbound strategies and fractional sales support for clients across the US and Canada.</p>
           </article>
           <article id="chapter-8" class="story-chapter" data-years="2024 – 2025" data-org="Finquest · Bengaluru">
             <span class="story-chapter__years">2024 – 2025</span>
-            <h3>The anchor</h3>
+            <h2>The anchor</h2>
             <p class="story-chapter__org">Finquest · Bengaluru</p>
             <p>Senior Lead Generation Manager: proprietary mid-market M&amp;A sourcing across North America, Europe and APAC. The numbers on the Results page happened here.</p>
           </article>
           <article id="chapter-9" class="story-chapter" data-years="2024 – 2026" data-org="Amrita Vishwa Vidyapeetham">
             <span class="story-chapter__years">2024 – 2026</span>
-            <h3>Sharpening the theory</h3>
+            <h2>Sharpening the theory</h2>
             <p class="story-chapter__org">Amrita Vishwa Vidyapeetham</p>
             <p>MBA in marketing management, in progress — under seven years of practice.</p>
           </article>
@@ -128,7 +130,7 @@
     </section>
 
     <section class="band band--cream">
-      <div class="band-inner band-inner--wide story-close">
+      <div class="band-inner band-inner--wide story-close reveal-group">
         <figure class="story-photo">
           <img src="/assets/about_portrait.jpg" alt="Sampath Kumar in a strategy discussion" width="800" height="600" loading="lazy">
         </figure>
@@ -141,7 +143,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="site-footer__inner container"><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><img src="/brand/sampath-signature-reversed.svg" alt="Sampath Kumar"></a><p class="site-footer__line">Every deal begins with hello.</p><nav class="site-footer__links" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a></nav><a class="btn btn--honey" href="/schedule/">Start a conversation</a><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p></div></footer>
+  <footer class="site-footer"><div class="site-footer__inner container"><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><span class="site-footer__signature">Sampath Kumar</span></a><p class="site-footer__line">Every deal begins with hello.</p><nav class="site-footer__links" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a></nav><a class="btn btn--primary" href="/schedule/">Start a conversation</a><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p></div></footer>
 
   <script type="module" src="/src/js/story.js"></script>
 </body>
