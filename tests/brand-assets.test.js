@@ -31,7 +31,7 @@ describe('Editorial Orchid brand assets', () => {
     const svg = (await readAsset(asset)).toString('utf8');
 
     expect(svg).toMatch(/<path\b/);
-    expect(svg).toMatch(/<title>/);
+    expect(svg).toMatch(/<title\b/);
   });
 
   it('uses white linework for the reversed signature', async () => {

@@ -1,99 +1,167 @@
-/* ============ THE CONVERSATION — locked identity tokens (spec §3) ============ */
 :root {
-  /* palette — the only four colors on the site */
-  --white: #FFFFFF;
-  --honey: #FFC21A;
-  --ink: #1E1B12;
-  --cream: #FFF3CC;
-  --paper: #FBF6E8; /* v5: the ground — a desaturated cousin of Cream, so White cards read as objects */
-  --hairline: rgba(30, 27, 18, 0.12); /* 12% Ink, inside cards only */
-
-  /* radii — the only three */
-  --r-card: 18px;
-  --r-pill: 999px;
-  --r-tail: 4px;
-
-  /* type */
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --fs-h1: clamp(2.1rem, 5.5vw, 4.5rem);
-  --fs-h2: clamp(1.5rem, 3.5vw, 2.2rem);
-  --fs-body: 1rem;
-  --fs-small: 0.8125rem;
-  --fs-label: 0.6875rem;
-
-  /* spacing scale — rhythm comes from alternating these, not uniform padding */
-  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 1rem;
-  --space-4: 1.75rem; --space-5: 3rem; --space-6: 5rem; --space-7: 7.5rem;
+  --color-canvas: #fffaff;
+  --color-section: #f7f2ff;
+  --color-highlight: #e9d5ff;
+  --color-orchid: #c084fc;
+  --color-violet: #6b21a8;
+  --color-deep-violet: #2e1065;
+  --color-white: #fff;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --content-max: 76rem;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-space: clamp(3.5rem, 8vw, 8rem);
+  --radius-media: clamp(0.75rem, 1.5vw, 1.25rem);
+  --focus-ring: 0 0 0 3px #fffaff, 0 0 0 6px #6b21a8;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
+  min-width: 20rem;
   margin: 0;
-  background-color: var(--paper);    /* identity v5: light world on warm paper */
-  background-image: radial-gradient(rgba(30, 27, 18, 0.045) 1px, transparent 1px);
-  background-size: 9px 9px;          /* the Night panel's dot-grid, whispered site-wide */
-  color: var(--ink);
+  background: var(--color-canvas);
+  color: var(--color-deep-violet);
   font-family: var(--font-body);
-  font-size: var(--fs-body);
+  font-size: clamp(1rem, 0.97rem + 0.15vw, 1.125rem);
   line-height: 1.65;
 }
-img, svg { max-width: 100%; display: block; }
-[hidden] { display: none !important; }
 
-h1, h2 { font-family: var(--font-display); font-weight: 600; line-height: 1.13; margin: 0; }
-h1 { font-size: var(--fs-h1); }
-h2 { font-size: var(--fs-h2); }
-p { margin: 0 0 var(--space-3); }
-a { color: var(--ink); }
-
-/* emphasis — italic Ink on a Honey sweep. Max one per screen. */
-.sweep {
-  font-style: italic;
-  background: var(--honey);
-  padding: 0 0.18em;
-  border-radius: var(--r-tail);
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }
 
-/* small uppercase label */
-.label {
-  font-family: var(--font-body);
+img {
+  height: auto;
+}
+
+a {
+  color: var(--color-violet);
+  overflow-wrap: anywhere;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+a:hover {
+  color: var(--color-deep-violet);
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-deep-violet);
+  font-family: var(--font-display);
   font-weight: 600;
-  font-size: var(--fs-label);
-  letter-spacing: 0.22em;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+}
+
+p {
+  max-width: 72ch;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.container {
+  width: min(100% - (var(--gutter) * 2), var(--content-max));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.surface {
+  background: var(--color-section);
+  border-radius: var(--radius-media);
+}
+
+.eyebrow {
+  color: var(--color-violet);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.label--pill { background: var(--cream); padding: 0.35em 0.8em; border-radius: var(--r-pill); }
 
-/* white card on the light world — hairline keeps the edge readable */
-.card {
-  background: var(--white);
-  border: 1px solid rgba(30, 27, 18, 0.08);
-  border-radius: var(--r-card);
-  position: relative;
-  box-shadow: 0 2px 12px rgba(30, 27, 18, 0.05); /* warm lift off the paper — never grey-black */
+.editorial-emphasis {
+  background: var(--color-highlight);
+  color: inherit;
+  font-style: italic;
+  padding-inline: 0.12em;
 }
-/* width rhythm (v5): contained column → wide panel → full-bleed close */
-.container { max-width: 1200px; margin-inline: auto; padding-inline: clamp(20px, 3vw, 56px); }
-.container--wide { max-width: 1500px; }
 
-/* band world (v7): sections run edge-to-edge in color; content keeps a readable column */
-.band { width: 100%; }
-.band--white { background: var(--white); }
-.band--cream { background: var(--cream); }
-.band--honey { background: var(--honey); }
-.band--ink {
-  background: var(--ink);
-  background-image: radial-gradient(rgba(255, 243, 204, 0.13) 1px, transparent 1px);
-  background-size: 8px 8px;
-  color: var(--white);
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 0.75rem;
+  left: 0.75rem;
+  transform: translateY(-160%);
+  background: var(--color-deep-violet);
+  border-radius: 0.25rem;
+  color: var(--color-white);
+  padding: 0.75rem 1rem;
 }
-.band-inner { max-width: 1200px; margin-inline: auto; padding: var(--space-5) clamp(20px, 3vw, 56px); }
-.band-inner--wide { max-width: 1500px; }
 
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; border-radius: var(--r-tail); }
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.container > *,
+.section > *,
+.surface > *,
+[class*="grid"] > *,
+[class*="flex"] > * {
+  min-width: 0;
+}
+
+:focus-visible {
+  border-radius: 0.2rem;
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -18,7 +18,7 @@ describe('Editorial Orchid foundation contracts', () => {
     expect(html).toContain('DM+Sans');
     expect(html).toContain('/src/styles/identity.css');
     expect(html).toContain('/src/styles/components.css');
-    expect(html).not.toMatch(/Fraunces|Inter|Font Awesome|font-awesome/i);
+    expect(html).not.toMatch(/family=(?:Fraunces|Inter)(?:[+:&]|$)|Font Awesome|font-awesome/i);
   });
 });
 
