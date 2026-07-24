@@ -98,6 +98,29 @@ describe('Editorial Orchid Story contracts', () => {
   });
 });
 
+describe('Editorial Orchid Results contracts', () => {
+  it('presents proof metrics before the primary case study and structures outcomes', async () => {
+    const html = await readPage('results/index.html');
+    const proofIndex = html.indexOf('+35%');
+    const finquestIndex = html.indexOf('Finquest');
+
+    expect(proofIndex).toBeGreaterThan(-1);
+    expect(finquestIndex).toBeGreaterThan(-1);
+    expect(proofIndex).toBeLessThan(finquestIndex);
+
+    const outcomes = html.match(/<div\b[^>]*class="[^"]*outcome-block[^"]*"[^>]*>/g) ?? [];
+    expect(outcomes.length).toBe(4);
+  });
+
+  it('groups earlier roles and provides a conversation call to action', async () => {
+    const html = await readPage('results/index.html');
+
+    expect(html).toMatch(/<section\b[^>]*aria-labelledby="earlier-roles-heading"[^>]*>/);
+    expect(html).toMatch(/<a\b[^>]*href="\/schedule\/"[^>]*>Start a conversation<\/a>/);
+  });
+});
+
+
 
 describe('Editorial Orchid shared-shell contracts', () => {
   it.each(pages)('%s provides the shared accessible header, navigation state, skip link, and footer', async (page) => {
