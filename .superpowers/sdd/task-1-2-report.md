@@ -191,3 +191,38 @@ Passed with no whitespace errors.
 
 Independent focused re-review of commit `71c219e` found no critical, high,
 medium, low, or actionable issues and approved all three official remediations.
+
+## Contact-action contrast remediation (2026-07-24)
+
+Added an exact regression assertion for the LinkedIn action inside Home's
+deep-violet `.contact-card`.
+
+```text
+npm test -- --run tests/editorial-orchid-css.test.js tests/site-contract.test.js
+```
+
+RED: 1 expected failure showed the action still used
+`btn-pill btn-outline-dark`, whose deep-violet text and border disappeared
+against the panel.
+
+GREEN: changed the action to the existing `btn btn--ghost-cream` reversed
+variant. The focused command then passed 2 files and 42 tests, with 3 deferred
+shared-shell tests.
+
+```text
+npm test
+```
+
+Passed: 5 files, 65 tests passed, 3 deferred shared-shell tests.
+
+```text
+npm run build
+```
+
+Passed with Vite 5.4.21.
+
+```text
+git diff --check
+```
+
+Passed with no whitespace errors.

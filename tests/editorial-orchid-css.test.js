@@ -56,6 +56,15 @@ describe('Home contact contract', () => {
     expect(script).not.toMatch(/querySelector\(['"]i['"]\)|fa-bars|fa-xmark/);
     expect(css).not.toMatch(/\.contact-form\b|\.form-group\b|\.form-control\b/);
   });
+
+  it('uses the reversed light button for LinkedIn inside the deep contact panel', async () => {
+    const home = await readProjectFile('index.html');
+    const contactPanel = home.match(/<div class="contact-card">([\s\S]*?)<\/section>/)?.[1] ?? '';
+    const linkedInAction = contactPanel.match(/<a[^>]+linkedin\.com[^>]*>/)?.[0] ?? '';
+
+    expect(linkedInAction).toContain('class="btn btn--ghost-cream"');
+    expect(linkedInAction).not.toContain('btn-outline-dark');
+  });
 });
 
 describe('Shared content primitives', () => {
