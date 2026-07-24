@@ -2,7 +2,6 @@ import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 
 const stylesheets = [
-  'src/styles/main.css',
   'src/styles/components.css',
   'src/styles/home.css',
   'src/styles/story.css',

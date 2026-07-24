@@ -32,6 +32,55 @@ describe('Editorial Orchid foundation contracts', () => {
   });
 });
 
+describe('Editorial Orchid Home contracts', () => {
+  it('loads its page stylesheet instead of the retired main stylesheet', async () => {
+    const html = await readPage('index.html');
+
+    expect(html).toContain('/src/styles/home.css');
+    expect(html).not.toContain('/src/styles/main.css');
+  });
+
+  it('opens with the approved editorial greeting', async () => {
+    const html = await readPage('index.html');
+    const heading = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '';
+
+    expect(heading).toContain('Every deal begins with');
+    expect(heading).toMatch(/<em\b[^>]*>\s*hello\.\s*<\/em>/);
+  });
+
+  it('makes the priority portrait informative and ready for the hero', async () => {
+    const html = await readPage('index.html');
+    const portrait = html.match(/<img\b[^>]*hero_portrait\.jpg[^>]*>/)?.[0] ?? '';
+
+    expect(portrait).toMatch(/alt="[^"]+"/);
+    expect(portrait).toMatch(/width="\d+"/);
+    expect(portrait).toMatch(/height="\d+"/);
+    expect(portrait).toContain('fetchpriority="high"');
+  });
+
+  it('keeps the primary hero action on the honest Schedule path', async () => {
+    const html = await readPage('index.html');
+    const hero = html.match(/<section\b[^>]*class="[^"]*hero[^"]*"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
+
+    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="\/schedule\/"/);
+  });
+
+  it('states the verified proof values literally without counter animation hooks', async () => {
+    const html = await readPage('index.html');
+
+    for (const value of ['+35%', '9.2/10', '200M+', '12 markets']) {
+      expect(html).toContain(value);
+    }
+    expect(html).not.toMatch(/data-target|stat-number/);
+  });
+
+  it('does not present a contact form without a delivery endpoint', async () => {
+    const html = await readPage('index.html');
+
+    expect(html).not.toContain('contactForm');
+  });
+});
+
 describe('Editorial Orchid shared-shell contracts', () => {
   it.each(pages)('%s provides the shared accessible header, navigation state, skip link, and footer', async (page) => {
     const html = await readPage(page);
