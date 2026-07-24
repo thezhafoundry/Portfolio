@@ -81,6 +81,24 @@ describe('Editorial Orchid Home contracts', () => {
   });
 });
 
+describe('Editorial Orchid Story contracts', () => {
+  it('contains nine story chapters without TODO placeholder comments or photo slots', async () => {
+    const html = await readPage('story/index.html');
+    const matches = html.match(/<article\b[^>]*class="[^"]*story-chapter[^"]*"[^>]*>/g) ?? [];
+
+    expect(matches.length).toBe(9);
+    expect(html).not.toContain('TODO');
+    expect(html).not.toContain('Photo — to be added');
+  });
+
+  it('uses accessible buttons for timeline navigation referencing chapter IDs', async () => {
+    const html = await readPage('story/index.html');
+
+    expect(html).toMatch(/<button\b[^>]*data-chapter="chapter-\d+"[^>]*>/);
+  });
+});
+
+
 describe('Editorial Orchid shared-shell contracts', () => {
   it.each(pages)('%s provides the shared accessible header, navigation state, skip link, and footer', async (page) => {
     const html = await readPage(page);
