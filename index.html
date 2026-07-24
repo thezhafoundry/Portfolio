@@ -30,34 +30,27 @@
   </style>
 </head>
 <body>
-
-  <section id="home" class="hero">
-
-    <div class="container">
-      <nav class="hero-glass-nav">
-        <a href="#" class="hero-brand">
-          <span class="hero-brand-dot"></span>
-          Sampath Kumar
-        </a>
-
-        <ul class="hero-nav-links" id="navLinks">
-          <li><a href="#home" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <a href="#contact" class="btn-nav-glass">
-          Book a Consultation
-        </a>
-
-        <button class="nav-toggle-glass" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
-          Menu
-        </button>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="site-header__inner container">
+      <a class="site-brand" href="/" aria-label="Sampath Kumar, home">
+        <img class="site-brand__signature" src="/brand/sampath-signature.svg" alt="Sampath Kumar">
+        <img class="site-brand__mark" src="/brand/sampath-s-mark.svg" alt="" aria-hidden="true">
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button>
+      <nav id="site-navigation" class="site-nav" aria-label="Primary">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/story/">Story</a>
+        <a href="/results/">Results</a>
+        <a href="/schedule/">Schedule</a>
+        <a class="btn btn--primary" href="/schedule/">Start a conversation</a>
       </nav>
     </div>
+    <button class="nav-scrim" type="button" tabindex="-1" aria-label="Close navigation" hidden></button>
+  </header>
+
+  <main id="main-content">
+  <section id="home" class="hero">
 
     <div class="container">
       <div class="hero-grid">
@@ -543,17 +536,20 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-display-title">Sampath Kumar</div>
-      <div class="footer-bottom">
-        <div>© 2026 Sampath Kumar. All rights reserved.</div>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn Profile">in</a>
-          <a href="#contact" class="social-link" aria-label="Send Email">Email</a>
-        </div>
-      </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner container">
+      <a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><img src="/brand/sampath-signature-reversed.svg" alt="Sampath Kumar"></a>
+      <p class="site-footer__line">Every deal begins with hello.</p>
+      <nav class="site-footer__links" aria-label="Footer">
+        <a href="/story/">Story</a>
+        <a href="/results/">Results</a>
+        <a href="/schedule/">Schedule</a>
+        <a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <a class="btn btn--honey" href="/schedule/">Start a conversation</a>
+      <p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p>
     </div>
   </footer>
 

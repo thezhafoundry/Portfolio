@@ -1,18 +1,11 @@
-/* ==========================================================================
+import { initNav } from './nav.js';
+
+/* ===========================================================================
    Main Interactivity Script for Sampath Kumar Portfolio
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile Nav Toggle
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('active');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-  }
+  initNav();
 
   // Accordion Interactivity for Process Section
   const accordionItems = document.querySelectorAll('#processAccordion .accordion-item');
