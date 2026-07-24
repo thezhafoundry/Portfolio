@@ -1,3 +1,12 @@
+export const motionDurations = Object.freeze({
+  control: 160,
+  menuOpen: 220,
+  menuClose: 180,
+  accordion: 260,
+  story: 320,
+  hero: 480,
+});
+
 /* Spring physics core — pure and testable (spec §4). */
 export function springStep(state, dt, { stiffness = 170, damping = 14, mass = 1 } = {}) {
   const displacement = state.value - state.target;
@@ -15,6 +24,7 @@ export function isSettled(state, epsilon = 0.001) {
 
 export function prefersReducedMotion() {
   return typeof window !== 'undefined'
+    && window.matchMedia
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
@@ -36,9 +46,6 @@ export function animateSpring({ from, to, params, onFrame, onDone }) {
   return () => cancelAnimationFrame(raf);
 }
 
-/* Typing headline (spec §4): heading keeps its real DOM text; we wrap
-   words/inline elements in .type-unit spans and reveal them in sequence.
-   Screen readers get the full text via aria-label on the heading. */
 export function typeHeading(el, { unitDelay = 90 } = {}) {
   const fullText = el.textContent.replace(/\s+/g, ' ').trim();
   el.setAttribute('aria-label', fullText);

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { springStep, isSettled } from '../src/js/motion.js';
+import { springStep, isSettled, motionDurations, prefersReducedMotion } from '../src/js/motion.js';
 
 const run = (params, steps = 600) => {
   let s = { value: 0, velocity: 0, target: 100 };
@@ -30,5 +30,21 @@ describe('springStep', () => {
     const s = springStep({ value: 100, velocity: 0, target: 100 }, 1 / 60);
     expect(s.value).toBeCloseTo(100, 5);
     expect(s.velocity).toBeCloseTo(0, 5);
+  });
+});
+
+describe('motionDurations contract', () => {
+  it('exports frozen standardized motion durations', () => {
+    expect(Object.isFrozen(motionDurations)).toBe(true);
+    expect(motionDurations.control).toBe(160);
+    expect(motionDurations.menuOpen).toBe(220);
+    expect(motionDurations.menuClose).toBe(180);
+    expect(motionDurations.accordion).toBe(260);
+    expect(motionDurations.story).toBe(320);
+    expect(motionDurations.hero).toBe(480);
+  });
+
+  it('checks reduced motion preference safely', () => {
+    expect(typeof prefersReducedMotion()).toBe('boolean');
   });
 });
