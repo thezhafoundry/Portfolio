@@ -5,16 +5,16 @@
   min-height: 520px;
   overflow: visible;
 }
-.hero-copy { padding: var(--space-5) var(--space-3) var(--space-5) 0; }
-.hero-copy h1 { margin: var(--space-4) 0 0; max-width: 13ch; }
-.hero-sub { margin-top: var(--space-3); max-width: 42ch; color: var(--ink); opacity: 0.72; }
-.hero-actions { margin-top: var(--space-4); display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.hero-copy { padding: 3rem 1rem 3rem 0; }
+.hero-copy h1 { margin: 1.75rem 0 0; max-width: 13ch; }
+.hero-sub { margin-top: 1rem; max-width: 42ch; color: var(--color-deep-violet); opacity: 0.72; }
+.hero-actions { margin-top: 1.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
 .hero-photo { position: relative; }
 .hero-shape {
   position: absolute; inset: -1px -1px -1px 24px;
-  background: var(--honey);
-  border-radius: 120px var(--r-card) var(--r-card) var(--r-tail);
+  background: var(--color-highlight);
+  border-radius: 120px var(--radius-media) var(--radius-media) 0.25rem;
   overflow-x: clip;      /* contain the silhouette's intrinsic-ratio width */
   overflow-y: visible;   /* but let the head break the shape's top line */
 }
@@ -24,25 +24,25 @@
 }
 .hero-badge {
   position: absolute; top: 20px; right: 20px; z-index: 2;
-  box-shadow: 0 4px 14px rgba(30, 27, 18, 0.18);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--color-deep-violet) 18%, transparent);
 }
 
 /* the 12 markets, travelling the hero's bottom edge (v5 spec move 2) */
 .hero-ticker {
   grid-column: 1 / -1;
   overflow: hidden; white-space: nowrap;
-  border-top: 1px dashed rgba(30, 27, 18, 0.22);
+  border-top: 1px dashed color-mix(in srgb, var(--color-deep-violet) 22%, transparent);
   padding: 0.9em 0 0;
-  font: 600 var(--fs-label) var(--font-body);
+  font: 600 0.75rem var(--font-body);
   letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(30, 27, 18, 0.5);
+  color: color-mix(in srgb, var(--color-deep-violet) 50%, transparent);
 }
 .hero-ticker .tickline { display: inline-block; animation: ticker-scroll 45s linear infinite; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ================= stat row — the numbers, said out loud on a honey band (v7) ================= */
 .stats {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
   text-align: center;
 }
 .stat-n {
@@ -52,16 +52,16 @@
 }
 .stat-n small { font-size: 0.55em; }
 .stat-l {
-  margin-top: var(--space-2);
-  font: 600 var(--fs-label) var(--font-body);
+  margin-top: 0.5rem;
+  font: 600 0.75rem var(--font-body);
   letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.55;
 }
 
 /* ================= credibility band — the teams, as wordmarks (v5 spec move 5) ================= */
 .clients { text-align: center; }
-.clients .label { display: block; margin-bottom: var(--space-3); opacity: 0.6; }
+.clients .label { display: block; margin-bottom: 1rem; opacity: 0.6; }
 .clients-row {
-  display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3);
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1rem;
   justify-content: center; align-items: baseline;
 }
 .clients-row span {
@@ -69,72 +69,72 @@
   font-size: 1.15rem; opacity: 0.62;
 }
 .clients-row span:not(:last-child)::after {
-  content: "·"; color: var(--honey); opacity: 1;
-  margin-left: var(--space-3); font-style: normal;
+  content: "·"; color: var(--color-highlight); opacity: 1;
+  margin-left: 1rem; font-style: normal;
 }
 
 /* ================= sections ================= */
-.section-gap { margin-top: var(--space-6); }
+.section-gap { margin-top: 5rem; }
 
 .followers { text-align: center; }
-.followers-number { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); margin: var(--space-2) 0 0; }
-.followers-note { opacity: 0.65; font-size: var(--fs-small); }
+.followers-number { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 4vw, 3.5rem); margin: 0.5rem 0 0; }
+.followers-note { opacity: 0.65; font-size: 0.875rem; }
 .followers svg { width: min(640px, 100%); margin-inline: auto; }
 
 /* ================= the Night Window — now a full-bleed dark band (v7) ================= */
-.night { color: var(--white); }
-.night h2 { text-align: center; color: var(--white); }
-.night h2 em { font-style: italic; color: var(--honey); }
+.night { color: var(--color-white); }
+.night h2 { text-align: center; color: var(--color-white); }
+.night h2 em { font-style: italic; color: var(--color-highlight); }
 
-.signal-stage { position: relative; margin-top: var(--space-4); max-width: 1400px; margin-inline: auto; }
+.signal-stage { position: relative; margin-top: 1.75rem; max-width: 1400px; margin-inline: auto; }
 .signal-svg { display: block; width: 100%; height: auto; }
-.signal-nodes { filter: drop-shadow(0 0 6px rgba(255, 194, 26, 0.55)); }
+.signal-nodes { filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-highlight) 55%, transparent)); }
 .signal-chip {
   position: absolute; transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 243, 204, 0.3);
-  color: var(--cream);
-  font: 600 var(--fs-label) var(--font-body);
+  background: color-mix(in srgb, var(--color-white) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-section) 30%, transparent);
+  color: var(--color-section);
+  font: 600 0.75rem var(--font-body);
   letter-spacing: 0.18em; text-transform: uppercase;
-  border-radius: 12px 12px 12px var(--r-tail);
+  border-radius: 12px 12px 12px 0.25rem;
   padding: 0.55em 0.95em; white-space: nowrap;
 }
 .night-caption {
-  text-align: center; color: rgba(255, 243, 204, 0.75);
-  font-size: var(--fs-small); max-width: 52ch;
-  margin: var(--space-4) auto 0;
+  text-align: center; color: color-mix(in srgb, var(--color-section) 75%, transparent);
+  font-size: 0.875rem; max-width: 52ch;
+  margin: 1.75rem auto 0;
 }
 
 /* ================= editorial apparatus (v4 spec §9; v7 — secheads live inside their bands) ================= */
-.sechead { display: flex; align-items: center; gap: 14px; margin: 0 0 var(--space-4); }
+.sechead { display: flex; align-items: center; gap: 14px; margin: 0 0 1.75rem; }
 .sechead--solo { margin-bottom: 0; }
 .sechead .num { font-family: var(--font-display); font-style: italic; font-size: 1.05rem; opacity: 0.5; }
 .sechead .num::before {
   content: ""; display: inline-block; width: 9px; height: 9px;
-  border-radius: var(--r-pill); background: var(--honey);
+  border-radius: 999px; background: var(--color-highlight);
   margin-right: 10px; vertical-align: middle;
 }
-.band--ink .sechead { color: var(--cream); }
-.band--ink .sechead i { border-top-color: rgba(255, 243, 204, 0.25); }
-.sechead .lab { font: 600 var(--fs-label) var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; }
-.sechead i { flex: 1; border-top: 1px solid rgba(30, 27, 18, 0.15); }
+.band--ink .sechead { color: var(--color-section); }
+.band--ink .sechead i { border-top-color: color-mix(in srgb, var(--color-section) 25%, transparent); }
+.sechead .lab { font: 600 0.75rem var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; }
+.sechead i { flex: 1; border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 15%, transparent); }
 .sechead .of { font-family: var(--font-display); font-style: italic; font-size: 0.85rem; opacity: 0.4; }
-.sechead .arrow { font: 600 var(--fs-small) var(--font-body); color: var(--ink); }
+.sechead .arrow { font: 600 0.875rem var(--font-body); color: var(--color-deep-violet); }
 .pull { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 3.2vw, 2.1rem); text-align: center; max-width: 24ch; margin: 0 auto; line-height: 1.3; }
 /* the 06 sechead already provides the pause before the dark close (home only) */
 .site-close { margin-top: 0; }
 
 /* ================= win routes — outcomes as flight legs ================= */
-.routes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.routes { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .route {
-  display: flex; flex-direction: column; gap: var(--space-1);
-  padding: var(--space-4); text-decoration: none;
+  display: flex; flex-direction: column; gap: 0.25rem;
+  padding: 1.75rem; text-decoration: none;
   overflow: hidden;
 }
 /* honey wash sweeps in from the left (v5 spec move 8) */
 .route::before {
   content: ""; position: absolute; inset: 0;
-  background: var(--honey); border-radius: inherit;
+  background: var(--color-highlight); border-radius: inherit;
   transform: translateX(-101%);
   transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -142,26 +142,26 @@
 .route > * { position: relative; }
 .route-code {
   display: flex; align-items: center; gap: 8px;
-  font: 600 var(--fs-label) var(--font-body);
+  font: 600 0.75rem var(--font-body);
   letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.55;
 }
-.route-code i { flex: 1; border-top: 1px dashed rgba(30, 27, 18, 0.35); }
+.route-code i { flex: 1; border-top: 1px dashed color-mix(in srgb, var(--color-deep-violet) 35%, transparent); }
 .route-title { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; }
-.route-sub { font-size: var(--fs-small); opacity: 0.65; }
-.route:hover { border-color: rgba(30, 27, 18, 0.3); }
+.route-sub { font-size: 0.875rem; opacity: 0.65; }
+.route:hover { border-color: color-mix(in srgb, var(--color-deep-violet) 30%, transparent); }
 
 /* ================= how it sounds — a real exchange, in the brand's own bubbles (v5 spec move 7) ================= */
-.convo { display: flex; flex-direction: column; gap: var(--space-3); }
+.convo { display: flex; flex-direction: column; gap: 1rem; }
 .convo p { margin: 0; }
-.convo .thread-bubble { font-size: var(--fs-body); }
+.convo .thread-bubble { font-size: 1rem; }
 .convo-typing { padding: 0.85em 1.1em; }
-.convo-note { text-align: center; font-size: var(--fs-small); opacity: 0.6; margin: var(--space-3) auto 0; }
+.convo-note { text-align: center; font-size: 0.875rem; opacity: 0.6; margin: 1rem auto 0; }
 
 /* ================= mobile recomposition (spec §3.5) ================= */
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; min-height: 0; }
-  .hero-copy { padding: var(--space-4) 0 var(--space-3); }
-  .hero-photo { min-height: 340px; margin-top: var(--space-3); overflow: hidden; border-radius: 120px var(--r-card) var(--r-tail) var(--r-card); }
+  .hero-copy { padding: 1.75rem 0 1rem; }
+  .hero-photo { min-height: 340px; margin-top: 1rem; overflow: hidden; border-radius: 120px var(--radius-media) 0.25rem var(--radius-media); }
   .hero-shape { inset: 0; border-radius: inherit; }
   .hero-silhouette { left: 14%; right: 14%; height: 100%; }
 }
@@ -173,12 +173,11 @@
 @media (max-width: 640px) {
   .signal-stage {
     display: flex; flex-direction: column; align-items: center;
-    gap: var(--space-3); padding-block: var(--space-2);
-    background-image: linear-gradient(rgba(255, 194, 26, 0.45) 50%, transparent 50%);
-    background-size: 1px 8px; background-repeat: repeat-y; background-position: center top;
+    gap: 1rem; padding-block: 0.5rem;
+    border-left: 1px dashed var(--color-orchid);
   }
   .signal-svg { display: none; }
-  .signal-chip { position: static; transform: none; background: var(--ink); }
+  .signal-chip { position: static; transform: none; background: var(--color-deep-violet); }
   .routes { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: 1fr 1fr; gap: var(--space-4) var(--space-3); }
+  .stats { grid-template-columns: 1fr 1fr; gap: 1.75rem 1rem; }
 }

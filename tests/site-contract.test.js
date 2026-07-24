@@ -20,6 +20,13 @@ describe('Editorial Orchid foundation contracts', () => {
     expect(html).toContain('/src/styles/components.css');
     expect(html).not.toMatch(/family=(?:Fraunces|Inter)(?:[+:&]|$)|Font Awesome|font-awesome/i);
   });
+
+  it('keeps Home new-tab links safe and its mobile navigation visibly labelled', async () => {
+    const html = await readPage('index.html');
+
+    expect(html).toMatch(/target="_blank"[^>]*rel="noopener"/);
+    expect(html).toMatch(/id="navToggle"[^>]*aria-controls="navLinks"[^>]*aria-expanded="false"[^>]*>\s*Menu/);
+  });
 });
 
 describe.todo('Editorial Orchid shared-shell contracts', () => {

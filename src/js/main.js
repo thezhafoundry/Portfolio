@@ -104,28 +104,4 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(heroStats);
   }
 
-  // Contact Form Submission Handler
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = contactForm.querySelector('button[type="submit"]');
-      const originalText = btn.innerHTML;
-      
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Scheduling...';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Consultation Requested!';
-        btn.style.backgroundColor = '#10B981';
-        contactForm.reset();
-
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.backgroundColor = '';
-          btn.disabled = false;
-        }, 4000);
-      }, 1200);
-    });
-  }
 });

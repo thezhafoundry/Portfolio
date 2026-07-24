@@ -71,8 +71,58 @@ error.
 
 ## Concerns
 
-The shared-shell task must migrate the retained route/component styles away from
-their prior token system and replace the interim page headers. This is explicitly
-outside the files and incremental contract boundary for Tasks 1–2; the deferred
-contracts document that hand-off without leaving this unit's foundation tests
-failing.
+None. The shared-shell work remains intentionally deferred, but all currently
+loaded styles now resolve against the Editorial Orchid token system.
+
+## Review remediation (2026-07-24)
+
+### RED evidence
+
+Added `tests/editorial-orchid-css.test.js` and expanded
+`tests/site-contract.test.js`, then ran:
+
+```text
+npm test -- --run tests/site-contract.test.js tests/editorial-orchid-css.test.js
+```
+
+The result was 7 expected failures: every live stylesheet still had legacy
+token references, gradients, raw color values, or the Home contact form still
+claimed a Schedule destination while no Schedule link existed. The site-contract
+assertion already passed, so the RED evidence isolated the styling/contact
+regressions rather than a test harness problem.
+
+### Fixes
+
+- Migrated all six live stylesheets to current Editorial Orchid tokens or exact
+  approved colors, using `color-mix()` only for transparent tints and shadows.
+  No legacy compatibility tokens, raw RGB/RGBA colors, or gradients remain.
+- Replaced the simulated Home form with honest Schedule and LinkedIn actions,
+  and removed its false success JavaScript.
+- Added a visible mobile Menu label and static control relationship assertion;
+  the shared-shell unit will provide the final reusable navigation behavior.
+
+### GREEN evidence and exact verification
+
+```text
+npm test -- --run tests/site-contract.test.js tests/editorial-orchid-css.test.js
+```
+
+Passed: 2 files, 12 tests passed, 3 deferred shared-shell tests.
+
+```text
+npm test
+```
+
+Passed: 5 files, 35 tests passed, 3 deferred shared-shell tests.
+
+```text
+npm run build
+```
+
+Passed with Vite 5.4.21.
+
+```text
+git diff --check
+```
+
+Passed with no whitespace errors.

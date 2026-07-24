@@ -1,15 +1,15 @@
 /* v7 band world: the card chrome is gone — the white band carries the section */
-.sched h1 { margin-top: var(--space-4); max-width: 16ch; }
-.sched-sub { margin-top: var(--space-3); max-width: 46ch; opacity: 0.72; }
+.sched h1 { margin-top: 1.75rem; max-width: 16ch; }
+.sched-sub { margin-top: 1rem; max-width: 46ch; opacity: 0.72; }
 
-.cal-embed { margin-top: var(--space-5); min-height: 480px; }
+.cal-embed { margin-top: 3rem; min-height: 480px; }
 @media (min-width: 1440px) { .cal-embed { min-height: 600px; } }
-.cal-loading { display: flex; gap: 10px; align-items: center; opacity: 0.6; font-size: var(--fs-small); font-weight: 600; }
+.cal-loading { display: flex; gap: 10px; align-items: center; opacity: 0.6; font-size: 0.875rem; font-weight: 600; }
 
-.cal-fallback { margin-top: var(--space-5); max-width: 34rem; font-weight: 400; padding: var(--space-4); }
+.cal-fallback { margin-top: 3rem; max-width: 34rem; font-weight: 400; padding: 1.75rem; }
 .cal-fallback p { margin: 0; }
-.cal-fallback-list { margin: var(--space-2) 0 0; padding-left: 1.1em; }
+.cal-fallback-list { margin: 0.5rem 0 0; padding-left: 1.1em; }
 
-.section-gap { margin-top: var(--space-5); }
-.sched-links { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.section-gap { margin-top: 3rem; }
+.sched-links { display: flex; gap: 1rem; flex-wrap: wrap; }
 .sched-link { text-decoration: none; }

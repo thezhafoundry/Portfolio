@@ -1,45 +1,45 @@
 /* ================= story head — a white band: copy left, figures right, journey strip below ================= */
-.story-head { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: var(--space-5); align-items: center; }
-.story-head h1 { margin-top: var(--space-4); max-width: 16ch; }
-.story-intro { margin-top: var(--space-3); max-width: 48ch; opacity: 0.72; }
-.story-head-figs { display: grid; gap: var(--space-4); justify-items: end; text-align: right; border-left: 1px solid var(--hairline); padding-left: var(--space-5); }
+.story-head { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; }
+.story-head h1 { margin-top: 1.75rem; max-width: 16ch; }
+.story-intro { margin-top: 1rem; max-width: 48ch; opacity: 0.72; }
+.story-head-figs { display: grid; gap: 1.75rem; justify-items: end; text-align: right; border-left: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); padding-left: 3rem; }
 .fig-num { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; display: block; }
-.fig-lab { font: 600 var(--fs-label) var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; }
+.fig-lab { font: 600 0.75rem var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.55; }
 
 /* the journey strip — the card's former dead space, now a preview of the chapters */
 .story-strip {
   grid-column: 1 / -1;
-  margin: var(--space-4) 0 0;
-  padding: var(--space-3) 0 0;
-  border-top: 1px dashed rgba(30, 27, 18, 0.2);
+  margin: 1.75rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px dashed color-mix(in srgb, var(--color-deep-violet) 20%, transparent);
   display: flex; justify-content: space-between; align-items: flex-start;
   position: relative;
 }
 .story-strip::before {
   content: ""; position: absolute;
-  left: 0; right: 0; top: calc(var(--space-3) + 9px);
-  border-top: 2px dashed rgba(255, 194, 26, 0.7);
+  left: 0; right: 0; top: calc(1rem + 9px);
+  border-top: 2px dashed color-mix(in srgb, var(--color-highlight) 70%, transparent);
 }
 .story-strip button {
   position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px;
   background: none; border: 0; padding: 0; cursor: pointer;
 }
 .story-strip i {
-  width: 11px; height: 11px; border-radius: var(--r-pill);
-  background: var(--honey); border: 3px solid var(--white);
-  box-shadow: 0 0 0 2px rgba(255, 194, 26, 0.8);
+  width: 11px; height: 11px; border-radius: 999px;
+  background: var(--color-highlight); border: 3px solid var(--color-white);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-highlight) 80%, transparent);
   transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .story-strip button:hover i { transform: scale(1.35); }
 .story-strip span {
-  font: 600 var(--fs-label) var(--font-body);
+  font: 600 0.75rem var(--font-body);
   letter-spacing: 0.14em; opacity: 0.55;
 }
 
-.section-gap { margin-top: var(--space-6); }
+.section-gap { margin-top: 5rem; }
 
 /* ================= chapters — scroll-driven split (dim list + pinned panel) ================= */
-.chapters { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: start; }
+.chapters { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .chapter-list { display: flex; flex-direction: column; padding-block: 18vh 30vh; }
 .chapter {
   min-height: 38vh; display: flex; flex-direction: column; justify-content: center;
@@ -48,20 +48,20 @@
 .chapter.on { opacity: 1; }
 .chapter h3 {
   font-family: var(--font-display); font-weight: 600; line-height: 1.12;
-  font-size: clamp(1.6rem, 2.8vw, 2.5rem); margin: 0 0 var(--space-2);
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem); margin: 0 0 0.5rem;
 }
 .chapter p { max-width: 44ch; margin: 0; opacity: 0.8; }
 
 .chapter-panel { position: sticky; top: 12vh; height: 76vh; }
 .chapter-panel-inner {
-  height: 100%; background: var(--honey); border-radius: var(--r-card) var(--r-card) var(--r-card) var(--r-tail);
-  padding: var(--space-5); display: flex; flex-direction: column;
+  height: 100%; background: var(--color-highlight); border-radius: var(--radius-media) var(--radius-media) var(--radius-media) 0.25rem;
+  padding: 3rem; display: flex; flex-direction: column;
   position: relative; overflow: hidden;
 }
 .cp-idx { opacity: 0.6; }
 .cp-svg { width: min(420px, 90%); margin: auto; display: block; }
 .cp-node, .cp-halo { transition: cx 0.5s ease, cy 0.5s ease; }
-.cp-meta { display: flex; flex-direction: column; gap: var(--space-1); }
+.cp-meta { display: flex; flex-direction: column; gap: 0.25rem; }
 .cp-years { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.1; }
 .cp-org { opacity: 0.7; }
 /* the ghost numeral (v6): chapter progress you can read from across the room */
@@ -69,7 +69,7 @@
   position: absolute; right: -0.05em; bottom: -0.16em;
   font-family: var(--font-display); font-style: italic; font-weight: 600;
   font-size: clamp(8rem, 15vw, 15rem); line-height: 1;
-  color: rgba(30, 27, 18, 0.10);
+  color: color-mix(in srgb, var(--color-deep-violet) 10%, transparent);
   pointer-events: none; user-select: none;
 }
 
@@ -82,16 +82,16 @@
   }
   .chapters { grid-template-columns: minmax(0, 1fr) 44vw; }
   .chapter-panel { top: 9vh; height: 84vh; }
-  .chapter-panel-inner { border-radius: var(--r-card) 0 0 var(--r-tail); padding: var(--space-6); }
+  .chapter-panel-inner { border-radius: var(--radius-media) 0 0 0.25rem; padding: 5rem; }
   .cp-svg { width: min(560px, 86%); }
 }
 
 /* ================= closing card ================= */
-.story-close { display: grid; grid-template-columns: 320px 1fr; gap: var(--space-5); align-items: center; }
-.story-close h2 { font-size: var(--fs-h2); }
+.story-close { display: grid; grid-template-columns: 320px 1fr; gap: 3rem; align-items: center; }
+.story-close h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
 .story-photo-slot {
-  aspect-ratio: 4 / 5; background: var(--honey); /* honey until the real photo: designed, not missing */
-  border-radius: var(--r-card) var(--r-card) var(--r-card) var(--r-tail);
+  aspect-ratio: 4 / 5; background: var(--color-highlight); /* honey until the real photo: designed, not missing */
+  border-radius: var(--radius-media) var(--radius-media) var(--radius-media) 0.25rem;
   display: grid; place-items: center;
 }
 .story-photo-slot .label { opacity: 0.55; }
@@ -104,6 +104,6 @@
   .chapters { grid-template-columns: 1fr; }
   .chapter-panel { display: none; }
   .chapter-list { padding-block: 0; }
-  .chapter { min-height: 0; opacity: 1; padding-block: var(--space-4); border-bottom: 1px solid var(--hairline); }
+  .chapter { min-height: 0; opacity: 1; padding-block: 1.75rem; border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); }
   .story-close { grid-template-columns: 1fr; }
 }
