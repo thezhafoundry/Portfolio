@@ -1,32 +1,51 @@
-/* Cal.com inline embed with a designed fallback (spec §6.4).
-   Cal.com sends confirmation emails to BOTH parties and calendar invites —
-   this satisfies the "schedule a meeting which sends a mail" requirement. */
-
 const CAL_ORIGIN = 'https://cal.com';
 const EMBED_SRC = 'https://app.cal.com/embed/embed.js';
 
-export function initScheduler({ calLink, container, fallback, timeoutMs = 8000 }) {
-  let settled = false;
+export function resolveScheduleMode(calLink = '') {
+  if (typeof calLink !== 'string') return 'fallback';
+  const trimmed = calLink.trim();
+  if (!trimmed || trimmed.startsWith('TODO')) return 'fallback';
+  return 'calendar';
+}
 
-  function showFallback() {
-    if (settled) return;
-    settled = true;
-    container.hidden = true;
-    fallback.hidden = false;
+export function initScheduler({
+  calLink = '',
+  container,
+  fallback,
+  status,
+  timeoutMs = 8000,
+} = {}) {
+  const mode = resolveScheduleMode(calLink);
+
+  if (mode === 'fallback') {
+    if (container) container.hidden = true;
+    if (fallback) fallback.hidden = false;
+    if (status) {
+      status.textContent = 'Direct online booking is being set up. Please connect via LinkedIn.';
+    }
+    return;
   }
 
-  // No real link yet (spec §8.4) -> show the designed fallback immediately.
-  if (!calLink || calLink.startsWith('TODO')) { showFallback(); return; }
+  let settled = false;
 
-  const timer = setTimeout(showFallback, timeoutMs);
+  function showFallback(message = 'Unable to load interactive calendar. Please connect via LinkedIn.') {
+    if (settled) return;
+    settled = true;
+    if (container) container.hidden = true;
+    if (fallback) fallback.hidden = false;
+    if (status) status.textContent = message;
+  }
+
   function markReady() {
     if (settled) return;
     settled = true;
-    clearTimeout(timer);
+    if (status) status.textContent = 'Calendar loaded successfully.';
   }
 
+  if (status) status.textContent = 'Loading booking calendar...';
+  const timer = setTimeout(() => showFallback('Calendar load timed out. Please connect via LinkedIn.'), timeoutMs);
+
   try {
-    /* Official Cal.com embed snippet (loader) */
     (function (C, A, L) {
       let p = function (a, ar) { a.q.push(ar); };
       let d = C.document;
@@ -52,18 +71,21 @@ export function initScheduler({ calLink, container, fallback, timeoutMs = 8000 }
     })(window, EMBED_SRC, 'init');
 
     window.Cal('init', { origin: CAL_ORIGIN });
-    window.Cal('inline', {
-      elementOrSelector: container,
-      calLink,
-      config: { theme: 'light' },
-    });
+    if (container) {
+      window.Cal('inline', {
+        elementOrSelector: container,
+        calLink: calLink.trim(),
+        config: { theme: 'light' },
+      });
+    }
     window.Cal('ui', {
-      cssVarsPerTheme: { light: { 'cal-brand': '#1E1B12' } },
+      cssVarsPerTheme: { light: { 'cal-brand': '#6B21A8' } },
       hideEventTypeDetails: false,
     });
-    window.Cal('on', { action: 'linkReady', callback: markReady });
-    window.Cal('on', { action: 'linkFailed', callback: showFallback });
+    window.Cal('on', { action: 'linkReady', callback: () => { clearTimeout(timer); markReady(); } });
+    window.Cal('on', { action: 'linkFailed', callback: () => { clearTimeout(timer); showFallback(); } });
   } catch {
+    clearTimeout(timer);
     showFallback();
   }
 }

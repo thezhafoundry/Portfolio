@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Schedule — Sampath Kumar</title>
-  <meta name="description" content="Pick a time to talk with Sampath Kumar — lead generation and pre-sales.">
+  <meta name="description" content="Start a conversation with Sampath Kumar — B2B lead generation, market research, and pre-sales strategy.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,40 +15,48 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="site-header"><div class="site-header__inner container"><a class="site-brand" href="/" aria-label="Sampath Kumar, home"><img class="site-brand__signature" src="/brand/sampath-signature.svg" alt="Sampath Kumar"><img class="site-brand__mark" src="/brand/sampath-s-mark.svg" alt="" aria-hidden="true"></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button><nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/" aria-current="page">Schedule</a><a class="btn btn--primary" href="/schedule/">Start a conversation</a></nav></div><button class="nav-scrim" type="button" tabindex="-1" aria-label="Close navigation" hidden></button></header>
+  <header class="site-header">
+    <div class="site-header__inner container">
+      <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><img class="site-brand__signature" src="/brand/sampath-signature.svg" alt="Sampath Kumar"><img class="site-brand__mark" src="/brand/sampath-s-mark.svg" alt="" aria-hidden="true"></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button>
+      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/">Home</a><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/" aria-current="page">Schedule</a><a class="btn btn--primary" href="/schedule/">Start a conversation</a></nav>
+    </div>
+    <button class="nav-scrim" type="button" tabindex="-1" aria-label="Close navigation" hidden></button>
+  </header>
 
   <main id="main-content">
     <section class="band band--white">
       <div class="band-inner band-inner--wide sched">
         <span class="label label--pill">Schedule</span>
-        <h1>Pick a time. I'll say <em class="sweep">hello</em> first.</h1>
-        <p class="sched-sub">Thirty minutes, your time zone — Cal.com confirms by email to both of us and puts it on our calendars.</p>
+        <h1>Start a conversation. I'll say <em class="sweep">hello</em> first.</h1>
+        <p class="sched-sub">Direct online booking will be enabled once confirmed. In the meantime, connect directly via LinkedIn to discuss your B2B lead generation needs.</p>
 
-        <!-- Cal.com inline embed mounts here.
-             TODO(spec §8.4): set data-cal-link to Sampath's real Cal.com link, e.g. "sampath-kumar/30min" -->
-        <div id="cal-embed" data-cal-link="TODO" class="cal-embed">
-          <p class="cal-loading"><span class="typing-dots typing-dots--live" aria-hidden="true"><i></i><i></i><i></i></span> Loading the calendar…</p>
+        <div id="cal-status" role="status" aria-live="polite" class="sr-only">Direct online booking is being set up. Please connect via LinkedIn.</div>
+
+        <div id="cal-embed" data-cal-link="" class="cal-embed" hidden>
+          <p class="cal-loading">Loading booking calendar...</p>
         </div>
 
-        <!-- designed fallback — the page never dead-ends (spec §6.4) -->
-        <div id="cal-fallback" hidden class="bubble bubble--cream bubble--reply cal-fallback">
-          <p><strong>The calendar is warming up.</strong> Reach me directly instead:</p>
-          <ul class="cal-fallback-list">
-            <li><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699/" rel="noopener" target="_blank">Message me on LinkedIn</a></li>
-            <!-- TODO(spec §8.5): add public email as <li><a href="mailto:…">…</a></li> when supplied -->
-            <!-- TODO(spec §8.4): add direct booking URL <li><a href="https://cal.com/…">Book on Cal.com</a></li> when account exists -->
-          </ul>
+        <div id="cal-fallback" class="cal-fallback">
+          <div class="contact-card">
+            <div>
+              <p class="eyebrow">Direct Contact</p>
+              <h2>Start a conversation</h2>
+              <p>Reach out on LinkedIn to discuss strategy sessions, campaign reviews, or private-markets lead generation.</p>
+            </div>
+            <div class="contact-actions">
+              <a class="btn btn--primary" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">→</span></a>
+              <a class="btn btn--ghost-cream" href="/results/">See results</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="band">
       <div class="band-inner sched-links">
-        <a class="bubble bubble--white bubble--me sched-link" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699/" rel="noopener" target="_blank">LinkedIn — 8,331 followers</a>
-        <!-- TODO(spec §8.5): uncomment when cv.pdf exists in public/assets/
-        <a class="bubble bubble--ink bubble--me sched-link" href="/assets/cv.pdf" download>Download CV</a> -->
-        <!-- TODO(spec §8.5): uncomment when public email confirmed
-        <a class="bubble bubble--honey bubble--me sched-link" href="mailto:EMAIL">EMAIL</a> -->
+        <a class="btn btn--ghost" href="/story/">Explore career story</a>
+        <a class="btn btn--ghost" href="/results/">Review case studies</a>
       </div>
     </section>
   </main>

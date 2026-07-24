@@ -120,6 +120,19 @@ describe('Editorial Orchid Results contracts', () => {
   });
 });
 
+describe('Editorial Orchid Schedule contracts', () => {
+  it('defaults to an honest conversation fallback without misleading booking claims', async () => {
+    const html = await readPage('schedule/index.html');
+
+    expect(html).not.toContain('Pick a time');
+    expect(html).toContain('Start a conversation');
+    expect(html).toContain('linkedin.com/in/sampath-kumar-tn66sk9699');
+    expect(html).toMatch(/role="status"[^>]*aria-live="polite"/);
+    expect(html).not.toMatch(/@gmail|download CV|followers|instant booking/i);
+  });
+});
+
+
 
 
 describe('Editorial Orchid shared-shell contracts', () => {
