@@ -9,6 +9,10 @@ const svgAssets = [
 ];
 
 const signatureMasters = svgAssets.slice(0, 2);
+const primaryBrandAssets = [
+  'public/brand/sampath-signature.svg',
+  'public/brand/sampath-s-mark.svg',
+];
 const pngAssets = [
   'public/brand/png/sampath-signature-720.png',
   'public/brand/png/sampath-signature-1440.png',
@@ -37,6 +41,13 @@ describe('Editorial Orchid brand assets', () => {
   it('uses white linework for the reversed signature', async () => {
     const svg = (await readAsset('public/brand/sampath-signature-reversed.svg')).toString('utf8');
     expect(svg).toMatch(/(?:fill|stroke)=["'](?:#fff|#ffffff|white)["']/i);
+  });
+
+  it.each(primaryBrandAssets)('%s uses explicit deep-violet linework for external image use', async (asset) => {
+    const svg = (await readAsset(asset)).toString('utf8');
+
+    expect(svg).toMatch(/stroke=["']#2E1065["']/);
+    expect(svg).not.toMatch(/currentColor/i);
   });
 
   it.each([
