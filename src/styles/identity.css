@@ -109,6 +109,29 @@ p {
   border-radius: var(--radius-media);
 }
 
+.band {
+  width: 100%;
+  background: var(--color-canvas);
+}
+
+.band--white {
+  background: var(--color-white);
+}
+
+.band--cream {
+  background: var(--color-section);
+}
+
+.band-inner {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+  padding: var(--section-space) var(--gutter);
+}
+
+.band-inner--wide {
+  width: min(100%, 92rem);
+}
+
 .eyebrow {
   color: var(--color-violet);
   font-family: var(--font-body);
@@ -118,11 +141,120 @@ p {
   text-transform: uppercase;
 }
 
+.label {
+  color: var(--color-violet);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.label--pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--color-highlight);
+  padding: 0.4rem 0.75rem;
+}
+
 .editorial-emphasis {
   background: var(--color-highlight);
   color: inherit;
   font-style: italic;
   padding-inline: 0.12em;
+}
+
+.sweep {
+  border-radius: 0.2em;
+  background: var(--color-highlight);
+  color: inherit;
+  font-style: italic;
+  padding-inline: 0.12em;
+}
+
+.bubble {
+  position: relative;
+  width: fit-content;
+  max-width: min(100%, 38rem);
+  border: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent);
+  border-radius: var(--radius-media);
+  padding: 1rem 1.25rem;
+}
+
+.bubble--honey {
+  background: var(--color-highlight);
+  color: var(--color-deep-violet);
+}
+
+.bubble--cream {
+  background: var(--color-section);
+  color: var(--color-deep-violet);
+}
+
+.bubble--ink {
+  background: var(--color-deep-violet);
+  color: var(--color-white);
+}
+
+.bubble--white {
+  background: var(--color-white);
+  color: var(--color-deep-violet);
+}
+
+.bubble--me {
+  margin-left: auto;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.bubble--reply {
+  margin-right: auto;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.65rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--color-violet);
+  color: var(--color-white);
+}
+
+.btn--ghost {
+  border-color: var(--color-violet);
+  background: transparent;
+  color: var(--color-deep-violet);
+}
+
+.btn--honey {
+  background: var(--color-highlight);
+  color: var(--color-deep-violet);
+}
+
+.btn--ghost-cream {
+  border-color: var(--color-section);
+  background: transparent;
+  color: var(--color-white);
+}
+
+.btn--primary:hover,
+.btn--ghost:hover,
+.btn--honey:hover,
+.btn--ghost-cream:hover {
+  background: var(--color-deep-violet);
+  color: var(--color-white);
 }
 
 .skip-link {

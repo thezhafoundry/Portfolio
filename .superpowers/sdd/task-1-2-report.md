@@ -133,3 +133,58 @@ Independent re-review of the remediation reported no critical, high, medium, or
 low findings. It confirmed all route-loaded CSS uses current tokens and the
 approved palette, no gradients remain, and Home provides only real Schedule and
 LinkedIn actions.
+
+## Shared-selector remediation (2026-07-24)
+
+### RED evidence
+
+Extended `tests/editorial-orchid-css.test.js` with live shared-class,
+interface-font, and dead-code contracts, then ran:
+
+```text
+npm test -- --run tests/editorial-orchid-css.test.js tests/site-contract.test.js
+```
+
+The focused RED run failed 29 assertions for the intended reasons: 20 shared
+content classes had no identity rule, eight interface selectors did not
+explicitly use DM Sans, and the unreachable Font Awesome branch/obsolete form
+selectors remained.
+
+### Fixes
+
+- Restored Editorial Orchid implementations for every live `.band*`,
+  `.band-inner*`, `.label*`, `.sweep`, `.bubble*`, and `.btn*` class used by
+  Story, Results, and Schedule.
+- Assigned DM Sans explicitly to Home navigation, menu control, CTA, eyebrow,
+  badge, partner chip, and timeline filter selectors; Cormorant Garamond remains
+  reserved for headings and editorial values.
+- Removed the unreachable Font Awesome toggle branch and made the existing
+  toggle update `aria-expanded`.
+- Removed obsolete contact-form CSS and added a compact `.contact-actions`
+  layout for the real Schedule/LinkedIn actions.
+
+### GREEN and verification evidence
+
+```text
+npm test -- --run tests/editorial-orchid-css.test.js tests/site-contract.test.js
+```
+
+Passed: 2 files, 41 tests passed, 3 deferred shared-shell tests.
+
+```text
+npm test
+```
+
+Passed: 5 files, 64 tests passed, 3 deferred shared-shell tests.
+
+```text
+npm run build
+```
+
+Passed with Vite 5.4.21.
+
+```text
+git diff --check
+```
+
+Passed with no whitespace errors.

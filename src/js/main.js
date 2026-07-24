@@ -9,12 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-      const icon = navToggle.querySelector('i');
-      if (icon) {
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-xmark');
-      }
+      const isOpen = navLinks.classList.toggle('active');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
     });
   }
 
