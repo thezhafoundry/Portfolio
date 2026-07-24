@@ -15,6 +15,19 @@
   <link rel="stylesheet" href="/src/styles/identity.css">
   <link rel="stylesheet" href="/src/styles/components.css">
   <link rel="stylesheet" href="/src/styles/main.css">
+  <style>
+    :root {
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "DM Sans", system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--color-canvas);
+      color: var(--color-deep-violet);
+    }
+
+    h1, h2, h3, h4, h5, h6 { color: var(--color-deep-violet); }
+  </style>
 </head>
 <body>
 
@@ -40,7 +53,8 @@
           Book a Consultation
         </a>
 
-        <button class="nav-toggle-glass" id="navToggle" aria-label="Toggle navigation">
+        <button class="nav-toggle-glass" id="navToggle" aria-label="Toggle navigation" aria-controls="navLinks" aria-expanded="false">
+          Menu
         </button>
       </nav>
     </div>
@@ -554,7 +568,7 @@
       <div class="footer-bottom">
         <div>© 2026 Sampath Kumar. All rights reserved.</div>
         <div class="social-links">
-          <a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" class="social-link" aria-label="LinkedIn Profile">in</a>
+          <a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn Profile">in</a>
           <a href="#contact" class="social-link" aria-label="Send Email">Email</a>
         </div>
       </div>
