@@ -4,39 +4,46 @@
      from reading the code — this is what the wiki/codebase cannot tell you.
      Use [[backlinks]] to cross-reference decisions/log.md or active-backlog.md entries. -->
 
-## Homepage (`index.html`) runs a different design system than the rest of the site
+## RESOLVED (2026-07-25): the homepage design-system split is closed
 
-Found 2026-07-23 while writing `CLAUDE.md`. The commit
-`5a3081e "Redesign portfolio website from scratch with glassmorphic
-edge-to-edge layout"` rewrote `index.html` to load `src/js/main.js`, Font
-Awesome 6.5.1, and Inter/Plus Jakarta Sans — a plain-DOM-scripting page
-(accordion, filter chips, manual counter loop, fake contact-form submit
-handler) with **no dependency on the shared identity-system modules**.
+Superseded. The 2026-07-23 note here warned that `index.html` ran a
+glassmorphic/Font-Awesome system while the other three pages ran the
+spec-locked one. Verified closed on 2026-07-25: all four pages now load
+`identity.css` + `components.css` + a page stylesheet, `index.html` carries no
+Font Awesome (fonts are Cormorant Garamond / DM Sans / Great Vibes, matching
+`identity.css`), and it uses the shared `.nav-toggle` markup — so `initNav()`
+binds correctly everywhere. The direction is **Editorial Orchid**.
 
-Meanwhile `story/`, `results/`, and `schedule/` are untouched and still run
-the original spec-locked system: `identity.css` + `components.css` +
-Fraunces/Inter, built on `motion.js` (spring physics, reduced-motion gate),
-`bubbles.js` (`initReveals`), `nav.js` (`initNav`, expects
-`.nav-toggle`/`.site-nav .links`), per-page entry scripts.
+Consequence for the spec: `docs/superpowers/specs/2026-07-22-sampath-portfolio-design.md`
+§3.1–3.2 (Honey `#FFC21A` / Ink / Cream, Fraunces + Inter) is **historical** —
+live tokens are violet/orchid (`--color-violet: #6b21a8`). But **§4 motion is
+still binding**: transform/opacity only, static under `prefers-reduced-motion`,
+headings stay real DOM text. Don't let "the spec is superseded" leak from
+identity into motion.
 
-Practical fallout:
-- `src/js/home.js`, `src/styles/home.css`, and `src/styles/identity.css`'s
-  usage by the homepage are **orphaned** — no HTML entry point references
-  `home.js` anymore. `identity.css` is still live for the other 3 pages.
-- `nav.js`'s `initNav()` won't do anything on the current homepage — it
-  targets `.nav-toggle`, but `index.html` uses `#navToggle`/`#navLinks` with
-  inline logic in `main.js` instead.
-- The README and the LOCKED design spec (§3, Honey/Ink/Cream, Fraunces) still
-  describe the *old* homepage design — they no longer match what's live at
-  `/`. Don't trust the README's design-system claims for `index.html`
-  specifically; they're still accurate for the other three pages.
+`src/js/home.js` was deleted 2026-07-25 (commit `8b8bf44`) — it was the last
+referent of the old split. `src/styles/home.css` is **live**, loaded by
+`index.html`; do not delete it on the strength of the old note.
 
-**Before editing the homepage**: confirm with the user whether the
-Font-Awesome/glassmorphic direction is the new intended direction (and the
-spec/README need updating) or whether it was a wrong-branch/regression
-commit that should be reverted toward the locked spec. Don't assume either
-way. See [[active-backlog]] tech-debt entry and [[decisions-log]] migration
-index for the commit history.
+## Motion system (2026-07-25)
+
+Tokens live in `identity.css` `:root`: `--ease-out: cubic-bezier(0.23, 1, 0.32, 1)`,
+`--ease-in-out`, and `--duration-press: 160ms` / `--duration-hover: 200ms` /
+`--duration-surface: 260ms`. Two traps:
+
+- **Never `transition: all`.** Six rules in `components.css` had it; it animates
+  properties you did not intend, off-GPU, including on class swaps.
+- **A `:hover`/`:active` transform needs its `transition` on the *base* rule**,
+  not the state rule. `.btn` had `translateY` on both states and no transition
+  anywhere, so every button on the site snapped instantly.
+- Hover motion is gated behind `@media (hover: hover) and (pointer: fine)` —
+  touch devices fire `:hover` on tap and leave it stuck.
+
+Reduced motion is handled by one global kill-switch at the bottom of
+`identity.css` (`transition-duration: 0.01ms !important`), so per-component
+reduced-motion blocks are usually unnecessary — but it also means a CSS
+`@keyframes` loop stops at its *resting* declaration. Design the rest state to
+be the meaningful one (see `.typing-dots`, whose dots rest at 100/55/25%).
 
 ## Hero section (2026-07-24): violet gradient card layout replaced the dark full-bleed photo hero
 
