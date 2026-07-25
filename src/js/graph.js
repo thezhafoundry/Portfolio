@@ -2,9 +2,13 @@ import { prefersReducedMotion, animateSpring } from './motion.js';
 
 /* Overdamped on purpose. The default spring (damping 14) is underdamped and
    overshoots, which would flash a follower count higher than the real number
-   before settling back. Damping 28 is just past critical for stiffness 170, so
-   the value rises monotonically and stops. */
-const COUNTER_SPRING = Object.freeze({ stiffness: 170, damping: 28, mass: 1 });
+   before settling back. Critical damping for stiffness 600 is ~49, so 52 sits
+   safely past it and the value rises monotonically and stops.
+
+   Tuned to settle in ~567ms: the Editorial Orchid spec §13 warns off "long
+   counter animations", and this lands inside its 350-550ms entrance band
+   rather than the ~917ms the gentler original config took. */
+const COUNTER_SPRING = Object.freeze({ stiffness: 600, damping: 52, mass: 1 });
 
 export function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
@@ -25,7 +29,7 @@ export function buildGraphPath(points, width, height, pad = 8) {
     .join(' ');
 }
 
-/* DOM renderer. Honest by construction (spec §8.3):
+/* DOM renderer. Honest by construction — real numbers only:
    - data-points present  -> draw the real curve, bubble riding the tip
    - data-points absent   -> count up the single real number, no curve   */
 export function renderFollowerCard(el) {

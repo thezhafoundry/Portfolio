@@ -17,13 +17,14 @@
   --section-space: clamp(3.5rem, 8vw, 8rem);
   --radius-media: clamp(0.75rem, 1.5vw, 1.25rem);
   --focus-ring: 0 0 0 3px #fffaff, 0 0 0 6px #6b21a8;
-  /* Motion — spec §4. Built-in CSS easings are too weak to read as intentional;
-     these are the strong ease-out / ease-in-out variants. Durations stay under
-     300ms for UI so interactions never feel like they lag the pointer. */
+  /* Motion — Editorial Orchid spec §13. Built-in CSS easings are too weak to
+     read as intentional; these are the strong ease-out / ease-in-out variants.
+     Durations map to the spec's bands: buttons and links 140-180ms, accordions
+     and other surfaces 240-300ms. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --duration-press: 160ms;
-  --duration-hover: 200ms;
+  --duration-hover: 180ms;
   --duration-surface: 260ms;
 }
 
@@ -226,7 +227,7 @@ p {
   border-bottom-left-radius: 0.25rem;
 }
 
-/* Typing dots — the bubble motif at its smallest scale (spec §3.3): three dots
+/* Typing dots — the bubble motif at its smallest scale (retired "Conversation" spec §3.3): three dots
    resting at full / 55% / 25%, used wherever the site is waiting on something.
    The wave animates opacity only. Under reduced motion the global kill-switch
    stops the wave and the dots settle into the static resting motif. */

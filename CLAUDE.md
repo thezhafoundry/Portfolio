@@ -22,7 +22,9 @@ Four-page static site (Vite multi-page build, vanilla JS/CSS, no framework). Ent
 
 **Current direction is "Editorial Orchid"** — all four pages converged on it (verified 2026-07-25). Each page loads `identity.css` + `components.css` + a page stylesheet, and a page entry script that composes the shared modules. The earlier glassmorphic/Font-Awesome homepage split is **resolved** — Font Awesome is gone, and `index.html` uses the shared `.nav-toggle` markup like every other page.
 
-**⚠️ The LOCKED design spec is superseded on identity, not on motion.** `docs/superpowers/specs/2026-07-22-sampath-portfolio-design.md` §3 describes Honey `#FFC21A`/Ink/Cream + Fraunces/Inter. The live tokens in `identity.css` are violet/orchid (`--color-violet: #6b21a8`) + Cormorant Garamond/DM Sans/Great Vibes. Treat §3.1–3.2 (palette, type) as historical; **§4 motion constraints are still in force** — transform/opacity only, static under `prefers-reduced-motion`, headings stay real DOM text.
+**The governing spec is `docs/superpowers/specs/2026-07-24-editorial-orchid-portfolio-design.md`.** The older "The Conversation" spec (Honey/Ink/Cream, Fraunces+Inter, marked LOCKED §3) was deleted on 2026-07-25 — it had been superseded for a day and was actively misleading. Recover it from git history if you need the rationale: `git log --diff-filter=D -- docs/superpowers/specs/`.
+
+Motion rules live in **§13** of the current spec: transform/opacity for most effects; buttons and links 140–180ms; accordions 240–300ms; hero entrance 350–550ms; no scroll hijacking, looping floats, long counter animations, or large parallax; reduced motion removes movement while preserving content and state.
 
 ### Shared JS modules (`src/js/`)
 

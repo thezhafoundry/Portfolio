@@ -14,12 +14,12 @@ Font Awesome (fonts are Cormorant Garamond / DM Sans / Great Vibes, matching
 `identity.css`), and it uses the shared `.nav-toggle` markup — so `initNav()`
 binds correctly everywhere. The direction is **Editorial Orchid**.
 
-Consequence for the spec: `docs/superpowers/specs/2026-07-22-sampath-portfolio-design.md`
-§3.1–3.2 (Honey `#FFC21A` / Ink / Cream, Fraunces + Inter) is **historical** —
-live tokens are violet/orchid (`--color-violet: #6b21a8`). But **§4 motion is
-still binding**: transform/opacity only, static under `prefers-reduced-motion`,
-headings stay real DOM text. Don't let "the spec is superseded" leak from
-identity into motion.
+Consequence for the spec: the old "The Conversation" spec was **deleted
+2026-07-25**. `docs/superpowers/specs/2026-07-24-editorial-orchid-portfolio-design.md`
+governs; motion rules are its **§13**. Read live tokens from `identity.css`
+`:root`, never from a spec file. Some code comments still cite "retired
+Conversation spec §3.3" for the bubble/typing-dots motif — that is historical
+attribution for where the motif came from, not a live pointer.
 
 `src/js/home.js` was deleted 2026-07-25 (commit `8b8bf44`) — it was the last
 referent of the old split. `src/styles/home.css` is **live**, loaded by

@@ -33,7 +33,7 @@ describe('Motion tokens', () => {
   });
 });
 
-describe('Transition hygiene (spec §4: transform/opacity, bounded properties)', () => {
+describe("Transition hygiene (Editorial Orchid §13: transform/opacity, bounded properties)", () => {
   it.each(stylesheets)('%s never uses unbounded `transition: all`', async (path) => {
     const css = await readProjectFile(path);
 
@@ -72,7 +72,7 @@ describe('Typing-dots wait state', () => {
     expect(css).toMatch(/@keyframes typing-dot/);
   });
 
-  it('rests at the spec §3.3 opacities so reduced motion still reads as the motif', async () => {
+  it('rests at the retired-spec §3.3 opacities so reduced motion still reads as the motif', async () => {
     const css = await readProjectFile('src/styles/identity.css');
 
     expect(ruleBody(css, '.typing-dots span:nth-child(1)')).toMatch(/opacity:\s*1/);

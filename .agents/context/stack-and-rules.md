@@ -19,12 +19,21 @@
 - No backend, no database, no auth — this is a static marketing site.
 
 ## Hard Invariants
-- `docs/superpowers/specs/2026-07-22-sampath-portfolio-design.md` §3 is
-  marked **LOCKED**: colors White `#FFFFFF` / Honey `#FFC21A` / Ink `#1E1B12`
-  / Cream `#FFF3CC` only, Fraunces (display) + Inter (body), bubble-with-
-  typing-dots motif, `transform`/`opacity`-only motion, static under
-  `prefers-reduced-motion`. **This is currently violated by `index.html`**
-  — see `subsystem-notes.md` before touching the homepage.
+- The governing spec is
+  `docs/superpowers/specs/2026-07-24-editorial-orchid-portfolio-design.md`.
+  The old "The Conversation" spec (Honey/Ink/Cream, Fraunces+Inter, LOCKED §3)
+  was **deleted 2026-07-25** — superseded and actively misleading. Recover from
+  git history if the rationale is needed.
+- Live tokens are in `src/styles/identity.css` `:root` — read them there, not
+  from any spec: violet/orchid (`--color-violet: #6b21a8`), Cormorant Garamond
+  / DM Sans / Great Vibes.
+- **Motion is governed by §13** of the current spec: `transform`/`opacity` for
+  most effects; buttons and links 140–180ms; accordions 240–300ms; hero
+  entrance 350–550ms; no scroll hijacking, looping floats, long counter
+  animations, or large parallax; reduced motion removes movement while
+  preserving content and state. Shared tokens: `--ease-out`/`--ease-in-out`,
+  `--duration-press` 160ms / `--duration-hover` 180ms / `--duration-surface`
+  260ms. Never `transition: all`.
 - Every scroll/reveal/typing animation must short-circuit via
   `prefersReducedMotion()` (`src/js/motion.js`).
 - Real numbers only: no invented data. e.g. the follower-count card counts up

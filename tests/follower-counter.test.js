@@ -8,7 +8,7 @@ const readProjectFile = (path) => readFile(new URL(`../${path}`, import.meta.url
    number, so the spring stays well-conditioned regardless of how large the
    target is. These tests pin the properties that make it read as a count-up
    rather than a bounce. */
-const COUNTER_SPRING = { stiffness: 170, damping: 28, mass: 1 };
+const COUNTER_SPRING = { stiffness: 600, damping: 52, mass: 1 };
 
 const runSpring = (params) => {
   let state = { value: 0, velocity: 0, target: 1 };
@@ -36,15 +36,19 @@ describe('Follower counter spring', () => {
     });
   });
 
-  it('settles rather than running forever', () => {
+  it('settles inside the spec §13 entrance band rather than reading as a long counter', () => {
     let state = { value: 0, velocity: 0, target: 1 };
     let frames = 0;
     while (!isSettled(state, 0.01) && frames < 600) {
       state = springStep(state, 1 / 60, COUNTER_SPRING);
       frames += 1;
     }
+    const ms = (frames / 60) * 1000;
 
-    expect(frames).toBeLessThan(600);
+    // Editorial Orchid §13 warns off "long counter animations"; hero entrances
+    // are 350-550ms, so that is the closest sanctioned band for this motion.
+    expect(ms).toBeGreaterThan(300);
+    expect(ms).toBeLessThan(600);
   });
 
   it('would overshoot with the underdamped default, which is why damping is raised', () => {

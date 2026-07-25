@@ -7,7 +7,7 @@ export const motionDurations = Object.freeze({
   hero: 480,
 });
 
-/* Spring physics core — pure and testable (spec §4). */
+/* Spring physics core — pure and testable. */
 export function springStep(state, dt, { stiffness = 170, damping = 14, mass = 1 } = {}) {
   const displacement = state.value - state.target;
   const springForce = -stiffness * displacement;

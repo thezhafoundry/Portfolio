@@ -1277,7 +1277,7 @@ body.nav-is-open {
 }
 
 /* Touch devices fire :hover on tap and leave it stuck, so the lift is gated to
-   real pointers. The press squash (spec §4) stays ungated — it is the feedback
+   real pointers. The press squash (Editorial Orchid §13) stays ungated — it is the feedback
    that confirms the tap landed. */
 @media (hover: hover) and (pointer: fine) {
   .btn:hover,
@@ -1514,7 +1514,7 @@ body.nav-is-open {
   transform: translateX(-1.5rem);
 }
 
-/* Origin-aware bubble entrances (spec §3.3): a bubble enters from the side its
+/* Origin-aware bubble entrances (bubble motif, retired "Conversation" spec §3.3): a bubble enters from the side its
    tail points to, so the motion agrees with who is speaking. .bubble--me sits
    right (tail bottom-right) and arrives from the right; .bubble--reply sits
    left and arrives from the left. Overrides the group's default rise.
