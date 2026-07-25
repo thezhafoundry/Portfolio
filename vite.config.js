@@ -12,4 +12,9 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    // Git worktrees under .worktrees/ carry their own copy of tests/, which
+    // vitest would otherwise collect and run as duplicates of the real suite.
+    exclude: ['**/node_modules/**', '**/dist/**', '.worktrees/**'],
+  },
 });
