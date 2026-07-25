@@ -109,6 +109,12 @@
 .story-close h2 { font-size: clamp(2rem, 4vw, 3rem); }
 .story-close p { color: color-mix(in srgb, var(--color-deep-violet) 75%, var(--color-white)); margin-bottom: 1.5rem; }
 
+/* The story ends the way the site opens — as an exchange. The question sits
+   left, Sampath answers right, and each bubble enters from its own tail side
+   (see the origin-aware entrance rules in components.css). */
+.story-exchange { display: grid; gap: 0.6rem; margin: 1.25rem 0 1.75rem; }
+.story-exchange .bubble { margin-bottom: 0; max-width: min(100%, 30rem); }
+
 @media (max-width: 860px) {
   .story-head { grid-template-columns: 1fr; }
   /* The strip is a scrubber for the sticky visual panel, which is hidden on mobile.

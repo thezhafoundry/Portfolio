@@ -118,6 +118,27 @@ describe('Origin-aware bubble entrances', () => {
     expect(css).toMatch(/\.bubble--reply[\s\S]{0,200}?transform-origin:\s*bottom left/);
   });
 
+  it('restates the settled state at matching specificity so bubbles come to rest', async () => {
+    const css = await readProjectFile('src/styles/components.css');
+    // `.js .reveal-group > .bubble--me` is (0,3,0) and outranks the generic
+    // `.reveal-group.on > *` (0,2,0). Without an equally specific .on rule the
+    // bubbles enter translated and never settle.
+    const settled = ruleBody(css, '.reveal-group.on > .bubble--me,\n.reveal-group.on > .bubble--reply');
+
+    expect(settled).toMatch(/transform:\s*none/);
+    expect(settled).toMatch(/opacity:\s*1/);
+  });
+
+  it('actually mounts bubbles on the story page, so the entrance is not dead CSS', async () => {
+    const html = await readProjectFile('story/index.html');
+    const group = html.match(/<div class="story-exchange reveal-group">([\s\S]*?)<\/div>/)?.[1] ?? '';
+
+    // Direct children of the reveal-group, or the entrance selectors miss them.
+    expect(group).toMatch(/class="bubble bubble--cream bubble--reply"/);
+    expect(group).toMatch(/class="bubble bubble--ink bubble--me"/);
+    expect((group.match(/class="bubble\b/g) ?? []).length).toBeGreaterThanOrEqual(3);
+  });
+
   it('staggers grouped reveals within the 30-80ms band', async () => {
     const css = await readProjectFile('src/styles/components.css');
     const delays = [...css.matchAll(/\.reveal-group\.on > \*:nth-child\(\d+\)\s*\{\s*transition-delay:\s*([\d.]+)s/g)]

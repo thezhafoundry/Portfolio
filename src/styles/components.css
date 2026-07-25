@@ -1517,19 +1517,26 @@ body.nav-is-open {
 /* Origin-aware bubble entrances (spec §3.3): a bubble enters from the side its
    tail points to, so the motion agrees with who is speaking. .bubble--me sits
    right (tail bottom-right) and arrives from the right; .bubble--reply sits
-   left and arrives from the left. Overrides the group's default rise. */
-.js .reveal-group > .bubble--me,
-.js .reveal .bubble--me,
-.js .bubble--me.reveal {
+   left and arrives from the left. Overrides the group's default rise.
+
+   These selectors carry one more class than the generic `.reveal-group > *`
+   rules above, so the settled state MUST be restated at matching specificity —
+   otherwise `.reveal-group.on > *` (0,2,0) loses to these (0,3,0) and the
+   bubbles enter translated and never come to rest. */
+.js .reveal-group > .bubble--me {
   transform: translateX(1.5rem);
   transform-origin: bottom right;
 }
 
-.js .reveal-group > .bubble--reply,
-.js .reveal .bubble--reply,
-.js .bubble--reply.reveal {
+.js .reveal-group > .bubble--reply {
   transform: translateX(-1.5rem);
   transform-origin: bottom left;
+}
+
+.reveal-group.on > .bubble--me,
+.reveal-group.on > .bubble--reply {
+  opacity: 1;
+  transform: none;
 }
 
 .reveal-group.on > *:nth-child(2) { transition-delay: 0.08s; }
