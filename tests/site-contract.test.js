@@ -152,12 +152,12 @@ describe('Editorial Orchid shared-shell contracts', () => {
 
     expect(html).toMatch(/<a class="skip-link" href="#main-content">Skip to content<\/a>/);
     expect(html).toMatch(/<header class="site-header">[\s\S]*?<div class="site-header__inner container">/);
-    expect(html).toMatch(/<a class="site-brand" href="\/"[^>]*aria-label="Sampath Kumar, home">[\s\S]*?class="site-brand__word">Sampath Kumar<\/span>/);
+    expect(html).toMatch(/<a class="site-brand" href="\/"[^>]*aria-label="Sampath Kumar, home">[\s\S]*?class="site-brand__signature">Sampath Kumar<\/span>/);
     expect(html).toMatch(/<button class="nav-toggle" type="button"[\s\S]*?aria-expanded="false"[\s\S]*?aria-controls="site-navigation"[\s\S]*?aria-label="Open navigation">/);
     expect(html).toMatch(/<nav id="site-navigation" class="site-nav" aria-label="Primary">/);
     expect(html).toMatch(/<button class="nav-scrim" type="button" tabindex="-1"[\s\S]*?aria-label="Close navigation" hidden><\/button>/);
     expect(html).toMatch(/<main id="main-content">/);
-    expect(html).toMatch(/<footer class="site-footer">[\s\S]*?class="site-footer__signature">Sampath Kumar<\/span>[\s\S]*?Every deal begins with hello\.[\s\S]*?© 2026 Sampath Kumar · Greater Coimbatore, India/);
+    expect(html).toMatch(/<footer class="site-footer">[\s\S]*?class="site-footer__big-word-a">Sampath<\/span>[\s\S]*?class="site-footer__big-word-b">Kumar<\/span>[\s\S]*?Every deal begins with hello\.[\s\S]*?© 2026 Sampath Kumar · Greater Coimbatore, India/);
     expect(html).toMatch(/href="\/story\/"[^>]*>Story<\/a>[\s\S]*?href="\/results\/"[^>]*>Results<\/a>[\s\S]*?href="\/schedule\/"[^>]*>Schedule<\/a>[\s\S]*?linkedin\.com\/in\/sampath-kumar-tn66sk9699/);
     expect(html).toMatch(/href="\/schedule\/"[^>]*>Start a conversation<\/a>/);
   });

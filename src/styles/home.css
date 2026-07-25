@@ -1,90 +1,127 @@
-.home-hero {
+/* --- Paper grain -------------------------------------------------------------
+   Flat gradients read as "digital". A fine turbulence layer over the whole page
+   gives it the tooth of printed stock. Fixed, so it never scrolls with content. */
+body::after {
+  content: "";
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  opacity: 0.42;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.36'/%3E%3C/svg%3E");
+}
+
+/* --- The louver hero ---------------------------------------------------------
+   A white paper page with fine vertical rules, hiding the graded violet ground
+   and the portrait behind it. louver.js builds a field of slats — each hinged on
+   its own rule — that opens under the pointer, so the colour and the person come
+   through the page. */
+.louver-hero {
   position: relative;
   overflow: hidden;
   display: grid;
+  /* Without a declared track the implicit column sizes to max-content and
+     collapses the rail to the width of the headline. */
+  grid-template-columns: minmax(0, 1fr);
   align-content: center;
-  /* One screen, no more: the hero fills the viewport and centres its content. */
+  /* One screen, no more. */
   min-height: 100dvh;
-  --par-x: 0px;
-  --par-y: 0px;
   /* Top padding clears the transparent overlay header. */
   padding-block: clamp(5.5rem, 6vw + 2.5rem, 8rem) clamp(2rem, 3vw, 3rem);
-  /* Static editorial column grid — the no-JS/reduced-motion baseline. When the bionic
-     flaps are built, they replace these lines (each flap carries its own hinge line). */
-  background:
-    repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-orchid) 15%, transparent) 0 1px, transparent 1px 42px),
-    var(--color-section);
+  background: var(--color-white);
 }
 
-.home-hero.has-flaps {
-  background: var(--color-section);
-}
-
-/* Bionic flap field (AVTR-style): one vertical flap per grid column, each hinged on its
-   left line. A ripple of open flaps follows the pointer. */
-.hero-flaps {
+/* Layer 0 — the ground: what the page is hiding. Pale at the left so
+   deep-violet type stays legible when slats open beneath it, saturating to ink
+   at the right, where the portrait sits. */
+.louver-hero__ground {
   position: absolute;
   z-index: 0;
   inset: 0;
+  background:
+    linear-gradient(94deg,
+      color-mix(in srgb, var(--color-highlight) 42%, var(--color-white)) 0%,
+      var(--color-highlight) 54%,
+      color-mix(in srgb, var(--color-orchid) 72%, var(--color-white)) 72%,
+      var(--color-violet) 88%,
+      var(--color-deep-violet) 100%);
+}
+
+.louver-hero__ground img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: clamp(20rem, 44vw, 38rem);
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% 26%;
+  /* Feathered left edge, so the portrait emerges from the ink rather than
+     sitting on it as a pasted rectangle. Kept short — the fade is there to lose
+     the cut edge, not to dim the person. */
+  mask-image: linear-gradient(90deg, transparent 0%, var(--color-deep-violet) 18%, var(--color-deep-violet) 100%);
+  filter: saturate(0.96) contrast(1.04);
+}
+
+/* Layer 1 — the shutter. Built by louver.js only when there is a fine pointer
+   and motion is welcome, so the no-JS baseline is simply the ground, uncovered. */
+.louver-field {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
   display: flex;
-  perspective: 900px;
+  perspective: 1400px;
   pointer-events: none;
 }
 
-.hero-flaps i {
+.louver-field i {
+  position: relative;
   flex: 1 1 0;
-  border-left: 1px solid color-mix(in srgb, var(--color-orchid) 30%, transparent);
-  background: color-mix(in srgb, var(--color-orchid) 13%, transparent);
+  background: var(--color-white);
+  border-right: 1px solid color-mix(in srgb, var(--color-orchid) 26%, transparent);
   transform-origin: left center;
-  transform: rotateY(0deg);
-  transition: transform 110ms ease-out;
+  backface-visibility: hidden;
   will-change: transform;
 }
 
-/* Hero content sits above the flap field. */
-.home-hero > .container {
+/* Shading overlay — louver.js drives its opacity from the slat's angle. */
+.louver-field i > b {
+  position: absolute;
+  inset: 0;
+  background: var(--color-deep-violet);
+  opacity: 0;
+}
+
+/* Layer 2 — the copy. */
+.louver-hero > .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-.home-hero__grid {
+.louver-hero__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
   gap: clamp(2.5rem, 6vw, 6rem);
 }
 
-.introduction__grid,
-.results-preview__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-  align-items: center;
-  gap: clamp(2.5rem, 6vw, 6rem);
-}
+.louver-hero__copy { max-width: 38rem; }
 
-.home-hero__copy { max-width: 38rem; }
-
-.home-hero h1 {
-  max-width: 12ch;
+.louver-hero h1 {
+  max-width: 9.5ch;
   margin-bottom: 1.35rem;
   font-size: clamp(3.35rem, 6.1vw, 6.25rem);
+  line-height: 0.94;
 }
 
-.home-hero__highlight {
-  display: inline;
-  background: var(--color-highlight);
-  font-style: italic;
-  padding-inline: 0.08em;
-}
-
-.home-hero__intro {
+.louver-hero__intro {
   max-width: 35rem;
   margin-bottom: 2rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 76%, var(--color-white));
+  color: color-mix(in srgb, var(--color-deep-violet) 78%, var(--color-white));
   font-size: clamp(1rem, 1vw + 0.7rem, 1.2rem);
 }
 
-.home-hero__actions,
+.louver-hero__actions,
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
@@ -92,212 +129,342 @@
   gap: 0.9rem;
 }
 
-.home-hero__figure {
+/* --- The rotating greeting ---------------------------------------------------
+   The greeting sits on its own line, so swapping a longer word can never reflow
+   the lines above it. */
+.greet {
   position: relative;
-  isolation: isolate; /* keep the decorative block's z-index scoped to the figure */
-  margin: 0;
-  justify-self: end;
-  /* Capped against viewport height too, so the hero never spills past one screen. */
-  width: min(100%, 27rem, 56dvh);
+  display: block;
+  margin-top: 0.06em;
+  min-width: 7.2ch; /* reserve the widest greeting so the CTAs never shift */
 }
 
-/* Soft orchid block, strictly BEHIND the photo (z-index 0 < frame's 1), never in the
-   photo's 3D space — so it can't intersect the tilt. It drifts further than the grid
-   for a clear parallax depth cue. */
-.home-hero__figure::before {
-  content: "";
+.greet__word {
+  display: inline-block;
+  color: var(--color-orchid);
+  font-style: italic;
+}
+
+.js .greet__word {
+  animation: greet-in 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes greet-in {
+  from { opacity: 0; transform: translateY(0.38em) rotate(1.6deg); filter: blur(5px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+
+/* The market name rides under the greeting, small and quiet. */
+.greet__market {
   position: absolute;
-  z-index: 0;
-  inset: auto -2rem -2rem auto;
-  width: 70%;
-  aspect-ratio: 1;
-  background: color-mix(in srgb, var(--color-orchid) 26%, transparent);
-  transform: translate(calc(var(--par-x, 0px) * 1.7), calc(var(--par-y, 0px) * 1.7));
-  transition: transform 200ms ease;
-}
-
-.home-hero__photo-frame {
-  position: relative;
-  z-index: 1;
-  /* Neumorphic frame: photo extruded from the section surface, sharp corners. */
-  padding: 0.85rem;
-  border-radius: 0;
-  background: var(--color-section);
-  box-shadow:
-    -9px -9px 20px color-mix(in srgb, var(--color-white) 82%, transparent),
-    11px 11px 26px color-mix(in srgb, var(--color-deep-violet) 15%, transparent);
-  transform: perspective(1100px);
-  transition: transform 140ms ease;
-  will-change: transform;
-}
-
-.home-hero__photo-frame img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: 55% 30%;
-  border-radius: 0;
-}
-
-/* "▶ A personal introduction…" cue (lives in the Introduction section). */
-.home-hero__intro-cue {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin-top: 1.4rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white));
+  left: 0.1em;
+  bottom: -1.15em;
+  color: color-mix(in srgb, var(--color-deep-violet) 52%, var(--color-white));
   font-family: var(--font-body);
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: greet-in 0.62s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 
-.home-hero__play {
-  display: grid;
-  place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex: 0 0 auto;
-  border-radius: 50%;
-  background: var(--color-highlight);
-  color: var(--color-violet);
-  font-size: 0.7rem;
-  transition: transform 160ms ease, background 160ms ease;
+/* A quiet instruction — without it, a visitor who never moves the pointer never
+   learns the page opens. Only shown once the shutter actually exists. */
+.louver-cue {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 2.4rem 0 0;
+  color: color-mix(in srgb, var(--color-deep-violet) 55%, var(--color-white));
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-.home-hero__intro-cue:hover .home-hero__play,
-.home-hero__intro-cue:focus-visible .home-hero__play {
-  transform: scale(1.08);
+.louver-hero.has-louvers .louver-cue { display: inline-flex; }
+
+.louver-cue::before {
+  content: "";
+  width: 2.4rem;
+  height: 1px;
   background: var(--color-orchid);
-  color: var(--color-white);
+  transform-origin: left center;
+  animation: cue-draw 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
-.home-hero__badge {
-  position: absolute;
-  z-index: 2;
-  right: -1rem;
-  bottom: 1.4rem;
+@keyframes cue-draw {
+  0%, 12%  { transform: scaleX(0); }
+  46%, 66% { transform: scaleX(1); }
+  100%     { transform: scaleX(0); }
+}
+
+/* ===========================================================================
+   BELOW THE HERO — one continuous ruled sheet.
+
+   The hero is a shutter cut into a sheet of ruled paper. Everything under it is
+   set on that same sheet: the rules never stop, no card is ever rounded, and
+   depth comes from tint and overlap rather than drop shadows. Each section has
+   its own way of "opening" — a rule that draws, a wash of slats that wipes in —
+   so the page reads as one idea told six times, not six components.
+   =========================================================================== */
+
+/* The sheet itself. 30px pitch is the hero's slat width, so the rules below the
+   fold sit on exactly the grid the shutter is cut from. */
+body {
+  background-color: var(--color-canvas);
+  background-image:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-orchid) 13%, transparent) 0 1px, transparent 1px 30px);
+}
+
+/* Tinted sections stay translucent so the rules run straight through them. */
+.note,
+.method { background: color-mix(in srgb, var(--color-section) 72%, transparent); }
+
+/* --- Shared: section openings ---------------------------------------------- */
+.lede { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.lede h2 { max-width: 16ch; margin: 0.6rem 0 0; }
+
+.lede--split {
   display: grid;
-  gap: 0.1rem;
-  max-width: 11.5rem;
-  border: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
-  border-radius: 0.9rem;
-  background: var(--color-white);
-  padding: 0.9rem 1rem;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 3rem);
 }
 
-.home-hero__badge strong,
-.proof-rail strong { font-family: var(--font-display); font-size: 2rem; line-height: 1; }
-.home-hero__badge span,
-.proof-rail span { font-size: 0.78rem; line-height: 1.35; }
+.lede__note {
+  margin: 0 0 1.1rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 74%, var(--color-white));
+  font-size: 1rem;
+}
 
-.proof-rail { border-block: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); }
+/* --- Shared: the louver wash ------------------------------------------------
+   The page's one signature hover. Denser rules than the sheet's, over a faint
+   highlight, wiping in from the left — the same gesture as the shutter opening,
+   at a smaller scale. Sits behind its content on its own layer. */
+.wash {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-orchid) 30%, transparent) 0 1px, transparent 1px 15px),
+    color-mix(in srgb, var(--color-highlight) 42%, transparent);
+  opacity: 0;
+  transform: scaleX(0.35);
+  transform-origin: left center;
+  transition: opacity 0.35s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-.proof-rail__grid {
+/* --- The record ------------------------------------------------------------
+   Four figures standing as columns of the sheet, divided by its own rules. The
+   numbers carry the section; the partner index sits beneath as a quiet caption. */
+.figures {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 18%, transparent);
 }
 
-.proof-rail__grid > div {
-  display: grid;
-  gap: 0.4rem;
-  min-height: 8.5rem;
-  align-content: center;
-  padding: 1.4rem clamp(1rem, 2.3vw, 2rem);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
-}
-
-/* Hover: tile lifts and an orchid underline sweeps beneath the metric. */
-.proof-rail__grid > div:hover {
-  transform: translateY(-4px);
-  background: color-mix(in srgb, var(--color-highlight) 35%, transparent);
-}
-
-.proof-rail strong {
+.figure {
   position: relative;
-  width: fit-content;
+  isolation: isolate;
+  padding: clamp(1.2rem, 2.5vw, 1.9rem) clamp(0.9rem, 2vw, 1.6rem) clamp(1.4rem, 3vw, 2.2rem) 0;
 }
 
-.proof-rail strong::after {
+.figure + .figure {
+  border-left: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
+  padding-left: clamp(0.9rem, 2vw, 1.6rem);
+}
+
+.figure dd {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.figure dt {
+  max-width: 18ch;
+  color: color-mix(in srgb, var(--color-deep-violet) 66%, var(--color-white));
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.figure:hover .wash { opacity: 1; transform: scaleX(1); }
+.figure:hover dd { transform: translateY(-4px); }
+
+/* An orchid rule draws across the figures as they scroll into view. */
+.figures::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: -0.2em;
-  bottom: -0.12em;
-  height: 3px;
+  z-index: 1;
+  margin-top: -1px;
+  width: min(34%, 16rem);
+  height: 2px;
   background: var(--color-orchid);
+  transform-origin: left center;
+}
+
+.figures { position: relative; }
+.js .figures::before { transform: scaleX(0); transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s; }
+.js .figures.on::before { transform: scaleX(1); }
+
+.index-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  padding: 0;
+  list-style: none;
+  color: color-mix(in srgb, var(--color-deep-violet) 62%, var(--color-white));
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  line-height: 1.3;
+}
+
+.index-line li { display: flex; align-items: center; }
+.index-line li + li::before { margin-right: 1.1rem; color: var(--color-orchid); content: "•"; }
+
+/* Partner names take the same highlight sweep as the hero's greeting. */
+.index-line span { position: relative; padding-inline: 0.16em; transition: color 0.25s ease; }
+
+.index-line span::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0.06em -0.02em 0.04em;
+  background: var(--color-highlight);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.proof-rail__grid > div:hover strong::after {
-  transform: scaleX(1);
+.index-line li:hover span { color: var(--color-deep-violet); }
+.index-line li:hover span::after { transform: scaleX(1); }
+
+/* --- The note ---------------------------------------------------------------
+   The photo is held behind a static louver field — the hero's gesture, frozen —
+   which opens when the reader hovers it. */
+.note__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
 }
 
-.proof-rail__grid > div + div { border-left: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); }
+.note__media {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
 
-.partners { padding-bottom: clamp(2.5rem, 6vw, 5rem); }
-.partners h2 { max-width: 17ch; margin-bottom: 2.25rem; }
+.note__media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 48% 45%;
+  /* The source frame is a dark, neon-lit boardroom — the only heavy image on a
+     light violet page, and tonally unrelated to everything around it. Graded to
+     a violet duotone it stops fighting the palette and starts belonging to it.
+     Filters alone, so there is no blend-mode layer to fight the page grain. */
+  filter: grayscale(1) sepia(0.85) hue-rotate(212deg) saturate(2.4) brightness(0.95) contrast(1.06);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
 
-.partners__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem 1.3rem;
+/* A fine screen, not bars: 1px rules on the sheet's own 30px pitch. At 3px they
+   read as blinds slammed over the photo rather than paper it is printed on. */
+.note__slats {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-canvas) 55%, transparent) 0 1px, transparent 1px 30px);
+  transition: opacity 0.5s ease;
+}
+
+/* Hovering lifts the grade as well as the screen — the image resolves. */
+.note__media:hover img {
+  transform: scale(1.03);
+  filter: grayscale(1) sepia(0.6) hue-rotate(212deg) saturate(1.9) brightness(1.02) contrast(1.04);
+}
+
+.note__media:hover .note__slats { opacity: 0.3; }
+
+.note__body h2 { max-width: 13ch; margin: 0.6rem 0 1.3rem; }
+
+/* A proper lede: the opening sentence set in the display face, one step up. */
+.note__lede {
+  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  line-height: 1.32;
+}
+
+.note__copy {
+  margin-bottom: 1.8rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 74%, var(--color-white));
+}
+
+/* --- The offer --------------------------------------------------------------
+   Four editorial rows rather than four boxes. A card grid gives every item the
+   same weight and forces the ragged-title problem; rows carry a reading order. */
+.offer__list {
   margin: 0;
   padding: 0;
   list-style: none;
-  color: color-mix(in srgb, var(--color-deep-violet) 68%, var(--color-white));
+  border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 16%, transparent);
+}
+
+.offer__list > li {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: baseline;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(1.4rem, 3vw, 2.2rem) clamp(0.5rem, 1.5vw, 1rem) clamp(1.4rem, 3vw, 2.2rem) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.offer__num {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.7vw, 2rem);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1;
+  color: color-mix(in srgb, var(--color-deep-violet) 32%, var(--color-white));
+  transition: color 0.35s ease;
 }
 
-.partners__list li + li::before { margin-right: 1.3rem; color: var(--color-orchid); content: "•"; }
+.offer__list h3 { margin: 0; }
 
-/* Hover: each partner name takes the same orchid highlight sweep as "hello." */
-.partners__list li {
-  transition: color 0.25s ease, background 0.25s ease;
-  padding-inline: 0.15em;
+.offer__list p {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-deep-violet) 73%, var(--color-white));
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-.partners__list li:hover {
-  color: var(--color-deep-violet);
-  background: var(--color-highlight);
+.offer__list > li:hover { transform: translateX(6px); }
+.offer__list > li:hover .wash { opacity: 1; transform: scaleX(1); }
+.offer__list > li:hover .offer__num { color: var(--color-orchid); }
+
+/* --- The method -------------------------------------------------------------
+   Three steps hung from one rule that draws itself across on scroll. */
+.method__track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  margin: 0;
+  padding: 2.6rem 0 0;
+  list-style: none;
 }
 
-.introduction { background: var(--color-section); }
-.introduction__media { margin: 0; overflow: hidden; border-radius: var(--radius-media); }
-.introduction__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 48% 50%; }
-.introduction h2 { max-width: 12ch; margin-bottom: 1.25rem; }
-.introduction p:not(.eyebrow) { color: color-mix(in srgb, var(--color-deep-violet) 77%, var(--color-white)); }
-
-.section-heading { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: end; gap: 2rem; margin-bottom: 2.5rem; }
-.section-heading h2, .process > .container > h2, .results-preview h2 { max-width: 15ch; }
-.section-heading > p { margin-bottom: 0; color: color-mix(in srgb, var(--color-deep-violet) 75%, var(--color-white)); }
-
-.services__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
-.services__grid article { min-height: 17rem; display: flex; flex-direction: column; border: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); border-radius: var(--radius-media); padding: clamp(1.25rem, 2.5vw, 2rem); background: var(--color-white); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease; }
-
-/* Hover: card lifts, its number slides up, and an orchid rule draws along the top. */
-.services__grid article::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--color-orchid); border-radius: var(--radius-media) var(--radius-media) 0 0; transform: scaleX(0); transform-origin: left center; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-.services__grid article { position: relative; overflow: hidden; }
-.services__grid article:hover { transform: translateY(-6px); box-shadow: 0 1.1rem 2.2rem color-mix(in srgb, var(--color-deep-violet) 13%, transparent); }
-.services__grid article:hover::before { transform: scaleX(1); }
-.services__grid article span { display: inline-block; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-.services__grid article:hover span { transform: translateY(-3px); }
-.services__grid article:first-child { background: var(--color-deep-violet); }
-.services__grid span, .process__list > li > span, .results-preview__cards span { color: var(--color-violet); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em; }
-.services__grid article:first-child span, .services__grid article:first-child h3, .services__grid article:first-child p { color: var(--color-white); }
-.services__grid h3 { margin: auto 0 0.85rem; }
-.services__grid p { margin: 0; color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white)); font-size: 0.93rem; line-height: 1.55; }
-
-.process { background: var(--color-section); }
-.process__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 2.5rem 0 0; padding: 0; list-style: none; counter-reset: process; }
-.process__list > li { position: relative; padding: 1.25rem 0.5rem 0 0; }
-
-/* The orchid rules draw themselves left→right, one step after another, on scroll. */
-.process__list > li::before {
+/* The single rule the whole method hangs from. */
+.method__track::before {
   content: "";
   position: absolute;
   top: 0;
@@ -306,65 +473,256 @@
   height: 2px;
   background: var(--color-orchid);
   transform-origin: left center;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.js .process__list:not(.on) > li::before { transform: scaleX(0); }
-.process__list.on > li:nth-child(2)::before { transition-delay: 0.2s; }
-.process__list.on > li:nth-child(3)::before { transition-delay: 0.4s; }
-.process__list h3 { margin: 1.1rem 0 0.7rem; }
-.process__list p { margin: 0; color: color-mix(in srgb, var(--color-deep-violet) 75%, var(--color-white)); font-size: 0.95rem; }
+.js .method__track::before { transform: scaleX(0); transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.js .method__track.on::before { transform: scaleX(1); }
 
-.results-preview__grid { align-items: start; }
-.results-preview__cards { display: grid; gap: 0.75rem; }
-.results-preview__cards article { display: grid; grid-template-columns: minmax(6.5rem, 0.7fr) minmax(0, 1.15fr) minmax(0, 1fr); gap: 1rem; align-items: center; border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 14%, transparent); padding-block: 1.2rem; padding-inline: 0.4rem; transition: background 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.method__track > li { position: relative; padding-right: 1rem; }
 
-/* Hover: row tints and nudges right; the bold value takes the highlight sweep. */
-.results-preview__cards article:hover { background: color-mix(in srgb, var(--color-highlight) 30%, transparent); transform: translateX(4px); }
-.results-preview__cards strong { transition: background 0.3s ease; padding-inline: 0.1em; }
-.results-preview__cards article:hover strong { background: var(--color-highlight); }
-.results-preview__cards strong { color: var(--color-deep-violet); font-family: var(--font-display); font-size: 1.4rem; line-height: 1; }
-.results-preview__cards p { margin: 0; color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white)); font-size: 0.86rem; }
+/* Each step's node sits on the rule above it. */
+.method__track > li::before {
+  content: "";
+  position: absolute;
+  top: -2.6rem;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  margin-top: -3px;
+  background: var(--color-orchid);
+  transform: scale(0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-.conversation { padding-top: 0; }
-.contact-card { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); align-items: end; gap: 2rem; border-radius: var(--radius-media); background: var(--color-deep-violet); padding: clamp(2rem, 5vw, 4.5rem); color: var(--color-white); }
-.contact-card h2 { max-width: 13ch; color: var(--color-white); }
+.js .method__track.on > li::before { transform: scale(1); }
+.js .method__track.on > li:nth-child(2)::before { transition-delay: 0.35s; }
+.js .method__track.on > li:nth-child(3)::before { transition-delay: 0.6s; }
+
+.method__num {
+  display: block;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--color-orchid) 46%, var(--color-white));
+}
+
+.method__track h3 { margin: 0 0 0.7rem; }
+
+.method__track p {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-deep-violet) 74%, var(--color-white));
+  font-size: 0.95rem;
+}
+
+/* --- The outcomes -----------------------------------------------------------
+   Category labels run vertically, picking up the sheet's own direction. */
+.outcomes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
+  border-block: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
+}
+
+.outcome {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+  background: var(--color-canvas);
+  padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1rem, 2vw, 1.6rem);
+}
+
+.outcome__tag {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: var(--color-violet);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.outcome strong {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.outcome p {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white));
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.outcome:hover .wash { opacity: 1; transform: scaleX(1); }
+
+/* --- The conversation -------------------------------------------------------
+   Full-bleed ink, sharp-edged, ruled in white: the same sheet turned over. */
+.conversation { padding-block: 0 var(--section-space); }
+
+/* components.css still carries the previous treatment for .contact-card — a 36px
+   radius, a drop shadow, and `grid-template-columns: 1fr 1fr`. The new markup
+   nests the glow layer and the inner container inside the card, so that grid
+   handed each of them a column and crushed the buttons into the right half.
+   Reset here rather than in components.css, which the other three pages use. */
+.contact-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: block;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--color-deep-violet);
+  padding: clamp(2.75rem, 7vw, 5.5rem) 0;
+  color: var(--color-white);
+}
+
+/* The dark band's rules drift slowly sideways — the louvers, still breathing.
+   components.css animates this at 115°, an echo of the flap field the hero no
+   longer has; on the vertical grid it has to run vertical too. */
+.contact-card::after {
+  left: -30px;
+  width: calc(100% + 60px);
+  background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-white) 8%, transparent) 0 1px, transparent 1px 30px);
+  animation: rule-drift 16s linear infinite;
+}
+
+@keyframes rule-drift { to { transform: translateX(30px); } }
+
+.contact-card__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.contact-card h2 { max-width: 18ch; margin: 0.6rem 0 1rem; color: var(--color-white); }
 .contact-card p:not(.eyebrow) { margin-bottom: 0; color: color-mix(in srgb, var(--color-white) 78%, transparent); }
 .contact-card .eyebrow { color: var(--color-orchid); }
-.contact-actions { justify-content: flex-end; }
+
+/* Same story: components.css boxes the actions in a bordered, rounded, padded
+   column. On the full-bleed band they are simply two buttons on a line. */
+.contact-card .contact-actions {
+  flex-direction: row;
+  justify-content: flex-end;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
 .contact-card .btn--primary { background: var(--color-orchid); color: var(--color-deep-violet); }
 .contact-card .btn--primary:hover { background: var(--color-white); }
 
-/* Hero-specific entrance (shared .reveal system lives in components.css). */
-.js .home-hero__figure.reveal { transform: translateY(1.5rem) scale(0.985); }
-.home-hero__figure.reveal.on { transform: none; }
+/* Pointer-tracked wash; position comes from glow.js. */
+.contact-card__glow {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 26rem;
+  height: 26rem;
+  margin: -13rem 0 0 -13rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-orchid) 34%, transparent);
+  filter: blur(90px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(var(--glow-x, 0px), var(--glow-y, 0px), 0);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-card:hover .contact-card__glow { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .home-hero__figure.reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  /* No shutter is built at all under reduced motion, so the hero rests as the
+     uncovered ground: portrait, ink, and a single greeting that never cycles. */
+  .greet__word,
+  .greet__market { animation: none; }
+  .louver-cue { display: none !important; }
+
+  .contact-card__glow { display: none; }
+  .contact-card::after { animation: none; }
+  .wash,
+  .figure dd,
+  .offer__list > li,
+  .index-line span,
+  .index-line span::after,
+  .note__media img,
+  .note__slats { transition: none; }
+  .offer__list > li:hover { transform: none; }
+  .figure:hover dd { transform: none; }
+  .note__media:hover img { transform: none; }
+
+  .js .figures::before,
+  .js .method__track::before { transform: scaleX(1); transition: none; }
+  .js .method__track > li::before { transform: scale(1); transition: none; }
 }
 
 @media (max-width: 62rem) {
-  .home-hero__grid, .introduction__grid, .results-preview__grid, .section-heading, .contact-card { grid-template-columns: minmax(0, 1fr); }
-  .home-hero__figure { justify-self: start; width: min(100%, 30rem); }
-  .services__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .louver-hero__grid,
+  .note__grid,
+  .lede--split,
+  .contact-card__inner { grid-template-columns: minmax(0, 1fr); }
+
+  .lede--split { align-items: start; }
+
+  /* Narrow screens have no room for a side-by-side reveal — a portrait wide
+     enough to read would sit straight under the headline. So the composition
+     turns through ninety degrees: the grade runs top-to-bottom, copy holds the
+     clean top of the page, and the portrait becomes a band along the bottom,
+     fading in from nothing so no type ever lands on his face. */
+  /* Fixed rem clearance rather than a viewport percentage: the gap between the
+     last CTA and the photo band must not depend on how tall the copy wraps. */
+  .louver-hero { align-content: start; min-height: auto; padding-bottom: 19.5rem; }
+
+  .louver-hero__ground {
+    background:
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--color-highlight) 42%, var(--color-white)) 0%,
+        var(--color-highlight) 54%,
+        color-mix(in srgb, var(--color-orchid) 72%, var(--color-white)) 72%,
+        var(--color-violet) 88%,
+        var(--color-deep-violet) 100%);
+  }
+
+  .louver-hero__ground img {
+    top: auto;
+    width: 100%;
+    height: 17.5rem;
+    /* A wide, short crop takes the ceiling unless it is aimed at his face. */
+    object-position: 54% 34%;
+    mask-image: linear-gradient(180deg, transparent 0%, var(--color-deep-violet) 26%, var(--color-deep-violet) 100%);
+  }
+
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .figure:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .figure:nth-child(n+3) { border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent); }
+  .outcomes__grid { grid-template-columns: minmax(0, 1fr); }
+  .method__track { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .method__track > li::before { display: none; }
   .contact-actions { justify-content: flex-start; }
 }
 
 @media (max-width: 44rem) {
-  .home-hero { padding-top: 6rem; }
-  .home-hero__grid { gap: 2.2rem; }
-  .home-hero h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
-  .home-hero__badge { right: 0.7rem; bottom: 0.7rem; }
-  .proof-rail__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .proof-rail__grid > div { min-height: 7rem; }
-  .proof-rail__grid > div:nth-child(3) { border-left: 0; border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); }
-  .proof-rail__grid > div:nth-child(4) { border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); }
-  .partners__list li + li::before { margin-right: 0.7rem; }
-  .services__grid, .process__list { grid-template-columns: minmax(0, 1fr); }
-  .services__grid article { min-height: 13rem; }
-  .results-preview__cards article { grid-template-columns: minmax(0, 1fr); gap: 0.45rem; }
+  .louver-hero { padding-top: 6rem; }
+  .louver-hero__grid { gap: 2.2rem; }
+  .louver-hero h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
+  .figures { grid-template-columns: minmax(0, 1fr); }
+  .figure { border-left: 0; padding-left: 0; }
+  .figure + .figure { border-left: 0; padding-left: 0; border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent); }
+  .index-line { gap: 0.3rem 0.7rem; }
+  .index-line li + li::before { margin-right: 0.7rem; }
+  .offer__list > li { grid-template-columns: 3rem minmax(0, 1fr); gap: 0.6rem 1rem; }
+  .offer__list > li p { grid-column: 2; }
 }

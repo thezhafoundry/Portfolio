@@ -9,7 +9,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=DM+Sans:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap&amp;text=SampathKumr%20" rel="stylesheet">
   <link rel="stylesheet" href="/src/styles/identity.css">
   <link rel="stylesheet" href="/src/styles/components.css">
@@ -19,7 +19,7 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="site-header__inner container">
-      <a class="site-brand" href="/" aria-current="page" aria-label="Sampath Kumar, home"><span class="site-brand__badge" aria-hidden="true">S</span><span class="site-brand__word">Sampath Kumar</span></a>
+      <a class="site-brand" href="/" aria-current="page" aria-label="Sampath Kumar, home"><span class="site-brand__signature">Sampath Kumar</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button>
       <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/story/">Story</a><a href="/results/">Work</a><a href="/schedule/">Hello</a></nav>
     </div>
@@ -27,102 +27,108 @@
   </header>
 
   <main id="main-content">
-    <section class="home-hero hero">
-      <div class="container home-hero__grid">
-        <div class="home-hero__copy reveal">
+    <section class="louver-hero">
+      <div class="louver-hero__ground">
+        <img src="/assets/hero_portrait.jpg" alt="Sampath Kumar seated at a desk, ready for a strategy conversation" width="1200" height="896" fetchpriority="high">
+      </div>
+
+      <div class="container louver-hero__grid">
+        <div class="louver-hero__copy">
           <p class="eyebrow">Sales leader · Storyteller</p>
-          <h1>Every deal begins with <em class="home-hero__highlight">hello.</em></h1>
-          <p class="home-hero__intro">An editorial portfolio built around Sampath's journey, working philosophy, and strongest outcomes.</p>
-          <div class="home-hero__actions">
+          <h1>Every deal begins with&nbsp;<span class="greet"><em class="greet__word">hello.</em></span></h1>
+          <p class="louver-hero__intro">I help B2B and private-market teams turn sharper market intelligence into warmer conversations — and meetings worth having.</p>
+          <div class="louver-hero__actions">
             <a class="btn btn--primary" href="/story/">Read the story <span aria-hidden="true">→</span></a>
             <a class="btn btn--text" href="/results/">See selected results</a>
           </div>
+          <p class="louver-cue">Move to open</p>
         </div>
-        <figure class="home-hero__figure reveal">
-          <div class="home-hero__photo-frame">
-            <img src="/assets/hero_portrait.jpg" alt="Sampath Kumar seated at a desk, ready for a strategy conversation" width="1200" height="896" fetchpriority="high">
-          </div>
-          <figcaption class="home-hero__badge"><strong>9.2/10</strong><span>client satisfaction</span></figcaption>
-        </figure>
       </div>
     </section>
 
-    <section class="proof-rail" aria-label="Selected proof points">
-      <div class="container proof-rail__grid reveal-group">
-        <div><strong>+35%</strong><span>lead-to-meeting conversion lift</span></div>
-        <div><strong>9.2/10</strong><span>average client satisfaction</span></div>
-        <div><strong>200M+</strong><span>private-company records mapped</span></div>
-        <div><strong>12 markets</strong><span>worked across globally</span></div>
-      </div>
-    </section>
-
-    <section class="partners section" aria-labelledby="partners-heading">
+    <section class="record section" aria-labelledby="record-heading">
       <div class="container">
-        <p class="eyebrow">Selected partners</p>
-        <h2 id="partners-heading">Work shaped across ambitious teams.</h2>
-        <ul class="partners__list reveal-group" aria-label="Selected organizations">
-          <li>Finquest</li><li>The Sales Group</li><li>Uplers</li><li>Mavlers</li><li>Ecosmob</li><li>Alore</li><li>Zinnov</li><li>Draup</li>
+        <header class="lede reveal">
+          <p class="eyebrow">Partners &amp; proof</p>
+          <h2 id="record-heading">Work shaped across ambitious teams.</h2>
+        </header>
+
+        <dl class="figures reveal-group" aria-label="Selected proof points">
+          <div class="figure"><dd>+35%</dd><dt>lead-to-meeting conversion lift</dt><span class="wash" aria-hidden="true"></span></div>
+          <div class="figure"><dd>9.2/10</dd><dt>average client satisfaction</dt><span class="wash" aria-hidden="true"></span></div>
+          <div class="figure"><dd>200M+</dd><dt>private-company records mapped</dt><span class="wash" aria-hidden="true"></span></div>
+          <div class="figure"><dd>12 markets</dd><dt>worked across globally</dt><span class="wash" aria-hidden="true"></span></div>
+        </dl>
+
+        <ul class="index-line reveal-group" aria-label="Selected organizations">
+          <li><span>Finquest</span></li><li><span>The Sales Group</span></li><li><span>Uplers</span></li><li><span>Mavlers</span></li><li><span>Ecosmob</span></li><li><span>Alore</span></li><li><span>Zinnov</span></li><li><span>Draup</span></li>
         </ul>
       </div>
     </section>
 
-    <section class="introduction section">
-      <div class="container introduction__grid reveal">
-        <figure class="introduction__media">
+    <section class="note section" aria-labelledby="note-heading">
+      <div class="container note__grid reveal">
+        <figure class="note__media">
           <img src="/assets/strategy_session.jpg" alt="Sampath Kumar in a working strategy session" width="1376" height="768" loading="lazy">
+          <span class="note__slats" aria-hidden="true"></span>
         </figure>
-        <div>
+        <div class="note__body">
           <p class="eyebrow">A practical partner</p>
-          <h2>Research first. A human conversation next.</h2>
-          <p>I’m an engineer-turned-sales leader based in Coimbatore, with seven-plus years of experience in B2B SaaS, pre-sales, and private-market intelligence. I bring the structure behind a good pipeline into the room without losing the human reason someone should care.</p>
+          <h2 id="note-heading">Research first. A human conversation next.</h2>
+          <p class="note__lede">I’m an engineer-turned-sales leader based in Coimbatore, with seven-plus years of experience in B2B SaaS, pre-sales, and private-market intelligence.</p>
+          <p class="note__copy">I bring the structure behind a good pipeline into the room without losing the human reason someone should care.</p>
           <a class="btn btn--ghost" href="/story/">Read my story <span aria-hidden="true">→</span></a>
-          <br>
-          <a class="home-hero__intro-cue" href="/story/"><span class="home-hero__play" aria-hidden="true">▶</span> A personal introduction, presented like a story chapter</a>
         </div>
       </div>
     </section>
 
-    <section class="services section" aria-labelledby="services-heading">
+    <section class="offer section" aria-labelledby="offer-heading">
       <div class="container">
-        <div class="section-heading">
-          <div><p class="eyebrow">What I help unlock</p><h2 id="services-heading">From a sharper target list to a better next meeting.</h2></div>
-          <p>Hands-on growth work for teams that need a clear market view, relevant outreach, and a confident commercial handoff.</p>
-        </div>
-        <div class="services__grid reveal-group">
-          <article><span>01</span><h3>Deal origination</h3><p>Map investment theses to credible mid-market targets and surface opportunities worth pursuing.</p></article>
-          <article><span>02</span><h3>Outbound systems</h3><p>Build a focused account, message, and cadence plan that earns a response across markets.</p></article>
-          <article><span>03</span><h3>Pre-sales clarity</h3><p>Turn complex products into useful demos, proposals, and commercial next steps.</p></article>
-          <article><span>04</span><h3>Pipeline discipline</h3><p>Give sales teams cleaner data, clear ownership, and a more dependable view of progress.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="process section" aria-labelledby="process-heading">
-      <div class="container">
-        <p class="eyebrow">A simple way of working</p>
-        <h2 id="process-heading">Enough process to make the work repeatable.</h2>
-        <ol class="process__list reveal-group">
-          <li><span>01</span><h3>Listen for the real brief</h3><p>Clarify the market, moment, and commercial outcome before opening a list.</p></li>
-          <li><span>02</span><h3>Build the case to connect</h3><p>Prioritize the right accounts and write outreach around a concrete reason to talk.</p></li>
-          <li><span>03</span><h3>Learn and hand off cleanly</h3><p>Track what lands, qualify the signal, and give the next conversation useful context.</p></li>
+        <header class="lede lede--split reveal">
+          <div><p class="eyebrow">What I help unlock</p><h2 id="offer-heading">From a sharper target list to a better next meeting.</h2></div>
+          <p class="lede__note">Hands-on growth work for teams that need a clear market view, relevant outreach, and a confident commercial handoff.</p>
+        </header>
+        <ol class="offer__list reveal-group">
+          <li><span class="offer__num" aria-hidden="true">01</span><h3>Deal origination</h3><p>Map investment theses to credible mid-market targets and surface opportunities worth pursuing.</p><span class="wash" aria-hidden="true"></span></li>
+          <li><span class="offer__num" aria-hidden="true">02</span><h3>Outbound systems</h3><p>Build a focused account, message, and cadence plan that earns a response across markets.</p><span class="wash" aria-hidden="true"></span></li>
+          <li><span class="offer__num" aria-hidden="true">03</span><h3>Pre-sales clarity</h3><p>Turn complex products into useful demos, proposals, and commercial next steps.</p><span class="wash" aria-hidden="true"></span></li>
+          <li><span class="offer__num" aria-hidden="true">04</span><h3>Pipeline discipline</h3><p>Give sales teams cleaner data, clear ownership, and a more dependable view of progress.</p><span class="wash" aria-hidden="true"></span></li>
         </ol>
       </div>
     </section>
 
-    <section class="results-preview section" aria-labelledby="results-heading">
-      <div class="container results-preview__grid reveal">
-        <div><p class="eyebrow">Selected outcomes</p><h2 id="results-heading">Useful work leaves a trail.</h2><p>Explore a short record of conversion gains, global research, and commercial work across the last seven years.</p><a class="btn btn--ghost" href="/results/">View selected results <span aria-hidden="true">→</span></a></div>
-        <div class="results-preview__cards">
-          <article><span>Private markets</span><strong>From months to weeks</strong><p>Market-thesis sourcing accelerated for PE clients.</p></article>
-          <article><span>Global outreach</span><strong>North America to APAC</strong><p>Campaigns shaped for diverse buying contexts.</p></article>
-          <article><span>Commercial craft</span><strong>Complex to clear</strong><p>Demos and proposals built for confident handoffs.</p></article>
+    <section class="method section" aria-labelledby="method-heading">
+      <div class="container">
+        <header class="lede reveal">
+          <p class="eyebrow">A simple way of working</p>
+          <h2 id="method-heading">Enough process to make the work repeatable.</h2>
+        </header>
+        <ol class="method__track reveal-group">
+          <li><span class="method__num" aria-hidden="true">01</span><h3>Listen for the real brief</h3><p>Clarify the market, moment, and commercial outcome before opening a list.</p></li>
+          <li><span class="method__num" aria-hidden="true">02</span><h3>Build the case to connect</h3><p>Prioritize the right accounts and write outreach around a concrete reason to talk.</p></li>
+          <li><span class="method__num" aria-hidden="true">03</span><h3>Learn and hand off cleanly</h3><p>Track what lands, qualify the signal, and give the next conversation useful context.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="outcomes section" aria-labelledby="outcomes-heading">
+      <div class="container">
+        <header class="lede lede--split reveal">
+          <div><p class="eyebrow">Selected outcomes</p><h2 id="outcomes-heading">Useful work leaves a trail.</h2></div>
+          <div><p class="lede__note">Explore a short record of conversion gains, global research, and commercial work across the last seven years.</p><a class="btn btn--ghost" href="/results/">View selected results <span aria-hidden="true">→</span></a></div>
+        </header>
+        <div class="outcomes__grid reveal-group">
+          <article class="outcome"><span class="outcome__tag">Private markets</span><div><strong>From months to weeks</strong><p>Market-thesis sourcing accelerated for PE clients.</p></div><span class="wash" aria-hidden="true"></span></article>
+          <article class="outcome"><span class="outcome__tag">Global outreach</span><div><strong>North America to APAC</strong><p>Campaigns shaped for diverse buying contexts.</p></div><span class="wash" aria-hidden="true"></span></article>
+          <article class="outcome"><span class="outcome__tag">Commercial craft</span><div><strong>Complex to clear</strong><p>Demos and proposals built for confident handoffs.</p></div><span class="wash" aria-hidden="true"></span></article>
         </div>
       </div>
     </section>
 
-    <section class="conversation section" aria-labelledby="conversation-heading">
-      <div class="container">
-        <div class="contact-card reveal">
+    <section class="conversation" aria-labelledby="conversation-heading">
+      <div class="contact-card reveal" data-glow>
+        <span class="contact-card__glow" aria-hidden="true"></span>
+        <div class="container contact-card__inner">
           <div><p class="eyebrow">Start with a hello</p><h2 id="conversation-heading">Have a market or pipeline question worth unpacking?</h2><p>Choose a time that works, or send me a note on LinkedIn. I’ll come prepared to make the first conversation useful.</p></div>
           <div class="contact-actions" aria-label="Ways to start a conversation"><a class="btn btn--primary" href="/schedule/">View scheduling options <span aria-hidden="true">→</span></a><a class="btn btn--ghost-cream" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">Message on LinkedIn</a></div>
         </div>
@@ -130,7 +136,7 @@
     </section>
   </main>
 
-  <footer class="site-footer"><div class="site-footer__inner container"><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><span class="site-footer__signature">Sampath Kumar</span></a><p class="site-footer__line">Every deal begins with hello.</p><nav class="site-footer__links" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn</a></nav><a class="btn btn--primary" href="/schedule/">Start a conversation</a><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p></div></footer>
+  <footer class="site-footer"><div class="site-footer__inner container"><div class="site-footer__row-top"><nav class="site-footer__nav" aria-label="Footer"><a href="/story/">Story</a><a href="/results/">Results</a><a href="/schedule/">Schedule</a></nav><div class="site-footer__contact"><a class="site-footer__pill" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a><a class="btn btn--primary" href="/schedule/">Start a conversation</a></div></div><a class="site-footer__brand" href="/" aria-label="Sampath Kumar, home"><p class="site-footer__big-word"><span class="site-footer__big-word-a">Sampath</span> <span class="site-footer__big-word-b">Kumar</span></p></a><p class="site-footer__line">Every deal begins with hello.</p><div class="site-footer__row-bottom"><p class="site-footer__fine">© 2026 Sampath Kumar · Greater Coimbatore, India</p><div class="site-footer__socials"><a href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1s2.5 1.12 2.5 2.5zM.22 8.24h4.56V23H.22V8.24zM8.06 8.24h4.37v2.01h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.48 3.04 5.48 6.99V23h-4.56v-6.98c0-1.66-.03-3.8-2.32-3.8-2.32 0-2.68 1.81-2.68 3.68V23H8.06V8.24z"/></svg></a></div></div></div></footer>
   <script type="module" src="/src/js/main.js"></script>
 </body>
 </html>
