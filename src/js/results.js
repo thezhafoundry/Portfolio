@@ -1,6 +1,11 @@
 import { initReveals } from './bubbles.js';
 import { initNav } from './nav.js';
 import { initMagnetic } from './magnetic.js';
+import { renderFollowerCard } from './graph.js';
+
 initNav();
 initReveals();
 initMagnetic();
+
+const followerCard = document.getElementById('follower-card');
+if (followerCard) renderFollowerCard(followerCard);

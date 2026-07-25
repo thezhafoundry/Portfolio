@@ -1,4 +1,10 @@
-import { prefersReducedMotion } from './motion.js';
+import { prefersReducedMotion, animateSpring } from './motion.js';
+
+/* Overdamped on purpose. The default spring (damping 14) is underdamped and
+   overshoots, which would flash a follower count higher than the real number
+   before settling back. Damping 28 is just past critical for stiffness 170, so
+   the value rises monotonically and stops. */
+const COUNTER_SPRING = Object.freeze({ stiffness: 170, damping: 28, mass: 1 });
 
 export function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
@@ -30,14 +36,18 @@ export function renderFollowerCard(el) {
   const finish = () => { numberEl.textContent = target.toLocaleString('en-IN'); };
   if (prefersReducedMotion()) { finish(); drawStatic(); return; }
 
-  const DURATION = 1800;
-  let start;
-  const tickCount = (now) => {
-    start ??= now;
-    const p = Math.min((now - start) / DURATION, 1);
-    numberEl.textContent = countUpValue(0, target, p).toLocaleString('en-IN');
-    if (raw) advanceLine(p);
-    if (p < 1) requestAnimationFrame(tickCount);
+  /* The spring runs 0 -> 1 and that progress is mapped onto the number, rather
+     than springing the raw value. Spring force scales with displacement, so
+     targeting 8331 directly would be violently stiff; normalised progress keeps
+     the physics identical no matter how large the real number is.
+
+     Interpolate linearly here: the spring IS the easing curve. Routing this
+     through countUpValue() would apply easeOutCubic on top of the spring and
+     flatten the physics it exists to produce. */
+  const renderProgress = (p) => {
+    const clamped = Math.min(Math.max(p, 0), 1);
+    numberEl.textContent = Math.round(target * clamped).toLocaleString('en-IN');
+    if (raw) advanceLine(clamped);
   };
 
   let path, tip, totalLen;
@@ -67,8 +77,21 @@ export function renderFollowerCard(el) {
     tip.setAttribute('transform', `translate(${pt.x} ${pt.y})`);
   }
 
+  /* The markup ships the real number as literal text so it is correct with JS
+     disabled. Once we know we will animate, zero it immediately — otherwise the
+     final value sits on screen and visibly resets when the card scrolls in. */
+  renderProgress(0);
+
   const io = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) { io.disconnect(); requestAnimationFrame(tickCount); }
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    animateSpring({
+      from: 0,
+      to: 1,
+      params: COUNTER_SPRING,
+      onFrame: renderProgress,
+      onDone: finish,
+    });
   }, { threshold: 0.4 });
   io.observe(el);
 }

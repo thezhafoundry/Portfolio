@@ -31,6 +31,13 @@
   letter-spacing: 0.05em;
 }
 
+/* Tabular figures keep every digit the same width, so a counting number does
+   not jitter sideways as it ticks through values. */
+.results-proof-count {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
 .role--anchor {
   padding: 1.5rem 0;
 }

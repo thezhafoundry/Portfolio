@@ -39,6 +39,9 @@ export function initScheduler({
   function markReady() {
     if (settled) return;
     settled = true;
+    // The typing bubble is the wait state; once Cal answers it has to go, or it
+    // sits above the live embed still claiming to be loading.
+    container?.querySelector('.cal-loading')?.remove();
     if (status) status.textContent = 'Calendar loaded successfully.';
   }
 

@@ -82,12 +82,15 @@
   font-size: 0.88rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: transform var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
 }
 
-.btn-nav-glass:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px color-mix(in srgb, var(--color-violet) 35%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .btn-nav-glass:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--color-violet) 35%, transparent);
+  }
 }
 
 .nav-toggle-glass {
@@ -325,13 +328,17 @@
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--color-deep-violet);
-  transition: all 0.2s ease;
+  transition: transform var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out),
+    border-color var(--duration-hover) var(--ease-out);
 }
 
-.partner-badge:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px color-mix(in srgb, var(--color-violet) 12%, transparent);
-  border-color: color-mix(in srgb, var(--color-violet) 30%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .partner-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--color-violet) 12%, transparent);
+    border-color: color-mix(in srgb, var(--color-violet) 30%, transparent);
+  }
 }
 
 .partner-tag {
@@ -463,14 +470,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.35s ease;
+  transition: transform var(--duration-surface) var(--ease-out),
+    box-shadow var(--duration-surface) var(--ease-out);
   position: relative;
   overflow: hidden;
 }
 
-.service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px color-mix(in srgb, var(--color-violet) 12%, transparent);
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px color-mix(in srgb, var(--color-violet) 12%, transparent);
+  }
 }
 
 .service-card.purple-featured {
@@ -578,7 +588,10 @@
   padding: 24px;
   border: 1px solid color-mix(in srgb, var(--color-deep-violet) 6%, transparent);
   cursor: pointer;
-  transition: all 0.35s ease;
+  transition: background-color var(--duration-surface) var(--ease-out),
+    color var(--duration-surface) var(--ease-out),
+    border-color var(--duration-surface) var(--ease-out),
+    box-shadow var(--duration-surface) var(--ease-out);
 }
 
 .accordion-item.active {
@@ -677,7 +690,10 @@
   border: 1px solid color-mix(in srgb, var(--color-deep-violet) 8%, transparent);
   color: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-white));
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color var(--duration-hover) var(--ease-out),
+    color var(--duration-hover) var(--ease-out),
+    border-color var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
 }
 
 .filter-chip:hover,
@@ -916,7 +932,9 @@
   justify-content: center;
   color: var(--color-deep-violet);
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: background-color var(--duration-hover) var(--ease-out),
+    color var(--duration-hover) var(--ease-out),
+    border-color var(--duration-hover) var(--ease-out);
 }
 
 .social-link:hover {
@@ -1236,6 +1254,7 @@ body.nav-is-open {
 .btn--text,
 .btn--reversed {
   min-height: 2.75rem;
+  transition: transform var(--duration-press) var(--ease-out);
 }
 
 .btn--secondary {
@@ -1257,16 +1276,21 @@ body.nav-is-open {
   color: var(--color-deep-violet);
 }
 
-.btn:hover,
-.btn--secondary:hover,
-.btn--reversed:hover {
-  transform: translateY(-1px);
+/* Touch devices fire :hover on tap and leave it stuck, so the lift is gated to
+   real pointers. The press squash (spec §4) stays ungated — it is the feedback
+   that confirms the tap landed. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover,
+  .btn--secondary:hover,
+  .btn--reversed:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .btn:active,
 .btn--secondary:active,
 .btn--reversed:active {
-  transform: translateY(0);
+  transform: scale(0.97);
 }
 
 .btn:focus-visible,
@@ -1488,6 +1512,24 @@ body.nav-is-open {
 /* Slide-in-from-left variant for ledger/list rows. */
 .js .reveal-group--left > * {
   transform: translateX(-1.5rem);
+}
+
+/* Origin-aware bubble entrances (spec §3.3): a bubble enters from the side its
+   tail points to, so the motion agrees with who is speaking. .bubble--me sits
+   right (tail bottom-right) and arrives from the right; .bubble--reply sits
+   left and arrives from the left. Overrides the group's default rise. */
+.js .reveal-group > .bubble--me,
+.js .reveal .bubble--me,
+.js .bubble--me.reveal {
+  transform: translateX(1.5rem);
+  transform-origin: bottom right;
+}
+
+.js .reveal-group > .bubble--reply,
+.js .reveal .bubble--reply,
+.js .bubble--reply.reveal {
+  transform: translateX(-1.5rem);
+  transform-origin: bottom left;
 }
 
 .reveal-group.on > *:nth-child(2) { transition-delay: 0.08s; }
