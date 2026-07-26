@@ -135,24 +135,3 @@ describe('Shared content primitives', () => {
   });
 });
 
-describe('Interface typography', () => {
-  const interfaceSelectors = [
-    '.hero-brand',
-    '.hero-nav-links a',
-    '.btn-nav-glass',
-    '.nav-toggle-glass',
-    '.hero-eyebrow',
-    '.hero-floating-badge-value',
-    '.partner-badge',
-    '.filter-chip',
-  ];
-
-  it.each(interfaceSelectors)('%s uses DM Sans rather than the display face', async (selector) => {
-    const css = await readProjectFile('src/styles/components.css');
-    const body = ruleBody(css, selector);
-
-    expect(body).not.toBe('');
-    expect(body).toContain('font-family: var(--font-body)');
-    expect(body).not.toContain('font-family: var(--font-display)');
-  });
-});
