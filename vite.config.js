@@ -9,6 +9,7 @@ export default defineConfig({
         story: resolve(__dirname, 'story/index.html'),
         results: resolve(__dirname, 'results/index.html'),
         schedule: resolve(__dirname, 'schedule/index.html'),
+        notFound: resolve(__dirname, '404.html'),
       },
     },
   },

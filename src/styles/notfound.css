@@ -1,0 +1,28 @@
+/* 404 page — a quiet, narrow variant of the standard band-inner. */
+.notfound-inner {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.notfound-exchange {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.notfound-exchange .bubble {
+  margin-bottom: 0;
+  max-width: min(100%, 26rem);
+}
+
+.notfound-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+@media (max-width: 48rem) {
+  .notfound {
+    min-height: calc(100dvh - 4.5rem);
+  }
+}

@@ -6,6 +6,7 @@ const pages = [
   'story/index.html',
   'results/index.html',
   'schedule/index.html',
+  '404.html',
 ];
 
 const readPage = (page) => readFile(new URL(`../${page}`, import.meta.url), 'utf8');
