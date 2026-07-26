@@ -14,6 +14,26 @@ codebase for `TODO(spec` before assuming a section is launch-ready:
 | Pivot pull-quote (Sampath's own words) | replace placeholder in `story/index.html` `.pivot` | blocks launch |
 
 ## Known Tech Debt
+- ~~`components.css` carried ~900 lines of dead "Violet Gradient Hero" CSS~~ —
+  **removed 2026-07-26** (redesign audit). That era's markup (`.hero-grid`,
+  `.service-card`, `.accordion-item`, `.timeline-card`, `.partners-section`,
+  `.about-grid`, `.footer-display-title`, etc. — 69 selectors) had zero live
+  callers in any of the four pages' HTML or in `src/js/*.js`; only
+  `.contact-card` and `.contact-actions` from that block were still live and
+  were kept. File dropped from 1615 → 722 lines. A stale
+  `describe('Interface typography', ...)` block in
+  `tests/editorial-orchid-css.test.js` that asserted font rules on those same
+  dead selectors was removed too — it was passing only because the dead CSS
+  still existed to satisfy it. Before assuming any class in `components.css`
+  is live, grep the four HTML pages for the exact token — several other
+  historical redesigns (see `docs/superpowers/plans/`) may have left similar
+  debris.
+- Added a custom `404.html` (root, registered in `vite.config.js`
+  `rollupOptions.input.notFound`, styled by `src/styles/notfound.css`) — the
+  site previously had no branded not-found page. Netlify/Vercel both
+  auto-serve a root-level `404.html` for unmatched routes with zero extra
+  config. Added to the `pages` array in `tests/site-contract.test.js` so it
+  stays covered by the shared header/nav/footer/typography contract.
 - ~~Homepage design-system divergence~~ — **resolved 2026-07-25**, all four
   pages are on Editorial Orchid. See [[subsystem-notes]].
 - ~~`src/js/home.js` orphaned~~ — deleted 2026-07-25 (`8b8bf44`).
