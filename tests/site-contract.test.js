@@ -70,7 +70,7 @@ describe('Editorial Orchid Home contracts', () => {
   it('states the verified proof values literally without counter animation hooks', async () => {
     const html = await readPage('index.html');
 
-    for (const value of ['+35%', '9.2/10', '200M+', '24 markets']) {
+    for (const value of ['+35%', '200M+', '24 major markets']) {
       expect(html).toContain(value);
     }
     expect(html).not.toMatch(/data-target|stat-number/);

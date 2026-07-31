@@ -31,6 +31,27 @@ export function restAngles(count, { start = 0.6, end = 0.99, angle = 78, feather
   return out;
 }
 
+/* Pure: slat angles during the initial load sweep. louverAngles (below) nudges
+   the already-SETTLED rest angles, which is right for pointer interaction —
+   but it makes a poor load animation over the portrait, where rest is already
+   near the ceiling and there is almost no room left to swing, so the wave
+   reads as if it stops at the paper and barely touches the photo.
+
+   sweepAngles instead reveals every slat from fully closed (0°) up to its own
+   rest angle as the wavefront `px` passes it, so the opening motion is
+   visible everywhere the wave travels, portrait included, with a travelling
+   bulge riding the front for the same "swell" feel louverAngles has. */
+export function sweepAngles(px, rest, { feather = 0.14, open = 26, sigma = 0.11, ceiling = 90 } = {}) {
+  const count = rest.length;
+  return rest.map((r, i) => {
+    const centre = (i + 0.5) / count;
+    const revealed = smoothstep((px - centre) / feather) * r;
+    const d = centre - px;
+    const pull = Math.exp(-(d * d) / (2 * sigma * sigma));
+    return +Math.min(ceiling, revealed + open * pull).toFixed(2);
+  });
+}
+
 /* Pure: slat angles for a pointer at `px` (0..1). Each slat opens BY up to
    `open` degrees beyond its own rest angle, on a Gaussian falloff, capped at
    `ceiling`. Pass px = null for the resting state.
@@ -59,6 +80,7 @@ const SLAT_WIDTH = 30;
 const DEG = Math.PI / 180;
 const SWEEP_DELAY_MS = 620;
 const SWEEP_MS = 1700;
+const GLOW_MS = 900;
 
 /* Shading rides on a child overlay's opacity rather than filter: brightness().
    Four dozen filtered elements repainting every frame is a real cost on weaker
@@ -77,6 +99,39 @@ function buildSlats(n) {
     slat.appendChild(document.createElement('b')); // the shading overlay
     return slat;
   });
+}
+
+/* Where the paper gives way to the portrait, as a fraction of the hero's
+   width (0..1). Reads the portrait's actual rendered width rather than
+   duplicating the --seam-inset clamp() from home.css in JS, so it can never
+   drift out of sync with the stylesheet. Returns null on the narrow layout,
+   where the portrait becomes a full-width band along the bottom instead (see
+   the `max-width: 62rem` media query in home.css) — there is no horizontal
+   seam to speak of there. */
+function seamFraction(hero) {
+  if (window.matchMedia('(max-width: 62rem)').matches) return null;
+  const img = hero.querySelector('.louver-hero__ground img');
+  if (!img || !hero.clientWidth) return null;
+  return 1 - img.getBoundingClientRect().width / hero.clientWidth;
+}
+
+/* restAngles' open zone (start/end) is a FRACTION of the hero's width — but
+   the portrait's own width is capped at a fixed 608px (--seam-inset in
+   home.css: clamp(20rem, 44vw, 38rem)), not proportional to the viewport.
+   Below ~1382px wide the two happen to agree closely enough to look right,
+   but past it the portrait stops growing while a fraction-based open zone
+   keeps scaling with the viewport — so on a very wide screen the slats sit
+   open over nothing but the bare ground gradient for a long stretch before
+   the portrait actually begins, reading as a flat block of colour. Anchoring
+   `start`/`feather` to the portrait's real measured edge instead of a fixed
+   fraction keeps the shutter's opening lined up with the photo at any width. */
+const SEAM_RAMP_PX = 100;
+
+function restAnglesForHero(hero, count) {
+  const seamPx = seamFraction(hero);
+  if (seamPx === null) return restAngles(count);
+  const feather = SEAM_RAMP_PX / hero.clientWidth;
+  return restAngles(count, { start: Math.max(0, seamPx - feather), end: 0.995, feather });
 }
 
 export function initLouver(root = document) {
@@ -138,10 +193,47 @@ export function initLouver(root = document) {
 
   let slats = [...field.children];
   let shades = slats.map((slat) => slat.firstChild);
-  let rest = restAngles(count);
+  let rest = restAnglesForHero(hero, count);
   let raf = 0;
+  let settled = false;
 
-  paint(slats, shades, louverAngles(null, rest));
+  // The "glow": once the sweep is done, the seam stays a little more open
+  // than its own rest angle, as though the pointer were permanently resting
+  // there. Reuses louverAngles — the exact math a real hover already uses —
+  // rather than an effect layered on top of the shutter; it IS the shutter,
+  // just left a touch further open right where the portrait begins.
+  const litRest = (baseRest) => {
+    const seamPx = seamFraction(hero);
+    return seamPx === null ? baseRest : louverAngles(seamPx, baseRest, { open: 12, sigma: 0.045, ceiling: 89 });
+  };
+
+  // Starts fully closed, portrait included, rather than at rest — otherwise
+  // the photo is already sitting there uncovered before the sweep ever runs,
+  // and the "opening" has nothing left to reveal by the time it arrives.
+  paint(slats, shades, rest.map(() => 0));
+
+  /* Eases the seam from its plain rest angle to the permanently-lit angle
+     over GLOW_MS — the same swell a hover produces, just held rather than
+     released, so the glow arriving reads as the shutter easing open a touch
+     further, not a value snapping to a new angle in a single frame. */
+  const settleGlow = () => {
+    const before = rest;
+    const after = litRest(rest);
+    let t0 = 0;
+    const step = (now) => {
+      if (!t0) t0 = now;
+      const t = Math.min(1, (now - t0) / GLOW_MS);
+      const eased = 1 - (1 - t) ** 3;
+      paint(slats, shades, before.map((b, i) => +(b + (after[i] - b) * eased).toFixed(2)));
+      if (t < 1) requestAnimationFrame(step);
+      else {
+        rest = after;
+        settled = true;
+        paint(slats, shades, louverAngles(null, rest));
+      }
+    };
+    requestAnimationFrame(step);
+  };
 
   /* The page opens itself once on load. Without this the shutter only ever
      reacts to a pointer move — and the first impression is formed before
@@ -152,11 +244,11 @@ export function initLouver(root = document) {
       if (!t0) t0 = now;
       const t = Math.min(1, (now - t0) / SWEEP_MS);
       const eased = t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
-      // The load sweep reaches a touch wider than the pointer does — it is the
-      // one moment that has to announce the page opens at all.
-      paint(slats, shades, louverAngles(-0.1 + eased * 1.2, rest, { open: 82, sigma: 0.11 }));
+      // sweepAngles reveals from closed rather than nudging from rest, so the
+      // wave stays visible the whole way across, portrait included.
+      paint(slats, shades, sweepAngles(-0.1 + eased * 1.2, rest));
       if (t < 1) requestAnimationFrame(step);
-      else paint(slats, shades, louverAngles(null, rest));
+      else settleGlow();
     };
     requestAnimationFrame(step);
   };
@@ -186,7 +278,8 @@ export function initLouver(root = document) {
       field.replaceChildren(...buildSlats(count));
       slats = [...field.children];
       shades = slats.map((slat) => slat.firstChild);
-      rest = restAngles(count);
+      rest = restAnglesForHero(hero, count);
+      if (settled) rest = litRest(rest);
       paint(slats, shades, louverAngles(null, rest));
     }, 200);
   });
