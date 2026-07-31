@@ -83,11 +83,49 @@ export function initLouver(root = document) {
   const hero = root.querySelector('.louver-hero');
   if (!hero) return;
 
+  const photoImg = hero.querySelector('.louver-hero__ground img');
+  let hasAnimatedPhoto = false;
+  try {
+    hasAnimatedPhoto = typeof sessionStorage !== 'undefined' && sessionStorage.getItem('hero_photo_animated');
+  } catch (e) {
+    // ignore storage access errors
+  }
+
+  if (photoImg) {
+    if (!hasAnimatedPhoto && !prefersReducedMotion()) {
+      hero.classList.add('hero-photo-animate');
+      const triggerActive = () => hero.classList.add('hero-photo-active');
+      if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(() => {
+          if (typeof requestAnimationFrame !== 'undefined') {
+            requestAnimationFrame(triggerActive);
+          } else {
+            triggerActive();
+          }
+        });
+      } else {
+        triggerActive();
+      }
+      setTimeout(() => {
+        hero.classList.remove('hero-photo-animate', 'hero-photo-active');
+        hero.classList.add('hero-photo-settled');
+        try {
+          if (typeof sessionStorage !== 'undefined') {
+            sessionStorage.setItem('hero_photo_animated', 'true');
+          }
+        } catch (e) {}
+      }, 2000);
+    } else {
+      hero.classList.add('hero-photo-settled');
+    }
+  }
+
   // No JS, no fine pointer, or reduced motion: the shutter is never built, so
   // the ground layer — portrait and ink — simply shows as designed.
   if (prefersReducedMotion()) return;
   if (typeof window === 'undefined' || !window.matchMedia) return;
   if (!window.matchMedia('(pointer: fine)').matches) return;
+
 
   const field = document.createElement('div');
   field.className = 'louver-field';

@@ -5,6 +5,11 @@ import { initGreeting } from './greeting.js';
 import { initLouver } from './louver.js';
 import { initMagnetic } from './magnetic.js';
 import { initPointerGlow } from './glow.js';
+import { initOdometer } from './odometer.js';
+import { initSimulator } from './simulator.js';
+import { initProcessEngine } from './process-engine.js';
+import { initTicker } from './ticker.js';
+import { initYouTubeModal } from './youtube-modal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
@@ -14,5 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initLouver();
   initMagnetic();
   initPointerGlow();
+  initOdometer();
+  initSimulator();
+  initProcessEngine();
+  initTicker();
+  initYouTubeModal();
 });
+
 

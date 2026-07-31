@@ -36,6 +36,8 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -85,7 +87,7 @@ h4 {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.025em;
-  line-height: 0.98;
+  line-height: 1.22;
 }
 
 h1 {
@@ -174,18 +176,25 @@ p {
 }
 
 .editorial-emphasis {
+  display: inline;
   background: var(--color-highlight);
   color: inherit;
   font-style: italic;
-  padding-inline: 0.12em;
+  padding: 0.05em 0.3em;
+  border-radius: 0.25em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .sweep {
-  border-radius: 0.2em;
+  display: inline;
+  border-radius: 0.25em;
   background: var(--color-highlight);
   color: inherit;
   font-style: italic;
-  padding-inline: 0.12em;
+  padding: 0.05em 0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .bubble {

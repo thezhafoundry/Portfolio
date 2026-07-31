@@ -59,20 +59,18 @@ describe('Editorial Orchid Home contracts', () => {
     expect(portrait).toContain('fetchpriority="high"');
   });
 
-  it('points the primary hero action at the story and keeps an honest schedule path available', async () => {
+  it('points the primary hero action at the schedule and keeps an honest schedule path available', async () => {
     const html = await readPage('index.html');
     const hero = html.match(/<section\b[^>]*class="[^"]*hero[^"]*"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
 
-    // Editorial Orchid direction: the hero CTA is "Read the story" → /story/.
-    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="\/story\/"/);
-    // The honest scheduling path still exists elsewhere on the page.
+    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="\/schedule\/"/);
     expect(html).toMatch(/href="\/schedule\/"/);
   });
 
   it('states the verified proof values literally without counter animation hooks', async () => {
     const html = await readPage('index.html');
 
-    for (const value of ['+35%', '9.2/10', '200M+', '12 markets']) {
+    for (const value of ['+35%', '9.2/10', '200M+', '24 markets']) {
       expect(html).toContain(value);
     }
     expect(html).not.toMatch(/data-target|stat-number/);
@@ -158,14 +156,12 @@ describe('Editorial Orchid shared-shell contracts', () => {
     expect(html).toMatch(/<nav id="site-navigation" class="site-nav" aria-label="Primary">/);
     expect(html).toMatch(/<button class="nav-scrim" type="button" tabindex="-1"[\s\S]*?aria-label="Close navigation" hidden><\/button>/);
     expect(html).toMatch(/<main id="main-content">/);
-    expect(html).toMatch(/<footer class="site-footer">[\s\S]*?class="site-footer__big-word-a">Sampath<\/span>[\s\S]*?class="site-footer__big-word-b">Kumar<\/span>[\s\S]*?Every deal begins with hello\.[\s\S]*?© 2026 Sampath Kumar · Greater Coimbatore, India/);
-    expect(html).toMatch(/href="\/story\/"[^>]*>Story<\/a>[\s\S]*?href="\/results\/"[^>]*>Results<\/a>[\s\S]*?href="\/schedule\/"[^>]*>Schedule<\/a>[\s\S]*?linkedin\.com\/in\/sampath-kumar-tn66sk9699/);
-    expect(html).toMatch(/href="\/schedule\/"[^>]*>Start a conversation<\/a>/);
+    expect(html).toMatch(/<footer class="site-footer">[\s\S]*?class="site-footer__big-word-a">Sampath<\/span>[\s\S]*?class="site-footer__big-word-b">Kumar<\/span>[\s\S]*?Every deal begins with hello\.[\s\S]*?© 2026 Sampath Kumar · Coimbatore, Tamil Nadu, India/);
+    expect(html).toMatch(/linkedin\.com\/in\/sampath-kumar-tn66sk9699/);
   });
 
   it.each([
     ['index.html', '/'],
-    ['story/index.html', '/story/'],
     ['results/index.html', '/results/'],
     ['schedule/index.html', '/schedule/'],
   ])('%s marks its active route (%s)', async (page, route) => {

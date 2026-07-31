@@ -1,7 +1,10 @@
 import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 
-const readProjectFile = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+const readProjectFile = async (path) => {
+  const content = await readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+  return content.replace(/\r\n/g, '\n');
+};
 
 const stylesheets = [
   'src/styles/identity.css',

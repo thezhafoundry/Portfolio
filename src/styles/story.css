@@ -1,6 +1,6 @@
 /* ================= story head — a white band: copy left, figures right, journey strip below ================= */
 .story-head { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: center; }
-.story-head h1 { margin-top: 1.75rem; max-width: 16ch; }
+.story-head h1 { margin-top: 1.75rem; max-width: 16ch; line-height: 1.25; }
 .story-intro { margin-top: 1rem; max-width: 48ch; color: color-mix(in srgb, var(--color-deep-violet) 75%, var(--color-white)); }
 .story-head-figs { display: grid; gap: 1.75rem; justify-items: end; text-align: right; border-left: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent); padding-left: 3rem; }
 .fig-num { font-family: var(--font-display); font-weight: 600; font-style: italic; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; display: block; color: var(--color-deep-violet); }

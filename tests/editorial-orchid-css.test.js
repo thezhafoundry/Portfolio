@@ -24,8 +24,10 @@ const ruleBody = (css, selector) => {
    it, saturating to ink where the portrait sits; and a feathered mask so the
    portrait emerges from that ink instead of sitting on it as a pasted rectangle.
    Both are load-bearing, so these two rules are exempt from the blanket ban —
-   which still applies to every other declaration in every stylesheet. */
-const gradientExemptRules = ['.louver-hero__ground img', '.louver-hero__ground'];
+   which still applies to every other declaration in every stylesheet.
+   The site-header__inner gradient is also exempt: it is a deliberate brand
+   decision — lighter on the brand/signature side, richer toward the nav links. */
+const gradientExemptRules = ['.louver-hero__ground img', '.louver-hero__ground', '.site-header'];
 
 /* Global — the ground is restated inside the narrow-screen media query, where the
    grade turns through ninety degrees. Every occurrence is exempt, not just the first. */

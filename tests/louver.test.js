@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { restAngles, louverAngles } from '../src/js/louver.js';
+import { restAngles, louverAngles, initLouver } from '../src/js/louver.js';
 
 describe('restAngles (the shutter at rest)', () => {
   it('keeps the page shut everywhere left of the portrait zone', () => {
@@ -105,3 +105,44 @@ describe('louverAngles (the pointer ripple)', () => {
     expect(peakOf(0.15)).toBeLessThan(peakOf(0.85));
   });
 });
+
+describe('initLouver photo entrance transition', () => {
+  it('applies hero-photo-animate on initial open and hero-photo-settled once session storage flag is set', () => {
+    const createMockRoot = () => {
+      const classes = new Set();
+      const hero = {
+        classList: {
+          add: (c) => classes.add(c),
+          remove: (c) => classes.delete(c),
+          contains: (c) => classes.has(c),
+        },
+        querySelector: (sel) => sel === '.louver-hero__ground img' ? {} : null,
+      };
+      return {
+        querySelector: (sel) => sel === '.louver-hero' ? hero : null,
+        hero,
+      };
+    };
+
+    const mockSessionStorage = new Map();
+    const globalSessionStorage = globalThis.sessionStorage;
+    globalThis.sessionStorage = {
+      getItem: (k) => mockSessionStorage.get(k) || null,
+      setItem: (k, v) => mockSessionStorage.set(k, String(v)),
+      removeItem: (k) => mockSessionStorage.delete(k),
+    };
+
+    const root1 = createMockRoot();
+    initLouver(root1);
+    expect(root1.hero.classList.contains('hero-photo-animate')).toBe(true);
+
+    mockSessionStorage.set('hero_photo_animated', 'true');
+    const root2 = createMockRoot();
+    initLouver(root2);
+    expect(root2.hero.classList.contains('hero-photo-settled')).toBe(true);
+
+    globalThis.sessionStorage = globalSessionStorage;
+  });
+});
+
+
