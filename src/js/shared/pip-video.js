@@ -19,54 +19,65 @@ export function initPip({ revealAfter = null } = {}) {
 
   if (!wrap || !trigger || !card || !video) return;
 
-  /* --- Scroll-based reveal ------------------------------------------------ */
-  if (revealAfter) {
-    const sentinel = document.querySelector(revealAfter);
-    if (sentinel) {
-      wrap.classList.add('pip-wrap--hidden');
-      new IntersectionObserver(
-        ([entry]) => {
-          wrap.classList.toggle('pip-wrap--hidden', entry.isIntersecting);
-        },
-        { threshold: 0.15 }
-      ).observe(sentinel);
+  /* The trigger only makes sense once a real video file is in place — until
+     then, hide it rather than opening a card with nothing playable inside.
+     Re-appears automatically the moment the asset named in this file's doc
+     comment exists; no other code change needed. */
+  wrap.hidden = true;
+  fetch(video.currentSrc || video.src, { method: 'HEAD' })
+    .then((res) => { if (res.ok) { wrap.hidden = false; wireUp(); } })
+    .catch(() => {});
+
+  function wireUp() {
+    /* --- Scroll-based reveal ----------------------------------------------- */
+    if (revealAfter) {
+      const sentinel = document.querySelector(revealAfter);
+      if (sentinel) {
+        wrap.classList.add('pip-wrap--hidden');
+        new IntersectionObserver(
+          ([entry]) => {
+            wrap.classList.toggle('pip-wrap--hidden', entry.isIntersecting);
+          },
+          { threshold: 0.15 }
+        ).observe(sentinel);
+      }
     }
+
+    /* --- Open / close -------------------------------------------------------- */
+    function open() {
+      wrap.classList.add('pip-wrap--active');
+      card.removeAttribute('hidden');
+      card.setAttribute('aria-hidden', 'false');
+      trigger.setAttribute('aria-expanded', 'true');
+      trigger.classList.add('pip-trigger--active');
+      requestAnimationFrame(() => card.classList.add('pip-card--open'));
+      video.play().catch(() => {});
+    }
+
+    function close() {
+      wrap.classList.remove('pip-wrap--active');
+      card.classList.remove('pip-card--open');
+      card.setAttribute('aria-hidden', 'true');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.classList.remove('pip-trigger--active');
+      video.pause();
+      card.addEventListener('transitionend', () => {
+        if (!card.classList.contains('pip-card--open')) card.setAttribute('hidden', '');
+      }, { once: true });
+    }
+
+    trigger.addEventListener('click', () => {
+      trigger.getAttribute('aria-expanded') === 'true' ? close() : open();
+    });
+
+    closeBtn?.addEventListener('click', (e) => { e.stopPropagation(); close(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') close();
+    });
+
+    document.addEventListener('pointerdown', (e) => {
+      if (trigger.getAttribute('aria-expanded') === 'true' && !wrap.contains(e.target)) close();
+    });
   }
-
-  /* --- Open / close ------------------------------------------------------- */
-  function open() {
-    wrap.classList.add('pip-wrap--active');
-    card.removeAttribute('hidden');
-    card.setAttribute('aria-hidden', 'false');
-    trigger.setAttribute('aria-expanded', 'true');
-    trigger.classList.add('pip-trigger--active');
-    requestAnimationFrame(() => card.classList.add('pip-card--open'));
-    video.play().catch(() => {});
-  }
-
-  function close() {
-    wrap.classList.remove('pip-wrap--active');
-    card.classList.remove('pip-card--open');
-    card.setAttribute('aria-hidden', 'true');
-    trigger.setAttribute('aria-expanded', 'false');
-    trigger.classList.remove('pip-trigger--active');
-    video.pause();
-    card.addEventListener('transitionend', () => {
-      if (!card.classList.contains('pip-card--open')) card.setAttribute('hidden', '');
-    }, { once: true });
-  }
-
-  trigger.addEventListener('click', () => {
-    trigger.getAttribute('aria-expanded') === 'true' ? close() : open();
-  });
-
-  closeBtn?.addEventListener('click', (e) => { e.stopPropagation(); close(); });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') close();
-  });
-
-  document.addEventListener('pointerdown', (e) => {
-    if (trigger.getAttribute('aria-expanded') === 'true' && !wrap.contains(e.target)) close();
-  });
 }

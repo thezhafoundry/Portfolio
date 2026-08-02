@@ -25,7 +25,7 @@ export function initSimulator() {
 
   function update() {
     const accounts = parseInt(slider.value, 10);
-    if (accountValueEl) accountValueEl.textContent = `${accounts} accounts / mo`;
+    if (accountValueEl) accountValueEl.textContent = `${accounts} Leads & Prospects / mo`;
 
     const config = sectorMultipliers[activeSector] || sectorMultipliers.saas;
 
