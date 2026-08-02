@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Schedule a Call — Sampath Kumar</title>
-  <meta name="description" content="Book a 60-minute online consulting session with Sampath Kumar for USD 350.">
+  <meta name="description" content="Book a 60-minute online consulting session with Sampath Kumar for USD 350. IST (Indian Standard Time) availability.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +19,12 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="site-header__inner container">
-      <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><span class="site-brand__signature">Sampath Kumar</span></a>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a class="btn btn--text" href="/" style="display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; text-decoration: none; padding: 0.2rem 0.5rem;"><span aria-hidden="true">←</span> Home</a>
+        <a class="site-brand" href="/" aria-label="Sampath Kumar, home"><span class="site-brand__signature">Sampath Kumar</span></a>
+      </div>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation"><span aria-hidden="true"></span></button>
-      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/#about-lead-gen">About</a><a href="/results/">Case Studies</a><a href="/assets/sampath-kumar-resume.pdf" download aria-label="Download Sampath Kumar resume PDF">Resume</a><a href="/schedule/" aria-current="page">Schedule a Call</a></nav>
+      <nav id="site-navigation" class="site-nav" aria-label="Primary"><a href="/#about-lead-gen">About</a><a href="/results/">Case Studies</a><a href="/assets/sampath-kumar-resume.pdf" download aria-label="Download Sampath Kumar resume PDF">Resume</a><a href="/schedule/" aria-current="page">Talk to Sampath</a></nav>
     </div>
     <button class="nav-scrim" type="button" tabindex="-1" aria-label="Close navigation" hidden></button>
   </header>
@@ -31,18 +34,66 @@
       <div class="band-inner band-inner--wide sched">
         <span class="label label--pill">Strategy Calendar</span>
         <h1>Start a conversation. I'll say <em class="sweep">hello</em> first.</h1>
-        <p class="sched-sub">A focused remote consulting session for lead generation, outbound strategy, and pre-sales planning. Payment and scheduling instructions are shared after the payment setup is approved.</p>
+        <p class="sched-sub">A focused remote consulting session for lead generation, outbound strategy, and pre-sales planning. Sessions are scheduled based on <strong>IST (Indian Standard Time)</strong> availability.</p>
 
         <div class="consultation-summary" aria-label="Consulting offer details">
           <div class="consultation-summary__item"><strong>USD 350</strong><span>One paid consulting session</span></div>
-          <div class="consultation-summary__item"><strong>60 minutes</strong><span>60-minute online consultation</span></div>
-          <div class="consultation-summary__item"><strong>Remote</strong><span>Remote consulting service; no physical shipping</span></div>
-          <div class="consultation-summary__item"><strong>After approval</strong><span>Payment link and scheduling instructions</span></div>
+          <div class="consultation-summary__item"><strong>60 minutes (IST)</strong><span>60-minute online consultation (IST Timezone)</span></div>
+          <div class="consultation-summary__item"><strong>Remote</strong><span>Remote consulting service</span></div>
+          <div class="consultation-summary__item"><strong>After approval</strong><span>Payment link &amp; IST scheduling instructions</span></div>
+        </div>
+
+        <!-- EMBEDDED INTERACTIVE ESTIMATOR ON SCHEDULE PAGE -->
+        <div style="margin-block: 2.5rem 2rem;">
+          <div class="sim-card reveal" style="border: 1px solid var(--color-highlight); background: var(--color-section); padding: 2rem; border-radius: var(--radius-media);">
+            <div style="margin-bottom: 1.5rem;">
+              <p class="eyebrow">Interactive Estimator</p>
+              <h2 style="font-size: 1.5rem; font-family: var(--font-display);">Estimate pipeline &amp; tool costs prior to booking</h2>
+              <p style="font-size: 0.9rem; color: var(--color-deep-violet);">Select your sector focus and target monthly client volume to calculate meeting targets, research timeframes, and estimated stack costs.</p>
+            </div>
+
+            <div class="sim-controls">
+              <div class="sim-group">
+                <label class="sim-label">Target Market Focus</label>
+                <div class="sim-sectors" role="tablist" aria-label="Select sector">
+                  <button type="button" class="sim-sector-btn" data-sector="saas" aria-pressed="true">B2B SaaS Growth</button>
+                  <button type="button" class="sim-sector-btn" data-sector="services" aria-pressed="false">Service-Based Sector</button>
+                  <button type="button" class="sim-sector-btn" data-sector="midmarket" aria-pressed="false">Mid-Market &amp; Digital Marketing Resources</button>
+                </div>
+              </div>
+
+              <div class="sim-group" style="margin-top: 1.25rem;">
+                <div class="sim-slider-header">
+                  <label for="sched-sim-accounts" class="sim-label">Target Clients / Lead &amp; Prospect Volume</label>
+                  <span class="sim-badge">120 Clients / Leads per mo</span>
+                </div>
+                <input type="range" id="sched-sim-accounts" min="30" max="400" step="10" value="120" class="sim-slider" aria-label="Adjust target clients and leads per month">
+              </div>
+            </div>
+
+            <div class="sim-results" style="margin-top: 1.5rem;">
+              <div class="sim-stat">
+                <span class="sim-stat__label">Estimated Meetings &amp; MQL Leads</span>
+                <strong class="sim-stat__val" data-sim-meetings>~18 MQL Leads &amp; Meetings</strong>
+              </div>
+              <div class="sim-stat">
+                <span class="sim-stat__label">Research &amp; Ramp Timeframe</span>
+                <strong class="sim-stat__val" data-sim-timeframe>60 Days Research Cycle</strong>
+              </div>
+              <div class="sim-stat">
+                <span class="sim-stat__label">Estimated Tools Cost Stack</span>
+                <strong class="sim-stat__val" data-sim-tools-cost>$1,050/mo Tools Cost Stack</strong>
+              </div>
+            </div>
+            <div style="margin-top: 1.5rem; text-align: center;">
+              <a href="/#tools" class="btn btn--ghost-cream" style="font-size: 0.9rem;">View Tools Contributing to Cost <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
         </div>
 
         <div class="payment-status" role="status" aria-live="polite">
-          <p class="eyebrow">Payment setup</p>
-          <p><strong>Payment link will be added after approval.</strong> The consultation is currently described for review; a live payment button will appear here after the account holder receives an approved payment link.</p>
+          <p class="eyebrow">Payment &amp; Calendar Setup (IST Timezone)</p>
+          <p><strong>Payment link will be added after approval.</strong> Sessions are conducted on Indian Standard Time (IST). A live booking button and slot selector will appear here upon account setup approval.</p>
         </div>
 
         <div id="cal-status" role="status" aria-live="polite" class="sr-only">Booking calendar will appear once a live scheduling link is connected.</div>
@@ -60,8 +111,8 @@
           <div class="contact-card reveal">
             <div>
               <p class="eyebrow">Direct Contact &amp; LinkedIn</p>
-              <h2>Have a custom inquiry?</h2>
-              <p>Connect directly via LinkedIn or phone to discuss the USD 350 consultation and tailored B2B lead generation projects.</p>
+              <h2>Start a conversation with Sampath</h2>
+              <p>Connect directly via LinkedIn or phone to discuss the USD 350 consultation (IST timezone) and tailored B2B lead generation projects.</p>
             </div>
             <div class="contact-actions">
               <a class="btn btn--primary" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">→</span></a>
@@ -114,3 +165,4 @@
   <script type="module" src="/src/js/schedule/schedule-page.js"></script>
 </body>
 </html>
+

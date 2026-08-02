@@ -10,6 +10,7 @@ import { initSimulator } from './simulator.js';
 import { initProcessEngine } from './process-engine.js';
 import { initTicker } from './ticker.js';
 import { initYouTubeModal } from './youtube-modal.js';
+import { initLinkedinGraph } from './linkedin-graph.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initProcessEngine();
   initTicker();
   initYouTubeModal();
+  initLinkedinGraph();
 });
 
 

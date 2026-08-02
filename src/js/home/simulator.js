@@ -3,51 +3,63 @@
  * Allows prospects to select their sector and target account scale to see real-time estimated outcomes.
  */
 export function initSimulator() {
-  const container = document.getElementById('deal-simulator');
-  if (!container) return;
+  const containers = document.querySelectorAll('#deal-simulator, .sim-card');
+  if (!containers.length) return;
 
-  const slider = container.querySelector('#sim-accounts');
-  const accountValueEl = container.querySelector('#sim-accounts-val');
-  const sectorBtns = container.querySelectorAll('[data-sector]');
-  const meetingsEl = container.querySelector('#sim-meetings');
-  const hoursEl = container.querySelector('#sim-hours');
-  const velocityEl = container.querySelector('#sim-velocity');
+  containers.forEach((container) => {
+    const slider = container.querySelector('#sim-accounts, .sim-slider');
+    const accountValueEl = container.querySelector('#sim-accounts-val, .sim-badge');
+    const sectorBtns = container.querySelectorAll('[data-sector]');
+    const meetingsEl = container.querySelector('#sim-meetings, [data-sim-meetings]');
+    const timeframeEl = container.querySelector('#sim-hours, #sim-timeframe, [data-sim-timeframe]');
+    const toolsCostEl = container.querySelector('#sim-velocity, #sim-tools-cost, [data-sim-tools-cost]');
 
-  if (!slider) return;
+    if (!slider) return;
 
-  let activeSector = 'saas'; // default
+    let activeSector = 'saas';
 
-  const sectorMultipliers = {
-    saas: { meetingRate: 0.14, hrsPerAccount: 0.45, speedMultiplier: 3.2 },
-    pe: { meetingRate: 0.18, hrsPerAccount: 0.65, speedMultiplier: 4.5 },
-    midmarket: { meetingRate: 0.12, hrsPerAccount: 0.50, speedMultiplier: 2.8 },
-  };
+    const sectorConfigs = {
+      saas: { meetingRate: 0.15, baseToolCost: 450, costPerClient: 5 },
+      services: { meetingRate: 0.12, baseToolCost: 350, costPerClient: 4 },
+      midmarket: { meetingRate: 0.14, baseToolCost: 500, costPerClient: 6 },
+    };
 
-  function update() {
-    const accounts = parseInt(slider.value, 10);
-    if (accountValueEl) accountValueEl.textContent = `${accounts} accounts / mo`;
+    function update() {
+      const clients = parseInt(slider.value, 10);
+      if (accountValueEl) {
+        accountValueEl.textContent = `${clients} Clients / Leads per mo`;
+      }
 
-    const config = sectorMultipliers[activeSector] || sectorMultipliers.saas;
+      const config = sectorConfigs[activeSector] || sectorConfigs.saas;
 
-    const estMeetings = Math.round(accounts * config.meetingRate);
-    const estHours = Math.round(accounts * config.hrsPerAccount);
-    const speed = config.speedMultiplier;
+      const estMeetings = Math.max(1, Math.round(clients * config.meetingRate));
 
-    if (meetingsEl) meetingsEl.textContent = `~${estMeetings} qualified meetings`;
-    if (hoursEl) hoursEl.textContent = `${estHours} hrs saved / mo`;
-    if (velocityEl) velocityEl.textContent = `${speed}x pipeline velocity`;
-  }
+      let researchTimeframe = '30 Days Research Cycle';
+      if (clients > 150) {
+        researchTimeframe = '90 Days Research Cycle';
+      } else if (clients > 60) {
+        researchTimeframe = '60 Days Research Cycle';
+      }
 
-  slider.addEventListener('input', update);
+      const estToolsCost = config.baseToolCost + clients * config.costPerClient;
 
-  sectorBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      sectorBtns.forEach((b) => b.setAttribute('aria-pressed', 'false'));
-      btn.setAttribute('aria-pressed', 'true');
-      activeSector = btn.dataset.sector;
-      update();
+      if (meetingsEl) meetingsEl.textContent = `~${estMeetings} MQL Leads & Meetings`;
+      if (timeframeEl) timeframeEl.textContent = researchTimeframe;
+      if (toolsCostEl) toolsCostEl.textContent = `$${estToolsCost}/mo Tools Cost Stack`;
+    }
+
+    slider.addEventListener('input', update);
+
+    sectorBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        sectorBtns.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+        btn.setAttribute('aria-pressed', 'true');
+        activeSector = btn.dataset.sector;
+        update();
+      });
     });
-  });
 
-  update();
+    update();
+  });
 }
+
