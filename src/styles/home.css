@@ -697,7 +697,6 @@ body {
   .js .figures::before,
   .js .method__track::before { transform: scaleX(1); transition: none; }
   .js .method__track > li::before { transform: scale(1); transition: none; }
-  .live-dot { animation: none; }
 }
 
 @media (max-width: 62rem) {
@@ -1150,7 +1149,14 @@ body {
   background: var(--color-section);
 }
 
-/* --- Tools with Links and SVG Logos ---------------------------------- */
+/* --- Tools with Links and SVG Logos -----------------------------------
+   Unused: no page currently renders .tools-grid/.tool-card (confirmed via
+   repo-wide grep during the 2026-08-02 critique). Left in place rather than
+   deleted as part of an unrelated fix — a dead-code cleanup pass should
+   remove this block along with the equally-unused .stack-group, .award-card,
+   .pipeline-card, and .industries-cloud rules below it, once confirmed intentional.
+   The live Tools section on index.html uses .tool-groups/.tool-group/
+   .tool-links/.tool-link, defined further down. -------------------------- */
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1223,6 +1229,62 @@ body {
   gap: 0.25rem;
 }
 
+/* --- Tools: category groups (flat-ruled, live) -------------------------
+   Replaces inline styles that duplicated the dead .tools-grid/.tool-card
+   above. Same ruled-grid grammar as .outcomes__grid: flat canvas cells,
+   1px rule lines from the shared background, no shadow/hardcoded radius. */
+.tool-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 1.75rem;
+  background: color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
+  border-block: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
+}
+
+.tool-group {
+  background: var(--color-canvas);
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+.tool-group > p:not(.eyebrow) {
+  margin: 0 0 1.1rem;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 75%, transparent);
+}
+
+.tool-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tool-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-deep-violet) 16%, transparent);
+  color: var(--color-violet);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out), color var(--duration-hover) var(--ease-out);
+}
+
+.tool-link:hover,
+.tool-link:focus-visible {
+  background: var(--color-highlight);
+  border-color: var(--color-orchid);
+  color: var(--color-deep-violet);
+}
+
+@media (max-width: 40rem) {
+  .tool-groups { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* --- Companies Experience Grid ---------------------------------------- */
 .companies-grid {
   display: grid;
@@ -1234,7 +1296,7 @@ body {
 .company-card {
   background: var(--color-white);
   border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: 1.1rem;
+  border-radius: var(--radius-media);
   padding: 1.5rem 1.35rem;
   box-shadow: 0 4px 16px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
   transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
@@ -1300,7 +1362,7 @@ body {
   margin-left: 2.75rem;
   background: var(--color-white);
   border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: 1.1rem;
+  border-radius: var(--radius-media);
   padding: 1.35rem 1.5rem;
   box-shadow: 0 4px 16px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
   transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
@@ -1454,24 +1516,11 @@ body {
   .companies-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
-.modal-scrim.is-open {
-  display: flex !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-@keyframes pulse-live {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
 .live-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   background: var(--color-orchid);
-  animation: pulse-live 1.8s infinite ease-in-out;
 }
 
 /* --------------------------------------------------------------------------
@@ -1533,7 +1582,7 @@ body {
 
 .linkedin-card__stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   gap: 1.5rem;
   margin: 0;
   padding-top: clamp(1.5rem, 3vw, 2rem);

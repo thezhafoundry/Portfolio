@@ -1,0 +1,16 @@
+{
+  "files": [
+    "index.html",
+    "story/index.html",
+    "results/index.html",
+    "schedule/index.html",
+    "policies/terms/index.html",
+    "policies/privacy/index.html",
+    "policies/refunds/index.html",
+    "404.html"
+  ],
+  "exclude": ["dist/**", ".worktrees/**"],
+  "insertBefore": "</body>",
+  "commentSyntax": "html",
+  "cspChecked": true
+}
