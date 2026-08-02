@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Schedule a Call — Sampath Kumar</title>
-  <meta name="description" content="Schedule a strategy session with Sampath Kumar. First call is 100% free; subsequent advisory sessions at $350/hr.">
+  <meta name="description" content="Book a 60-minute online consulting session with Sampath Kumar for USD 350.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,24 +31,21 @@
       <div class="band-inner band-inner--wide sched">
         <span class="label label--pill">Strategy Calendar</span>
         <h1>Start a conversation. I'll say <em class="sweep">hello</em> first.</h1>
-        <p class="sched-sub">Transparent consultation terms &amp; live time-slot scheduling. Reserve your session without overbooking conflicts.</p>
+        <p class="sched-sub">A focused remote consulting session for lead generation, outbound strategy, and pre-sales planning. Payment and scheduling instructions are shared after the payment setup is approved.</p>
 
-        <!-- TRANSPARENT PRICING CARDS -->
-        <div class="pricing-cards reveal-group" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1px)); gap: 1.5rem; margin: 2rem 0;">
-          <div class="pricing-card" style="background: var(--color-section); padding: 1.75rem; border-radius: var(--radius-media); border: 2px solid var(--color-orchid);">
-            <span class="label label--pill" style="background: var(--color-violet); color: var(--color-white);">Initial Call</span>
-            <h2 style="font-size: 2.2rem; margin: 0.75rem 0 0.25rem;">FREE <span style="font-size: 1rem; font-weight: normal; opacity: 0.8;">(30 mins)</span></h2>
-            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--color-deep-violet);">100% complimentary initial strategy session for prospective lead generation, account targeting, or pre-sales consulting partnerships.</p>
-          </div>
-
-          <div class="pricing-card" style="background: var(--color-canvas); padding: 1.75rem; border-radius: var(--radius-media); border: 1px solid var(--color-highlight);">
-            <span class="label label--pill">Subsequent Advisory</span>
-            <h2 style="font-size: 2.2rem; margin: 0.75rem 0 0.25rem;">$350 <span style="font-size: 1rem; font-weight: normal; opacity: 0.8;">/ hour</span></h2>
-            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--color-deep-violet);">Dedicated hourly consulting for campaign optimization, outbound cadence engineering, SDR team training, and M&amp;A pipeline architecture.</p>
-          </div>
+        <div class="consultation-summary" aria-label="Consulting offer details">
+          <div class="consultation-summary__item"><strong>USD 350</strong><span>One paid consulting session</span></div>
+          <div class="consultation-summary__item"><strong>60 minutes</strong><span>60-minute online consultation</span></div>
+          <div class="consultation-summary__item"><strong>Remote</strong><span>Remote consulting service; no physical shipping</span></div>
+          <div class="consultation-summary__item"><strong>After approval</strong><span>Payment link and scheduling instructions</span></div>
         </div>
 
-        <div id="cal-status" role="status" aria-live="polite" class="sr-only">Direct online booking calendar active. Select your time slot below.</div>
+        <div class="payment-status" role="status" aria-live="polite">
+          <p class="eyebrow">Payment setup</p>
+          <p><strong>Payment link will be added after approval.</strong> The consultation is currently described for review; a live payment button will appear here after the account holder receives an approved payment link.</p>
+        </div>
+
+        <div id="cal-status" role="status" aria-live="polite" class="sr-only">Booking calendar will appear once a live scheduling link is connected.</div>
 
         <div id="cal-embed" data-cal-link="" class="cal-embed" hidden>
           <p class="cal-loading">
@@ -59,40 +56,12 @@
           </p>
         </div>
 
-        <!-- TIME SLOT SELECTOR WIDGET (NO OVERBOOKING GUARD) -->
-        <div id="booking-widget" class="booking-widget" style="background: var(--color-canvas); border: 1px solid var(--color-highlight); border-radius: var(--radius-media); padding: 2rem; margin-top: 1rem;">
-          <h3 style="margin-bottom: 0.5rem;">Select an Available Strategy Slot</h3>
-          <p style="font-size: 0.9rem; margin-bottom: 1.5rem; opacity: 0.85;">Guaranteed single-booking slots with instant confirmation. Booked slots are locked to prevent overbooking.</p>
-
-          <div class="slots-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
-            <button type="button" class="slot-btn" style="padding: 1rem; border-radius: 8px; border: 1px solid var(--color-orchid); background: var(--color-section); text-align: left; cursor: pointer;">
-              <strong style="display: block; color: var(--color-violet);">09:00 AM EST</strong>
-              <span style="font-size: 0.8rem; color: var(--color-deep-violet);">Available (FREE Initial)</span>
-            </button>
-
-            <button type="button" class="slot-btn" style="padding: 1rem; border-radius: 8px; border: 1px solid var(--color-orchid); background: var(--color-section); text-align: left; cursor: pointer;">
-              <strong style="display: block; color: var(--color-violet);">11:30 AM EST</strong>
-              <span style="font-size: 0.8rem; color: var(--color-deep-violet);">Available (FREE Initial)</span>
-            </button>
-
-            <button type="button" class="slot-btn" disabled style="padding: 1rem; border-radius: 8px; border: 1px solid #ccc; background: #eee; text-align: left; opacity: 0.6; cursor: not-allowed;">
-              <strong style="display: block; color: #666;">02:00 PM EST</strong>
-              <span style="font-size: 0.8rem; color: #888;">🔒 Booked (No Overbook)</span>
-            </button>
-
-            <button type="button" class="slot-btn" style="padding: 1rem; border-radius: 8px; border: 1px solid var(--color-orchid); background: var(--color-section); text-align: left; cursor: pointer;">
-              <strong style="display: block; color: var(--color-violet);">04:30 PM EST</strong>
-              <span style="font-size: 0.8rem; color: var(--color-deep-violet);">Available ($350/hr Advisory)</span>
-            </button>
-          </div>
-        </div>
-
         <div id="cal-fallback" class="cal-fallback" style="margin-top: 2rem;">
           <div class="contact-card reveal">
             <div>
               <p class="eyebrow">Direct Contact &amp; LinkedIn</p>
               <h2>Have a custom inquiry?</h2>
-              <p>Connect directly via LinkedIn or email to discuss tailored B2B lead generation projects and enterprise packages.</p>
+              <p>Connect directly via LinkedIn or phone to discuss the USD 350 consultation and tailored B2B lead generation projects.</p>
             </div>
             <div class="contact-actions">
               <a class="btn btn--primary" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">→</span></a>
@@ -118,6 +87,9 @@
           <a href="/#about-lead-gen">About</a>
           <a href="/results/">Case Studies</a>
           <a href="/schedule/">Schedule</a>
+          <a href="/policies/terms/">Terms</a>
+          <a href="/policies/privacy/">Privacy</a>
+          <a href="/policies/refunds/">Refunds</a>
         </nav>
         <div class="site-footer__contact">
           <a class="site-footer__pill" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>

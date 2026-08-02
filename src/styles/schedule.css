@@ -2,6 +2,49 @@
 .sched h1 { margin-top: 1.25rem; max-width: 18ch; }
 .sched-sub { margin-top: 1rem; max-width: 48ch; color: color-mix(in srgb, var(--color-deep-violet) 75%, var(--color-white)); }
 
+.consultation-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.consultation-summary__item {
+  border: 1px solid var(--color-highlight);
+  border-radius: var(--radius-media);
+  background: var(--color-section);
+  padding: 1.25rem;
+}
+
+.consultation-summary__item strong,
+.consultation-summary__item span {
+  display: block;
+}
+
+.consultation-summary__item strong {
+  color: var(--color-violet);
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+
+.consultation-summary__item span {
+  margin-top: 0.35rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 76%, transparent);
+  font-size: 0.88rem;
+}
+
+.payment-status {
+  border: 1px solid color-mix(in srgb, var(--color-violet) 25%, transparent);
+  border-radius: var(--radius-media);
+  background: var(--color-white);
+  padding: 1.25rem 1.5rem;
+}
+
+.payment-status p:last-child {
+  margin-bottom: 0;
+}
+
 .cal-embed {
   margin-top: 2.5rem;
   min-height: 480px;
