@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-02T18:35:31Z",
+  "title": "Design System: Sampath Kumar Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "royal-violet": {
+        "role": "primary",
+        "displayName": "Royal Violet",
+        "canonical": "#6b21a8",
+        "tonalRamp": ["oklch(18% 0.14 305)", "oklch(28% 0.15 305)", "oklch(38% 0.17 305)", "oklch(46% 0.18 305)", "oklch(55% 0.19 305)", "oklch(65% 0.18 305)", "oklch(78% 0.14 305)", "oklch(92% 0.06 305)"]
+      },
+      "orchid": {
+        "role": "secondary",
+        "displayName": "Orchid",
+        "canonical": "#c084fc",
+        "tonalRamp": ["oklch(20% 0.12 310)", "oklch(32% 0.15 310)", "oklch(44% 0.18 310)", "oklch(55% 0.20 310)", "oklch(65% 0.21 310)", "oklch(72% 0.20 310)", "oklch(82% 0.15 310)", "oklch(92% 0.07 310)"]
+      },
+      "ink-violet": {
+        "role": "neutral",
+        "displayName": "Ink Violet",
+        "canonical": "#2e1065",
+        "tonalRamp": ["oklch(12% 0.10 285)", "oklch(20% 0.12 285)", "oklch(28% 0.13 285)", "oklch(36% 0.14 285)", "oklch(46% 0.13 285)", "oklch(58% 0.11 285)", "oklch(72% 0.08 285)", "oklch(88% 0.04 285)"]
+      },
+      "pale-orchid": {
+        "role": "neutral",
+        "displayName": "Pale Orchid",
+        "canonical": "#e9d5ff",
+        "tonalRamp": ["oklch(30% 0.08 305)", "oklch(42% 0.09 305)", "oklch(54% 0.09 305)", "oklch(66% 0.08 305)", "oklch(78% 0.07 305)", "oklch(87% 0.05 305)", "oklch(93% 0.03 305)", "oklch(97% 0.015 305)"]
+      },
+      "whisper-lavender": {
+        "role": "neutral",
+        "displayName": "Whisper Lavender",
+        "canonical": "#f7f2ff",
+        "tonalRamp": ["oklch(35% 0.03 290)", "oklch(47% 0.03 290)", "oklch(59% 0.025 290)", "oklch(71% 0.02 290)", "oklch(82% 0.015 290)", "oklch(90% 0.01 290)", "oklch(95% 0.006 290)", "oklch(98% 0.003 290)"]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#fffaff",
+        "tonalRamp": ["oklch(40% 0.01 320)", "oklch(52% 0.01 320)", "oklch(64% 0.008 320)", "oklch(75% 0.006 320)", "oklch(85% 0.004 320)", "oklch(92% 0.003 320)", "oklch(97% 0.002 320)", "oklch(99.3% 0.001 320)"]
+      },
+      "pure-white": {
+        "role": "neutral",
+        "displayName": "Pure White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["oklch(40% 0 0)", "oklch(52% 0 0)", "oklch(64% 0 0)", "oklch(75% 0 0)", "oklch(85% 0 0)", "oklch(92% 0 0)", "oklch(97% 0 0)", "oklch(100% 0 0)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page h1s; the homepage hero locally scales this role up further for maximum contrast against the shutter reveal." },
+      "headline": { "displayName": "Headline", "purpose": "Section h2s — 'The Method', 'The Offer', case-study role headers." },
+      "title": { "displayName": "Title", "purpose": "h3/h4 sub-section and card titles." },
+      "body": { "displayName": "Body", "purpose": "All running copy, capped at 72ch line length." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, pill badges, nav links, footer links — the small-caps wayfinding voice." },
+      "signature": { "displayName": "Signature", "purpose": "The site brand-mark wordmark only, underlined by a single orchid stroke. Never used for content." }
+    },
+    "shadows": [
+      { "name": "card-lift-legacy", "value": "0 0.9rem 1.8rem color-mix(in srgb, var(--color-deep-violet) 10%, transparent)", "purpose": "Hover lift on results-page outcome blocks. Legacy pattern being phased out in favor of flat/ruled depth — do not extend to new components." },
+      { "name": "pip-card-shadow", "value": "0 4px 16px color-mix(in srgb, var(--color-deep-violet) 14%, transparent), 0 16px 48px color-mix(in srgb, var(--color-deep-violet) 20%, transparent)", "purpose": "The one deliberately-retained shadow: the floating PiP video card, which needs to read as floating above the page." },
+      { "name": "focus-ring", "value": "0 0 0 3px #fffaff, 0 0 0 6px #6b21a8", "purpose": "Universal focus-visible treatment on every interactive element site-wide — a two-ring halo, not a shadow in the elevation sense, but structurally identical." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Default strong ease-out for entrances, reveals, hovers. Spec note: built-in CSS easings read as too weak/generic for this system." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Strong ease-in-out for looping/ambient motion (typing dots, ripples)." },
+      { "name": "duration-press", "value": "160ms", "purpose": "Button/interactive press-squash feedback." },
+      { "name": "duration-hover", "value": "180ms", "purpose": "Hover-state color/background transitions." },
+      { "name": "duration-surface", "value": "260ms", "purpose": "Larger surface transitions — accordions, the PiP card open/close." }
+    ],
+    "breakpoints": [
+      { "name": "xs", "value": "32rem" },
+      { "name": "sm", "value": "48rem" },
+      { "name": "md", "value": "992px" },
+      { "name": "lg", "value": "1440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main call-to-action pill button (e.g. 'Schedule a Call').",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">Schedule a Call</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; border: 1px solid transparent; border-radius: 999px; padding: 0.65rem 1.1rem; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.925rem; font-weight: 700; line-height: 1; text-decoration: none; background: #6b21a8; color: #fff; transition: transform 160ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-primary:hover { background: #2e1065; transform: translateY(-1px); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px #fffaff, 0 0 0 6px #6b21a8; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action button, outlined on transparent background.",
+      "html": "<a class=\"ds-btn ds-btn-ghost\" href=\"#\">See Results</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; border: 1px solid #6b21a8; border-radius: 999px; padding: 0.65rem 1.1rem; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.925rem; font-weight: 700; background: transparent; color: #2e1065; transition: transform 160ms cubic-bezier(0.23,1,0.32,1), background 180ms cubic-bezier(0.23,1,0.32,1), color 180ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-ghost:hover { background: #2e1065; color: #fff; } .ds-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 3px #fffaff, 0 0 0 6px #6b21a8; }"
+    },
+    {
+      "name": "Reply Bubble",
+      "kind": "custom",
+      "refersTo": "bubble-reply",
+      "description": "Conversation-motif chat bubble, reply side (left-aligned, sharp bottom-left corner).",
+      "html": "<div class=\"ds-bubble ds-bubble-reply\">Every deal begins with hello.</div>",
+      "css": ".ds-bubble-reply { position: relative; width: fit-content; max-width: 30rem; border: 1px solid rgba(46,16,101,0.12); border-radius: clamp(0.75rem, 1.5vw, 1.25rem); border-bottom-left-radius: 0.25rem; padding: 1rem 1.25rem; background: #fff; color: #2e1065; font-family: 'DM Sans', system-ui, sans-serif; }"
+    },
+    {
+      "name": "Me Bubble",
+      "kind": "custom",
+      "refersTo": "bubble-me",
+      "description": "Conversation-motif chat bubble, 'me' side (right-aligned, sharp bottom-right corner, Pale Orchid fill).",
+      "html": "<div class=\"ds-bubble ds-bubble-me\">Tell me about the pipeline results.</div>",
+      "css": ".ds-bubble-me { position: relative; width: fit-content; max-width: 30rem; margin-left: auto; border: 1px solid rgba(46,16,101,0.12); border-radius: clamp(0.75rem, 1.5vw, 1.25rem); border-bottom-right-radius: 0.25rem; padding: 1rem 1.25rem; background: #e9d5ff; color: #2e1065; font-family: 'DM Sans', system-ui, sans-serif; }"
+    },
+    {
+      "name": "Badge Pill",
+      "kind": "chip",
+      "refersTo": "badge-pill",
+      "description": "Eyebrow/label pill badge (e.g. 'Strategy Calendar').",
+      "html": "<span class=\"ds-badge\">Strategy Calendar</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; border-radius: 999px; background: #e9d5ff; color: #6b21a8; padding: 0.4rem 0.75rem; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Outcome Card (legacy)",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Results-page proof card — soft shadow on hover. Documented as inherited debt; new work should prefer the flat ruled-row treatment instead (see Elevation & Depth in DESIGN.md).",
+      "html": "<div class=\"ds-outcome-card\"><strong>3.2x</strong><p>Qualified pipeline growth in 6 months.</p></div>",
+      "css": ".ds-outcome-card { background: #fff; border: 1px solid rgba(46,16,101,0.12); border-radius: clamp(0.75rem, 1.5vw, 1.25rem); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease; } .ds-outcome-card:hover { transform: translateY(-4px); box-shadow: 0 0.9rem 1.8rem rgba(46,16,101,0.10); } .ds-outcome-card strong { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; font-weight: 600; color: #2e1065; } .ds-outcome-card p { margin: 0; font-size: 0.875rem; color: rgba(46,16,101,0.75); }"
+    },
+    {
+      "name": "Nav Pill Link",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Site navigation link, pill-shaped, tints on hover, solid fill for the current page.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\" aria-current=\"page\">Results</a>",
+      "css": ".ds-nav-link { min-height: 2.5rem; display: inline-flex; align-items: center; padding-inline: 0.95rem; border-radius: 999px; color: #2e1065; font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: background 180ms cubic-bezier(0.23,1,0.32,1), color 180ms cubic-bezier(0.23,1,0.32,1); } .ds-nav-link:hover, .ds-nav-link:focus-visible { background: rgba(192,132,252,0.16); } .ds-nav-link[aria-current='page'] { background: #e9d5ff; font-weight: 700; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Louvered Correspondence",
+    "overview": "The site opens as a sheet of ruled paper: a louvered shutter of paper slats hinged over a violet-ground portrait, parting under the pointer to reveal color and person beneath the page. Everything below the fold is set on that same ruled sheet — a fine 30px-pitch rule grid running the full body background, echoing the hero's own slat width, so the page reads as one idea told several times rather than a set of unrelated sections. Running through it is a second motif: conversation. The hero's greeting animates in like a reply arriving; the story page closes with a literal question-and-answer exchange rendered as chat bubbles with side-aware entrances; the results page calls its case-study sections a 'Ledger.' The voice is warm and conversational — intimate, hand-set, unhurried — but delivered inside a rigorously ruled, numbered editorial structure: offer items are numbered rows on a rule, not cards; method steps hang off a single line that draws itself in on scroll; outcome tags run in vertical type like a ledger's margin notes. Warmth in the voice, precision in the structure.\n\nA fine SVG turbulence grain sits fixed over the whole page at low opacity, giving the flat violet-and-paper palette the tooth of printed stock rather than a flat digital gradient. Buttons, the floating video widget, and the custom cursor all respond physically — lift, press-squash, glow rings, radar ripples — so the interface feels tactile and confident, not just decorative.",
+    "keyCharacteristics": [
+      "Ruled-paper canvas: a repeating 1px/30px vertical rule runs the full body background, tying hero and post-hero sections to one grid.",
+      "Louvered shutter hero: paper slats hinged on a rule, opening under the pointer to reveal a violet-to-ink gradient ground and a portrait.",
+      "Conversation as motif: chat-bubble components (.bubble, .bubble--me, .bubble--reply) recur from the hero greeting through the story close.",
+      "Numbered editorial rows over card grids: offer items and method steps are rule-hung rows/numbers, not boxed cards.",
+      "Tactile interaction: pill buttons lift + press-squash + glow-ring focus; the floating video trigger pulses radar ripples; a custom lerping cursor ring/dot follows the pointer on fine-pointer devices."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Only two colors ever carry action or emphasis: Royal Violet for anything actionable (links, primary buttons, active states), Orchid for anything decorative (sweeps, rules, ripples). Never swap their roles.", "section": "colors" },
+      { "name": "The Serif-Speaks, Sans-Labels Rule", "body": "Cormorant Garamond only ever sets a heading or a large numeral. DM Sans carries every other role. A sans-serif heading or a serif label is a system violation.", "section": "typography" },
+      { "name": "The Flat-Ruled Target Rule", "body": "Depth comes from a 1px rule, a color tint, or a hover wash, never a drop shadow, on new work. Shadow-and-radius cards on results/schedule/story are inherited debt to migrate away from, not a pattern to extend.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Royal Violet exclusively for action (links, primary buttons, active nav) and Orchid exclusively for decoration (sweeps, ripples, rules) — see The One Accent Rule.",
+      "Do set every heading and large numeral in Cormorant Garamond and every other role in DM Sans — see The Serif-Speaks, Sans-Labels Rule.",
+      "Do build new depth cues from a 1px color-mix(..., var(--color-deep-violet) N%, transparent) rule or a hover wash, not a box-shadow — see The Flat-Ruled Target Rule.",
+      "Do gate hover lifts behind (hover: hover) and (pointer: fine) so touch taps never get a stuck :hover state (established pattern in components.css).",
+      "Do gate all motion on prefersReducedMotion() / the global prefers-reduced-motion media query — every animated component in this system already does."
+    ],
+    "donts": [
+      "Don't add new border-radius + box-shadow card components; that pattern is inherited debt on results/schedule/story, not the target language.",
+      "Don't use Orchid on text meant to be read as an action (links, button labels) — it is reserved for decorative/motion roles only.",
+      "Don't introduce a third font family; the system is strictly Cormorant Garamond (display) + DM Sans (body/label) + Great Vibes (signature mark only).",
+      "Don't add persistent ambient motion (ripples, pulses, shimmer) to more than one component at a time — the PiP widget's radar ripple works because it is the only thing doing it."
+    ]
+  }
+}
