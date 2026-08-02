@@ -20,10 +20,11 @@ history behind the design).
 ## Code Style Rules
 - ES modules only, no build-time TS. Keep pure logic (physics, math,
   formatting) in small dependency-free functions exported from otherwise
-  DOM-driving files — this is what makes `motion.js`/`graph.js` unit-testable
-  without a DOM (see `tests/*.test.js`). Follow that split for new logic.
+  DOM-driving files — this is what makes `shared/motion.js`/`results/graph.js`
+  unit-testable without a DOM (see `tests/*.test.js`). Follow that split for
+  new logic.
 - Motion/animation code must gate on `prefersReducedMotion()` from
-  `src/js/motion.js` before animating anything — established repo-wide
-  pattern, not optional per-feature.
+  `src/js/shared/motion.js` before animating anything — established
+  repo-wide pattern, not optional per-feature.
 - CSS: custom properties for tokens (see `identity.css`), animate only
   `transform`/`opacity` per the locked design spec and `rules/web/performance.md`.

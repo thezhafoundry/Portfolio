@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { magneticPull } from '../src/js/magnetic.js';
+import { magneticPull } from '../src/js/shared/magnetic.js';
 
 describe('magneticPull', () => {
   it('pulls hardest at the button centre', () => {

@@ -80,7 +80,7 @@ describe('Home contact contract', () => {
   it('offers honest Schedule and LinkedIn actions instead of a simulated contact form', async () => {
     const [home, script] = await Promise.all([
       readProjectFile('index.html'),
-      readProjectFile('src/js/main.js'),
+      readProjectFile('src/js/home/main.js'),
     ]);
 
     expect(home).toContain('href="/schedule/"');
@@ -102,7 +102,7 @@ describe('Home contact contract', () => {
   it('contains no dead Font Awesome toggle branch or obsolete form selectors', async () => {
     const [css, script] = await Promise.all([
       readProjectFile('src/styles/components.css'),
-      readProjectFile('src/js/main.js'),
+      readProjectFile('src/js/home/main.js'),
     ]);
 
     expect(script).not.toMatch(/querySelector\(['"]i['"]\)|fa-bars|fa-xmark/);

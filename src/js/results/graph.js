@@ -1,4 +1,4 @@
-import { prefersReducedMotion, animateSpring } from './motion.js';
+import { prefersReducedMotion, animateSpring } from '../shared/motion.js';
 
 /* Overdamped on purpose. The default spring (damping 14) is underdamped and
    overshoots, which would flash a follower count higher than the real number

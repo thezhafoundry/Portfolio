@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { GREETINGS, nextGreeting } from '../src/js/greeting.js';
+import { GREETINGS, nextGreeting } from '../src/js/home/greeting.js';
 
 describe('nextGreeting', () => {
   it('advances through the list', () => {

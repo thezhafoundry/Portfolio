@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { restAngles, louverAngles, initLouver } from '../src/js/louver.js';
+import { restAngles, louverAngles, initLouver } from '../src/js/home/louver.js';
 
 describe('restAngles (the shutter at rest)', () => {
   it('keeps the page shut everywhere left of the portrait zone', () => {

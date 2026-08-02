@@ -100,7 +100,7 @@ describe('Typing-dots wait state', () => {
   });
 
   it('clears the wait state once the calendar reports ready', async () => {
-    const js = await readProjectFile('src/js/scheduler.js');
+    const js = await readProjectFile('src/js/schedule/scheduler.js');
 
     expect(js).toMatch(/\.cal-loading'\)\?\.remove\(\)/);
   });

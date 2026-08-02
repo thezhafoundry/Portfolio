@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from './motion.js';
+import { prefersReducedMotion } from '../shared/motion.js';
 
 /* The rotating greeting.
    "Every deal begins with hello." is the brand line, so the greeting itself

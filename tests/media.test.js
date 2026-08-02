@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getMediaMode } from '../src/js/media.js';
+import { getMediaMode } from '../src/js/home/media.js';
 
 describe('Media mode resolver', () => {
   it('returns video when a video source is provided', () => {

@@ -1,8 +1,8 @@
-import { initNav } from './nav.js';
+import { initNav } from '../shared/nav.js';
 import { initScheduler } from './scheduler.js';
-import { initReveals } from './bubbles.js';
-import { initMagnetic } from './magnetic.js';
-import { initCustomCursor } from './cursor.js';
+import { initReveals } from '../shared/bubbles.js';
+import { initMagnetic } from '../shared/magnetic.js';
+import { initCustomCursor } from '../shared/cursor.js';
 
 initNav();
 initReveals();

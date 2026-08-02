@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { springStep, isSettled, motionDurations, prefersReducedMotion } from '../src/js/motion.js';
+import { springStep, isSettled, motionDurations, prefersReducedMotion } from '../src/js/shared/motion.js';
 
 const run = (params, steps = 600) => {
   let s = { value: 0, velocity: 0, target: 100 };

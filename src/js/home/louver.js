@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from './motion.js';
+import { prefersReducedMotion } from '../shared/motion.js';
 
 /* The louver hero.
    The hero is a white paper page with fine vertical rules. Behind it sit the

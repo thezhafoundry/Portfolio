@@ -4,6 +4,43 @@
      from reading the code — this is what the wiki/codebase cannot tell you.
      Use [[backlinks]] to cross-reference decisions/log.md or active-backlog.md entries. -->
 
+## RESOLVED (2026-08-02): results.js/graph.js were silently orphaned, and src/js/ is now feature-folder structured
+
+The 2026-07-31 "complete redesign" commit (`301e204`) bulk-changed
+`results/index.html`'s closing script tag from `results.js` to `main.js` —
+almost certainly a copy-paste from `index.html`'s template rather than an
+intentional change, since `main.js` has no code path that touches
+`#follower-card`. Consequence: the spring-physics follower count-up
+(`graph.js`'s `renderFollowerCard`, tuned to the site's 300–600ms motion
+band, documented in `CLAUDE.md`, and covered by
+`tests/follower-counter.test.js`) went **dead in production** for over a
+week. The `#follower-card` element still carried a stray `data-count`
+attribute from an unrelated generic-odometer feature added in the same
+commit, so a *different*, purpose-mismatched counter (`odometer.js`, 1800ms
+ease-cubic, comma-breaking regex) picked it up instead and animated it by
+accident — this is why nothing looked obviously broken in a casual glance,
+but it violated the project's own motion-contract rule against long counter
+animations.
+
+**Why the test suite didn't catch it**: `follower-counter.test.js` asserted
+that `src/js/results.js` *contains* `renderFollowerCard` — true regardless of
+whether any page actually loads that file. No test asserted the `<script>`
+`src` on `results/index.html` itself. Fixed by adding a dedicated "Page
+entry-script wiring" block to `tests/site-contract.test.js` that pins every
+page's entry script by exact path — this is the test to extend if a new page
+is added.
+
+**Fixed same day**: `results/index.html`'s script tag now correctly points
+to `results/results.js` again.
+
+**Also same day**: `src/js/` (19 flat files, several only distantly related)
+was split into feature folders — `shared/`, `home/`, `results/`, `schedule/`,
+`story/`, `notfound/` — per [[stack-and-rules]]'s File Map. Every HTML
+`<script>`/inline-`import` path and every relative import inside the moved
+files was updated; `git mv` was used so file history survives the move. If a
+grep for `src/js/<name>.js` (flat, no subfolder) turns up a hit anywhere
+going forward, that reference is stale — the flat paths no longer exist.
+
 ## RESOLVED (2026-07-25): the homepage design-system split is closed
 
 Superseded. The 2026-07-23 note here warned that `index.html` ran a

@@ -184,3 +184,22 @@ describe('Editorial Orchid shared-shell contracts', () => {
     expect(newTabLinks.every((link) => /rel="[^"]*\bnoopener\b[^"]*"/.test(link))).toBe(true);
   });
 });
+
+describe('Page entry-script wiring', () => {
+  /* Regression guard: a bulk redesign once swapped results/index.html's entry
+     script from results.js to main.js, silently orphaning the follower-counter
+     wiring. Each page must load its own dedicated entry, not another page's. */
+  const entries = [
+    ['index.html', '/src/js/home/main.js'],
+    ['story/index.html', '/src/js/story/story.js'],
+    ['results/index.html', '/src/js/results/results.js'],
+    ['schedule/index.html', '/src/js/schedule/schedule-page.js'],
+    ['404.html', '/src/js/notfound/notfound.js'],
+  ];
+
+  it.each(entries)('%s loads its own entry script (%s)', async (page, entry) => {
+    const html = await readPage(page);
+
+    expect(html).toContain(`<script type="module" src="${entry}"></script>`);
+  });
+});

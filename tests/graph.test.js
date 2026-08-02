@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { easeOutCubic, countUpValue, buildGraphPath } from '../src/js/graph.js';
+import { easeOutCubic, countUpValue, buildGraphPath } from '../src/js/results/graph.js';
 
 describe('countUpValue', () => {
   it('returns endpoints at progress 0 and 1', () => {

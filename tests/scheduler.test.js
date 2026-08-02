@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { resolveScheduleMode } from '../src/js/scheduler.js';
+import { resolveScheduleMode } from '../src/js/schedule/scheduler.js';
 
 describe('Schedule mode resolver', () => {
   it('returns calendar when a valid Cal link is provided', () => {

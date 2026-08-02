@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { glowOffset } from '../src/js/glow.js';
+import { glowOffset } from '../src/js/home/glow.js';
 
 describe('glowOffset', () => {
   it('reports the pointer relative to the element box, not the viewport', () => {

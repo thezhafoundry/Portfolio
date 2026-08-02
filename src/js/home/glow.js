@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from './motion.js';
+import { prefersReducedMotion } from '../shared/motion.js';
 
 /* Pure helper: pointer position expressed relative to an element's box, in px.
    Kept separate from the DOM wiring so the math stays unit-testable. */

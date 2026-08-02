@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
-import { springStep, isSettled } from '../src/js/motion.js';
+import { springStep, isSettled } from '../src/js/shared/motion.js';
 
 const readProjectFile = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
@@ -61,14 +61,14 @@ describe('Follower counter spring', () => {
 
 describe('Follower counter wiring', () => {
   it('drives the count with animateSpring instead of a hand-rolled rAF loop', async () => {
-    const js = await readProjectFile('src/js/graph.js');
+    const js = await readProjectFile('src/js/results/graph.js');
 
-    expect(js).toMatch(/import\s*\{[^}]*animateSpring[^}]*\}\s*from\s*'\.\/motion\.js'/);
+    expect(js).toMatch(/import\s*\{[^}]*animateSpring[^}]*\}\s*from\s*'\.\.\/shared\/motion\.js'/);
     expect(js).toMatch(/animateSpring\(/);
   });
 
   it('clamps the rendered value so rounding cannot exceed the real number', async () => {
-    const js = await readProjectFile('src/js/graph.js');
+    const js = await readProjectFile('src/js/results/graph.js');
 
     expect(js).toMatch(/Math\.min/);
   });
@@ -96,7 +96,7 @@ describe('Follower counter wiring', () => {
   });
 
   it('is initialised by the results page entry script', async () => {
-    const js = await readProjectFile('src/js/results.js');
+    const js = await readProjectFile('src/js/results/results.js');
 
     expect(js).toMatch(/renderFollowerCard/);
   });

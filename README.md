@@ -1,6 +1,6 @@
 # Sampath Kumar — Portfolio ("Editorial Orchid")
 
-Four-page static site. Vite + vanilla JS. Design spec:
+Seven-page static site. Vite + vanilla JS. Design spec:
 `docs/superpowers/specs/2026-07-24-editorial-orchid-portfolio-design.md`
 (motion rules in §13). Live design tokens are in `src/styles/identity.css`
 `:root` — read them there rather than from any spec.
@@ -9,35 +9,48 @@ Four-page static site. Vite + vanilla JS. Design spec:
 - `/` — Home: hero, proof metrics, services, process, CTA
 - `/story/` — career told as a conversation, with the engineer→sales pivot
 - `/results/` — proof rail (incl. the animated follower count), editorial ledger of roles, Finquest as the anchor
-- `/schedule/` — Cal.com booking (emails both parties) with a designed fallback
+- `/schedule/` — the paid consulting offer (USD 350 / 60-min), Cal.com booking with a designed fallback, and a "payment link after approval" status
+- `/policies/terms/`, `/policies/privacy/`, `/policies/refunds/` — public policy pages published for payment-gateway review (see `docs/superpowers/specs/2026-08-02-payment-readiness-pages-design.md`)
+- `/404.html` — branded not-found page, served automatically by Netlify/Vercel
 
 ## Commands
 - `npm install` — install dependencies
 - `npm run dev` — dev server (http://localhost:5173)
 - `npm run build` — production build to `dist/`
 - `npm run preview` — preview the production build
-- `npm test` — unit tests (spring physics, graph math)
+- `npm test` — unit tests (spring physics, graph math, content contracts)
 
 ## Deploy
 Netlify: connect the repo; `netlify.toml` handles build + publish dir.
 (Vercel works too: framework preset "Vite", output `dist`.)
 
-## Before launch — real-content TODOs
+## Code structure
+`src/js/` is split by feature, not left flat: `shared/` (nav, motion, reveals,
+magnetic, cursor, pip-video — used by 2+ pages), `home/`, `results/`,
+`schedule/`, `story/`, `notfound/` — one folder per page entry plus its
+exclusive dependencies. Each page's `<script type="module" src="...">` must
+point at its own entry; `tests/site-contract.test.js`'s "Page entry-script
+wiring" block pins the exact path per page so a page can't silently end up
+loading another page's script (this happened once — see
+`.agents/context/subsystem-notes.md`).
 
-Verified 2026-07-25. The older list here named `TODO(spec` markers and CSS
-hooks (`.hero-silhouette`, `.story-photo-slot`, `.pivot` placeholder,
-testimonial comment blocks) that **no longer exist** — the redesign removed
-them, and portraits are already in `assets/`. What actually remains:
+## Before launch
 
-1. **Cal.com link** → set `data-cal-link` in `schedule/index.html` (e.g.
-   `sampath-kumar/30min`). It is empty today, so `/schedule/` renders the
-   LinkedIn fallback rather than a calendar. **This is the only launch blocker.**
-2. **CV PDF + public email** (optional) → no CV link or `cv.pdf` exists yet;
-   add both if the recruiter path matters.
-3. **Follower history curve** (nice-to-have) → `renderFollowerCard` will draw a
-   real curve if given `data-points='[…]'` on `#follower-card` in
-   `results/index.html`. Without it the card counts up the single real
-   number (8,331) — honest by construction, no invented curve.
+Verified 2026-08-02 by grepping the live HTML — no `TODO(spec` markers or
+placeholder content remain.
+
+1. **Cal.com link** → set `data-cal-link` in `schedule/index.html`. It is
+   empty today, so `/schedule/` renders the LinkedIn/phone fallback rather
+   than a calendar. **This is the only remaining launch blocker.**
+2. **Live Razorpay payment link** (not blocking launch) → `/schedule/` and
+   the policy pages intentionally state a payment link is pending approval.
+   Out of scope for this repo until the client's Razorpay account is
+   approved for international payments.
+
+Nice-to-haves: a real `data-points` history curve for the follower-count
+card (currently counts up the one honest real number, 8,331); Playwright /
+visual-regression coverage; lint/typecheck tooling (none configured — this
+is a small vanilla-JS project with manual style review).
 
 ## Design system (do not drift)
 

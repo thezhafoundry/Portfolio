@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { initNav, nextNavState } from '../src/js/nav.js';
+import { initNav, nextNavState } from '../src/js/shared/nav.js';
 
 function createElement() {
   const listeners = new Map();
