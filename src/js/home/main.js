@@ -1,4 +1,5 @@
 import { initNav } from '../shared/nav.js';
+import { initScrollTop } from '../shared/scroll-top.js';
 import { initMedia } from './media.js';
 import { initReveals } from '../shared/bubbles.js';
 import { initGreeting } from './greeting.js';
@@ -9,10 +10,10 @@ import { initOdometer } from './odometer.js';
 import { initSimulator } from './simulator.js';
 import { initProcessEngine } from './process-engine.js';
 import { initTicker } from './ticker.js';
-import { initLinkedinGraph } from './linkedin-graph.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
+  initScrollTop();
   initMedia();
   initReveals();
   initGreeting();
@@ -23,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSimulator();
   initProcessEngine();
   initTicker();
-  initLinkedinGraph();
 });
 
 

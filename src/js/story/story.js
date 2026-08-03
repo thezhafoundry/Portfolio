@@ -3,11 +3,13 @@ import { prefersReducedMotion } from '../shared/motion.js';
 import { initReveals } from '../shared/bubbles.js';
 import { initMagnetic } from '../shared/magnetic.js';
 import { initCustomCursor } from '../shared/cursor.js';
+import { initScrollTop } from '../shared/scroll-top.js';
 
 initNav();
 initReveals();
 initMagnetic();
 initCustomCursor();
+initScrollTop();
 
 const chapters = [...document.querySelectorAll('.story-chapter')];
 const panel = document.querySelector('.chapter-panel');

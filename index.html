@@ -72,87 +72,68 @@
             <div><dt>Outbound CSAT</dt><dd>9.2 / 10</dd></div>
           </dl>
 
-          <!-- CONTINUOUS TRAVELING LINKEDIN FOLLOWER GROWTH CURVE -->
-          <div id="linkedin-follower-traveler" style="margin-block: 1.75rem 1rem; position: relative; width: 100%; height: 55px; overflow: visible;">
-            <svg viewBox="0 0 700 45" preserveAspectRatio="none" style="width: 100%; height: 100%; display: block; overflow: visible;">
-              <defs>
-                <linearGradient id="growth-line-grad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="var(--color-orchid)" stop-opacity="0.2"/>
-                  <stop offset="60%" stop-color="var(--color-orchid)" stop-opacity="0.85"/>
-                  <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
-                </linearGradient>
-              </defs>
+          <!-- IMPRESSIONS OVER TIME CHART -->
+          <section class="linkedin-chart">
+            <header class="linkedin-chart__head">
+              <div>
+                <p class="linkedin-chart__kicker">Audience momentum</p>
+                <h3>Impressions over time</h3>
+                <p class="linkedin-chart__note">Organic content performance with natural campaign peaks and recovery periods.</p>
+              </div>
+              <div class="linkedin-chart__total">
+                <strong>2.1M+</strong>
+                <span>Total impressions</span>
+              </div>
+            </header>
 
-              <!-- Gentle rising curve -->
-              <path class="growth-curve-path" fill="none" stroke="url(#growth-line-grad)" stroke-width="3" stroke-linecap="round" d="M 10 38 C 220 36, 440 24, 660 8"/>
-            </svg>
-
-            <!-- Dynamic Floating Traveler Badge counting up as it travels -->
-            <div data-traveler-badge style="position: absolute; top: 0; left: 0; background: color-mix(in srgb, var(--color-white) 16%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--color-orchid); padding: 0.2rem 0.65rem; border-radius: 20px; color: var(--color-white); font-weight: 700; font-size: 0.82rem; box-shadow: 0 4px 14px rgba(0,0,0,0.2); white-space: nowrap; pointer-events: none; will-change: transform;">
-              0M+ Impressions
+            <div class="linkedin-chart__wrap">
+              <svg viewBox="0 0 1000 230" preserveAspectRatio="none" role="img" aria-label="Impressions chart with peaks and dips">
+                <defs>
+                  <linearGradient id="linkedin-chart-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="var(--color-orchid)" stop-opacity="0.32"/>
+                    <stop offset="100%" stop-color="var(--color-orchid)" stop-opacity="0.02"/>
+                  </linearGradient>
+                  <linearGradient id="linkedin-chart-line" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="var(--color-orchid)"/>
+                    <stop offset="55%" stop-color="var(--color-violet)"/>
+                    <stop offset="100%" stop-color="var(--color-deep-violet)"/>
+                  </linearGradient>
+                </defs>
+                <line class="linkedin-chart__grid" x1="36" y1="35" x2="980" y2="35"/>
+                <line class="linkedin-chart__grid" x1="36" y1="85" x2="980" y2="85"/>
+                <line class="linkedin-chart__grid" x1="36" y1="135" x2="980" y2="135"/>
+                <line class="linkedin-chart__grid" x1="36" y1="185" x2="980" y2="185"/>
+                <text class="linkedin-chart__axis-label" x="0" y="39">300K</text>
+                <text class="linkedin-chart__axis-label" x="0" y="89">200K</text>
+                <text class="linkedin-chart__axis-label" x="0" y="139">100K</text>
+                <text class="linkedin-chart__axis-label" x="12" y="189">0</text>
+                <path class="linkedin-chart__area" d="M36 178 C78 172,93 147,126 150 S182 171,215 136 S267 72,307 88 S362 132,401 120 S452 46,497 62 S544 123,585 115 S637 137,676 101 S724 54,765 76 S824 126,858 98 S911 32,980 44 L980 190 L36 190 Z"/>
+                <path class="linkedin-chart__line" d="M36 178 C78 172,93 147,126 150 S182 171,215 136 S267 72,307 88 S362 132,401 120 S452 46,497 62 S544 123,585 115 S637 137,676 101 S724 54,765 76 S824 126,858 98 S911 32,980 44"/>
+                <circle class="linkedin-chart__point" cx="126" cy="150" r="5"/>
+                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="307" cy="88" r="6"/>
+                <circle class="linkedin-chart__point" cx="401" cy="120" r="5"/>
+                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="497" cy="62" r="6"/>
+                <circle class="linkedin-chart__point" cx="585" cy="115" r="5"/>
+                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="765" cy="76" r="6"/>
+                <circle class="linkedin-chart__point" cx="858" cy="98" r="5"/>
+                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="980" cy="44" r="6"/>
+                <g class="linkedin-chart__tooltip" transform="translate(815,8)">
+                  <rect width="145" height="28" rx="14"/>
+                  <text x="14" y="18">Latest growth peak ↗</text>
+                </g>
+              </svg>
             </div>
 
-            <!-- Dynamic Traveler Pointer Dot -->
-            <div data-traveler-dot style="position: absolute; top: 0; left: 0; width: 10px; height: 10px; background: #ffffff; border: 2px solid var(--color-orchid); border-radius: 50%; box-shadow: 0 0 10px var(--color-orchid); margin-left: -5px; margin-top: -5px; pointer-events: none; will-change: transform;"></div>
-          </div>
-
-          <!-- LINKEDIN SOCIAL SELLING INDEX (SSI) 4-PILLAR SCORES -->
-          <div style="margin-top: 2rem; padding-top: 1.75rem; border-top: 1px dashed color-mix(in srgb, var(--color-orchid) 30%, transparent);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
-              <p class="eyebrow" style="margin: 0; color: var(--color-orchid);">LinkedIn Social Selling Index (SSI) Scorecard</p>
-              <span style="font-size: 0.85rem; color: color-mix(in srgb, var(--color-white) 75%, transparent); font-weight: 600;">Industry Rank: Top 1%</span>
+            <div class="linkedin-chart__axis">
+              <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+              <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
-              <!-- Pillar 1 -->
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
-                  <span style="color: var(--color-white); font-weight: 600;">1. Establish Personal Brand</span>
-                  <strong style="color: var(--color-orchid);">98 / 100</strong>
-                </div>
-                <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 98%; height: 100%; background: linear-gradient(90deg, var(--color-orchid), #e9d5ff); border-radius: 4px;"></div>
-                </div>
-                <span style="font-size: 0.75rem; color: color-mix(in srgb, var(--color-white) 65%, transparent); margin-top: 0.25rem; display: block;">2.1M+ organic impressions &amp; brand architecture</span>
-              </div>
-
-              <!-- Pillar 2 -->
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
-                  <span style="color: var(--color-white); font-weight: 600;">2. Find the Right People</span>
-                  <strong style="color: var(--color-orchid);">95 / 100</strong>
-                </div>
-                <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 95%; height: 100%; background: linear-gradient(90deg, var(--color-orchid), #e9d5ff); border-radius: 4px;"></div>
-                </div>
-                <span style="font-size: 0.75rem; color: color-mix(in srgb, var(--color-white) 65%, transparent); margin-top: 0.25rem; display: block;">10,000+ C-suite &amp; VP targeted connections</span>
-              </div>
-
-              <!-- Pillar 3 -->
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
-                  <span style="color: var(--color-white); font-weight: 600;">3. Engage with Insights</span>
-                  <strong style="color: var(--color-orchid);">96 / 100</strong>
-                </div>
-                <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 96%; height: 100%; background: linear-gradient(90deg, var(--color-orchid), #e9d5ff); border-radius: 4px;"></div>
-                </div>
-                <span style="font-size: 0.75rem; color: color-mix(in srgb, var(--color-white) 65%, transparent); margin-top: 0.25rem; display: block;">9.2 / 10 CSAT score &amp; market intelligence</span>
-              </div>
-
-              <!-- Pillar 4 -->
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
-                  <span style="color: var(--color-white); font-weight: 600;">4. Build Relationships</span>
-                  <strong style="color: var(--color-orchid);">94 / 100</strong>
-                </div>
-                <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
-                  <div style="width: 94%; height: 100%; background: linear-gradient(90deg, var(--color-orchid), #e9d5ff); border-radius: 4px;"></div>
-                </div>
-                <span style="font-size: 0.75rem; color: color-mix(in srgb, var(--color-white) 65%, transparent); margin-top: 0.25rem; display: block;">+35% lead-to-meeting conversion lift</span>
-              </div>
-            </div>
-          </div>
+            <footer class="linkedin-chart__foot">
+              <span class="linkedin-chart__legend"><i></i>Organic impressions</span>
+              <span class="linkedin-chart__caption">Illustrative trend — connect actual analytics for production</span>
+            </footer>
+          </section>
         </div>
       </div>
     </section>
@@ -594,6 +575,11 @@
       </div>
     </div>
   </footer>
+
+  <button type="button" class="scroll-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+  </button>
+
   <script type="module" src="/src/js/home/main.js"></script>
 
   <!-- Floating PiP video -->

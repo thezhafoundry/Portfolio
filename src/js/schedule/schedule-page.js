@@ -4,12 +4,14 @@ import { initReveals } from '../shared/bubbles.js';
 import { initMagnetic } from '../shared/magnetic.js';
 import { initCustomCursor } from '../shared/cursor.js';
 import { initSimulator } from '../home/simulator.js';
+import { initScrollTop } from '../shared/scroll-top.js';
 
 initNav();
 initReveals();
 initMagnetic();
 initCustomCursor();
 initSimulator();
+initScrollTop();
 
 const container = document.getElementById('cal-embed');
 const fallback = document.getElementById('cal-fallback');

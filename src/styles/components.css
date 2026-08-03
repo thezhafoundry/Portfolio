@@ -397,6 +397,61 @@ body.nav-is-open {
   fill: currentColor;
 }
 
+/* Back-to-hero control. Fixed bottom-left (not bottom-right, where #pip-wrap
+   lives on the homepage and story page) — appears once the footer scrolls
+   into view, scroll-top.js toggles .is-visible via IntersectionObserver. */
+.scroll-top {
+  position: fixed;
+  left: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 150;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid color-mix(in srgb, var(--color-deep-violet) 22%, transparent);
+  border-radius: 999px;
+  background: var(--color-canvas);
+  color: var(--color-deep-violet);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-deep-violet) 18%, transparent);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  pointer-events: none;
+  transition: opacity var(--duration-surface) var(--ease-out),
+    transform var(--duration-surface) var(--ease-out),
+    background var(--duration-hover) var(--ease-out),
+    color var(--duration-hover) var(--ease-out);
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.scroll-top svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: currentColor;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .scroll-top:hover {
+    background: var(--color-deep-violet);
+    color: var(--color-white);
+  }
+}
+
+.scroll-top:active {
+  transform: scale(0.94);
+}
+
+.scroll-top:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
 /* Shared action states. */
 .btn,
 .btn--secondary,
