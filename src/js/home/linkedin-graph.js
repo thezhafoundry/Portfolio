@@ -9,52 +9,72 @@ export function initFollowerTraveler() {
   if (!path || !dot || !badge) return;
 
   const totalLen = path.getTotalLength();
+  const BASELINE_MILLIONS = 0;
+  const TARGET_MILLIONS = 2.1;
+  const DURATION = 2400; // ms — a single authored reveal, not a loop
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function settleAtEnd() {
+    const pt = path.getPointAtLength(totalLen);
+    path.style.strokeDasharray = String(totalLen);
+    path.style.strokeDashoffset = '0';
+    dot.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
+    badge.style.transform = `translate(${pt.x}px, ${pt.y - 28}px)`;
+    badge.textContent = `${TARGET_MILLIONS.toFixed(1)}M+ Impressions`;
+  }
+
+  if (reduceMotion) {
+    settleAtEnd();
+    return;
+  }
+
   path.style.strokeDasharray = String(totalLen);
   path.style.strokeDashoffset = String(totalLen);
 
-  const BASELINE_COUNT = 0;
-  const TARGET_COUNT = 10000;
-  const DURATION = 5000; // 5 seconds travel time
-  const PAUSE = 5000; // 5 seconds hold at peak
-
   let startTime = null;
+  let playing = false;
 
   function step(timestamp) {
     if (!startTime) startTime = timestamp;
     const elapsed = timestamp - startTime;
+    const rawProgress = Math.min(elapsed / DURATION, 1);
+    // Smooth ease-out
+    const progress = 1 - Math.pow(1 - rawProgress, 2.5);
 
-    if (elapsed < DURATION) {
-      const rawProgress = elapsed / DURATION;
-      // Smooth ease-out
-      const progress = 1 - Math.pow(1 - rawProgress, 2.5);
+    const pt = path.getPointAtLength(totalLen * progress);
+    path.style.strokeDashoffset = String(totalLen * (1 - progress));
+    dot.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
+    badge.style.transform = `translate(${pt.x}px, ${pt.y - 28}px)`;
 
-      const pt = path.getPointAtLength(totalLen * progress);
-      path.style.strokeDashoffset = String(totalLen * (1 - progress));
+    const currentMillions = BASELINE_MILLIONS + (TARGET_MILLIONS - BASELINE_MILLIONS) * progress;
+    badge.textContent = `${currentMillions.toFixed(1)}M+ Impressions`;
 
-      dot.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
-      badge.style.transform = `translate(${pt.x}px, ${pt.y - 28}px)`;
-
-      const currentCount = Math.min(TARGET_COUNT, Math.round(BASELINE_COUNT + (TARGET_COUNT - BASELINE_COUNT) * progress));
-      badge.textContent = `${currentCount.toLocaleString('en-US')}+ Followers`;
-
-      requestAnimationFrame(step);
-    } else if (elapsed < DURATION + PAUSE) {
-      // Hold at peak point (10,000+ Followers) for 5 seconds
-      const pt = path.getPointAtLength(totalLen);
-      path.style.strokeDashoffset = '0';
-      dot.style.transform = `translate(${pt.x}px, ${pt.y}px)`;
-      badge.style.transform = `translate(${pt.x}px, ${pt.y - 28}px)`;
-      badge.textContent = '10,000+ Followers';
-
+    if (rawProgress < 1) {
       requestAnimationFrame(step);
     } else {
-      // Reset & Loop
-      startTime = timestamp;
-      requestAnimationFrame(step);
+      settleAtEnd();
     }
   }
 
-  requestAnimationFrame(step);
+  function play() {
+    if (playing) return;
+    playing = true;
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          play();
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  observer.observe(container);
 }
 
 export function initLinkedinGraph() {
