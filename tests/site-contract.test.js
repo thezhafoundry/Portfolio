@@ -59,11 +59,12 @@ describe('Editorial Orchid Home contracts', () => {
     expect(portrait).toContain('fetchpriority="high"');
   });
 
-  it('points the primary hero action at the schedule and keeps an honest schedule path available', async () => {
+  it('points the hero actions at proof-of-work sections and keeps an honest schedule path available', async () => {
     const html = await readPage('index.html');
     const hero = html.match(/<section\b[^>]*class="[^"]*hero[^"]*"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
 
-    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="\/schedule\/"/);
+    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="#companies"/);
+    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--secondary[^"]*"[^>]*href="#results"/);
     expect(html).toMatch(/href="\/schedule\/"/);
   });
 
