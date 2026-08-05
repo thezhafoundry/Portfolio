@@ -26,6 +26,10 @@
   --duration-press: 160ms;
   --duration-hover: 180ms;
   --duration-surface: 260ms;
+  /* Right-edge inset shared by every fixed floating control, so the
+     scroll-top button, chatbot trigger and PiP video widget stack in one
+     column instead of colliding at the corner. */
+  --float-inset: clamp(1rem, 3vw, 2rem);
 }
 
 *,
