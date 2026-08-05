@@ -5,6 +5,7 @@ import { initMagnetic } from '../shared/magnetic.js';
 import { initCustomCursor } from '../shared/cursor.js';
 import { initSimulator } from '../home/simulator.js';
 import { initScrollTop } from '../shared/scroll-top.js';
+import { initChatbot } from '../shared/chatbot.js';
 
 initNav();
 initReveals();
@@ -12,6 +13,7 @@ initMagnetic();
 initCustomCursor();
 initSimulator();
 initScrollTop();
+initChatbot();
 
 const container = document.getElementById('cal-embed');
 const fallback = document.getElementById('cal-fallback');

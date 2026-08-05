@@ -183,6 +183,60 @@
     </button>
   </div>
 
+  <button id="chatbot-trigger" type="button" class="chatbot-trigger" aria-expanded="false" aria-controls="chatbot-panel" aria-label="Chat with Sampath Kumar's assistant">
+    <svg class="chatbot-trigger__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/></svg>
+  </button>
+
+  <div id="chatbot-panel" class="chatbot-panel" role="dialog" aria-label="Chat with Sampath Kumar's assistant" aria-hidden="true" hidden>
+    <div class="chatbot-panel__head">
+      <p class="chatbot-panel__title">Ask a quick question</p>
+      <button id="chatbot-close" type="button" class="chatbot-panel__close" aria-label="Close chat">&#10005;</button>
+    </div>
+
+    <div id="chatbot-menu" class="chatbot-view">
+      <button type="button" class="chatbot-chip" data-chatbot-show="services">What services do you offer?</button>
+      <button type="button" class="chatbot-chip" data-chatbot-show="process">What's your process?</button>
+      <button type="button" class="chatbot-chip" data-chatbot-show="pricing">How much does it cost?</button>
+      <button type="button" class="chatbot-chip" data-chatbot-show="results">Can I see past results?</button>
+      <button type="button" class="chatbot-chip" data-chatbot-show="booking">How do I book a call?</button>
+    </div>
+
+    <div id="chatbot-answer-services" class="chatbot-view chatbot-answer" hidden>
+      <p class="bubble bubble--me">What services do you offer?</p>
+      <p class="bubble bubble--reply">I run outbound B2B &amp; B2C lead generation, automated prospect enrichment, and pre-sales deal architecture &mdash; from cold email and LinkedIn cadences through enterprise solution demos to MQL delivery and commercial proposal handoff.</p>
+      <a class="btn btn--primary chatbot-answer__cta" href="/#about-lead-gen">Read more</a>
+      <button type="button" class="chatbot-chip chatbot-chip--back" data-chatbot-show="menu">Ask another question</button>
+    </div>
+
+    <div id="chatbot-answer-process" class="chatbot-view chatbot-answer" hidden>
+      <p class="bubble bubble--me">What's your process?</p>
+      <p class="bubble bubble--reply">Multi-channel outbound cadences open qualified conversations, which move into enterprise solution demos, then MQL delivery and a commercial proposal handoff.</p>
+      <a class="btn btn--primary chatbot-answer__cta" href="/#tools">See the tools</a>
+      <button type="button" class="chatbot-chip chatbot-chip--back" data-chatbot-show="menu">Ask another question</button>
+    </div>
+
+    <div id="chatbot-answer-pricing" class="chatbot-view chatbot-answer" hidden>
+      <p class="bubble bubble--me">How much does it cost?</p>
+      <p class="bubble bubble--reply">USD 350 for a single 60-minute remote consulting session, scheduled on Indian Standard Time (IST).</p>
+      <a class="btn btn--primary chatbot-answer__cta" href="/schedule/">Book a session</a>
+      <button type="button" class="chatbot-chip chatbot-chip--back" data-chatbot-show="menu">Ask another question</button>
+    </div>
+
+    <div id="chatbot-answer-results" class="chatbot-view chatbot-answer" hidden>
+      <p class="bubble bubble--me">Can I see past results?</p>
+      <p class="bubble bubble--reply">10,000+ followers and 2.1M+ impressions, plus case studies like a 200M+ record M&amp;A sourcing engine built for Finquest.</p>
+      <a class="btn btn--primary chatbot-answer__cta" href="/results/">View case studies</a>
+      <button type="button" class="chatbot-chip chatbot-chip--back" data-chatbot-show="menu">Ask another question</button>
+    </div>
+
+    <div id="chatbot-answer-booking" class="chatbot-view chatbot-answer" hidden>
+      <p class="bubble bubble--me">How do I book a call?</p>
+      <p class="bubble bubble--reply">Head to the schedule page to pick a time &mdash; sessions run on Indian Standard Time (IST).</p>
+      <a class="btn btn--primary chatbot-answer__cta" href="/schedule/">Go to the schedule page</a>
+      <button type="button" class="chatbot-chip chatbot-chip--back" data-chatbot-show="menu">Ask another question</button>
+    </div>
+  </div>
+
   <script type="module" src="/src/js/story/story.js"></script>
   <script type="module">import { initPip } from '/src/js/shared/pip-video.js'; initPip();</script>
 </body>

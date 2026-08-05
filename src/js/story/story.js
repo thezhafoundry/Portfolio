@@ -4,12 +4,14 @@ import { initReveals } from '../shared/bubbles.js';
 import { initMagnetic } from '../shared/magnetic.js';
 import { initCustomCursor } from '../shared/cursor.js';
 import { initScrollTop } from '../shared/scroll-top.js';
+import { initChatbot } from '../shared/chatbot.js';
 
 initNav();
 initReveals();
 initMagnetic();
 initCustomCursor();
 initScrollTop();
+initChatbot();
 
 const chapters = [...document.querySelectorAll('.story-chapter')];
 const panel = document.querySelector('.chapter-panel');

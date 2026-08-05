@@ -134,12 +134,19 @@ describe('Editorial Orchid Results contracts', () => {
 describe('Editorial Orchid Schedule contracts', () => {
   it('defaults to an honest conversation fallback without misleading booking claims', async () => {
     const html = await readPage('schedule/index.html');
+    /* The site-wide chatbot widget (identical markup on every page, see the
+       "Chatbot widget" contracts below) truthfully answers "Can I see past
+       results?" with the same follower count shown on the homepage. That's
+       not a schedule-page claim, so it's excluded from this guard — the
+       widget is always appended right before the page's entry script, after
+       all of the page's own authored content. */
+    const pageContent = html.split('<button id="chatbot-trigger"')[0];
 
-    expect(html).not.toContain('Pick a time');
-    expect(html).toContain('Start a conversation');
-    expect(html).toContain('linkedin.com/in/sampath-kumar-tn66sk9699');
-    expect(html).toMatch(/role="status"[^>]*aria-live="polite"/);
-    expect(html).not.toMatch(/@gmail|download CV|followers|instant booking/i);
+    expect(pageContent).not.toContain('Pick a time');
+    expect(pageContent).toContain('Start a conversation');
+    expect(pageContent).toContain('linkedin.com/in/sampath-kumar-tn66sk9699');
+    expect(pageContent).toMatch(/role="status"[^>]*aria-live="polite"/);
+    expect(pageContent).not.toMatch(/@gmail|download CV|followers|instant booking/i);
   });
 });
 
@@ -202,5 +209,42 @@ describe('Page entry-script wiring', () => {
     const html = await readPage(page);
 
     expect(html).toContain(`<script type="module" src="${entry}"></script>`);
+  });
+});
+
+describe('Chatbot widget', () => {
+  const chatbotPages = [
+    'index.html',
+    'story/index.html',
+    'results/index.html',
+    'schedule/index.html',
+    'policies/terms/index.html',
+    'policies/privacy/index.html',
+    'policies/refunds/index.html',
+    '404.html',
+  ];
+
+  it.each(chatbotPages)('%s mounts the chatbot trigger and panel', async (page) => {
+    const html = await readPage(page);
+
+    expect(html).toContain('id="chatbot-trigger"');
+    expect(html).toContain('id="chatbot-panel"');
+    expect(html).toContain('id="chatbot-menu"');
+  });
+
+  it('states the real session rate on the pricing answer', async () => {
+    const html = await readPage('index.html');
+    const pricing = html.match(/<div id="chatbot-answer-pricing"[\s\S]*?<\/div>/)?.[0] ?? '';
+
+    expect(pricing).toContain('USD 350');
+  });
+
+  it('lists all five FAQ chips in the menu', async () => {
+    const html = await readPage('index.html');
+    const menu = html.match(/<div id="chatbot-menu"[\s\S]*?<\/div>/)?.[0] ?? '';
+
+    ['services', 'process', 'pricing', 'results', 'booking'].forEach((id) => {
+      expect(menu).toContain(`data-chatbot-show="${id}"`);
+    });
   });
 });

@@ -1,5 +1,6 @@
 import { initNav } from '../shared/nav.js';
 import { initScrollTop } from '../shared/scroll-top.js';
+import { initChatbot } from '../shared/chatbot.js';
 import { initMedia } from './media.js';
 import { initReveals } from '../shared/bubbles.js';
 import { initGreeting } from './greeting.js';
@@ -14,6 +15,7 @@ import { initTicker } from './ticker.js';
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initScrollTop();
+  initChatbot();
   initMedia();
   initReveals();
   initGreeting();
