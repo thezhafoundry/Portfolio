@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/src/styles/identity.css">
   <link rel="stylesheet" href="/src/styles/components.css">
   <link rel="stylesheet" href="/src/styles/home.css">
+  <link rel="stylesheet" href="/src/styles/home-sections.css">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -51,102 +52,112 @@
       </div>
     </section>
 
-    <!-- LINKEDIN PROOF CARD -->
-    <section class="linkedin-proof section" aria-label="LinkedIn impact">
-      <div class="container">
-        <div class="linkedin-card reveal">
-          <div class="linkedin-card__head">
-            <div>
-              <p class="linkedin-card__badge"><span class="live-dot" aria-hidden="true"></span>Live LinkedIn impact &amp; Social Selling Index</p>
-              <h2>10,000+ followers &amp; 2.1M+ impressions</h2>
-              <p class="linkedin-card__lede">Verified LinkedIn Creator Analytics &amp; Social Selling Index (SSI) framework driving steady B2B &amp; B2C inbound leads.</p>
-            </div>
-            <a class="btn btn--ghost-cream" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+    <!-- ============ LINKEDIN PROOF ============
+         The dark card is gone. It was a wrapper whose own content restated the
+         heading, and it forced the chart to live as a card-inside-a-card. The
+         section now reads like every other one: a .lede header, a stat rail,
+         then the chart standing on its own. -->
+    <section class="band band--proof" aria-labelledby="proof-heading">
+      <div class="wrap container">
+        <header class="lede reveal">
+          <div class="lede__left">
+            <p class="tag tag--live"><span class="dot" aria-hidden="true"></span>Live LinkedIn impact</p>
+            <h2 id="proof-heading">10,000+ followers &amp; 2.1M+ impressions</h2>
           </div>
-
-          <!-- LINKEDIN CREATOR ANALYTICS METRICS -->
-          <dl class="linkedin-card__stats">
-            <div><dt>Network size</dt><dd>10,000+</dd></div>
-            <div><dt>Content reach</dt><dd>2.1M+</dd></div>
-            <div><dt>Active followers</dt><dd>10k+</dd></div>
-            <div><dt>Outbound CSAT</dt><dd>9.2 / 10</dd></div>
-          </dl>
-
-          <!-- IMPRESSIONS OVER TIME CHART -->
-          <section class="linkedin-chart">
-            <header class="linkedin-chart__head">
-              <div>
-                <p class="linkedin-chart__kicker">Audience momentum</p>
-                <h3>Impressions over time</h3>
-                <p class="linkedin-chart__note">Organic content performance with natural campaign peaks and recovery periods.</p>
-              </div>
-              <div class="linkedin-chart__total">
-                <strong>2.1M+</strong>
-                <span>Total impressions</span>
-              </div>
-            </header>
-
-            <div class="linkedin-chart__wrap">
-              <svg viewBox="0 0 1000 230" preserveAspectRatio="none" role="img" aria-label="Impressions chart with peaks and dips">
-                <defs>
-                  <linearGradient id="linkedin-chart-area" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="var(--color-orchid)" stop-opacity="0.32"/>
-                    <stop offset="100%" stop-color="var(--color-orchid)" stop-opacity="0.02"/>
-                  </linearGradient>
-                  <linearGradient id="linkedin-chart-line" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stop-color="var(--color-orchid)"/>
-                    <stop offset="55%" stop-color="var(--color-violet)"/>
-                    <stop offset="100%" stop-color="var(--color-deep-violet)"/>
-                  </linearGradient>
-                </defs>
-                <line class="linkedin-chart__grid" x1="36" y1="35" x2="980" y2="35"/>
-                <line class="linkedin-chart__grid" x1="36" y1="85" x2="980" y2="85"/>
-                <line class="linkedin-chart__grid" x1="36" y1="135" x2="980" y2="135"/>
-                <line class="linkedin-chart__grid" x1="36" y1="185" x2="980" y2="185"/>
-                <text class="linkedin-chart__axis-label" x="0" y="39">300K</text>
-                <text class="linkedin-chart__axis-label" x="0" y="89">200K</text>
-                <text class="linkedin-chart__axis-label" x="0" y="139">100K</text>
-                <text class="linkedin-chart__axis-label" x="12" y="189">0</text>
-                <path class="linkedin-chart__area" d="M36 178 C78 172,93 147,126 150 S182 171,215 136 S267 72,307 88 S362 132,401 120 S452 46,497 62 S544 123,585 115 S637 137,676 101 S724 54,765 76 S824 126,858 98 S911 32,980 44 L980 190 L36 190 Z"/>
-                <path class="linkedin-chart__line" d="M36 178 C78 172,93 147,126 150 S182 171,215 136 S267 72,307 88 S362 132,401 120 S452 46,497 62 S544 123,585 115 S637 137,676 101 S724 54,765 76 S824 126,858 98 S911 32,980 44"/>
-                <circle class="linkedin-chart__point" cx="126" cy="150" r="5"/>
-                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="307" cy="88" r="6"/>
-                <circle class="linkedin-chart__point" cx="401" cy="120" r="5"/>
-                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="497" cy="62" r="6"/>
-                <circle class="linkedin-chart__point" cx="585" cy="115" r="5"/>
-                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="765" cy="76" r="6"/>
-                <circle class="linkedin-chart__point" cx="858" cy="98" r="5"/>
-                <circle class="linkedin-chart__point linkedin-chart__point--peak" cx="980" cy="44" r="6"/>
-                <g class="linkedin-chart__tooltip" transform="translate(815,8)">
-                  <rect width="145" height="28" rx="14"/>
-                  <text x="14" y="18">Latest growth peak ↗</text>
-                </g>
-              </svg>
+          <div class="lede__aside">
+            <p class="lede__note">Verified LinkedIn Creator Analytics &amp; Social Selling Index (SSI) framework driving steady B2B &amp; B2C inbound leads.</p>
+            <div class="lede__proof">
+              <a class="cta cta--line" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
+                <span>Connect on LinkedIn</span><i class="cta__pip" aria-hidden="true">↗</i>
+              </a>
+              <p class="proof-chip"><strong>9.2 / 10</strong><span>Outbound CSAT</span></p>
             </div>
+          </div>
+        </header>
 
-            <div class="linkedin-chart__axis">
-              <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
-              <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
-            </div>
 
-            <footer class="linkedin-chart__foot">
-              <span class="linkedin-chart__legend"><i></i>Organic impressions</span>
-              <span class="linkedin-chart__caption">Illustrative trend — connect actual analytics for production</span>
-            </footer>
-          </section>
+        <div class="tray reveal">
+          <div class="tray__core">
+            <section class="chart">
+              <header class="chart__head">
+                <div>
+                  <p class="tag tag--quiet">Audience momentum</p>
+                  <h3>Impressions over time</h3>
+                  <p class="chart__note">Organic content performance with natural campaign peaks and recovery periods.</p>
+                </div>
+                <div class="chart__total">
+                  <strong>2.1M+</strong>
+                  <span>Total impressions</span>
+                </div>
+              </header>
+
+              <div class="chart__wrap">
+                <svg viewBox="0 0 1000 230" preserveAspectRatio="none" role="img" aria-label="Impressions chart with peaks and dips">
+                  <defs>
+                    <linearGradient id="p-area" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.34"/>
+                      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.02"/>
+                    </linearGradient>
+                    <linearGradient id="p-line" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#c084fc"/>
+                      <stop offset="55%" stop-color="#6b21a8"/>
+                      <stop offset="100%" stop-color="#2e1065"/>
+                    </linearGradient>
+                  </defs>
+                  <line class="chart__grid" x1="36" y1="35" x2="980" y2="35"/>
+                  <line class="chart__grid" x1="36" y1="85" x2="980" y2="85"/>
+                  <line class="chart__grid" x1="36" y1="135" x2="980" y2="135"/>
+                  <line class="chart__grid" x1="36" y1="185" x2="980" y2="185"/>
+                  <text class="chart__axis-label" x="0" y="39">300K</text>
+                  <text class="chart__axis-label" x="0" y="89">200K</text>
+                  <text class="chart__axis-label" x="0" y="139">100K</text>
+                  <text class="chart__axis-label" x="12" y="189">0</text>
+                  <path class="chart__area" d="M36 178 C78 172,93 147,126 150 S182 171,215 136 S267 72,307 88 S362 132,401 120 S452 46,497 62 S544 123,585 115 S637 137,676 101 S724 54,765 76 S824 126,858 98 S911 32,980 44 L980 190 L36 190 Z"/>
+                  <path class="chart__line" d="M36 178 C78 172,93 147,126 150 S182 171,215 136 S267 72,307 88 S362 132,401 120 S452 46,497 62 S544 123,585 115 S637 137,676 101 S724 54,765 76 S824 126,858 98 S911 32,980 44"/>
+                  <circle class="chart__pt" cx="126" cy="150" r="5"/>
+                  <circle class="chart__pt chart__pt--peak" cx="307" cy="88" r="6"/>
+                  <circle class="chart__pt" cx="401" cy="120" r="5"/>
+                  <circle class="chart__pt chart__pt--peak" cx="497" cy="62" r="6"/>
+                  <circle class="chart__pt" cx="585" cy="115" r="5"/>
+                  <circle class="chart__pt chart__pt--peak" cx="765" cy="76" r="6"/>
+                  <circle class="chart__pt" cx="858" cy="98" r="5"/>
+                  <circle class="chart__pt chart__pt--peak" cx="980" cy="44" r="6"/>
+                  <g class="chart__tip" transform="translate(815,8)">
+                    <rect width="145" height="28" rx="14"/>
+                    <text x="14" y="18">Latest growth peak ↗</text>
+                  </g>
+                </svg>
+              </div>
+
+              <div class="chart__axis">
+                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+              </div>
+
+              <footer class="chart__foot">
+                <span class="chart__legend"><i></i>Organic impressions</span>
+                <span class="chart__caption">Illustrative trend — connect actual analytics for production</span>
+              </footer>
+            </section>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT LEAD GEN & YOUTUBE VIDEO POPUP MODAL -->
-    <section id="about-lead-gen" class="note section" aria-labelledby="about-lead-gen-heading">
-      <div class="container note__grid reveal">
-        <figure class="note__media">
-          <img src="/assets/strategy_session.jpg" alt="Sampath Kumar leading a pre-sales and lead generation strategy session" width="1376" height="768" loading="lazy">
-          <span class="note__slats" aria-hidden="true"></span>
+    <!-- ============ ABOUT — editorial split with overlapping figure ============ -->
+    <section id="about-lead-gen" class="band" aria-labelledby="about-lead-gen-heading">
+      <div class="wrap note">
+        <figure class="note__media reveal">
+          <div class="tray tray--tight">
+            <div class="tray__core">
+              <img src="/assets/strategy_session.jpg" alt="Sampath Kumar leading a pre-sales and lead generation strategy session" width="1376" height="768" loading="lazy">
+              <span class="note__slats" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="note__stamp" aria-hidden="true">7+<span>years</span></p>
         </figure>
-        <div class="note__body">
-          <p class="eyebrow">Pre-Sales Leadership &amp; Fractional Strategy</p>
+        <div class="note__body reveal">
+          <p class="tag">Pre-Sales Leadership &amp; Fractional Strategy</p>
           <h2 id="about-lead-gen-heading">Building high-volume Lead Generation &amp; Pre-Sales engines.</h2>
           <p class="note__lede">I bring an engineer's analytical rigour to B2B &amp; B2C outbound lead generation, automated prospect enrichment, and pre-sales deal architecture — specializing in B2B SaaS, service-based private markets, and global account expansion.</p>
           <p class="note__copy">From structuring multi-channel cold email &amp; LinkedIn outreach cadences to conducting enterprise solution demos through to delivering Marketing Qualified Leads (MQLs) and managing commercial proposal handoffs, I engineer dependable sales pipelines that consistently convert targeted prospects into booked meetings.</p>
@@ -154,373 +165,392 @@
       </div>
     </section>
 
-    <!-- INDUSTRIES WORKED IN (No company names) -->
-    <section id="industries" class="section" aria-labelledby="industries-heading">
-      <div class="container">
-        <header class="lede lede--split reveal">
-          <div>
-            <p class="eyebrow">Sector Breadth</p>
-            <h2 id="industries-heading">Industries Worked In</h2>
+    <!-- ============ INDUSTRIES — asymmetrical bento ============ -->
+    <section id="industries" class="band band--tint" aria-labelledby="industries-heading">
+      <div class="wrap container">
+        <header class="lede reveal">
+          <div class="lede__left">
+            <p class="tag">Sector Breadth</p>
+            <h2 id="industries-heading">Industries worked in</h2>
           </div>
           <p class="lede__note">7+ years of deep domain experience across key global growth sectors.</p>
         </header>
 
-        <div class="outcomes__grid reveal-group">
-          <article class="outcome"><span class="outcome__tag">SaaS</span><div><strong>B2B &amp; B2C SaaS</strong><p>High-velocity growth across IT &amp; SaaS platforms.</p></div><span class="wash" aria-hidden="true"></span></article>
-          <article class="outcome"><span class="outcome__tag">Markets</span><div><strong>Service-Based Private Markets</strong><p>Global account expansion &amp; deal origination.</p></div><span class="wash" aria-hidden="true"></span></article>
-          <article class="outcome"><span class="outcome__tag">Staffing</span><div><strong>Staffing &amp; Recruiting</strong><p>Fractional pre-sales &amp; BDR talent acceleration.</p></div><span class="wash" aria-hidden="true"></span></article>
-          <article class="outcome"><span class="outcome__tag">Health</span><div><strong>Pharma &amp; Healthcare</strong><p>Targeted medical &amp; healthcare B2B lead gen.</p></div><span class="wash" aria-hidden="true"></span></article>
-          <article class="outcome"><span class="outcome__tag">Finance</span><div><strong>Banking, Finance &amp; BPO</strong><p>Financial service pipelines &amp; back-end solutions.</p></div><span class="wash" aria-hidden="true"></span></article>
-          <article class="outcome"><span class="outcome__tag">Commerce</span><div><strong>E-commerce, Retail &amp; Aviation</strong><p>Omnichannel B2B &amp; B2C campaign strategy.</p></div><span class="wash" aria-hidden="true"></span></article>
-          <article class="outcome"><span class="outcome__tag">Education</span><div><strong>Education &amp; EdTech</strong><p>Institutional lead gen &amp; consultative selling.</p></div><span class="wash" aria-hidden="true"></span></article>
-          <article class="outcome"><span class="outcome__tag">Engineering</span><div><strong>Energy, Utilities &amp; Engineering</strong><p>Technical proposal scoping &amp; enterprise demos.</p></div><span class="wash" aria-hidden="true"></span></article>
+        <div class="bento reveal-group">
+          <article class="cell cell--lead">
+            <span class="cell__tag">SaaS</span>
+            <strong>B2B &amp; B2C SaaS</strong>
+            <p>High-velocity growth across IT &amp; SaaS platforms.</p>
+          </article>
+          <article class="cell cell--wide">
+            <span class="cell__tag">Markets</span>
+            <strong>Service-Based Private Markets</strong>
+            <p>Global account expansion &amp; deal origination.</p>
+          </article>
+          <article class="cell">
+            <span class="cell__tag">Staffing</span>
+            <strong>Staffing &amp; Recruiting</strong>
+            <p>Fractional pre-sales &amp; BDR talent acceleration.</p>
+          </article>
+          <article class="cell">
+            <span class="cell__tag">Health</span>
+            <strong>Pharma &amp; Healthcare</strong>
+            <p>Targeted medical &amp; healthcare B2B lead gen.</p>
+          </article>
+          <article class="cell">
+            <span class="cell__tag">Finance</span>
+            <strong>Banking, Finance &amp; BPO</strong>
+            <p>Financial service pipelines &amp; back-end solutions.</p>
+          </article>
+          <article class="cell cell--wide">
+            <span class="cell__tag">Commerce</span>
+            <strong>E-commerce, Retail &amp; Aviation</strong>
+            <p>Omnichannel B2B &amp; B2C campaign strategy.</p>
+          </article>
+          <article class="cell">
+            <span class="cell__tag">Education</span>
+            <strong>Education &amp; EdTech</strong>
+            <p>Institutional lead gen &amp; consultative selling.</p>
+          </article>
+          <article class="cell">
+            <span class="cell__tag">Engineering</span>
+            <strong>Energy, Utilities &amp; Engineering</strong>
+            <p>Technical proposal scoping &amp; enterprise demos.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- CATEGORIZED TOOLS WITH LOGOS & LINKS -->
-    <section id="tools" class="section" aria-labelledby="tools-heading">
-      <div class="container">
-        <header class="lede lede--split reveal">
-          <div>
-            <p class="eyebrow">Platform Architecture</p>
-            <h2 id="tools-heading">Lead Generation &amp; Pre-Sales Tools</h2>
+    <!-- ============ TOOLS — nested enclosures ============ -->
+    <section id="tools" class="band" aria-labelledby="tools-heading">
+      <div class="wrap container">
+        <header class="lede reveal">
+          <div class="lede__left">
+            <p class="tag">Platform Architecture</p>
+            <h2 id="tools-heading">Lead generation &amp; pre-sales tools</h2>
           </div>
           <p class="lede__note">Comprehensive tech stack grouped into high-impact categories for prospecting, CRM OS, data enrichment, and pre-sales intelligence.</p>
         </header>
 
-        <div class="tool-groups reveal-group">
-          <!-- CATEGORY 1: Prospecting & Intent Discovery -->
-          <div class="tool-group">
-            <p class="eyebrow">Prospecting &amp; Intent</p>
-            <h3>Sales Nav · Apollo · ZoomInfo · Crunchbase · Lusha · Cognism · Hunter · Lemlist</h3>
-            <p>Executive lead discovery, buyer intent signals, direct dial/email verification, and growth trigger tracking.</p>
-            <div class="tool-links">
-              <a href="https://www.linkedin.com/sales" target="_blank" rel="noopener" class="tool-link">Sales Nav <span aria-hidden="true">↗</span></a>
-              <a href="https://www.apollo.io" target="_blank" rel="noopener" class="tool-link">Apollo.io <span aria-hidden="true">↗</span></a>
-              <a href="https://www.zoominfo.com" target="_blank" rel="noopener" class="tool-link">ZoomInfo <span aria-hidden="true">↗</span></a>
-              <a href="https://www.crunchbase.com" target="_blank" rel="noopener" class="tool-link">Crunchbase <span aria-hidden="true">↗</span></a>
-              <a href="https://www.lusha.com" target="_blank" rel="noopener" class="tool-link">Lusha <span aria-hidden="true">↗</span></a>
-              <a href="https://www.cognism.com" target="_blank" rel="noopener" class="tool-link">Cognism <span aria-hidden="true">↗</span></a>
+        <div class="stack reveal-group">
+          <div class="tray tray--tight stack__item">
+            <div class="tray__core kit">
+              <p class="kit__no" aria-hidden="true">01</p>
+              <div class="kit__body">
+                <p class="tag tag--quiet">Prospecting &amp; Intent</p>
+                <h3>Sales Nav · Apollo · ZoomInfo · Crunchbase · Lusha · Cognism · Hunter · Lemlist</h3>
+                <p class="kit__desc">Executive lead discovery, buyer intent signals, direct dial/email verification, and growth trigger tracking.</p>
+                <div class="chips">
+                  <a href="https://www.linkedin.com/sales" target="_blank" rel="noopener" class="chip">Sales Nav <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.apollo.io" target="_blank" rel="noopener" class="chip">Apollo.io <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.zoominfo.com" target="_blank" rel="noopener" class="chip">ZoomInfo <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.crunchbase.com" target="_blank" rel="noopener" class="chip">Crunchbase <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.lusha.com" target="_blank" rel="noopener" class="chip">Lusha <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.cognism.com" target="_blank" rel="noopener" class="chip">Cognism <i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- CATEGORY 2: CRM & Pipeline OS -->
-          <div class="tool-group">
-            <p class="eyebrow">CRM &amp; Pipeline OS</p>
-            <h3>Salesforce CRM · HubSpot CRM · Pipedrive · Zoho · Close</h3>
-            <p>Pipeline data hygiene, automated lead routing, deal stage progression tracking, and executive reporting.</p>
-            <div class="tool-links">
-              <a href="https://www.salesforce.com" target="_blank" rel="noopener" class="tool-link">Salesforce <span aria-hidden="true">↗</span></a>
-              <a href="https://www.hubspot.com" target="_blank" rel="noopener" class="tool-link">HubSpot <span aria-hidden="true">↗</span></a>
-              <a href="https://www.pipedrive.com" target="_blank" rel="noopener" class="tool-link">Pipedrive <span aria-hidden="true">↗</span></a>
-              <a href="https://www.zoho.com/crm" target="_blank" rel="noopener" class="tool-link">Zoho CRM <span aria-hidden="true">↗</span></a>
+          <div class="tray tray--tight stack__item">
+            <div class="tray__core kit">
+              <p class="kit__no" aria-hidden="true">02</p>
+              <div class="kit__body">
+                <p class="tag tag--quiet">CRM &amp; Pipeline OS</p>
+                <h3>Salesforce CRM · HubSpot CRM · Pipedrive · Zoho · Close</h3>
+                <p class="kit__desc">Pipeline data hygiene, automated lead routing, deal stage progression tracking, and executive reporting.</p>
+                <div class="chips">
+                  <a href="https://www.salesforce.com" target="_blank" rel="noopener" class="chip">Salesforce <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.hubspot.com" target="_blank" rel="noopener" class="chip">HubSpot <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.pipedrive.com" target="_blank" rel="noopener" class="chip">Pipedrive <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.zoho.com/crm" target="_blank" rel="noopener" class="chip">Zoho CRM <i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- CATEGORY 3: Enrichment, n8n Automation & Agentic AI -->
-          <div class="tool-group">
-            <p class="eyebrow">n8n &amp; Agentic AI</p>
-            <h3>n8n Workflows · Agentic AI Tools · Clay · Instantly.ai · Smartlead · PhantomBuster</h3>
-            <p>n8n workflow automation, agentic AI lead enrichment, personalized outreach customization, and deliverability infrastructure.</p>
-            <div class="tool-links">
-              <a href="https://n8n.io" target="_blank" rel="noopener" class="tool-link">n8n Automation <span aria-hidden="true">↗</span></a>
-              <a href="https://www.clay.com" target="_blank" rel="noopener" class="tool-link">Agentic AI / Clay <span aria-hidden="true">↗</span></a>
-              <a href="https://instantly.ai" target="_blank" rel="noopener" class="tool-link">Instantly <span aria-hidden="true">↗</span></a>
-              <a href="https://www.smartlead.ai" target="_blank" rel="noopener" class="tool-link">Smartlead <span aria-hidden="true">↗</span></a>
+          <div class="tray tray--tight stack__item">
+            <div class="tray__core kit">
+              <p class="kit__no" aria-hidden="true">03</p>
+              <div class="kit__body">
+                <p class="tag tag--quiet">n8n &amp; Agentic AI</p>
+                <h3>n8n Workflows · Agentic AI Tools · Clay · Instantly.ai · Smartlead · PhantomBuster</h3>
+                <p class="kit__desc">n8n workflow automation, agentic AI lead enrichment, personalized outreach customization, and deliverability infrastructure.</p>
+                <div class="chips">
+                  <a href="https://n8n.io" target="_blank" rel="noopener" class="chip">n8n Automation <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.clay.com" target="_blank" rel="noopener" class="chip">Agentic AI / Clay <i aria-hidden="true">↗</i></a>
+                  <a href="https://instantly.ai" target="_blank" rel="noopener" class="chip">Instantly <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.smartlead.ai" target="_blank" rel="noopener" class="chip">Smartlead <i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- CATEGORY 4: Market Intelligence & Pre-Sales OS -->
-          <div class="tool-group">
-            <p class="eyebrow">Intelligence &amp; Pre-Sales</p>
-            <h3>Finquest AI · PitchBook · CB Insights · Gong.io · Draup AI · Chorus</h3>
-            <p>Proprietary mid-market M&amp;A database mapping, deal intelligence, call recording analytics, and pre-sales proposal engineering.</p>
-            <div class="tool-links">
-              <a href="https://www.finquest.com" target="_blank" rel="noopener" class="tool-link">Finquest AI <span aria-hidden="true">↗</span></a>
-              <a href="https://pitchbook.com" target="_blank" rel="noopener" class="tool-link">PitchBook <span aria-hidden="true">↗</span></a>
-              <a href="https://www.gong.io" target="_blank" rel="noopener" class="tool-link">Gong <span aria-hidden="true">↗</span></a>
+          <div class="tray tray--tight stack__item">
+            <div class="tray__core kit">
+              <p class="kit__no" aria-hidden="true">04</p>
+              <div class="kit__body">
+                <p class="tag tag--quiet">Intelligence &amp; Pre-Sales</p>
+                <h3>Finquest AI · PitchBook · CB Insights · Gong.io · Draup AI · Chorus</h3>
+                <p class="kit__desc">Proprietary mid-market M&amp;A database mapping, deal intelligence, call recording analytics, and pre-sales proposal engineering.</p>
+                <div class="chips">
+                  <a href="https://www.finquest.com" target="_blank" rel="noopener" class="chip">Finquest AI <i aria-hidden="true">↗</i></a>
+                  <a href="https://pitchbook.com" target="_blank" rel="noopener" class="chip">PitchBook <i aria-hidden="true">↗</i></a>
+                  <a href="https://www.gong.io" target="_blank" rel="noopener" class="chip">Gong <i aria-hidden="true">↗</i></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COMPANIES WORKED IN -->
-    <section id="companies" class="section" aria-labelledby="companies-heading">
-      <div class="container">
-        <header class="lede lede--split reveal">
-          <div>
-            <p class="eyebrow">Track Record</p>
-            <h2 id="companies-heading">Companies Worked In</h2>
+    <!-- ============ COMPANIES — numbered editorial ledger ============ -->
+    <section id="companies" class="band band--tint" aria-labelledby="companies-heading">
+      <div class="wrap container">
+        <header class="lede reveal">
+          <div class="lede__left">
+            <p class="tag">Track Record</p>
+            <h2 id="companies-heading">Companies worked in</h2>
           </div>
           <p class="lede__note">7+ years of revenue contribution across mid-market, SaaS, and private market origination leaders.</p>
         </header>
 
-        <div class="companies-grid reveal-group">
-          <article class="company-card">
-            <div class="company-card__header">
-              <h3 class="company-card__name">Finquest</h3>
-              <p class="company-card__role">Senior Lead Generation Manager</p>
+        <ol class="ledger reveal-group">
+          <li class="ledger__row">
+            <span class="ledger__no" aria-hidden="true">01</span>
+            <div class="ledger__id">
+              <h3>Finquest</h3>
+              <p class="ledger__role">Senior Lead Generation Manager</p>
             </div>
-            <p class="company-card__meta">Jul 2024 – Sep 2025 · Bengaluru, India</p>
-            <p class="company-card__desc">Led outbound strategy for proprietary mid-market M&amp;A sourcing. Built 200M+ private company databases and delivered +35% lift in lead-to-meeting conversion.</p>
-          </article>
-
-          <article class="company-card">
-            <div class="company-card__header">
-              <h3 class="company-card__name">The Sales Group</h3>
-              <p class="company-card__role">Lead Generation Manager</p>
+            <p class="ledger__meta">Jul 2024 – Sep 2025<span>Bengaluru, India</span></p>
+            <p class="ledger__desc">Led outbound strategy for proprietary mid-market M&amp;A sourcing. Built 200M+ private company databases and delivered +35% lift in lead-to-meeting conversion.</p>
+          </li>
+          <li class="ledger__row">
+            <span class="ledger__no" aria-hidden="true">02</span>
+            <div class="ledger__id">
+              <h3>The Sales Group</h3>
+              <p class="ledger__role">Lead Generation Manager</p>
             </div>
-            <p class="company-card__meta">Jan 2024 – Jun 2024 · Toronto, Canada (Remote)</p>
-            <p class="company-card__desc">Accelerated North American pipeline growth through custom outbound email and LinkedIn programs tailored to fractional and full-time sales placement clients.</p>
-          </article>
-
-          <article class="company-card">
-            <div class="company-card__header">
-              <h3 class="company-card__name">Uplers &amp; Mavlers</h3>
-              <p class="company-card__role">Business Development Manager</p>
+            <p class="ledger__meta">Jan 2024 – Jun 2024<span>Toronto, Canada (Remote)</span></p>
+            <p class="ledger__desc">Accelerated North American pipeline growth through custom outbound email and LinkedIn programs tailored to fractional and full-time sales placement clients.</p>
+          </li>
+          <li class="ledger__row">
+            <span class="ledger__no" aria-hidden="true">03</span>
+            <div class="ledger__id">
+              <h3>Uplers &amp; Mavlers</h3>
+              <p class="ledger__role">Business Development Manager</p>
             </div>
-            <p class="company-card__meta">May 2023 – Dec 2023 · Ahmedabad, India</p>
-            <p class="company-card__desc">Executed multi-region B2B lead generation across US, UK, Africa, and APAC. Managed QA of data lists and Salesforce CRM integration.</p>
-          </article>
-
-          <article class="company-card">
-            <div class="company-card__header">
-              <h3 class="company-card__name">Ecosmob Technologies</h3>
-              <p class="company-card__role">Lead Generation Manager</p>
+            <p class="ledger__meta">May 2023 – Dec 2023<span>Ahmedabad, India</span></p>
+            <p class="ledger__desc">Executed multi-region B2B lead generation across US, UK, Africa, and APAC. Managed QA of data lists and Salesforce CRM integration.</p>
+          </li>
+          <li class="ledger__row">
+            <span class="ledger__no" aria-hidden="true">04</span>
+            <div class="ledger__id">
+              <h3>Ecosmob Technologies</h3>
+              <p class="ledger__role">Lead Generation Manager</p>
             </div>
-            <p class="company-card__meta">Jun 2022 – Apr 2023 · Ahmedabad, India</p>
-            <p class="company-card__desc">Managed automated inbound and outbound campaigns via Sales Navigator and CRM tools across US, UK, MENA, and APAC regions.</p>
-          </article>
-
-          <article class="company-card">
-            <div class="company-card__header">
-              <h3 class="company-card__name">Alore (Growth OS)</h3>
-              <p class="company-card__role">Lead Generation Specialist</p>
+            <p class="ledger__meta">Jun 2022 – Apr 2023<span>Ahmedabad, India</span></p>
+            <p class="ledger__desc">Managed automated inbound and outbound campaigns via Sales Navigator and CRM tools across US, UK, MENA, and APAC regions.</p>
+          </li>
+          <li class="ledger__row">
+            <span class="ledger__no" aria-hidden="true">05</span>
+            <div class="ledger__id">
+              <h3>Alore (Growth OS)</h3>
+              <p class="ledger__role">Lead Generation Specialist</p>
             </div>
-            <p class="company-card__meta">Apr 2021 – May 2022 · Bengaluru, India</p>
-            <p class="company-card__desc">Spearheaded prospect research, lead validation, and targeted outbound email campaigns across North America, UK, and Australia.</p>
-          </article>
-
-          <article class="company-card">
-            <div class="company-card__header">
-              <h3 class="company-card__name">Zinnov &amp; Draup</h3>
-              <p class="company-card__role">Lead Generation Specialist (Pre-Sales Lead)</p>
+            <p class="ledger__meta">Apr 2021 – May 2022<span>Bengaluru, India</span></p>
+            <p class="ledger__desc">Spearheaded prospect research, lead validation, and targeted outbound email campaigns across North America, UK, and Australia.</p>
+          </li>
+          <li class="ledger__row">
+            <span class="ledger__no" aria-hidden="true">06</span>
+            <div class="ledger__id">
+              <h3>Zinnov &amp; Draup</h3>
+              <p class="ledger__role">Lead Generation Specialist (Pre-Sales Lead)</p>
             </div>
-            <p class="company-card__meta">Jul 2020 – Mar 2021 · Coimbatore, India</p>
-            <p class="company-card__desc">Pre-sales solution consulting across HR tech and workforce analytics. Conducted product demos and built technical/commercial proposals.</p>
-          </article>
-        </div>
+            <p class="ledger__meta">Jul 2020 – Mar 2021<span>Coimbatore, India</span></p>
+            <p class="ledger__desc">Pre-sales solution consulting across HR tech and workforce analytics. Conducted product demos and built technical/commercial proposals.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- EDUCATION (Ordered Latest to Down: MBA -> B.E. -> Diploma) -->
-    <section id="education" class="section" aria-labelledby="education-heading">
-      <div class="container">
+    <!-- ============ EDUCATION — stepped timeline ============ -->
+    <section id="education" class="band" aria-labelledby="education-heading">
+      <div class="wrap container">
         <header class="lede reveal">
-          <p class="eyebrow">Academic Background</p>
-          <h2 id="education-heading">Education</h2>
+          <div class="lede__left">
+            <p class="tag">Academic Background</p>
+            <h2 id="education-heading">Education</h2>
+          </div>
           <p class="lede__note">Ordered chronologically from latest degree down to foundation diploma.</p>
         </header>
 
-        <div class="education-timeline reveal-group">
-          <!-- 1. Latest: MBA -->
-          <article class="education-card">
-            <span class="education-card__years">Apr 2024 – Apr 2026</span>
-            <h3 class="education-card__degree">MBA in Marketing Management</h3>
-            <p class="education-card__inst">Amrita Vishwa Vidyapeetham</p>
+        <div class="steps reveal-group">
+          <article class="step">
+            <span class="step__years">Apr 2024 – Apr 2026</span>
+            <h3 class="step__degree">MBA in Marketing Management</h3>
+            <p class="step__inst">Amrita Vishwa Vidyapeetham</p>
           </article>
-
-          <!-- 2. B.E. -->
-          <article class="education-card">
-            <span class="education-card__years">2017 – 2020</span>
-            <h3 class="education-card__degree">Bachelor of Engineering (B.E.) in Mechanical Engineering</h3>
-            <p class="education-card__inst">Sri Krishna College of Technology</p>
+          <article class="step">
+            <span class="step__years">2017 – 2020</span>
+            <h3 class="step__degree">Bachelor of Engineering (B.E.) in Mechanical Engineering</h3>
+            <p class="step__inst">Sri Krishna College of Technology</p>
           </article>
-
-          <!-- 3. Diploma -->
-          <article class="education-card">
-            <span class="education-card__years">2013 – 2016</span>
-            <h3 class="education-card__degree">Diploma in Mechanical Engineering</h3>
-            <p class="education-card__inst">Sree Narayana Guru Polytechnic College</p>
+          <article class="step">
+            <span class="step__years">2013 – 2016</span>
+            <h3 class="step__degree">Diploma in Mechanical Engineering</h3>
+            <p class="step__inst">Sree Narayana Guru Polytechnic College</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ACHIEVEMENTS & ROLLING CASE STUDIES TICKER SECTION -->
-    <section id="results" class="linkedin-ticker section" aria-labelledby="outcomes-heading" style="background: var(--color-canvas); padding-block: 4rem;">
-      <div class="container">
-        <header class="lede lede--split reveal" style="margin-bottom: 2rem;">
-          <div><p class="eyebrow">Proven Outcomes</p><h2 id="outcomes-heading">Achievements &amp; Case Studies</h2></div>
-          <div><p class="lede__note">Rolling case studies of proven pipeline outcomes across North America, Europe, APAC, and MENA. Click any card to read the full case study breakdown.</p></div>
+    <!-- ============ ACHIEVEMENTS & CASE STUDIES ============ -->
+    <section id="results" class="band band--tint" aria-labelledby="outcomes-heading">
+      <div class="wrap container">
+        <header class="lede reveal">
+          <div class="lede__left">
+            <p class="tag">Proven Outcomes</p>
+            <h2 id="outcomes-heading">Achievements &amp; case studies</h2>
+          </div>
+          <p class="lede__note">Rolling case studies of proven pipeline outcomes across North America, Europe, APAC, and MENA. Click any card to read the full case study breakdown.</p>
         </header>
       </div>
 
-      <div class="ticker-wrap">
-        <div class="ticker-track">
-          <a class="ticker-item" href="/results/#finquest-h">
-            <div class="ticker-item__header">
-              <span class="label">PE Deal Sourcing</span>
-              <span class="ticker-item__tag">Finquest</span>
-            </div>
-            <h3 class="ticker-item__title">200M+ Private Company M&amp;A Sourcing Engine</h3>
-            <p class="ticker-item__excerpt">Mapped proprietary databases for PE buy/sell-side deals. Cut sourcing timelines from months to weeks with +35% conversion lift.</p>
-            <span class="ticker-item__action">Read Case Study <span aria-hidden="true">→</span></span>
+      <div class="rail-scroll" tabindex="0" role="region" aria-label="Case studies, scrollable">
+        <div class="rail-scroll__track ticker-track">
+          <a class="brief" href="/results/#finquest-h">
+            <div class="brief__head"><span class="brief__kind">PE Deal Sourcing</span><span class="brief__org">Finquest</span></div>
+            <h3>200M+ Private Company M&amp;A Sourcing Engine</h3>
+            <p>Mapped proprietary databases for PE buy/sell-side deals. Cut sourcing timelines from months to weeks with +35% conversion lift.</p>
+            <span class="brief__go">Read case study <i aria-hidden="true">→</i></span>
           </a>
-
-          <a class="ticker-item" href="/results/#earlier-roles-heading">
-            <div class="ticker-item__header">
-              <span class="label">Fractional Sales</span>
-              <span class="ticker-item__tag">The Sales Group</span>
-            </div>
-            <h3 class="ticker-item__title">North American BDR Pipeline Acceleration</h3>
-            <p class="ticker-item__excerpt">Custom outbound email &amp; LinkedIn cadences generating predictable pipeline across US and Canadian client ICPs.</p>
-            <span class="ticker-item__action">Read Case Study <span aria-hidden="true">→</span></span>
+          <a class="brief" href="/results/#earlier-roles-heading">
+            <div class="brief__head"><span class="brief__kind">Fractional Sales</span><span class="brief__org">The Sales Group</span></div>
+            <h3>North American BDR Pipeline Acceleration</h3>
+            <p>Custom outbound email &amp; LinkedIn cadences generating predictable pipeline across US and Canadian client ICPs.</p>
+            <span class="brief__go">Read case study <i aria-hidden="true">→</i></span>
           </a>
-
-          <a class="ticker-item" href="/results/#earlier-roles-heading">
-            <div class="ticker-item__header">
-              <span class="label">Global B2B</span>
-              <span class="ticker-item__tag">Uplers &amp; Mavlers</span>
-            </div>
-            <h3 class="ticker-item__title">Cross-Border Outreach &amp; Salesforce Hygiene</h3>
-            <p class="ticker-item__excerpt">Executed multi-region outreach across US, UK, Africa and Asia with automated lead routing and CRM list QA.</p>
-            <span class="ticker-item__action">Read Case Study <span aria-hidden="true">→</span></span>
+          <a class="brief" href="/results/#earlier-roles-heading">
+            <div class="brief__head"><span class="brief__kind">Global B2B</span><span class="brief__org">Uplers &amp; Mavlers</span></div>
+            <h3>Cross-Border Outreach &amp; Salesforce Hygiene</h3>
+            <p>Executed multi-region outreach across US, UK, Africa and Asia with automated lead routing and CRM list QA.</p>
+            <span class="brief__go">Read case study <i aria-hidden="true">→</i></span>
           </a>
-
-          <a class="ticker-item" href="/results/#earlier-roles-heading">
-            <div class="ticker-item__header">
-              <span class="label">Telecom &amp; SaaS</span>
-              <span class="ticker-item__tag">Ecosmob</span>
-            </div>
-            <h3 class="ticker-item__title">Territory Management across MENA &amp; APAC</h3>
-            <p class="ticker-item__excerpt">Led global lead-gen team, allocating territories across 4 regions and automating monthly campaign analytics.</p>
-            <span class="ticker-item__action">Read Case Study <span aria-hidden="true">→</span></span>
+          <a class="brief" href="/results/#earlier-roles-heading">
+            <div class="brief__head"><span class="brief__kind">Telecom &amp; SaaS</span><span class="brief__org">Ecosmob</span></div>
+            <h3>Territory Management across MENA &amp; APAC</h3>
+            <p>Led global lead-gen team, allocating territories across 4 regions and automating monthly campaign analytics.</p>
+            <span class="brief__go">Read case study <i aria-hidden="true">→</i></span>
           </a>
-
-          <a class="ticker-item" href="/results/#earlier-roles-heading">
-            <div class="ticker-item__header">
-              <span class="label">Pre-Sales</span>
-              <span class="ticker-item__tag">Zinnov &amp; Draup</span>
-            </div>
-            <h3 class="ticker-item__title">Enterprise Solution Demos &amp; Commercial Scoping</h3>
-            <p class="ticker-item__excerpt">Consulted across HR tech and workforce intelligence portfolios, engineering technical proposals for C-suite closures.</p>
-            <span class="ticker-item__action">Read Case Study <span aria-hidden="true">→</span></span>
+          <a class="brief" href="/results/#earlier-roles-heading">
+            <div class="brief__head"><span class="brief__kind">Pre-Sales</span><span class="brief__org">Zinnov &amp; Draup</span></div>
+            <h3>Enterprise Solution Demos &amp; Commercial Scoping</h3>
+            <p>Consulted across HR tech and workforce intelligence portfolios, engineering technical proposals for C-suite closures.</p>
+            <span class="brief__go">Read case study <i aria-hidden="true">→</i></span>
           </a>
         </div>
       </div>
 
-      <div class="container" style="margin-top: 2rem; text-align: center;">
-        <a class="btn btn--primary" href="/results/">View All Case Studies &amp; Ledger <span aria-hidden="true">→</span></a>
+      <div class="wrap band__foot">
+        <a class="cta cta--solid" href="/results/"><span>View all case studies &amp; ledger</span><i class="cta__pip" aria-hidden="true">→</i></a>
       </div>
     </section>
 
-    <!-- INTERACTIVE ESTIMATOR (WORDING UPDATED TO LEADS & PROSPECTS) -->
-    <section class="simulator section" aria-labelledby="sim-heading">
-      <div class="container">
-        <header class="lede lede--split reveal">
-          <div>
-            <p class="eyebrow">Interactive Estimator</p>
+    <!-- ============ SIMULATOR — controls left, results tray right ============ -->
+    <section class="band" aria-labelledby="sim-heading">
+      <div class="wrap container">
+        <header class="lede reveal">
+          <div class="lede__left">
+            <p class="tag">Interactive Estimator</p>
             <h2 id="sim-heading">Estimate pipeline outcomes for your target market.</h2>
           </div>
           <p class="lede__note">Select your market focus and target monthly lead volume to model projected meeting conversions and research time saved.</p>
         </header>
 
-        <div id="deal-simulator" class="sim-card reveal">
-          <div class="sim-controls">
-            <div class="sim-group">
-              <label class="sim-label">Target Market Focus</label>
-              <div class="sim-sectors" role="tablist" aria-label="Select sector">
-                <button type="button" class="sim-sector-btn" data-sector="saas" aria-pressed="true">B2B SaaS Growth</button>
-                <button type="button" class="sim-sector-btn" data-sector="services" aria-pressed="false">Service-Based Sector</button>
-                <button type="button" class="sim-sector-btn" data-sector="midmarket" aria-pressed="false">Mid-Market &amp; Digital Marketing Resources</button>
+        <div id="deal-simulator" class="tray sim reveal">
+          <div class="tray__core sim__core">
+            <div class="sim__controls">
+              <div class="sim__group">
+                <p class="sim__label" id="sim-sector-label">Target market focus</p>
+                <div class="sim__sectors" role="group" aria-labelledby="sim-sector-label">
+                  <button type="button" class="pill" data-sector="saas" aria-pressed="true">B2B SaaS Growth</button>
+                  <button type="button" class="pill" data-sector="services" aria-pressed="false">Service-Based Sector</button>
+                  <button type="button" class="pill" data-sector="midmarket" aria-pressed="false">Mid-Market &amp; Digital Marketing Resources</button>
+                </div>
               </div>
+
+              <div class="sim__group">
+                <div class="sim__sliderhead">
+                  <label for="sim-accounts" class="sim__label">Target clients / lead &amp; prospect volume</label>
+                  <output id="sim-accounts-val" for="sim-accounts" class="sim__badge">120 Clients / Leads per mo</output>
+                </div>
+                <input type="range" id="sim-accounts" min="30" max="400" step="10" value="120" class="sim__slider">
+              </div>
+
+              <a href="#tools" class="cta cta--line cta--sm sim__link"><span>View tools contributing to cost</span><i class="cta__pip" aria-hidden="true">↓</i></a>
             </div>
 
-            <div class="sim-group">
-              <div class="sim-slider-header">
-                <label for="sim-accounts" class="sim-label">Target Clients / Lead &amp; Prospect Volume</label>
-                <span id="sim-accounts-val" class="sim-badge">120 Clients / Leads per mo</span>
-              </div>
-              <input type="range" id="sim-accounts" min="30" max="400" step="10" value="120" class="sim-slider" aria-label="Adjust target clients and leads per month">
-            </div>
-          </div>
-
-          <div class="sim-results">
-            <div class="sim-stat">
-              <span class="sim-stat__label">Estimated Meetings &amp; MQL Leads</span>
-              <strong id="sim-meetings" class="sim-stat__val">~18 MQL Leads &amp; Meetings</strong>
-            </div>
-            <div class="sim-stat">
-              <span class="sim-stat__label">Research &amp; Ramp Timeframe</span>
-              <strong id="sim-hours" class="sim-stat__val">60 Days Research Cycle</strong>
-            </div>
-            <div class="sim-stat">
-              <span class="sim-stat__label">Estimated Tools Cost Stack</span>
-              <strong id="sim-velocity" class="sim-stat__val">$1,050/mo Tools Cost Stack</strong>
-            </div>
-          </div>
-          <div style="margin-top: 1.5rem; text-align: center;">
-            <a href="#tools" class="btn btn--ghost-cream" style="font-size: 0.9rem;">View Tools Contributing to Cost <span aria-hidden="true">↓</span></a>
+            <dl class="sim__results" aria-live="polite">
+              <div class="sim__stat"><dt>Estimated meetings &amp; MQL leads</dt><dd id="sim-meetings">~18 MQL Leads &amp; Meetings</dd></div>
+              <div class="sim__stat"><dt>Research &amp; ramp timeframe</dt><dd id="sim-hours">60 Days Research Cycle</dd></div>
+              <div class="sim__stat"><dt>Estimated tools cost stack</dt><dd id="sim-velocity">$1,050/mo Tools Cost Stack</dd></div>
+            </dl>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTINUOUS ROLLING LINKEDIN FEATURED POSTS TICKER -->
-    <section class="linkedin-ticker" aria-label="Featured LinkedIn Insights">
-      <div class="container">
-        <header class="lede lede--split reveal" style="margin-bottom: 1.5rem;">
-          <div>
-            <p class="eyebrow">Thought Leadership</p>
-            <h2 style="font-size: 1.8rem;">Featured LinkedIn Posts</h2>
+    <!-- ============ FEATURED LINKEDIN POSTS ============ -->
+    <section class="band band--tint" aria-labelledby="posts-heading">
+      <div class="wrap container">
+        <header class="lede reveal">
+          <div class="lede__left">
+            <p class="tag">Thought Leadership</p>
+            <h2 id="posts-heading">Featured LinkedIn posts</h2>
           </div>
           <p class="lede__note">Rolling insights on B2B lead generation, pre-sales architecture, and private-market deal origination.</p>
         </header>
       </div>
 
-      <div class="ticker-wrap">
-        <div class="ticker-track">
-          <a class="ticker-item" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
-            <div class="ticker-item__header">
-              <svg class="ticker-item__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
-              <span class="ticker-item__tag">Lead Gen Strategy</span>
+      <div class="rail-scroll" tabindex="0" role="region" aria-label="Featured LinkedIn posts, scrollable">
+        <div class="rail-scroll__track ticker-track">
+          <a class="brief brief--post" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
+            <div class="brief__head">
+              <svg class="brief__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+              <span class="brief__kind">Lead Gen Strategy</span>
             </div>
-            <h3 class="ticker-item__title">Achieving +35% Lift in Lead-to-Meeting Conversions</h3>
-            <p class="ticker-item__excerpt">Why hyper-segmented industry value propositions outperform generic cold outreach across private markets.</p>
-            <span class="ticker-item__action">Read post on LinkedIn <span aria-hidden="true">↗</span></span>
+            <h3>Achieving +35% Lift in Lead-to-Meeting Conversions</h3>
+            <p>Why hyper-segmented industry value propositions outperform generic cold outreach across private markets.</p>
+            <span class="brief__go">Read post on LinkedIn <i aria-hidden="true">↗</i></span>
           </a>
-
-          <a class="ticker-item" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
-            <div class="ticker-item__header">
-              <svg class="ticker-item__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
-              <span class="ticker-item__tag">Pre-Sales Engineering</span>
+          <a class="brief brief--post" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
+            <div class="brief__head">
+              <svg class="brief__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+              <span class="brief__kind">Pre-Sales Engineering</span>
             </div>
-            <h3 class="ticker-item__title">Bridging Complex SaaS Features to C-Suite Value</h3>
-            <p class="ticker-item__excerpt">How structured product demos and proposal scoping turn initial discovery calls into confident closures.</p>
-            <span class="ticker-item__action">Read post on LinkedIn <span aria-hidden="true">↗</span></span>
+            <h3>Bridging Complex SaaS Features to C-Suite Value</h3>
+            <p>How structured product demos and proposal scoping turn initial discovery calls into confident closures.</p>
+            <span class="brief__go">Read post on LinkedIn <i aria-hidden="true">↗</i></span>
           </a>
-
-          <a class="ticker-item" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
-            <div class="ticker-item__header">
-              <svg class="ticker-item__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
-              <span class="ticker-item__tag">Market Intelligence</span>
+          <a class="brief brief--post" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
+            <div class="brief__head">
+              <svg class="brief__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+              <span class="brief__kind">Market Intelligence</span>
             </div>
-            <h3 class="ticker-item__title">Mapping 200M+ Global Private Companies</h3>
-            <p class="ticker-item__excerpt">Building proprietary database architectures for PE deal sourcing and target acquisition modeling.</p>
-            <span class="ticker-item__action">Read post on LinkedIn <span aria-hidden="true">↗</span></span>
+            <h3>Mapping 200M+ Global Private Companies</h3>
+            <p>Building proprietary database architectures for PE deal sourcing and target acquisition modeling.</p>
+            <span class="brief__go">Read post on LinkedIn <i aria-hidden="true">↗</i></span>
           </a>
-
-          <a class="ticker-item" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
-            <div class="ticker-item__header">
-              <svg class="ticker-item__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
-              <span class="ticker-item__tag">Global Expansion</span>
+          <a class="brief brief--post" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">
+            <div class="brief__head">
+              <svg class="brief__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.72a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg>
+              <span class="brief__kind">Global Expansion</span>
             </div>
-            <h3 class="ticker-item__title">Navigating 12 International Markets</h3>
-            <p class="ticker-item__excerpt">Adapting outreach cadences and buyer communication norms across North America, Europe, APAC &amp; MENA.</p>
-            <span class="ticker-item__action">Read post on LinkedIn <span aria-hidden="true">↗</span></span>
+            <h3>Navigating 12 International Markets</h3>
+            <p>Adapting outreach cadences and buyer communication norms across North America, Europe, APAC &amp; MENA.</p>
+            <span class="brief__go">Read post on LinkedIn <i aria-hidden="true">↗</i></span>
           </a>
         </div>
       </div>

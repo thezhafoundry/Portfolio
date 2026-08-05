@@ -1,3 +1,71 @@
+/* =============================================================================
+   HOME — Editorial Orchid
+   Palette, typefaces and motion tokens are inherited from identity.css; the
+   shared shell (header, nav, contact card, footer) is styled by components.css.
+   This file owns the hero. Section composition lives in home-sections.css.
+   ========================================================================== */
+
+:root {
+  /* Homepage additions. Palette, typefaces, easings and durations all come
+     from identity.css — these are only the surface/rhythm tokens the
+     recomposed sections need. */
+  /* --- Inherited identity (identity.css :root) --- */
+
+  /* --- Surfaces & depth (new) ---------------------------------------------
+     Every shadow is violet-tinted and highly diffused. No black, no harsh
+     drop shadows — those read as cheap at this scale. */
+  --tray-shell: color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
+  --tray-shell-dark: color-mix(in srgb, var(--color-deep-violet) 55%, transparent);
+  --rule: color-mix(in srgb, var(--color-deep-violet) 11%, transparent);
+  --rule-soft: color-mix(in srgb, var(--color-deep-violet) 7%, transparent);
+  --rule-dark: color-mix(in srgb, var(--color-white) 13%, transparent);
+
+  --shadow-soft:
+    0 1px 2px color-mix(in srgb, var(--color-deep-violet) 4%, transparent),
+    0 8px 24px -8px color-mix(in srgb, var(--color-deep-violet) 10%, transparent);
+  --shadow-lift:
+    0 2px 4px color-mix(in srgb, var(--color-deep-violet) 5%, transparent),
+    0 20px 48px -14px color-mix(in srgb, var(--color-deep-violet) 18%, transparent);
+  --shadow-island:
+    0 1px 2px color-mix(in srgb, var(--color-deep-violet) 5%, transparent),
+    0 12px 32px -10px color-mix(in srgb, var(--color-deep-violet) 16%, transparent);
+  /* the inner highlight that makes a core read as seated in its tray */
+  --inset-lip: inset 0 1px 0 color-mix(in srgb, var(--color-white) 70%, transparent);
+  --inset-lip-dark: inset 0 1px 0 color-mix(in srgb, var(--color-white) 12%, transparent);
+
+  /* --- Concentric radii ---------------------------------------------------
+     Core radius is derived, never guessed, so the curves stay concentric. */
+  --pad-shell: 0.5rem;
+  --radius-shell: 2rem;
+  --radius-core: calc(var(--radius-shell) - var(--pad-shell));
+  --radius-sm: 0.75rem;
+
+  /* --- Measure & rhythm --- */
+  --wrap-max: 78rem;
+  --s-band: clamp(4rem, 2.5rem + 5.5vw, 8rem);
+  --s-stack: clamp(2rem, 1.2rem + 2.4vw, 3.5rem);
+
+  /* --- Type scale --- */
+  --t-hero: clamp(3.1rem, 1.5rem + 6.2vw, 6.6rem);
+  --t-h2: clamp(2.05rem, 1.35rem + 2.6vw, 3.6rem);
+  --t-h3: clamp(1.12rem, 0.98rem + 0.6vw, 1.5rem);
+  --t-lede: clamp(1.02rem, 0.96rem + 0.32vw, 1.22rem);
+  --t-body: clamp(0.94rem, 0.9rem + 0.18vw, 1.02rem);
+  --t-tag: 0.68rem;
+  --t-mono: 0.72rem;
+
+  /* --- Motion — Editorial Orchid spec §13 ---------------------------------
+     Buttons/links 140-180ms · surfaces 240-300ms · entrances 350-550ms.
+     The skill's default 700-800ms entrances would break that contract, so
+     entrances are pinned at 520ms — the top of the permitted band. */
+  --e-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-seat: cubic-bezier(0.32, 0.72, 0, 1);
+  --d-press: 160ms;
+  --d-hover: 180ms;
+  --d-surface: 260ms;
+  --duration-enter: 520ms;
+}
+
 /* --- Paper grain -------------------------------------------------------------
    Flat gradients read as "digital". A fine turbulence layer over the whole page
    gives it the tooth of printed stock. Fixed, so it never scrolls with content. */
@@ -179,8 +247,12 @@ body::after {
   animation: greet-in 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* The entrance keeps its character — rise, tilt, focus — but starts from a
+   visible floor. It used to begin at `opacity: 0` behind a 5px blur and restart
+   every 2.6s forever, so the brand line rendered as "Every deal begins with ___"
+   a measurable share of the time. */
 @keyframes greet-in {
-  from { opacity: 0; transform: translateY(0.38em) rotate(1.6deg); filter: blur(5px); }
+  from { opacity: 0.32; transform: translateY(0.38em) rotate(1.6deg); filter: blur(2px); }
   to   { opacity: 1; transform: none; filter: none; }
 }
 
@@ -230,381 +302,43 @@ body::after {
   100%     { transform: scaleX(0); }
 }
 
-/* ===========================================================================
-   BELOW THE HERO — one continuous ruled sheet.
-
-   The hero is a shutter cut into a sheet of ruled paper. Everything under it is
-   set on that same sheet: the rules never stop, no card is ever rounded, and
-   depth comes from tint and overlap rather than drop shadows. Each section has
-   its own way of "opening" — a rule that draws, a wash of slats that wipes in —
-   so the page reads as one idea told six times, not six components.
-   =========================================================================== */
-
-/* The sheet itself. 30px pitch is the hero's slat width, so the rules below the
-   fold sit on exactly the grid the shutter is cut from. */
-body {
-  background-color: var(--color-canvas);
-  background-image:
-    repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-orchid) 13%, transparent) 0 1px, transparent 1px 30px);
+/* --- Short-viewport fit ------------------------------------------------------
+   `min-height: 100dvh` is a floor, not a ceiling. The hero's vertical metrics
+   were derived from viewport WIDTH only (6.1vw headline, 6vw top padding),
+   which says nothing about available height — so on a laptop screen the copy
+   column plus padding rendered ~814px tall inside a 703px window and the CTAs
+   and cue fell below the fold. Below 50rem of height those two metrics get a
+   vh ceiling as well. min() only bites when the height-derived value is the
+   smaller one, so taller viewports render exactly as before. */
+@media (min-width: 62rem) and (max-height: 50rem) {
+  .louver-hero {
+    padding-block: min(clamp(5.5rem, 6vw + 2.5rem, 8rem), 11.5vh) min(clamp(2rem, 3vw, 3rem), 5vh);
+  }
+  .louver-hero h1 {
+    margin-bottom: 1rem;
+    font-size: min(clamp(3.35rem, 6.1vw, 6.25rem), 10.2vh);
+  }
+  .louver-hero__intro {
+    margin-bottom: 1.5rem;
+    font-size: min(clamp(1rem, 1vw + 0.7rem, 1.2rem), 2.6vh);
+  }
+  .louver-cue { margin-top: 1.6rem; }
 }
 
-/* Tinted sections stay translucent so the rules run straight through them. */
-.note,
-.method { background: color-mix(in srgb, var(--color-section) 72%, transparent); }
-
-/* --- Shared: section openings ---------------------------------------------- */
-.lede { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-.lede h2 { max-width: 16ch; margin: 0.6rem 0 0; }
-
-.lede--split {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  align-items: flex-start;
-  gap: clamp(1.5rem, 4vw, 3rem);
-}
-
-.lede__note {
-  margin: 0 0 1.1rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 74%, var(--color-white));
-  font-size: 1rem;
-}
-
-/* --- Shared: the louver wash ------------------------------------------------
-   The page's one signature hover. Denser rules than the sheet's, over a faint
-   highlight, wiping in from the left — the same gesture as the shutter opening,
-   at a smaller scale. Sits behind its content on its own layer. */
-.wash {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background:
-    repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-orchid) 30%, transparent) 0 1px, transparent 1px 15px),
-    color-mix(in srgb, var(--color-highlight) 42%, transparent);
-  opacity: 0;
-  transform: scaleX(0.35);
-  transform-origin: left center;
-  transition: opacity 0.35s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* --- The record ------------------------------------------------------------
-   Four figures standing as columns of the sheet, divided by its own rules. The
-   numbers carry the section; the partner index sits beneath as a quiet caption. */
-.figures {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 0;
-  border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 18%, transparent);
-}
-
-.figure {
-  position: relative;
-  isolation: isolate;
-  padding: clamp(1.2rem, 2.5vw, 1.9rem) clamp(0.9rem, 2vw, 1.6rem) clamp(1.4rem, 3vw, 2.2rem) 0;
-}
-
-.figure + .figure {
-  border-left: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
-  padding-left: clamp(0.9rem, 2vw, 1.6rem);
-}
-
-.figure dd {
-  margin: 0 0 0.5rem;
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
-  font-weight: 600;
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.figure dt {
-  max-width: 18ch;
-  color: color-mix(in srgb, var(--color-deep-violet) 66%, var(--color-white));
-  font-size: 0.78rem;
-  line-height: 1.4;
-}
-
-.figure:hover .wash { opacity: 1; transform: scaleX(1); }
-.figure:hover dd { transform: translateY(-4px); }
-
-/* An orchid rule draws across the figures as they scroll into view. */
-.figures::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  margin-top: -1px;
-  width: min(34%, 16rem);
-  height: 2px;
-  background: var(--color-orchid);
-  transform-origin: left center;
-}
-
-.figures { position: relative; }
-.js .figures::before { transform: scaleX(0); transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s; }
-.js .figures.on::before { transform: scaleX(1); }
-
-.index-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 1.1rem;
-  margin: clamp(2rem, 4vw, 3rem) 0 0;
-  padding: 0;
-  list-style: none;
-  color: color-mix(in srgb, var(--color-deep-violet) 62%, var(--color-white));
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-  line-height: 1.3;
-}
-
-.index-line li { display: flex; align-items: center; }
-.index-line li + li::before { margin-right: 1.1rem; color: var(--color-orchid); content: "•"; }
-
-/* Partner names take the same highlight sweep as the hero's greeting. */
-.index-line span { position: relative; padding-inline: 0.16em; transition: color 0.25s ease; }
-
-.index-line span::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0.06em -0.02em 0.04em;
-  background: var(--color-highlight);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.index-line li:hover span { color: var(--color-deep-violet); }
-.index-line li:hover span::after { transform: scaleX(1); }
-
-/* --- The note ---------------------------------------------------------------
-   The photo is held behind a static louver field — the hero's gesture, frozen —
-   which opens when the reader hovers it. */
-.note__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  align-items: center;
-  gap: clamp(2rem, 5vw, 4.5rem);
-}
-
-.note__media {
-  position: relative;
-  overflow: hidden;
-  margin: 0;
-}
-
-.note__media img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: 48% 45%;
-  /* The source frame is a dark, neon-lit boardroom — the only heavy image on a
-     light violet page, and tonally unrelated to everything around it. Graded to
-     a violet duotone it stops fighting the palette and starts belonging to it.
-     Filters alone, so there is no blend-mode layer to fight the page grain. */
-  filter: grayscale(1) sepia(0.85) hue-rotate(212deg) saturate(2.4) brightness(0.95) contrast(1.06);
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
-}
-
-/* A fine screen, not bars: 1px rules on the sheet's own 30px pitch. At 3px they
-   read as blinds slammed over the photo rather than paper it is printed on. */
-.note__slats {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-canvas) 55%, transparent) 0 1px, transparent 1px 30px);
-  transition: opacity 0.5s ease;
-}
-
-/* Hovering lifts the grade as well as the screen — the image resolves. */
-.note__media:hover img {
-  transform: scale(1.03);
-  filter: grayscale(1) sepia(0.6) hue-rotate(212deg) saturate(1.9) brightness(1.02) contrast(1.04);
-}
-
-.note__media:hover .note__slats { opacity: 0.3; }
-
-.note__body h2 { max-width: 13ch; margin: 0.6rem 0 1.3rem; }
-
-/* A proper lede: the opening sentence set in the display face, one step up. */
-.note__lede {
-  margin-bottom: 1rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2vw, 1.7rem);
-  line-height: 1.32;
-}
-
-.note__copy {
-  margin-bottom: 1.8rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 74%, var(--color-white));
-}
-
-/* --- The offer --------------------------------------------------------------
-   Four editorial rows rather than four boxes. A card grid gives every item the
-   same weight and forces the ragged-title problem; rows carry a reading order. */
-.offer__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 16%, transparent);
-}
-
-.offer__list > li {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  grid-template-columns: 5rem minmax(0, 0.9fr) minmax(0, 1.1fr);
-  align-items: baseline;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  padding: clamp(1.4rem, 3vw, 2.2rem) clamp(0.5rem, 1.5vw, 1rem) clamp(1.4rem, 3vw, 2.2rem) 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.offer__num {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
-  font-weight: 600;
-  line-height: 1;
-  color: color-mix(in srgb, var(--color-deep-violet) 32%, var(--color-white));
-  transition: color 0.35s ease;
-}
-
-.offer__list h3 { margin: 0; }
-
-.offer__list p {
-  margin: 0;
-  color: color-mix(in srgb, var(--color-deep-violet) 73%, var(--color-white));
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.offer__list > li:hover { transform: translateX(6px); }
-.offer__list > li:hover .wash { opacity: 1; transform: scaleX(1); }
-.offer__list > li:hover .offer__num { color: var(--color-orchid); }
-
-/* --- The method -------------------------------------------------------------
-   Three steps hung from one rule that draws itself across on scroll. */
-.method__track {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.25rem, 3vw, 2.5rem);
-  margin: 0;
-  padding: 2.6rem 0 0;
-  list-style: none;
-}
-
-/* The single rule the whole method hangs from. */
-.method__track::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--color-orchid);
-  transform-origin: left center;
-}
-
-.js .method__track::before { transform: scaleX(0); transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-.js .method__track.on::before { transform: scaleX(1); }
-
-.method__track > li { position: relative; padding-right: 1rem; }
-
-/* Each step's node sits on the rule above it. */
-.method__track > li::before {
-  content: "";
-  position: absolute;
-  top: -2.6rem;
-  left: 0;
-  width: 9px;
-  height: 9px;
-  margin-top: -3px;
-  background: var(--color-orchid);
-  transform: scale(0);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.js .method__track.on > li::before { transform: scale(1); }
-.js .method__track.on > li:nth-child(2)::before { transition-delay: 0.35s; }
-.js .method__track.on > li:nth-child(3)::before { transition-delay: 0.6s; }
-
-.method__num {
-  display: block;
-  margin-bottom: 0.9rem;
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  font-weight: 600;
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  color: color-mix(in srgb, var(--color-orchid) 46%, var(--color-white));
-}
-
-.method__track h3 { margin: 0 0 0.7rem; }
-
-.method__track p {
-  margin: 0;
-  color: color-mix(in srgb, var(--color-deep-violet) 74%, var(--color-white));
-  font-size: 0.95rem;
-}
-
-/* --- The outcomes -----------------------------------------------------------
-   Category labels run vertically, picking up the sheet's own direction. */
-.outcomes__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
-  border-block: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
-}
-
-.outcome {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: clamp(0.9rem, 2vw, 1.5rem);
-  background: var(--color-canvas);
-  padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1rem, 2vw, 1.6rem);
-}
-
-.outcome__tag {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  color: var(--color-violet);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.outcome strong {
-  display: block;
-  margin-bottom: 0.6rem;
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  font-weight: 600;
-  line-height: 1.05;
-}
-
-.outcome p {
-  margin: 0;
-  color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white));
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
-
-.outcome:hover .wash { opacity: 1; transform: scaleX(1); }
-
-/* --- The conversation -------------------------------------------------------
-   Full-bleed ink, sharp-edged, ruled in white: the same sheet turned over. */
+/* =============================================================================
+   CONVERSATION PANEL
+   The contact card's markup is shared with /results/ and /schedule/, so its
+   surface styling lives in components.css. These are the homepage-only layout
+   rules — they were in this file before the section recomposition and are
+   still load-bearing, because .contact-card__inner has no rule anywhere else.
+   ========================================================================== */
 .conversation { padding-block: 0 var(--section-space); }
 
-/* components.css still carries the previous treatment for .contact-card — a 36px
-   radius, a drop shadow, and `grid-template-columns: 1fr 1fr`. The new markup
-   nests the glow layer and the inner container inside the card, so that grid
-   handed each of them a column and crushed the buttons into the right half.
-   Reset here rather than in components.css, which the other three pages use. */
+/* components.css makes .contact-card a two-column grid for /results/ and
+   /schedule/, where it sits inside a normal content column. On the homepage it
+   is a full-bleed band instead, so it resets to a block and lets its own
+   __inner do the columns — otherwise __inner is trapped in one grid cell and
+   renders at half width against an empty violet half. */
 .contact-card {
   position: relative;
   isolation: isolate;
@@ -618,17 +352,21 @@ body {
   color: var(--color-white);
 }
 
-/* The dark band's rules drift slowly sideways — the louvers, still breathing.
-   components.css animates this at 115°, an echo of the flap field the hero no
-   longer has; on the vertical grid it has to run vertical too. */
-.contact-card::after {
-  left: -30px;
-  width: calc(100% + 60px);
-  background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-white) 8%, transparent) 0 1px, transparent 1px 30px);
-  animation: rule-drift 16s linear infinite;
+.contact-card h2 { max-width: 18ch; margin: 0.6rem 0 1rem; color: var(--color-white); }
+.contact-card p:not(.eyebrow) { margin-bottom: 0; color: color-mix(in srgb, var(--color-white) 78%, transparent); }
+.contact-card .eyebrow { color: var(--color-orchid); }
+.contact-card .contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 0.9rem;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
 }
-
-@keyframes rule-drift { to { transform: translateX(30px); } }
+.contact-card .btn--primary { background: var(--color-orchid); color: var(--color-deep-violet); }
+.contact-card .btn--primary:hover { background: var(--color-white); }
 
 .contact-card__inner {
   display: grid;
@@ -637,24 +375,7 @@ body {
   gap: clamp(1.5rem, 4vw, 3rem);
 }
 
-.contact-card h2 { max-width: 18ch; margin: 0.6rem 0 1rem; color: var(--color-white); }
-.contact-card p:not(.eyebrow) { margin-bottom: 0; color: color-mix(in srgb, var(--color-white) 78%, transparent); }
-.contact-card .eyebrow { color: var(--color-orchid); }
-
-/* Same story: components.css boxes the actions in a bordered, rounded, padded
-   column. On the full-bleed band they are simply two buttons on a line. */
-.contact-card .contact-actions {
-  flex-direction: row;
-  justify-content: flex-end;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-}
-
-.contact-card .btn--primary { background: var(--color-orchid); color: var(--color-deep-violet); }
-.contact-card .btn--primary:hover { background: var(--color-white); }
-
-/* Pointer-tracked wash; position comes from glow.js. */
+/* Pointer-tracked bloom, driven by glow.js via --glow-x/--glow-y. */
 .contact-card__glow {
   position: absolute;
   z-index: -1;
@@ -674,1074 +395,10 @@ body {
 
 .contact-card:hover .contact-card__glow { opacity: 1; }
 
-@media (prefers-reduced-motion: reduce) {
-  /* No shutter is built at all under reduced motion, so the hero rests as the
-     uncovered ground: portrait, ink, and a single greeting that never cycles. */
-  .greet__word,
-  .greet__market { animation: none; }
-  .louver-cue { display: none !important; }
-
-  .contact-card__glow { display: none; }
-  .contact-card::after { animation: none; }
-  .wash,
-  .figure dd,
-  .offer__list > li,
-  .index-line span,
-  .index-line span::after,
-  .note__media img,
-  .note__slats { transition: none; }
-  .offer__list > li:hover { transform: none; }
-  .figure:hover dd { transform: none; }
-  .note__media:hover img { transform: none; }
-
-  .js .figures::before,
-  .js .method__track::before { transform: scaleX(1); transition: none; }
-  .js .method__track > li::before { transform: scale(1); transition: none; }
-}
-
 @media (max-width: 62rem) {
-  .louver-hero__grid,
-  .note__grid,
-  .lede--split,
   .contact-card__inner { grid-template-columns: minmax(0, 1fr); }
-
-  .lede--split { align-items: start; }
-
-  /* Narrow screens have no room for a side-by-side reveal — a portrait wide
-     enough to read would sit straight under the headline. So the composition
-     turns through ninety degrees: the grade runs top-to-bottom, copy holds the
-     clean top of the page, and the portrait becomes a band along the bottom,
-     fading in from nothing so no type ever lands on his face. */
-  /* Fixed rem clearance rather than a viewport percentage: the gap between the
-     last CTA and the photo band must not depend on how tall the copy wraps. */
-  .louver-hero { align-content: start; min-height: auto; padding-bottom: 19.5rem; }
-
-  .louver-hero__ground {
-    background:
-      linear-gradient(180deg,
-        color-mix(in srgb, var(--color-highlight) 42%, var(--color-white)) 0%,
-        var(--color-highlight) 54%,
-        color-mix(in srgb, var(--color-orchid) 72%, var(--color-white)) 72%,
-        var(--color-violet) 88%,
-        var(--color-deep-violet) 100%);
-  }
-
-  .louver-hero__ground img {
-    top: auto;
-    width: 100%;
-    height: 17.5rem;
-    /* A wide, short crop takes the ceiling unless it is aimed at his face. */
-    object-position: 54% 34%;
-    mask-image: linear-gradient(180deg, transparent 0%, var(--color-deep-violet) 26%, var(--color-deep-violet) 100%);
-  }
-
-  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .figure:nth-child(odd) { border-left: 0; padding-left: 0; }
-  .figure:nth-child(n+3) { border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent); }
-  .outcomes__grid { grid-template-columns: minmax(0, 1fr); }
-  .method__track { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
-  .method__track > li::before { display: none; }
-  .contact-actions { justify-content: flex-start; }
-}
-
-@media (max-width: 44rem) {
-  .louver-hero { padding-top: 6rem; }
-  .louver-hero__grid { gap: 2.2rem; }
-  .louver-hero h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
-  .figures { grid-template-columns: minmax(0, 1fr); }
-  .figure { border-left: 0; padding-left: 0; }
-  .figure + .figure { border-left: 0; padding-left: 0; border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent); }
-  .index-line { gap: 0.3rem 0.7rem; }
-  .index-line li + li::before { margin-right: 0.7rem; }
-  .offer__list > li p { grid-column: 2; }
-}
-
-/* --- The Clarity Testimonials Grid ----------------------------------------
-   Staggered cards inspired by dark-mode executive editorial layouts, adapted to
-   our Editorial Orchid design system. */
-.clarity {
-  position: relative;
-  background: color-mix(in srgb, var(--color-section) 85%, transparent);
-  border-block: 1px solid color-mix(in srgb, var(--color-orchid) 20%, transparent);
-}
-
-.clarity__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: stretch;
-}
-
-.clarity-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: 1.25rem;
-  padding: clamp(1.6rem, 3vw, 2.4rem);
-  box-shadow: 0 4px 20px color-mix(in srgb, var(--color-deep-violet) 6%, transparent);
-  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
-}
-
-.clarity-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--color-orchid);
-  box-shadow: 0 12px 32px color-mix(in srgb, var(--color-deep-violet) 12%, transparent);
-}
-
-.clarity-card__stars {
-  font-size: 0.95rem;
-  letter-spacing: 0.15em;
-  color: var(--color-orchid);
-  margin-bottom: 1.1rem;
-}
-
-.clarity-card__quote {
-  margin: 0 0 1.5rem;
-  font-family: var(--font-body);
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: var(--color-deep-violet);
-  font-style: normal;
-  flex-grow: 1;
-}
-
-.clarity-card__author {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  border-top: 1px solid color-mix(in srgb, var(--color-orchid) 18%, transparent);
-  padding-top: 1rem;
-  font-size: 0.85rem;
-  margin-top: auto;
-}
-
-.clarity-card__author strong {
-  font-weight: 700;
-  color: var(--color-deep-violet);
-}
-
-.clarity-card__author span {
-  color: color-mix(in srgb, var(--color-deep-violet) 65%, transparent);
-}
-
-@media (max-width: 56rem) {
-  .clarity__grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .clarity-card--stagger {
-    transform: none;
-  }
-  .clarity-card--stagger:hover {
-    transform: translateY(-6px);
-  }
-}
-
-/* --- Interactive Deal Sourcing Simulator ---------------------------------- */
-.simulator {
-  background: var(--color-canvas);
-}
-
-.sim-card {
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 30%, transparent);
-  border-radius: 1.5rem;
-  padding: clamp(1.75rem, 4vw, 3rem);
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-deep-violet) 8%, transparent);
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-  gap: clamp(2rem, 4vw, 3.5rem);
-  align-items: center;
-}
-
-.sim-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-.sim-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.sim-label {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--color-deep-violet);
-}
-
-.sim-sectors {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.sim-sector-btn {
-  padding: 0.5rem 1rem;
-  background: var(--color-section);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 30%, transparent);
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--color-deep-violet);
-  cursor: pointer;
-  transition: background var(--duration-hover) var(--ease-out), color var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
-}
-
-.sim-sector-btn[aria-pressed="true"],
-.sim-sector-btn:hover {
-  background: var(--color-deep-violet);
-  color: var(--color-white);
-  border-color: var(--color-deep-violet);
-}
-
-.sim-slider-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.sim-badge {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--color-violet);
-  background: var(--color-section);
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-}
-
-.sim-slider {
-  width: 100%;
-  accent-color: var(--color-violet);
-  cursor: pointer;
-}
-
-.sim-results {
-  background: var(--color-deep-violet);
-  color: var(--color-white);
-  border-radius: 1.25rem;
-  padding: clamp(1.5rem, 3vw, 2.25rem);
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-deep-violet) 25%, transparent);
-}
-
-.sim-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-white) 15%, transparent);
-  padding-bottom: 0.8rem;
-}
-
-.sim-stat:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.sim-stat__label {
-  font-size: 0.75rem;
-  color: color-mix(in srgb, var(--color-white) 70%, transparent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-}
-
-.sim-stat__val {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  font-weight: 600;
-  color: var(--color-highlight);
-}
-
-/* --- Method active step ---------------------------------------------------- */
-.method-step--active .method__num {
-  color: var(--color-violet);
-}
-
-.method-step--active::before {
-  transform: scale(1.4) !important;
-  background: var(--color-violet) !important;
-}
-
-@media (max-width: 52rem) {
-  .sim-card {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* --- Revenue Stack Grid ------------------------------------------------ */
-.stack-section {
-  background: var(--color-canvas);
-}
-
-.stack-group {
-  margin-bottom: 2rem;
-}
-
-.stack-group__title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-violet);
-  margin-bottom: 0.85rem;
-}
-
-.stack-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.stack-chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.4rem 0.85rem;
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--color-deep-violet);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out), background var(--duration-hover) var(--ease-out);
-}
-
-.stack-chip:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-orchid);
-  background: var(--color-section);
-}
-
-/* --- Recognized Performance Awards Grid ------------------------------- */
-.awards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.award-card {
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: 1.25rem;
-  padding: 1.75rem 1.5rem;
-  box-shadow: 0 4px 18px color-mix(in srgb, var(--color-deep-violet) 5%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
-}
-
-.award-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-orchid);
-}
-
-.award-card__year {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--color-violet);
-  margin-bottom: 0.4rem;
-}
-
-.award-card__title {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--color-deep-violet);
-  margin-bottom: 0.5rem;
-}
-
-.award-card__desc {
-  font-size: 0.88rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 72%, transparent);
-  margin: 0;
-}
-
-/* --- 8-Stage Pipeline Grid -------------------------------------------- */
-.pipeline-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.25rem;
-}
-
-.pipeline-card {
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 22%, transparent);
-  border-radius: 1rem;
-  padding: 1.35rem 1.2rem;
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
-}
-
-.pipeline-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-orchid);
-}
-
-.pipeline-card__step {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-violet);
-  margin-bottom: 0.35rem;
-}
-
-.pipeline-card__title {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--color-deep-violet);
-  margin-bottom: 0.4rem;
-}
-
-.pipeline-card__desc {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: color-mix(in srgb, var(--color-deep-violet) 72%, transparent);
-  margin: 0;
-}
-
-@media (max-width: 56rem) {
-  .awards-grid { grid-template-columns: minmax(0, 1fr); }
-  .pipeline-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 36rem) {
-  .pipeline-grid { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* --- Industries Cloud (No Company Names) ----------------------------- */
-.industries-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-
-.industry-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.65rem 1.15rem;
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 28%, transparent);
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-deep-violet);
-  box-shadow: 0 2px 10px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out), background var(--duration-hover) var(--ease-out);
-}
-
-.industry-tag:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-orchid);
-  background: var(--color-section);
-}
-
-/* --- Tools with Links and SVG Logos -----------------------------------
-   Unused: no page currently renders .tools-grid/.tool-card (confirmed via
-   repo-wide grep during the 2026-08-02 critique). Left in place rather than
-   deleted as part of an unrelated fix — a dead-code cleanup pass should
-   remove this block along with the equally-unused .stack-group, .award-card,
-   .pipeline-card, and .industries-cloud rules below it, once confirmed intentional.
-   The live Tools section on index.html uses .tool-groups/.tool-group/
-   .tool-links/.tool-link, defined further down. -------------------------- */
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.75rem;
-}
-
-.tool-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: 1.1rem;
-  padding: 1.5rem 1.25rem;
-  text-decoration: none;
-  color: var(--color-deep-violet);
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out), box-shadow var(--duration-hover) var(--ease-out);
-}
-
-.tool-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-orchid);
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-deep-violet) 8%, transparent);
-}
-
-.tool-card__header {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 0.85rem;
-}
-
-.tool-card__logo {
-  width: 2.25rem;
-  height: 2.25rem;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tool-card__logo svg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.tool-card__name {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.tool-card__desc {
-  font-size: 0.84rem;
-  line-height: 1.45;
-  color: color-mix(in srgb, var(--color-deep-violet) 72%, transparent);
-  margin: 0 0 1rem 0;
-}
-
-.tool-card__link {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-violet);
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
 }
 
-/* --- Tools: category groups (flat-ruled, live) -------------------------
-   Replaces inline styles that duplicated the dead .tools-grid/.tool-card
-   above. Same ruled-grid grammar as .outcomes__grid: flat canvas cells,
-   1px rule lines from the shared background, no shadow/hardcoded radius. */
-.tool-groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  margin-top: 1.75rem;
-  background: color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
-  border-block: 1px solid color-mix(in srgb, var(--color-deep-violet) 13%, transparent);
+@media (prefers-reduced-motion: reduce) {
+  .contact-card__glow { display: none; }
 }
-
-.tool-group {
-  background: var(--color-canvas);
-  padding: clamp(1.4rem, 3vw, 2rem);
-}
-
-.tool-group > p:not(.eyebrow) {
-  margin: 0 0 1.1rem;
-  font-size: 0.9rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 75%, transparent);
-}
-
-.tool-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tool-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--color-deep-violet) 16%, transparent);
-  color: var(--color-violet);
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out), color var(--duration-hover) var(--ease-out);
-}
-
-.tool-link:hover,
-.tool-link:focus-visible {
-  background: var(--color-highlight);
-  border-color: var(--color-orchid);
-  color: var(--color-deep-violet);
-}
-
-@media (max-width: 40rem) {
-  .tool-groups { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* --- Companies Experience Grid ---------------------------------------- */
-.companies-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.35rem;
-  margin-top: 1.75rem;
-}
-
-.company-card {
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: var(--radius-media);
-  padding: 1.5rem 1.35rem;
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
-}
-
-.company-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-orchid);
-}
-
-.company-card__header {
-  margin-bottom: 0.65rem;
-}
-
-.company-card__name {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--color-deep-violet);
-  margin-bottom: 0.2rem;
-}
-
-.company-card__role {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--color-violet);
-}
-
-.company-card__meta {
-  font-size: 0.78rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 60%, transparent);
-  margin-bottom: 0.75rem;
-}
-
-.company-card__desc {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: color-mix(in srgb, var(--color-deep-violet) 75%, transparent);
-  margin: 0;
-}
-
-/* --- Education Timeline (Latest to Down: MBA -> BE -> Diploma) ---------- */
-.education-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 1.75rem;
-  position: relative;
-}
-
-.education-timeline::before {
-  content: "";
-  position: absolute;
-  top: 1rem;
-  bottom: 1rem;
-  left: 1.25rem;
-  width: 2px;
-  background: color-mix(in srgb, var(--color-orchid) 30%, transparent);
-}
-
-.education-card {
-  position: relative;
-  margin-left: 2.75rem;
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: var(--radius-media);
-  padding: 1.35rem 1.5rem;
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-deep-violet) 4%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
-}
-
-.education-card::before {
-  content: "";
-  position: absolute;
-  left: -2.05rem;
-  top: 1.6rem;
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  background: var(--color-violet);
-  border: 2px solid var(--color-white);
-  box-shadow: 0 0 0 2px var(--color-orchid);
-}
-
-.education-card:hover {
-  transform: translateX(4px);
-  border-color: var(--color-orchid);
-}
-
-.education-card__years {
-  display: inline-block;
-  padding: 0.2rem 0.6rem;
-  background: color-mix(in srgb, var(--color-orchid) 12%, var(--color-white));
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--color-violet);
-  margin-bottom: 0.4rem;
-}
-
-.education-card__degree {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--color-deep-violet);
-  margin-bottom: 0.25rem;
-}
-
-.education-card__inst {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: color-mix(in srgb, var(--color-deep-violet) 75%, transparent);
-}
-
-/* --- Continuous Rolling LinkedIn Featured Posts Ticker ----------------- */
-.linkedin-ticker {
-  overflow: hidden;
-  padding-block: 3.5rem;
-  background: color-mix(in srgb, var(--color-highlight) 25%, var(--color-white));
-  border-block: 1px solid color-mix(in srgb, var(--color-orchid) 20%, transparent);
-}
-
-.ticker-wrap {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.ticker-track {
-  display: flex;
-  gap: 1.5rem;
-  width: max-content;
-  animation: ticker-scroll 35s linear infinite;
-}
-
-.ticker-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-  flex: 0 0 22rem;
-  width: 22rem;
-  background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-orchid) 25%, transparent);
-  border-radius: 1.1rem;
-  padding: 1.35rem 1.25rem;
-  text-decoration: none;
-  color: var(--color-deep-violet);
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-deep-violet) 5%, transparent);
-  transition: transform var(--duration-hover) var(--ease-out), border-color var(--duration-hover) var(--ease-out);
-}
-
-.ticker-item:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-orchid);
-}
-
-.ticker-item__header {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.75rem;
-}
-
-.ticker-item__icon {
-  width: 1.75rem;
-  height: 1.75rem;
-  color: var(--color-violet);
-  flex-shrink: 0;
-}
-
-.ticker-item__tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-violet);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.ticker-item__title {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.35;
-  margin-bottom: 0.5rem;
-  color: var(--color-deep-violet);
-}
-
-.ticker-item__excerpt {
-  font-size: 0.84rem;
-  line-height: 1.45;
-  color: color-mix(in srgb, var(--color-deep-violet) 72%, transparent);
-  margin-bottom: 0.85rem;
-}
-
-.ticker-item__action {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--color-violet);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2rem;
-}
-
-@media (max-width: 64rem) {
-  .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .companies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 40rem) {
-  .tools-grid { grid-template-columns: minmax(0, 1fr); }
-  .companies-grid { grid-template-columns: minmax(0, 1fr); }
-}
-
-.live-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-orchid);
-}
-
-/* --------------------------------------------------------------------------
-   The LinkedIn proof card — a deep-violet moment in the same territory as
-   .contact-card, standing in for the neon-dashboard widget it replaced.
-   Real, static numbers only: no counter, no fabricated growth curve — see
-   the "no invented data" guard in tests/site-contract.test.js, and the
-   homepage's data-target ban in particular.
-   -------------------------------------------------------------------------- */
-.linkedin-card {
-  background: var(--color-deep-violet);
-  border-radius: var(--radius-media);
-  padding: clamp(2rem, 4vw, 3rem);
-  color: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-white) 12%, transparent);
-  box-shadow: 0 30px 80px color-mix(in srgb, var(--color-deep-violet) 35%, transparent);
-}
-
-.linkedin-card__head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: clamp(2rem, 4vw, 2.75rem);
-}
-
-.linkedin-card__head > div { max-width: 38rem; }
-
-.linkedin-card__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin: 0 0 0.85rem;
-  background: color-mix(in srgb, var(--color-white) 12%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-white) 18%, transparent);
-  border-radius: 999px;
-  padding: 0.4rem 0.85rem 0.4rem 0.65rem;
-  color: var(--color-highlight);
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.linkedin-card__head h2 {
-  color: var(--color-white);
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
-  margin: 0 0 0.6rem;
-}
-
-.linkedin-card__lede {
-  margin: 0;
-  max-width: 34rem;
-  color: color-mix(in srgb, var(--color-white) 78%, transparent);
-  font-size: 0.95rem;
-}
-
-.linkedin-card__stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-  gap: 1.5rem;
-  margin: 0;
-  padding-top: clamp(1.5rem, 3vw, 2rem);
-  border-top: 1px solid color-mix(in srgb, var(--color-white) 14%, transparent);
-}
-
-.linkedin-card__stats dt {
-  margin-bottom: 0.4rem;
-  color: color-mix(in srgb, var(--color-white) 65%, transparent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.linkedin-card__stats dd {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  color: var(--color-white);
-}
-
-@media (max-width: 44rem) {
-  .linkedin-card__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
-}
-
-.linkedin-chart {
-  margin-top: clamp(1.5rem, 3vw, 2rem);
-  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 1.75rem) clamp(0.75rem, 2vw, 1rem);
-  background: var(--color-canvas);
-  border-radius: calc(var(--radius-media) - 0.5rem);
-  color: var(--color-deep-violet);
-}
-
-.linkedin-chart__head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.linkedin-chart__kicker {
-  margin: 0;
-  color: var(--color-violet);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.linkedin-chart__head h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
-  font-weight: 500;
-  color: var(--color-deep-violet);
-  margin: 0.3rem 0 0.15rem;
-}
-
-.linkedin-chart__note {
-  margin: 0;
-  max-width: 32rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 68%, transparent);
-  font-size: 0.82rem;
-}
-
-.linkedin-chart__total {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.linkedin-chart__total strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
-  font-weight: 500;
-  color: var(--color-deep-violet);
-}
-
-.linkedin-chart__total span {
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-deep-violet) 65%, transparent);
-}
-
-.linkedin-chart__wrap {
-  height: 230px;
-  position: relative;
-}
-
-.linkedin-chart__wrap svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  display: block;
-}
-
-.linkedin-chart__grid { stroke: color-mix(in srgb, var(--color-deep-violet) 10%, transparent); stroke-width: 1; }
-.linkedin-chart__axis-label { fill: color-mix(in srgb, var(--color-deep-violet) 55%, transparent); font-size: 8px; font-family: var(--font-body); }
-.linkedin-chart__area { fill: url(#linkedin-chart-area); }
-.linkedin-chart__line {
-  fill: none;
-  stroke: url(#linkedin-chart-line);
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.linkedin-chart__point { fill: var(--color-white); stroke: var(--color-deep-violet); stroke-width: 3; }
-.linkedin-chart__point--peak { fill: var(--color-orchid); stroke: var(--color-deep-violet); stroke-width: 3; }
-.linkedin-chart__tooltip rect { fill: var(--color-deep-violet); }
-.linkedin-chart__tooltip text { fill: var(--color-white); font-family: var(--font-body); font-size: 9px; font-weight: 700; }
-
-.linkedin-chart__axis {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 5px;
-  margin-top: -2px;
-  color: color-mix(in srgb, var(--color-deep-violet) 55%, transparent);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.linkedin-chart__foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  border-top: 1px solid color-mix(in srgb, var(--color-deep-violet) 12%, transparent);
-  margin-top: 0.85rem;
-  padding-top: 0.75rem;
-  color: color-mix(in srgb, var(--color-deep-violet) 65%, transparent);
-  font-size: 0.72rem;
-}
-
-.linkedin-chart__legend { display: flex; align-items: center; gap: 0.45rem; }
-.linkedin-chart__legend i {
-  width: 18px;
-  height: 3px;
-  border-radius: 99px;
-  background: var(--color-orchid);
-  display: inline-block;
-}
-.linkedin-chart__caption { font-style: italic; }
-
-@media (max-width: 44rem) {
-  .linkedin-chart__wrap { height: 175px; }
-  .linkedin-chart__axis-label { display: none; }
-}
-
-@media (max-width: 32rem) {
-  .linkedin-chart__head { flex-direction: column; }
-  .linkedin-chart__total { text-align: left; }
-  .linkedin-chart__wrap { height: 150px; }
-  .linkedin-chart__axis span:nth-child(even) { display: none; }
-}
-
-
-

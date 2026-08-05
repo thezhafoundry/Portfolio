@@ -1,0 +1,873 @@
+/* =============================================================================
+   HOME — section composition
+   Loaded after home.css. Depends on its tokens and on identity.css.
+   ========================================================================== */
+/* =============================================================================
+   PROTOTYPE — Editorial Orchid, recomposed
+   Foundation: tokens, reset, type scale, primitives.
+   Section styles live in prototype-sections.css.
+
+   Palette and typefaces are INHERITED from src/styles/identity.css — this is
+   the same Editorial Orchid identity, not a new one. What changes is
+   composition, depth, and rhythm.
+   ========================================================================== */
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+body {
+  min-width: 20rem;
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-deep-violet);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.65;
+  overflow-x: hidden;
+  /* the pinstripe ground the identity is built on, kept as a fixed layer so it
+     never repaints during scroll */
+  background-image: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--color-deep-violet) 3%, transparent) 0 1px,
+    transparent 1px 3.2rem
+  );
+}
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--color-deep-violet);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.028em;
+  line-height: 1.1;
+  /* kills the "Industries Worked / In" widow the current homepage has at 1440 */
+  text-wrap: balance;
+}
+p { margin: 0; }
+ol, ul, dl, dd { margin: 0; padding: 0; }
+li { list-style: none; }
+a { color: var(--color-violet); text-decoration-thickness: 0.08em; text-underline-offset: 0.16em; }
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+/* =============================================================================
+   PRIMITIVES
+   ========================================================================== */
+
+.wrap {
+  width: min(100% - var(--gutter) * 2, var(--wrap-max));
+  margin-inline: auto;
+}
+.band--proof { padding-top: var(--s-band); }
+
+.band {
+  position: relative;
+  padding-block: var(--s-band);
+}
+.band--tint { background: color-mix(in srgb, var(--color-section) 74%, transparent); }
+.band--flush { padding-block-end: calc(var(--s-band) * 0.6); }
+.band__foot { margin-top: var(--s-stack); text-align: center; }
+/* ---------- eyebrow tag ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1.1rem;
+  padding: 0.34rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-white) 60%, transparent);
+  color: var(--color-violet);
+  font-size: var(--t-tag);
+  font-weight: 700;
+  letter-spacing: 0.19em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.tag--quiet {
+  border-color: transparent;
+  background: none;
+  padding-inline: 0;
+  color: color-mix(in srgb, var(--color-violet) 70%, var(--color-canvas));
+}
+.tag--onDark {
+  border-color: var(--rule-dark);
+  background: color-mix(in srgb, var(--color-white) 8%, transparent);
+  color: var(--color-orchid);
+}
+.tag--live {
+  border-color: var(--rule-dark);
+  background: color-mix(in srgb, var(--color-orchid) 14%, transparent);
+  color: var(--color-orchid);
+}
+.tag--float {
+  background: color-mix(in srgb, var(--color-white) 78%, transparent);
+  backdrop-filter: blur(6px);
+}
+.dot {
+  width: 0.42em; height: 0.42em;
+  border-radius: 50%;
+  background: var(--color-orchid);
+  box-shadow: 0 0 0 0.28em color-mix(in srgb, var(--color-orchid) 26%, transparent);
+}
+/* ---------- CTA: island button with nested trailing pip ------------------
+   The arrow never floats naked beside the label — it sits in its own circular
+   well, flush with the button's inner padding. */
+.cta {
+  --cta-pip-bg: color-mix(in srgb, var(--color-white) 18%, transparent);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform var(--duration-press) var(--ease-seat),
+    background-color var(--duration-hover) var(--ease-out),
+    border-color var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out),
+    color var(--duration-hover) var(--ease-out);
+}
+.cta__pip {
+  display: grid;
+  place-items: center;
+  width: 2rem; height: 2rem;
+  border-radius: 50%;
+  background: var(--cta-pip-bg);
+  font-size: 0.82rem;
+  font-style: normal;
+  line-height: 1;
+  transition: transform var(--duration-hover) var(--ease-seat), background-color var(--duration-hover) var(--ease-out);
+}
+.cta--sm { padding-left: 1.1rem; font-size: 0.82rem; }
+.cta--sm .cta__pip { width: 1.7rem; height: 1.7rem; font-size: 0.72rem; }
+.cta--solid {
+  background: var(--color-violet);
+  color: var(--color-canvas);
+  box-shadow: var(--shadow-soft);
+}
+.cta--line {
+  --cta-pip-bg: color-mix(in srgb, var(--color-violet) 10%, transparent);
+  border-color: var(--rule);
+  background: color-mix(in srgb, var(--color-white) 55%, transparent);
+  color: var(--color-violet);
+}
+.cta--cream {
+  background: var(--color-canvas);
+  color: var(--color-deep-violet);
+}
+.cta--cream { --cta-pip-bg: color-mix(in srgb, var(--color-deep-violet) 10%, transparent); }
+.cta--onDark {
+  --cta-pip-bg: color-mix(in srgb, var(--color-white) 14%, transparent);
+  border-color: var(--rule-dark);
+  background: color-mix(in srgb, var(--color-white) 6%, transparent);
+  color: var(--color-canvas);
+}
+/* Hover motion is gated — touch devices fire :hover on tap and leave it stuck.
+   (subsystem-notes.md, Motion system) */
+@media (hover: hover) and (pointer: fine) {
+  .cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-lift); }
+  .cta--solid:hover { background: var(--color-deep-violet); }
+  .cta--line:hover { border-color: color-mix(in srgb, var(--color-violet) 34%, transparent); background: var(--color-white); }
+  .cta--onDark:hover { background: color-mix(in srgb, var(--color-white) 12%, transparent); }
+  /* internal kinetic tension: the pip leads, the button follows */
+  .cta:hover .cta__pip { transform: translate(2px, -2px); }
+  .cta--solid:hover .cta__pip { background: color-mix(in srgb, var(--color-white) 26%, transparent); }
+}
+.cta:active { transform: scale(0.985); }
+/* ---------- chip: small outbound link ---------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.36rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-white) 70%, transparent);
+  color: var(--color-violet);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform var(--duration-press) var(--ease-seat),
+    border-color var(--duration-hover) var(--ease-out),
+    background-color var(--duration-hover) var(--ease-out),
+    box-shadow var(--duration-hover) var(--ease-out);
+}
+.chip i { font-style: normal; opacity: 0.5; transition: transform var(--duration-hover) var(--ease-seat), opacity var(--duration-hover) var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+.chip:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--color-violet) 32%, transparent);
+    background: var(--color-white);
+    box-shadow: var(--shadow-soft);
+  }
+.chip:hover i { transform: translate(1px, -1px); opacity: 1; }
+}
+/* ---------- pill: toggle control ---------- */
+.pill {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-white) 62%, transparent);
+  color: var(--color-violet);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform var(--duration-press) var(--ease-seat),
+    background-color var(--duration-hover) var(--ease-out),
+    border-color var(--duration-hover) var(--ease-out),
+    color var(--duration-hover) var(--ease-out);
+}
+.pill[aria-pressed="true"] {
+  border-color: transparent;
+  background: var(--color-deep-violet);
+  color: var(--color-canvas);
+}
+@media (hover: hover) and (pointer: fine) {
+.pill:hover { border-color: color-mix(in srgb, var(--color-violet) 32%, transparent); }
+.pill[aria-pressed="true"]:hover { background: var(--color-violet); }
+}
+.pill:active { transform: scale(0.98); }
+/* ---------- TRAY: the double-bezel enclosure ----------------------------
+   Nothing meaningful sits flat on the page. An outer shell holds an inner
+   core with its own surface, its own lip highlight, and a derived radius, so
+   the two curves stay concentric — the thing reads as machined, not stacked. */
+.tray {
+  padding: var(--pad-shell);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-shell);
+  background: var(--tray-shell);
+  box-shadow: var(--shadow-soft);
+}
+.tray__core {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-core);
+  background: var(--color-canvas);
+  box-shadow: var(--inset-lip);
+}
+.tray--tight { --pad-shell: 0.375rem; --radius-shell: 1.5rem; }
+.tray--dark {
+  border-color: var(--rule-dark);
+  background: var(--tray-shell-dark);
+}
+.tray--dark .tray__core {
+  background: var(--color-deep-violet);
+  box-shadow: var(--inset-lip-dark);
+}
+/* =============================================================================
+   SCROLL ENTRY — nothing appears statically
+   ========================================================================== */
+.reveal,
+.reveal-group > * {
+  opacity: 0;
+  transform: translateY(1.6rem);
+  transition:
+    opacity var(--duration-enter) var(--ease-out),
+    transform var(--duration-enter) var(--ease-out);
+}
+.reveal.on,
+.reveal-group.on > * { opacity: 1; transform: none; }
+/* staggered, capped so a long grid never crawls */
+.reveal-group.on > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-group.on > *:nth-child(2) { transition-delay: 55ms; }
+.reveal-group.on > *:nth-child(3) { transition-delay: 110ms; }
+.reveal-group.on > *:nth-child(4) { transition-delay: 165ms; }
+.reveal-group.on > *:nth-child(5) { transition-delay: 200ms; }
+.reveal-group.on > *:nth-child(n+6) { transition-delay: 230ms; }
+/* No-JS: content must never be trapped at opacity 0. */
+html:not(.js) .reveal,
+html:not(.js) .reveal-group > * { opacity: 1; transform: none; }
+/* =============================================================================
+   REDUCED MOTION
+   Movement goes; content and state stay. (spec §13)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .reveal-group > * { opacity: 1; transform: none; }
+  /* the auto-scrolling rails stop and become manually scrollable instead —
+     the content and every card stay reachable */
+  .rail-scroll { overflow-x: auto; }
+  .rail-scroll__track { animation: none !important; }
+}
+.lede__aside { display: flex; flex-direction: column; align-items: start; gap: 1.1rem; }
+.lede__proof { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; }
+/* the one figure neither the heading nor the chart states */
+.proof-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-left: 1.4rem;
+  border-left: 1px solid var(--rule);
+}
+.proof-chip strong {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.proof-chip span {
+  color: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-canvas));
+  font-size: var(--t-mono);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+/* ---------- chart ---------- */
+.chart {
+  padding: clamp(1.35rem, 2.8vw, 2.4rem);
+  background: var(--color-canvas);
+}
+.chart, .chart h3 { color: var(--color-deep-violet); }
+.chart__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.chart__head h3 { font-size: var(--t-h3); }
+.chart__note {
+  max-width: 30rem;
+  margin-top: 0.4rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 62%, var(--color-canvas));
+  font-size: 0.84rem;
+}
+.chart__total { text-align: right; }
+.chart__total strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem);
+  font-weight: 600;
+  line-height: 1;
+}
+.chart__total span {
+  color: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-canvas));
+  font-size: var(--t-mono);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.chart__wrap { height: clamp(9rem, 20vw, 14rem); }
+.chart__wrap svg { width: 100%; height: 100%; }
+.chart__grid { stroke: color-mix(in srgb, var(--color-deep-violet) 9%, transparent); stroke-width: 1; }
+.chart__axis-label {
+  fill: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-canvas));
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+}
+.chart__area { fill: url(#p-area); }
+.chart__line { fill: none; stroke: url(#p-line); stroke-width: 2.5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.chart__pt { fill: var(--color-canvas); stroke: var(--color-violet); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.chart__pt--peak { fill: var(--color-violet); stroke: var(--color-canvas); }
+.chart__tip rect { fill: var(--color-deep-violet); }
+.chart__tip text { fill: var(--color-canvas); font-family: var(--font-body); font-size: 11px; font-weight: 700; }
+.chart__axis {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin-top: 0.5rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-canvas));
+  font-size: var(--t-mono);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.chart__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 0.76rem;
+}
+.chart__legend { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; }
+.chart__legend i { width: 1.4rem; height: 3px; border-radius: 2px; background: var(--color-violet); }
+.chart__caption { color: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-canvas)); font-style: italic; }
+/* =============================================================================
+   SECTION HEADER (lede)
+   ========================================================================== */
+.lede {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  margin-bottom: var(--s-stack);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.lede h2 { font-size: var(--t-h2); }
+.lede__note {
+  max-width: 30rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 68%, var(--color-canvas));
+  font-size: var(--t-lede);
+  line-height: 1.55;
+}
+/* =============================================================================
+   ABOUT — editorial split, figure overlaps into the gutter
+   ========================================================================== */
+.note {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+.note__media { position: relative; margin: 0; }
+.note__media .tray__core { aspect-ratio: 4 / 3; }
+.note__media img { width: 100%; height: 100%; object-fit: cover; }
+.note__slats {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg,
+    color-mix(in srgb, var(--color-canvas) 88%, transparent) 0 2px,
+    transparent 2px 1.9rem);
+}
+/* the stamp breaks the frame — depth through overlap, not shadow */
+.note__stamp {
+  position: absolute;
+  right: -1rem;
+  bottom: -1.6rem;
+  display: grid;
+  place-items: center;
+  width: 6.5rem; height: 6.5rem;
+  border-radius: 50%;
+  background: var(--color-deep-violet);
+  color: var(--color-canvas);
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  line-height: 1;
+  box-shadow: var(--shadow-lift);
+}
+.note__stamp span {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.66;
+}
+.note__body h2 { margin-bottom: 1.2rem; font-size: var(--t-h2); }
+.note__lede {
+  margin-bottom: 1.1rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 88%, var(--color-canvas));
+  font-size: var(--t-lede);
+  line-height: 1.6;
+}
+.note__copy { color: color-mix(in srgb, var(--color-deep-violet) 68%, var(--color-canvas)); line-height: 1.7; }
+/* =============================================================================
+   INDUSTRIES — asymmetrical bento
+   ========================================================================== */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+}
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: clamp(1.15rem, 2.2vw, 1.8rem);
+  border: 1px solid var(--rule-soft);
+  border-radius: 1.25rem;
+  background: color-mix(in srgb, var(--color-white) 55%, transparent);
+  transition:
+    transform var(--duration-surface) var(--ease-seat),
+    background-color var(--duration-surface) var(--ease-out),
+    border-color var(--duration-surface) var(--ease-out),
+    box-shadow var(--duration-surface) var(--ease-out);
+}
+.cell__tag {
+  align-self: start;
+  padding: 0.24rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-highlight) 60%, transparent);
+  color: var(--color-violet);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.cell strong {
+  font-family: var(--font-display);
+  font-size: var(--t-h3);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.cell p { color: color-mix(in srgb, var(--color-deep-violet) 62%, var(--color-canvas)); font-size: 0.88rem; }
+@media (hover: hover) and (pointer: fine) {
+.cell:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-violet) 22%, transparent);
+    background: var(--color-white);
+    box-shadow: var(--shadow-lift);
+  }
+}
+/* explicit placement — auto-flow can't produce a deliberate composition */
+@media (min-width: 62rem) {
+  /* tag anchors the top, the name/description block falls to the base — the
+     span between them is deliberate tension, not a gap left over */
+  .cell--lead { grid-column: 1 / 4; grid-row: 1 / 3; background: var(--color-deep-violet); border-color: transparent; }
+  .cell--lead strong { margin-top: auto; }
+  .cell--lead strong, .cell--lead { color: var(--color-canvas); }
+  .cell--lead p { color: color-mix(in srgb, var(--color-canvas) 70%, var(--color-deep-violet)); }
+  .cell--lead .cell__tag { background: color-mix(in srgb, var(--color-orchid) 22%, transparent); color: var(--color-orchid); }
+  .cell--lead strong { font-size: clamp(1.6rem, 1.1rem + 1.5vw, 2.4rem); }
+  .bento > :nth-child(2) { grid-column: 4 / 7; grid-row: 1 / 2; }
+  .bento > :nth-child(3) { grid-column: 4 / 7; grid-row: 2 / 3; }
+  .bento > :nth-child(4) { grid-column: 1 / 3; grid-row: 3 / 4; }
+  .bento > :nth-child(5) { grid-column: 3 / 5; grid-row: 3 / 4; }
+  .bento > :nth-child(6) { grid-column: 5 / 7; grid-row: 3 / 4; }
+  .bento > :nth-child(7) { grid-column: 1 / 4; grid-row: 4 / 5; }
+  .bento > :nth-child(8) { grid-column: 4 / 7; grid-row: 4 / 5; }
+  @media (hover: hover) and (pointer: fine) {
+    .cell--lead:hover { background: color-mix(in srgb, var(--color-deep-violet) 88%, var(--color-violet)); }
+  }
+}
+/* =============================================================================
+   TOOLS — nested enclosures
+   ========================================================================== */
+.stack { display: grid; gap: 0.9rem; }
+.stack__item { transition: box-shadow var(--duration-surface) var(--ease-out); }
+.kit {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(1.25rem, 2.6vw, 2.1rem);
+}
+.kit__no {
+  color: color-mix(in srgb, var(--color-deep-violet) 34%, var(--color-canvas));
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.4rem + 2vw, 3.2rem);
+  font-weight: 600;
+  line-height: 0.9;
+}
+.kit__body h3 {
+  margin-bottom: 0.7rem;
+  font-size: clamp(1.1rem, 0.95rem + 0.75vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+.kit__desc {
+  max-width: 44rem;
+  margin-bottom: 1.1rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 64%, var(--color-canvas));
+  font-size: 0.9rem;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+@media (hover: hover) and (pointer: fine) {
+.stack__item:hover { box-shadow: var(--shadow-lift); }
+}
+/* =============================================================================
+   COMPANIES — numbered editorial ledger
+   ========================================================================== */
+.ledger { display: grid; }
+/* Column widths follow DOM order: no · name+role · dates · description.
+   Description takes the 1fr so it never rags down to a six-line column. */
+.ledger__row {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 14rem) minmax(0, 10.5rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+  padding-block: clamp(1.5rem, 2.6vw, 2.25rem);
+  border-top: 1px solid var(--rule);
+  transition: background-color var(--duration-surface) var(--ease-out);
+}
+/* the .lede already draws a rule above this list — a second one reads as a bug */
+.ledger__row:first-child { border-top: 0; padding-top: 0; }
+.ledger__row:last-child { border-bottom: 1px solid var(--rule); }
+.ledger__no {
+  color: color-mix(in srgb, var(--color-deep-violet) 26%, var(--color-canvas));
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.ledger__id h3 { font-size: var(--t-h3); }
+.ledger__role {
+  margin-top: 0.3rem;
+  color: var(--color-violet);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.ledger__desc { color: color-mix(in srgb, var(--color-deep-violet) 66%, var(--color-canvas)); font-size: 0.9rem; line-height: 1.65; }
+.ledger__meta {
+  color: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-canvas));
+  font-size: var(--t-mono);
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+.ledger__meta span { display: block; margin-top: 0.35rem; font-weight: 500; letter-spacing: 0.06em; opacity: 0.75; }
+@media (hover: hover) and (pointer: fine) {
+.ledger__row:hover { background: color-mix(in srgb, var(--color-highlight) 26%, transparent); }
+.ledger__row:hover .ledger__no { color: var(--color-violet); }
+}
+/* =============================================================================
+   EDUCATION — stepped timeline
+   ========================================================================== */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.5vw, 2rem); }
+.step {
+  position: relative;
+  padding-top: 2.1rem;
+  border-top: 2px solid var(--rule);
+  transition: border-color var(--duration-surface) var(--ease-out);
+}
+.step::before {
+  content: "";
+  position: absolute;
+  top: -0.3rem; left: 0;
+  width: 0.6rem; height: 0.6rem;
+  border-radius: 50%;
+  background: var(--color-orchid);
+  transition: transform var(--duration-surface) var(--ease-seat), background-color var(--duration-surface) var(--ease-out);
+}
+.step__years {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: var(--color-violet);
+  font-size: var(--t-mono);
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+.step__degree { margin-bottom: 0.5rem; font-size: var(--t-h3); }
+.step__inst { color: color-mix(in srgb, var(--color-deep-violet) 62%, var(--color-canvas)); font-size: 0.88rem; }
+@media (hover: hover) and (pointer: fine) {
+.step:hover { border-color: color-mix(in srgb, var(--color-violet) 40%, transparent); }
+.step:hover::before { transform: scale(1.35); background: var(--color-violet); }
+}
+/* =============================================================================
+   HORIZONTAL RAILS — case studies + LinkedIn posts
+   Continuously auto-scrolling, as on the current site. ticker.js clones the
+   items (clones get aria-hidden + tabindex="-1") so translateX(-50%) loops
+   seamlessly. Pauses on hover AND on focus-within, so a keyboard user can
+   actually reach a card without it sliding away.
+   ========================================================================== */
+.rail-scroll {
+  overflow: hidden;
+  margin-top: var(--s-stack);
+  padding-block: 0.5rem;
+}
+.rail-scroll__track {
+  display: flex;
+  gap: 0.9rem;
+  width: max-content;
+  padding-inline: 0.45rem;
+  animation: ticker-scroll 52s linear infinite;
+}
+/* four cards instead of five — shorten the loop to hold the same speed */
+[aria-labelledby="posts-heading"] .rail-scroll__track { animation-duration: 42s; }
+.rail-scroll__track:hover,
+.rail-scroll__track:focus-within { animation-play-state: paused; }
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.brief {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: clamp(17rem, 26vw, 22rem);
+  padding: clamp(1.25rem, 2.2vw, 1.75rem);
+  border: 1px solid var(--rule-soft);
+  border-radius: 1.35rem;
+  background: color-mix(in srgb, var(--color-white) 62%, transparent);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform var(--duration-surface) var(--ease-seat),
+    border-color var(--duration-surface) var(--ease-out),
+    background-color var(--duration-surface) var(--ease-out),
+    box-shadow var(--duration-surface) var(--ease-out);
+}
+.brief__head { display: flex; align-items: center; gap: 0.6rem; }
+.brief__icon { width: 1.05rem; height: 1.05rem; color: var(--color-violet); }
+.brief__kind {
+  color: var(--color-violet);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+.brief__org {
+  margin-left: auto;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-highlight) 55%, transparent);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.brief h3 { font-size: 1.18rem; line-height: 1.25; }
+.brief p {
+  flex: 1;
+  color: color-mix(in srgb, var(--color-deep-violet) 64%, var(--color-canvas));
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.brief__go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-violet);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.brief__go i { font-style: normal; transition: transform var(--duration-hover) var(--ease-seat); }
+@media (hover: hover) and (pointer: fine) {
+.brief:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-violet) 24%, transparent);
+    background: var(--color-white);
+    box-shadow: var(--shadow-lift);
+  }
+.brief:hover .brief__go i { transform: translateX(3px); }
+}
+/* =============================================================================
+   SIMULATOR
+   ========================================================================== */
+.sim__core {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+.sim__controls { display: flex; flex-direction: column; gap: 1.75rem; align-items: start; }
+.sim__group { width: 100%; }
+.sim__label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 70%, var(--color-canvas));
+  font-size: var(--t-mono);
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+.sim__sectors { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sim__sliderhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.sim__badge {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-highlight) 60%, transparent);
+  color: var(--color-violet);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+.sim__slider {
+  width: 100%;
+  height: 1.5rem;
+  margin-top: 0.5rem;
+  background: none;
+  appearance: none;
+  cursor: pointer;
+}
+.sim__slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-deep-violet) 12%, transparent);
+}
+.sim__slider::-moz-range-track { height: 4px; border-radius: 999px; background: color-mix(in srgb, var(--color-deep-violet) 12%, transparent); }
+.sim__slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.15rem; height: 1.15rem;
+  margin-top: -0.53rem;
+  border: 3px solid var(--color-canvas);
+  border-radius: 50%;
+  background: var(--color-violet);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--duration-press) var(--ease-seat);
+}
+.sim__slider::-moz-range-thumb {
+  width: 1.15rem; height: 1.15rem;
+  border: 3px solid var(--color-canvas);
+  border-radius: 50%;
+  background: var(--color-violet);
+}
+.sim__slider:active::-webkit-slider-thumb { transform: scale(1.15); }
+.sim__link { margin-top: auto; }
+.sim__results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: clamp(1rem, 2vw, 1.4rem);
+  border-radius: var(--radius-core);
+  background: var(--color-deep-violet);
+}
+.sim__stat { padding-block: 0.85rem; border-bottom: 1px solid var(--rule-dark); }
+.sim__stat:last-child { border-bottom: 0; padding-bottom: 0.25rem; }
+.sim__stat dt {
+  margin-bottom: 0.45rem;
+  color: color-mix(in srgb, var(--color-orchid) 82%, var(--color-canvas));
+  font-size: var(--t-mono);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.sim__stat dd {
+  color: var(--color-canvas);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1rem + 0.9vw, 1.7rem);
+  line-height: 1.15;
+}
+/* =============================================================================
+   RESPONSIVE
+   Every asymmetric layout collapses to a single column below 768px.
+   ========================================================================== */
+@media (max-width: 74rem) {
+  .ledger__row { grid-template-columns: 2.5rem minmax(0, 1fr) minmax(0, 9rem); }
+  .ledger__desc { grid-column: 2 / 4; }
+  .sim__core, .talk { grid-template-columns: 1fr; }
+  .talk__actions { justify-content: start; }
+}
+@media (max-width: 62rem) {
+.note { grid-template-columns: 1fr; }
+.bento { grid-template-columns: repeat(2, 1fr); }
+.steps { grid-template-columns: 1fr; }
+.lede { grid-template-columns: 1fr; align-items: start; }
+}
+@media (max-width: 48rem) {
+.kit { grid-template-columns: 1fr; gap: 0.75rem; }
+.kit__no { font-size: 1.6rem; }
+.ledger__row { grid-template-columns: 2.25rem minmax(0, 1fr); }
+.ledger__meta { grid-column: 2 / 3; text-align: left; }
+.ledger__desc { grid-column: 2 / 3; }
+.chart__axis { font-size: 0.58rem; }
+}
+@media (max-width: 34rem) {
+.bento { grid-template-columns: 1fr; }
+.note__stamp { right: 0.5rem; bottom: -1.2rem; width: 5rem; height: 5rem; font-size: 1.6rem; }
+.chart__head { flex-direction: column; }
+.chart__total { text-align: left; }
+/* 12 month labels across a 320px card — drop the tracking or "Dec" clips */
+  .chart { padding-inline: 0.85rem; }
+.chart__axis { font-size: 0.48rem; letter-spacing: 0; }
+}

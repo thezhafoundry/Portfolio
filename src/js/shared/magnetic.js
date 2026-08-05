@@ -15,7 +15,7 @@ export function initMagnetic(root = document) {
   if (prefersReducedMotion()) return;
   if (typeof window !== 'undefined' && window.matchMedia && !window.matchMedia('(pointer: fine)').matches) return;
 
-  const targets = root.querySelectorAll('.btn, #pip-trigger, .sim-sector-btn, .site-nav > a');
+  const targets = root.querySelectorAll('.btn, .cta, #pip-trigger, .sim-sector-btn, .pill, .site-nav > a');
 
   targets.forEach((btn) => {
     btn.addEventListener('pointermove', (event) => {

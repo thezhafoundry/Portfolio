@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 const stylesheets = [
   'src/styles/components.css',
   'src/styles/home.css',
+  'src/styles/home-sections.css',
   'src/styles/story.css',
   'src/styles/results.css',
   'src/styles/schedule.css',
