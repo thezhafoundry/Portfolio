@@ -505,6 +505,14 @@ body.nav-is-open {
   background: var(--color-violet);
 }
 
+/* Hidden near the top of any page — first-viewport content (hero CTAs, the
+   story page's opening paragraph) sits in this same bottom-left corner. */
+.chatbot-trigger--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+}
+
 .chatbot-panel {
   position: fixed;
   left: clamp(1rem, 3vw, 2rem);
