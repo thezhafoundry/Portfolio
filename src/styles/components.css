@@ -1157,6 +1157,27 @@ a:focus-visible .introduction__media img {
 }
 
 /* --- Video card ----------------------------------------------------------- */
+/* The intro video is optional. If the file is absent or unplayable the card
+   still opens, and this overlay says so instead of leaving native controls
+   that do nothing. Driven by pip-video.js on the <video> error event. */
+#pip-card.pip-card--unavailable video { display: none; }
+
+#pip-card.pip-card--unavailable::after {
+  content: "Intro video coming soon";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 8rem;
+  padding: 1.25rem;
+  /* the card surface is white, not the deep violet the trigger is */
+  color: color-mix(in srgb, var(--color-deep-violet) 72%, var(--color-white));
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
 #pip-card {
   width: 15rem;
   background: var(--color-white);

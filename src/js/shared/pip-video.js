@@ -19,14 +19,18 @@ export function initPip({ revealAfter = null } = {}) {
 
   if (!wrap || !trigger || !card || !video) return;
 
-  /* The trigger only makes sense once a real video file is in place — until
-     then, hide it rather than opening a card with nothing playable inside.
-     Re-appears automatically the moment the asset named in this file's doc
-     comment exists; no other code change needed. */
-  wrap.hidden = true;
-  fetch(video.currentSrc || video.src, { method: 'HEAD' })
-    .then((res) => { if (res.ok) { wrap.hidden = false; wireUp(); } })
-    .catch(() => {});
+  /* The trigger shows unconditionally — it is part of the page's furniture, not
+     something that appears only once an asset lands. The card still opens; if
+     the file is missing the <video> element's own error state is what shows,
+     rather than the widget silently not existing. */
+  wrap.hidden = false;
+  wireUp();
+
+  /* A missing or unplayable source gets labelled in the card instead of
+     failing silently behind native controls that do nothing. */
+  video.addEventListener('error', () => {
+    card.classList.add('pip-card--unavailable');
+  });
 
   function wireUp() {
     /* --- Scroll-based reveal ----------------------------------------------- */
