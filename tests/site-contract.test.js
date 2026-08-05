@@ -113,11 +113,11 @@ describe('Editorial Orchid Results contracts', () => {
   it('presents proof metrics before the primary case study and structures outcomes', async () => {
     const html = await readPage('results/index.html');
     const proofIndex = html.indexOf('+35%');
-    const finquestIndex = html.indexOf('Finquest');
+    const caseStudyIndex = html.indexOf('Client A');
 
     expect(proofIndex).toBeGreaterThan(-1);
-    expect(finquestIndex).toBeGreaterThan(-1);
-    expect(proofIndex).toBeLessThan(finquestIndex);
+    expect(caseStudyIndex).toBeGreaterThan(-1);
+    expect(proofIndex).toBeLessThan(caseStudyIndex);
 
     const outcomes = html.match(/<div\b[^>]*class="[^"]*outcome-block[^"]*"[^>]*>/g) ?? [];
     expect(outcomes.length).toBe(4);

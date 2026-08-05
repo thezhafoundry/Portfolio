@@ -515,7 +515,7 @@ body.nav-is-open {
 
 .chatbot-panel {
   position: fixed;
-  left: clamp(1rem, 3vw, 2rem);
+  right: clamp(1rem, 3vw, 2rem);
   bottom: calc(clamp(1rem, 3vw, 2rem) + 8.5rem);
   z-index: 160;
   width: min(21rem, calc(100vw - 2 * clamp(1rem, 3vw, 2rem)));
@@ -530,7 +530,7 @@ body.nav-is-open {
     0 16px 48px color-mix(in srgb, var(--color-deep-violet) 20%, transparent);
   opacity: 0;
   transform: translateY(0.75rem) scale(0.96);
-  transform-origin: bottom left;
+  transform-origin: bottom right;
   transition: opacity var(--duration-surface) var(--ease-out),
     transform var(--duration-surface) var(--ease-out);
 }
