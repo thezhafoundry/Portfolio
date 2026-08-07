@@ -837,6 +837,17 @@ html:not(.js) .reveal-group > * { opacity: 1; transform: none; }
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1rem + 0.9vw, 1.7rem);
   line-height: 1.15;
+  display: inline-block;
+  transform: translateZ(0);
+  transition: color var(--duration-surface) var(--ease-out);
+}
+.sim__stat dd.is-updated { color: var(--color-orchid); animation: sim-pulse var(--duration-surface) var(--ease-seat); }
+.sim__badge { transition: background-color var(--duration-surface) var(--ease-out); }
+.sim__badge.is-updated { background: color-mix(in srgb, var(--color-violet) 30%, transparent); }
+@keyframes sim-pulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }
 /* =============================================================================
    RESPONSIVE

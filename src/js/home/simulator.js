@@ -24,11 +24,23 @@ export function initSimulator() {
       midmarket: { meetingRate: 0.14, baseToolCost: 500, costPerClient: 6 },
     };
 
+    function pulse(el) {
+      if (!el) return;
+      el.classList.remove('is-updated');
+      // eslint-disable-next-line no-void
+      void el.offsetWidth;
+      el.classList.add('is-updated');
+    }
+
+    function setText(el, text) {
+      if (!el || el.textContent === text) return;
+      el.textContent = text;
+      pulse(el);
+    }
+
     function update() {
       const clients = parseInt(slider.value, 10);
-      if (accountValueEl) {
-        accountValueEl.textContent = `${clients} Clients / Leads per mo`;
-      }
+      setText(accountValueEl, `${clients} Clients / Leads per mo`);
 
       const config = sectorConfigs[activeSector] || sectorConfigs.saas;
 
@@ -43,9 +55,9 @@ export function initSimulator() {
 
       const estToolsCost = config.baseToolCost + clients * config.costPerClient;
 
-      if (meetingsEl) meetingsEl.textContent = `~${estMeetings} MQL Leads & Meetings`;
-      if (timeframeEl) timeframeEl.textContent = researchTimeframe;
-      if (toolsCostEl) toolsCostEl.textContent = `$${estToolsCost}/mo Tools Cost Stack`;
+      setText(meetingsEl, `~${estMeetings} MQL Leads & Meetings`);
+      setText(timeframeEl, researchTimeframe);
+      setText(toolsCostEl, `$${estToolsCost}/mo Tools Cost Stack`);
     }
 
     slider.addEventListener('input', update);
