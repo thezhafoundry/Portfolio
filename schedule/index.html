@@ -82,14 +82,14 @@
         </div>
 
         <!-- EMBEDDED INTERACTIVE ESTIMATOR ON SCHEDULE PAGE -->
-        <div style="margin-block: 2.5rem 2rem;">
-          <div class="sim-card reveal" style="border: 1px solid var(--color-highlight); background: var(--color-section); padding: 2rem; border-radius: var(--radius-media);">
-            <div style="margin-bottom: 1.5rem;">
-              <p class="eyebrow">Interactive Estimator</p>
-              <h2 style="font-size: 1.5rem; font-family: var(--font-display);">Estimate pipeline &amp; tool costs prior to booking</h2>
-              <p style="font-size: 0.9rem; color: var(--color-deep-violet);">Select your sector focus and target monthly client volume to calculate meeting targets, research timeframes, and estimated stack costs.</p>
-            </div>
+        <div class="sched-estimator reveal">
+          <div class="sched-estimator__head">
+            <p class="eyebrow">Interactive Estimator</p>
+            <h2 class="sched-estimator__title">Estimate pipeline &amp; tool costs<br>prior to booking</h2>
+            <p class="sched-estimator__sub">Select your sector focus and target monthly client volume to calculate meeting targets, research timeframes, and estimated stack costs.</p>
+          </div>
 
+          <div class="sched-estimator__body sim-card">
             <div class="sim-controls">
               <div class="sim-group">
                 <label class="sim-label">Target Market Focus</label>
@@ -100,7 +100,7 @@
                 </div>
               </div>
 
-              <div class="sim-group" style="margin-top: 1.25rem;">
+              <div class="sim-group sim-group--slider">
                 <div class="sim-slider-header">
                   <label for="sched-sim-accounts" class="sim-label">Target Clients / Lead &amp; Prospect Volume</label>
                   <span class="sim-badge">120 Clients / Leads per mo</span>
@@ -109,26 +109,27 @@
               </div>
             </div>
 
-            <div class="sim-results" style="margin-top: 1.5rem;">
-              <div class="sim-stat">
-                <span class="sim-stat__label">Estimated Meetings &amp; MQL Leads</span>
-                <strong class="sim-stat__val" data-sim-meetings>~18 MQL Leads &amp; Meetings</strong>
+            <div class="sched-sim-results">
+              <div class="sched-sim-stat sched-sim-stat--accent">
+                <span class="sched-sim-stat__label">Estimated Meetings &amp; MQL Leads</span>
+                <strong class="sched-sim-stat__val" data-sim-meetings>~18 MQL Leads</strong>
               </div>
-              <div class="sim-stat">
-                <span class="sim-stat__label">Research Cycle (Constant)</span>
-                <strong class="sim-stat__val" data-sim-timeframe>30 Days Research Cycle</strong>
+              <div class="sched-sim-stat">
+                <span class="sched-sim-stat__label">Research Cycle</span>
+                <strong class="sched-sim-stat__val" data-sim-timeframe>30 Days <em>constant</em></strong>
               </div>
-              <div class="sim-stat">
-                <span class="sim-stat__label">Time to First MQL Lead</span>
-                <strong class="sim-stat__val" data-sim-mql-time>45–90 Days to MQL Lead</strong>
+              <div class="sched-sim-stat">
+                <span class="sched-sim-stat__label">Time to First MQL Lead</span>
+                <strong class="sched-sim-stat__val" data-sim-mql-time>45–90 Days</strong>
               </div>
-              <div class="sim-stat">
-                <span class="sim-stat__label">Estimated Tools Cost Stack</span>
-                <strong class="sim-stat__val" data-sim-tools-cost>$1,050/mo Tools Cost Stack</strong>
+              <div class="sched-sim-stat sched-sim-stat--cost">
+                <span class="sched-sim-stat__label">Est. Tools Cost Stack</span>
+                <strong class="sched-sim-stat__val" data-sim-tools-cost>$1,050<em>/mo</em></strong>
               </div>
             </div>
-            <div style="margin-top: 1.5rem; text-align: center;">
-              <a href="/#tools" class="btn btn--ghost-cream" style="font-size: 0.9rem;">View Tools Contributing to Cost <span aria-hidden="true">→</span></a>
+
+            <div class="sched-estimator__foot">
+              <a href="/#tools" class="cta cta--line cta--sm"><span>View tools contributing to cost</span><i class="cta__pip" aria-hidden="true">↓</i></a>
             </div>
           </div>
         </div>

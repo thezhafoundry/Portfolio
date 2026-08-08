@@ -224,3 +224,179 @@
   color: var(--color-white);
   border-color: var(--color-deep-violet);
 }
+
+/* -----------------------------------------------------------------------
+   Schedule page — Interactive Estimator (premium card)
+   ----------------------------------------------------------------------- */
+.sched-estimator {
+  margin: 3rem 0;
+}
+
+.sched-estimator__head {
+  margin-bottom: 1.5rem;
+}
+
+.sched-estimator__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--color-deep-violet);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0.35rem 0 0.65rem;
+}
+
+.sched-estimator__sub {
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-deep-violet) 65%, var(--color-canvas));
+  max-width: 52ch;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* The card body — gradient top stripe, paper fill */
+.sched-estimator__body {
+  border: 1px solid var(--rule);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: var(--color-canvas);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Controls area — tinted stripe at top */
+.sched-estimator__body .sim-controls {
+  background: color-mix(in srgb, var(--color-violet) 5%, var(--color-canvas));
+  border-bottom: 1px solid var(--rule-soft);
+  padding: 1.75rem 2rem;
+}
+
+.sched-estimator__body .sim-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-deep-violet) 55%, transparent);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.sched-estimator__body .sim-sectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sim-group--slider {
+  margin-top: 1.5rem;
+}
+
+.sched-estimator__body .sim-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.sched-estimator__body .sim-badge {
+  background: color-mix(in srgb, var(--color-orchid) 15%, var(--color-canvas));
+  border: 1px solid color-mix(in srgb, var(--color-orchid) 35%, transparent);
+  color: var(--color-violet);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.25rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* 2×2 stat card grid */
+.sched-sim-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule-soft);
+}
+
+.sched-sim-stat {
+  background: var(--color-canvas);
+  padding: 1.4rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: background var(--duration-surface) var(--ease-out);
+}
+
+.sched-sim-stat--accent {
+  background: color-mix(in srgb, var(--color-orchid) 7%, var(--color-canvas));
+}
+
+.sched-sim-stat--cost {
+  background: color-mix(in srgb, var(--color-violet) 5%, var(--color-canvas));
+}
+
+.sched-sim-stat__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-deep-violet) 50%, transparent);
+}
+
+.sched-sim-stat__val {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 600;
+  color: var(--color-deep-violet);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  transition: color var(--duration-hover) var(--ease-out);
+}
+
+.sched-sim-stat--accent .sched-sim-stat__val {
+  color: var(--color-violet);
+}
+
+.sched-sim-stat--cost .sched-sim-stat__val {
+  color: var(--color-deep-violet);
+}
+
+/* italic suffix/modifier inside the stat value */
+.sched-sim-stat__val em {
+  font-style: normal;
+  font-size: 0.65em;
+  color: color-mix(in srgb, var(--color-deep-violet) 45%, transparent);
+  font-family: var(--font-body);
+  font-weight: 400;
+  margin-left: 0.1em;
+}
+
+/* "is-updated" pulse when JS updates a stat */
+.sched-sim-stat__val.is-updated {
+  animation: stat-pop 0.32s var(--ease-out) both;
+}
+@keyframes stat-pop {
+  0%  { transform: scale(1.06); color: var(--color-orchid); }
+  100%{ transform: scale(1); }
+}
+
+/* Footer link */
+.sched-estimator__foot {
+  padding: 1.1rem 2rem;
+  border-top: 1px solid var(--rule-soft);
+  background: color-mix(in srgb, var(--color-deep-violet) 3%, var(--color-canvas));
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 36rem) {
+  .sched-sim-results {
+    grid-template-columns: 1fr;
+  }
+  .sched-estimator__body .sim-controls {
+    padding: 1.25rem;
+  }
+  .sched-sim-stat {
+    padding: 1.1rem 1.25rem;
+  }
+}
