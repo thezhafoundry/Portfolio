@@ -63,8 +63,8 @@ describe('Editorial Orchid Home contracts', () => {
     const html = await readPage('index.html');
     const hero = html.match(/<section\b[^>]*class="[^"]*hero[^"]*"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
 
-    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="#companies"/);
-    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--secondary[^"]*"[^>]*href="#results"/);
+    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--primary[^"]*"[^>]*href="#crm-pipeline"/);
+    expect(hero).toMatch(/<a\b[^>]*class="[^"]*btn--secondary[^"]*"[^>]*href="#deal-simulator"/);
     expect(html).toMatch(/href="\/schedule\/"/);
   });
 
@@ -236,7 +236,7 @@ describe('Chatbot widget', () => {
     const html = await readPage('index.html');
     const pricing = html.match(/<div id="chatbot-answer-pricing"[\s\S]*?<\/div>/)?.[0] ?? '';
 
-    expect(pricing).toContain('USD 350');
+    expect(pricing).toContain('$350');
   });
 
   it('lists all five FAQ chips in the menu', async () => {

@@ -11,7 +11,10 @@ export function initSimulator() {
     const accountValueEl = container.querySelector('#sim-accounts-val, .sim-badge');
     const sectorBtns = container.querySelectorAll('[data-sector]');
     const meetingsEl = container.querySelector('#sim-meetings, [data-sim-meetings]');
+    // Research cycle display — always constant 30 days
     const timeframeEl = container.querySelector('#sim-hours, #sim-timeframe, [data-sim-timeframe]');
+    // Dynamic MQL lead timeline
+    const mqlTimeEl = container.querySelector('#sim-mql-time, [data-sim-mql-time]');
     const toolsCostEl = container.querySelector('#sim-velocity, #sim-tools-cost, [data-sim-tools-cost]');
 
     if (!slider) return;
@@ -19,8 +22,8 @@ export function initSimulator() {
     let activeSector = 'saas';
 
     const sectorConfigs = {
-      saas: { meetingRate: 0.15, baseToolCost: 450, costPerClient: 5 },
-      services: { meetingRate: 0.12, baseToolCost: 350, costPerClient: 4 },
+      saas:      { meetingRate: 0.15, baseToolCost: 450, costPerClient: 5 },
+      services:  { meetingRate: 0.12, baseToolCost: 350, costPerClient: 4 },
       midmarket: { meetingRate: 0.14, baseToolCost: 500, costPerClient: 6 },
     };
 
@@ -38,6 +41,20 @@ export function initSimulator() {
       pulse(el);
     }
 
+    /**
+     * Returns a human-readable MQL lead timeline string based on client volume.
+     * The research cycle itself is always 30 days (constant).
+     * The MQL lead timeline grows with volume.
+     */
+    function getMqlTimeline(clients) {
+      if (clients <= 30)  return '45–90 Days to MQL Lead';
+      if (clients <= 70)  return '75–100 Days to MQL Lead';
+      if (clients <= 120) return '90–120 Days to MQL Lead';
+      if (clients <= 180) return '110–140 Days to MQL Lead';
+      if (clients <= 250) return '130–160 Days to MQL Lead';
+      return '150–180 Days to MQL Lead';
+    }
+
     function update() {
       const clients = parseInt(slider.value, 10);
       setText(accountValueEl, `${clients} Clients / Leads per mo`);
@@ -46,18 +63,16 @@ export function initSimulator() {
 
       const estMeetings = Math.max(1, Math.round(clients * config.meetingRate));
 
-      let researchTimeframe = '30 Days Research Cycle';
-      if (clients > 150) {
-        researchTimeframe = '90 Days Research Cycle';
-      } else if (clients > 60) {
-        researchTimeframe = '60 Days Research Cycle';
-      }
+      // Research cycle is always constant — always 30 days
+      setText(timeframeEl, '30 Days Research Cycle');
+
+      // MQL lead timeline grows dynamically with volume
+      setText(mqlTimeEl, getMqlTimeline(clients));
 
       const estToolsCost = config.baseToolCost + clients * config.costPerClient;
 
       setText(meetingsEl, `~${estMeetings} MQL Leads & Meetings`);
-      setText(timeframeEl, researchTimeframe);
-      setText(toolsCostEl, `$${estToolsCost}/mo Tools Cost Stack`);
+      setText(toolsCostEl, `$${estToolsCost.toLocaleString()}/mo Tools Cost Stack`);
     }
 
     slider.addEventListener('input', update);
@@ -74,4 +89,3 @@ export function initSimulator() {
     update();
   });
 }
-

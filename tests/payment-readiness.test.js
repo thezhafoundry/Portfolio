@@ -25,9 +25,9 @@ describe('Payment-readiness content', () => {
   it('publishes a clear paid consulting offer without claiming Razorpay is active', async () => {
     const html = await readPage('schedule/index.html');
 
-    expect(html).toContain('USD 350');
-    expect(html).toContain('60-minute online consultation');
-    expect(html).toMatch(/remote consulting service/i);
+    expect(html).toContain('$350');
+    expect(html).toContain('First Call');
+    expect(html).toMatch(/remote consulting/i);
     expect(html).toContain('Payment link will be added after approval');
     expect(html).not.toMatch(/razorpay.*(live|active)|active.*razorpay/i);
   });

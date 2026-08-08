@@ -98,3 +98,129 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* -----------------------------------------------------------------------
+   Free × 3 badge
+   ----------------------------------------------------------------------- */
+.sched-free-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.sched-free-badge__word {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-orchid) 14%, var(--color-canvas));
+  border: 1.5px solid color-mix(in srgb, var(--color-orchid) 35%, transparent);
+  color: var(--color-violet);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  animation: free-pulse 2.4s ease-in-out infinite;
+}
+.sched-free-badge__word:nth-child(2) { animation-delay: 0.25s; }
+.sched-free-badge__word:nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes free-pulse {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-3px); opacity: 0.8; }
+}
+
+/* First-call-free highlight on summary card */
+.consultation-summary__item--free {
+  background: color-mix(in srgb, var(--color-orchid) 10%, var(--color-canvas));
+  border-color: color-mix(in srgb, var(--color-orchid) 45%, transparent);
+}
+.consultation-summary__item--free strong {
+  color: color-mix(in srgb, var(--color-violet) 90%, var(--color-orchid));
+}
+
+/* -----------------------------------------------------------------------
+   Sampath Work Plan section
+   ----------------------------------------------------------------------- */
+.work-plan {
+  border: 1px solid var(--rule-soft);
+  border-radius: 1.25rem;
+  background: var(--color-canvas);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  margin: 2.5rem 0;
+}
+
+.work-plan__head {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.work-plan__head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--color-deep-violet);
+  margin: 0.25rem 0 0.6rem;
+}
+
+.work-plan__sub {
+  color: color-mix(in srgb, var(--color-deep-violet) 65%, var(--color-canvas));
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.work-plan__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.work-plan__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.work-plan__no {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-violet) 10%, var(--color-canvas));
+  border: 1.5px solid color-mix(in srgb, var(--color-violet) 25%, transparent);
+  color: var(--color-violet);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.work-plan__step strong {
+  display: block;
+  color: var(--color-deep-violet);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.work-plan__step p {
+  margin: 0;
+  color: color-mix(in srgb, var(--color-deep-violet) 65%, var(--color-canvas));
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+/* Sim sector buttons on schedule page — inherit .pill style */
+.sim-sector-btn.pill[aria-pressed="true"] {
+  background: var(--color-deep-violet);
+  color: var(--color-white);
+  border-color: var(--color-deep-violet);
+}

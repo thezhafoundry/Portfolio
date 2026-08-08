@@ -402,7 +402,7 @@ body.nav-is-open {
    into view, scroll-top.js toggles .is-visible via IntersectionObserver. */
 .scroll-top {
   position: fixed;
-  right: var(--float-inset);
+  left: var(--float-inset);
   bottom: var(--float-inset);
   z-index: 150;
   display: inline-flex;

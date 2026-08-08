@@ -34,13 +34,51 @@
       <div class="band-inner band-inner--wide sched">
         <span class="label label--pill">Strategy Calendar</span>
         <h1>You bring the idea. I'll bring the <em class="sweep">plan</em>.</h1>
-        <p class="sched-sub">A focused remote consulting session for lead generation, outbound strategy, and pre-sales planning. Sessions are scheduled based on <strong>IST (Indian Standard Time)</strong> availability.</p>
+
+        <div class="sched-free-badge" aria-label="First call is free">
+          <span class="sched-free-badge__word">Free</span>
+          <span class="sched-free-badge__word">Free</span>
+          <span class="sched-free-badge__word">Free</span>
+        </div>
+        <p class="sched-sub"><strong>First call is free</strong> — 30 to 45 minutes to unpack your pipeline and strategy. Sessions run on <strong>IST (Indian Standard Time)</strong>.</p>
 
         <div class="consultation-summary" aria-label="Consulting offer details">
-          <div class="consultation-summary__item"><strong>USD 350</strong><span>One paid consulting session</span></div>
-          <div class="consultation-summary__item"><strong>60 minutes (IST)</strong><span>60-minute online consultation (IST Timezone)</span></div>
-          <div class="consultation-summary__item"><strong>Remote</strong><span>Remote consulting service</span></div>
+          <div class="consultation-summary__item consultation-summary__item--free"><strong>First Call — Free</strong><span>30–45 min · Strategy &amp; pipeline deep-dive</span></div>
+          <div class="consultation-summary__item"><strong>$350 — 1 Hour Setup</strong><span>Infrastructure · Tool alignment · Methodology</span></div>
+          <div class="consultation-summary__item"><strong>Remote (IST)</strong><span>Remote consulting, Indian Standard Time</span></div>
           <div class="consultation-summary__item"><strong>After approval</strong><span>Payment link &amp; IST scheduling instructions</span></div>
+        </div>
+
+        <!-- SAMPATH WORK PLAN -->
+        <div class="work-plan reveal">
+          <div class="work-plan__head">
+            <p class="eyebrow">Sampath Work Plan</p>
+            <h2>Pay for tools alone. Leads come later.</h2>
+            <p class="work-plan__sub">A structured engagement model built for accountability — you control the spend, we deliver the results.</p>
+          </div>
+          <ol class="work-plan__steps">
+            <li class="work-plan__step">
+              <span class="work-plan__no">01</span>
+              <div>
+                <strong>Pay for tools only</strong>
+                <p>Mandatory tool stack is activated. You pay the direct tool cost — no markup, no retainer yet.</p>
+              </div>
+            </li>
+            <li class="work-plan__step">
+              <span class="work-plan__no">02</span>
+              <div>
+                <strong>Research &amp; build</strong>
+                <p>ICP definition, account research, prospect sourcing and multi-channel outreach cadence built and launched.</p>
+              </div>
+            </li>
+            <li class="work-plan__step">
+              <span class="work-plan__no">03</span>
+              <div>
+                <strong>Leads flow — pay for results</strong>
+                <p>MQL leads &amp; qualified meetings delivered. Performance-linked payment on conversion.</p>
+              </div>
+            </li>
+          </ol>
         </div>
 
         <!-- EMBEDDED INTERACTIVE ESTIMATOR ON SCHEDULE PAGE -->
@@ -56,9 +94,9 @@
               <div class="sim-group">
                 <label class="sim-label">Target Market Focus</label>
                 <div class="sim-sectors" role="tablist" aria-label="Select sector">
-                  <button type="button" class="sim-sector-btn" data-sector="saas" aria-pressed="true">B2B SaaS Growth</button>
-                  <button type="button" class="sim-sector-btn" data-sector="services" aria-pressed="false">Service-Based Sector</button>
-                  <button type="button" class="sim-sector-btn" data-sector="midmarket" aria-pressed="false">Mid-Market &amp; Digital Marketing Resources</button>
+                  <button type="button" class="sim-sector-btn pill" data-sector="saas" aria-pressed="true">B2B SaaS Growth</button>
+                  <button type="button" class="sim-sector-btn pill" data-sector="services" aria-pressed="false">Service-Based Sector</button>
+                  <button type="button" class="sim-sector-btn pill" data-sector="midmarket" aria-pressed="false">Mid-Market &amp; Digital Marketing</button>
                 </div>
               </div>
 
@@ -77,8 +115,12 @@
                 <strong class="sim-stat__val" data-sim-meetings>~18 MQL Leads &amp; Meetings</strong>
               </div>
               <div class="sim-stat">
-                <span class="sim-stat__label">Research &amp; Ramp Timeframe</span>
-                <strong class="sim-stat__val" data-sim-timeframe>60 Days Research Cycle</strong>
+                <span class="sim-stat__label">Research Cycle (Constant)</span>
+                <strong class="sim-stat__val" data-sim-timeframe>30 Days Research Cycle</strong>
+              </div>
+              <div class="sim-stat">
+                <span class="sim-stat__label">Time to First MQL Lead</span>
+                <strong class="sim-stat__val" data-sim-mql-time>45–90 Days to MQL Lead</strong>
               </div>
               <div class="sim-stat">
                 <span class="sim-stat__label">Estimated Tools Cost Stack</span>
@@ -112,7 +154,7 @@
             <div>
               <p class="eyebrow">Direct Contact &amp; LinkedIn</p>
               <h2>Start a conversation with Sampath</h2>
-              <p>Connect directly via LinkedIn or phone to discuss the USD 350 consultation (IST timezone) and tailored B2B lead generation projects.</p>
+              <p>Connect via LinkedIn or phone. <strong>First call is free</strong> (30–45 min). Second call is <strong>$350 for 1 hour</strong> — infrastructure setup, tool alignment &amp; methodology deep-dive.</p>
             </div>
             <div class="contact-actions">
               <a class="btn btn--primary" href="https://www.linkedin.com/in/sampath-kumar-tn66sk9699" target="_blank" rel="noopener">Connect on LinkedIn <span aria-hidden="true">→</span></a>
@@ -200,14 +242,14 @@
 
     <div id="chatbot-answer-pricing" class="chatbot-view chatbot-answer" hidden>
       <p class="bubble bubble--me">How much does it cost?</p>
-      <p class="bubble bubble--reply">USD 350 for a single 60-minute remote consulting session, scheduled on Indian Standard Time (IST).</p>
+      <p class="bubble bubble--reply">First call is free — 30 to 45 minutes. Second call is $350 for 1 hour: tool setup, infrastructure alignment &amp; methodology deep-dive (IST timezone).</p>
       <a class="btn btn--primary chatbot-answer__cta" href="/schedule/">Book a session</a>
       <button type="button" class="chatbot-chip chatbot-chip--back" data-chatbot-show="menu">Ask another question</button>
     </div>
 
     <div id="chatbot-answer-results" class="chatbot-view chatbot-answer" hidden>
       <p class="bubble bubble--me">Can I see past results?</p>
-      <p class="bubble bubble--reply">10,000+ followers and 2.1M+ impressions, plus case studies like a 200M+ record M&amp;A sourcing engine built for Finquest.</p>
+      <p class="bubble bubble--reply">10,000+ followers and 2.6M+ impressions, plus case studies like a 200M+ record M&amp;A sourcing engine built for Finquest.</p>
       <a class="btn btn--primary chatbot-answer__cta" href="/results/">View case studies</a>
       <button type="button" class="chatbot-chip chatbot-chip--back" data-chatbot-show="menu">Ask another question</button>
     </div>
